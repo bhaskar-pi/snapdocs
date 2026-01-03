@@ -1,4 +1,4 @@
-# 🧠 SnapDocs – Code Review Guidelines (Solo Developer)
+# 🧠 SnapDocs – Code Review Guidelines
 
 This document defines how all code in this repository must be reviewed.
 The goal is **correctness, clarity, security, and long-term maintainability** — not cleverness.
