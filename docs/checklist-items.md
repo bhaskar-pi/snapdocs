@@ -56,3 +56,20 @@ Without them, we cannot:
 - Not files
 - Not reusable across requests
 - Not client-level data
+
+---
+
+## Table: checklist_items
+
+| Column | Type | Description |
+|------|------|------------|
+| id | UUID (PK) | Checklist item id |
+| request_id | UUID (FK) | Parent request |
+| label | TEXT | Document name |
+| status | ENUM | PENDING / RECEIVED |
+| is_required | BOOLEAN | Mandatory or optional |
+| position | INTEGER | Ordering |
+| created_at | TIMESTAMP | Created time |
+| updated_at | TIMESTAMP | Updated time |
+
+---

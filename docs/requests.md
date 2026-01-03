@@ -52,3 +52,23 @@ Requests preserve **context and history**.
 
 - Store documents directly
 - Define document structure
+
+---
+
+## Table: requests
+
+| Column | Type | Description |
+|------|------|------------|
+| id | UUID (PK) | Request identifier |
+| user_id | UUID (FK) | Owner |
+| client_id | UUID (FK) | Related client |
+| title | TEXT | Request title |
+| description | TEXT (nullable) | Extra context |
+| status | ENUM | DRAFT / SENT / COMPLETED / OVERDUE |
+| due_date | DATE (nullable) | Deadline |
+| sent_at | TIMESTAMP (nullable) | When sent |
+| completed_at | TIMESTAMP (nullable) | When finished |
+| created_at | TIMESTAMP | Created time |
+| updated_at | TIMESTAMP | Updated time |
+
+---

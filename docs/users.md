@@ -33,3 +33,16 @@ Users:
 - Organizations
 - Roles (admin/member)
 - Team collaboration
+
+---
+
+## Table: users
+
+| Column | Type | Description |
+|------|------|------------|
+| id | UUID (PK) | Primary identifier |
+| email | TEXT (UNIQUE) | Login email |
+| password_hash | TEXT | Hashed password |
+| name | TEXT | Display name |
+| created_at | TIMESTAMP | Created time |
+| updated_at | TIMESTAMP | Updated time |

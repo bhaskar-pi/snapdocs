@@ -41,3 +41,19 @@ This avoids ambiguity.
 - No public access
 - File type & size validation
 - Ownership enforced
+
+---
+
+## Table: documents
+
+| Column | Type | Description |
+|------|------|------------|
+| id | UUID (PK) | Document id |
+| checklist_item_id | UUID (FK) | Related checklist |
+| file_name | TEXT | Original name |
+| file_size | INTEGER | Size in bytes |
+| mime_type | TEXT | File type |
+| storage_path | TEXT | Object storage path |
+| uploaded_at | TIMESTAMP | Upload time |
+
+---
