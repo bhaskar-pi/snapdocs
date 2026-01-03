@@ -3,11 +3,11 @@ import env from "./env";
 
 const connectionString = env.SUPABASE_DB_URL;
 
-const db = new Pool({
+const pool = new Pool({
   connectionString,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-export default db;
+export default pool;
