@@ -10,7 +10,7 @@ This PR includes the following changes:
 
 <!--- Please link to the issue here: -->
 
-[#0000](https://github.com/payroo-group/payroo/issues/0)
+[#0000](https://github.com/SnapDocs-Group/snap-docs/issues/0)
 
 ## Types of changes
 
