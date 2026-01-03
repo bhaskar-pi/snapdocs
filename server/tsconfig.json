@@ -5,7 +5,7 @@
       "@routes/*": ["routes/*"],
       "@controllers/*": ["controllers/*"],
       "@services/*": ["services/*"],
-      "@middlewares/*": ["middlewares/*"],
+      "@middleware/*": ["middleware/*"],
       "@utils/*": ["utils/*"]
     },
     "target": "ES2020",
