@@ -5,6 +5,7 @@
 A **Document** is an actual uploaded file.
 
 Examples:
+
 - pan.pdf
 - form16_v2.pdf
 - bank_statement_march.pdf
@@ -22,6 +23,7 @@ Examples:
 ## Why Documents Attach to Checklist Items
 
 Because each file answers:
+
 > “Which requirement does this satisfy?”
 
 This avoids ambiguity.
@@ -46,14 +48,14 @@ This avoids ambiguity.
 
 ## Table: documents
 
-| Column | Type | Description |
-|------|------|------------|
-| id | UUID (PK) | Document id |
-| checklist_item_id | UUID (FK) | Related checklist |
-| file_name | TEXT | Original name |
-| file_size | INTEGER | Size in bytes |
-| mime_type | TEXT | File type |
-| storage_path | TEXT | Object storage path |
-| uploaded_at | TIMESTAMP | Upload time |
+| Column            | Type      | Description         |
+| ----------------- | --------- | ------------------- |
+| id                | UUID (PK) | Document id         |
+| checklist_item_id | UUID (FK) | Related checklist   |
+| file_name         | TEXT      | Original name       |
+| file_size         | INTEGER   | Size in bytes       |
+| mime_type         | TEXT      | File type           |
+| storage_path      | TEXT      | Object storage path |
+| uploaded_at       | TIMESTAMP | Upload time         |
 
 ---

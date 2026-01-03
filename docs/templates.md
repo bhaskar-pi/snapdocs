@@ -5,6 +5,7 @@
 A **Template** is a reusable checklist definition.
 
 Examples:
+
 - ITR Documents
 - GST Filing Docs
 - KYC Documents
@@ -40,29 +41,29 @@ Examples:
 - Shared templates
 - Industry templates
 
---- 
+---
 
 ## Table: templates
 
-| Column | Type | Description |
-|------|------|------------|
-| id | UUID (PK) | Template id |
-| user_id | UUID (FK) | Owner |
-| name | TEXT | Template name |
-| description | TEXT (nullable) | Notes |
-| created_at | TIMESTAMP | Created time |
-| updated_at | TIMESTAMP | Updated time |
+| Column      | Type            | Description   |
+| ----------- | --------------- | ------------- |
+| id          | UUID (PK)       | Template id   |
+| user_id     | UUID (FK)       | Owner         |
+| name        | TEXT            | Template name |
+| description | TEXT (nullable) | Notes         |
+| created_at  | TIMESTAMP       | Created time  |
+| updated_at  | TIMESTAMP       | Updated time  |
 
 ---
 
 ## Table: template_items
 
-| Column | Type | Description |
-|------|------|------------|
-| id | UUID (PK) | Item id |
-| template_id | UUID (FK) | Parent template |
-| label | TEXT | Expected document |
-| is_required | BOOLEAN | Mandatory |
-| position | INTEGER | Order |
+| Column      | Type      | Description       |
+| ----------- | --------- | ----------------- |
+| id          | UUID (PK) | Item id           |
+| template_id | UUID (FK) | Parent template   |
+| label       | TEXT      | Expected document |
+| is_required | BOOLEAN   | Mandatory         |
+| position    | INTEGER   | Order             |
 
 ---

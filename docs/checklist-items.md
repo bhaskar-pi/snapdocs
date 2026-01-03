@@ -5,6 +5,7 @@
 A **Checklist Item** represents ONE expected document.
 
 Example:
+
 - PAN Card
 - Aadhaar Card
 - Bank Statement
@@ -23,6 +24,7 @@ This separation is intentional.
 ## Why Checklist Items Exist
 
 Without them, we cannot:
+
 - Track missing documents
 - Show progress (3 of 5 received)
 - Send targeted reminders
@@ -61,15 +63,15 @@ Without them, we cannot:
 
 ## Table: checklist_items
 
-| Column | Type | Description |
-|------|------|------------|
-| id | UUID (PK) | Checklist item id |
-| request_id | UUID (FK) | Parent request |
-| label | TEXT | Document name |
-| status | ENUM | PENDING / RECEIVED |
-| is_required | BOOLEAN | Mandatory or optional |
-| position | INTEGER | Ordering |
-| created_at | TIMESTAMP | Created time |
-| updated_at | TIMESTAMP | Updated time |
+| Column      | Type      | Description           |
+| ----------- | --------- | --------------------- |
+| id          | UUID (PK) | Checklist item id     |
+| request_id  | UUID (FK) | Parent request        |
+| label       | TEXT      | Document name         |
+| status      | ENUM      | PENDING / RECEIVED    |
+| is_required | BOOLEAN   | Mandatory or optional |
+| position    | INTEGER   | Ordering              |
+| created_at  | TIMESTAMP | Created time          |
+| updated_at  | TIMESTAMP | Updated time          |
 
 ---

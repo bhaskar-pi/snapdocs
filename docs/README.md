@@ -5,6 +5,7 @@ This folder contains all product and data-model documentation for SnapDocs.
 SnapDocs is a **document collection workflow system**, not just a file storage app.
 
 Core idea:
+
 > Track what is required → track what is missing → track what is received.
 
 ---

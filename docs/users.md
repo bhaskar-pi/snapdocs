@@ -5,6 +5,7 @@
 A **User** is a professional (CA, lawyer, consultant) who uses SnapDocs.
 
 Users:
+
 - Own all data
 - Create clients
 - Create requests
@@ -38,11 +39,13 @@ Users:
 
 ## Table: users
 
-| Column | Type | Description |
-|------|------|------------|
-| id | UUID (PK) | Primary identifier |
-| email | TEXT (UNIQUE) | Login email |
-| password_hash | TEXT | Hashed password |
-| name | TEXT | Display name |
-| created_at | TIMESTAMP | Created time |
-| updated_at | TIMESTAMP | Updated time |
+| Column       | Type          | Description        |
+| ------------ | ------------- | ------------------ |
+| id           | UUID (PK)     | Primary identifier |
+| email        | TEXT (UNIQUE) | Login email        |
+| password     | TEXT          | Hashed password    |
+| first_name   | TEXT          | Display name       |
+| last_name    | TEXT          | Display name       |
+| phone_number | TEXT          | contact number     |
+| created_at   | TIMESTAMP     | Created time       |
+| updated_at   | TIMESTAMP     | Updated time       |
