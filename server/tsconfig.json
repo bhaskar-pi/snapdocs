@@ -5,8 +5,11 @@
       "@routes/*": ["routes/*"],
       "@controllers/*": ["controllers/*"],
       "@services/*": ["services/*"],
-      "@middleware/*": ["middleware/*"],
-      "@utils/*": ["utils/*"]
+      "@middlewares/*": ["middlewares/*"],
+      "@utils/*": ["utils/*"],
+      "@config/*": ["config/*"],
+      "@models/*": ["models/*"],
+      "@validators/*": ["validators/*"]
     },
     "target": "ES2020",
     "module": "CommonJS",
