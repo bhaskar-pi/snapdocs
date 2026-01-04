@@ -28,7 +28,9 @@ export const loginHandler = async (request: Request, response: Response) => {
     });
   } catch (error: any) {
     return response.status(401).json({
-      message: "Login failed. Please check your credentials and try again",
+      message:
+        error?.message ||
+        "Login failed. Please check your credentials and try again",
     });
   }
 };

@@ -13,5 +13,5 @@ export const sessions = pgTable(
     expiresAt: timestamp("expires_at").notNull(),
     revokedAt: timestamp("revoked_at"),
   },
-  (table) => [index("sessions_user_idx").on(table.userId)]
+  (table) => [index("sessions_user_id_idx").on(table.userId)]
 );
