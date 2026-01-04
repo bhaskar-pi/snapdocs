@@ -2,5 +2,5 @@
   "files.exclude": {
     "**/node_modules": true
   },
-  "cSpell.words": ["supabase", "SUPERBASE"]
+  "cSpell.words": ["supabase", "SUPABASE"]
 }

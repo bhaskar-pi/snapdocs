@@ -42,7 +42,7 @@ export async function loginUser(data: LoginRequest) {
 
   const user = await getUserByEmail(email);
   if (!user) {
-    throw new Error("Email not registered. Please register to login.");
+    throw new Error("Invalid credentials.");
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);

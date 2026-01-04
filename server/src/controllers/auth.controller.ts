@@ -1,12 +1,13 @@
-import env from "@config/env";
-import { Environment } from "@enums/environment";
-import { TokenValidity } from "@enums/session";
+import { Request, Response } from "express";
+
 import {
   loginUser,
   rotateAccessToken,
   registerUser,
 } from "@services/auth.services";
-import { Request, Response } from "express";
+import env from "@config/env";
+import { Environment } from "@enums/environment";
+import { TokenValidity } from "@enums/session";
 
 export const loginHandler = async (request: Request, response: Response) => {
   try {
@@ -27,7 +28,7 @@ export const loginHandler = async (request: Request, response: Response) => {
     });
   } catch (error: any) {
     return response.status(401).json({
-      message: error.message || "Login failed",
+      message: "Login failed. Please check your credentials and try again",
     });
   }
 };

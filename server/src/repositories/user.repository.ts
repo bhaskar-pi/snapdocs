@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "@database/drizzle";
+
 import { users } from "@database/schema/users.schema";
 import { User } from "@models/user";
 

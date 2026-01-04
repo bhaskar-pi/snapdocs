@@ -16,7 +16,10 @@ export const users = pgTable(
     phoneNumber: text("phone_number"),
     password: text("password").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .notNull()
+      .$onUpdate(() => new Date()),
   },
   (table) => [uniqueIndex("users_email_idx").on(table.email)]
 );

@@ -7,7 +7,7 @@ import { ZodType } from "zod";
  * This function creates an Express middleware that:
  * 1. Validates `req.body` against the provided Zod schema.
  * 2. Stops the request immediately if validation fails.
- * 3. Attaches the validated & sanitized data to `req.validated`.
+ * 3. Attaches the validated & sanitized data to `req.body`.
  *
  * Why this exists:
  * - Ensures controllers never deal with raw `req.body`

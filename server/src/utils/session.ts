@@ -1,37 +1,31 @@
 import crypto from "crypto";
 import jwt, { JwtPayload } from "jsonwebtoken";
+
 import env from "@config/env";
+import { JWT_ACCESS_TOKEN_EXPIRATION, JWT_REFRESH_TOKEN_EXPIRATION } from "@config/constants";
 
 export function generateAccessToken(userId: string, email: string): string {
   const token = jwt.sign({ userId, email }, env.JWT_ACCESS_TOKEN_SECRET, {
-    expiresIn: "10m",
+    expiresIn: JWT_ACCESS_TOKEN_EXPIRATION,
   });
 
   return token;
 }
 
 export function verifyAccessToken(token: string) {
-  try {
-    const payload = jwt.verify(token, env.JWT_ACCESS_TOKEN_SECRET);
-    return payload;
-  } catch (error) {
-    throw error;
-  }
+  const payload = jwt.verify(token, env.JWT_ACCESS_TOKEN_SECRET);
+  return payload as JwtPayload;
 }
 
 export function generateRefreshToken(userId: string, email: string): string {
   return jwt.sign({ userId, email }, env.JWT_REFRESH_TOKEN_SECRET, {
-    expiresIn: "1d",
+    expiresIn: JWT_REFRESH_TOKEN_EXPIRATION,
   });
 }
 
 export function verifyRefreshToken(token: string) {
-  try {
-    const payload = jwt.verify(token, env.JWT_REFRESH_TOKEN_SECRET);
-    return payload as JwtPayload;
-  } catch (error) {
-    throw error;
-  }
+  const payload = jwt.verify(token, env.JWT_REFRESH_TOKEN_SECRET);
+  return payload as JwtPayload;
 }
 
 export function getSecurityTokens(

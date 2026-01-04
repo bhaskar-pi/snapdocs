@@ -1,4 +1,5 @@
 import { eq, and, isNull, gt } from "drizzle-orm";
+
 import { db } from "@database/drizzle";
 import { sessions } from "@database/schema/sessions.schema";
 import { Session } from "@models/session";

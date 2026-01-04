@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { validate } from "@middlewares/validate-request";
-import { loginSchema, registerSchema } from "validators/auth.schema";
+import { loginSchema, registerSchema } from "@validators/auth.schema";
 import {
   loginHandler,
   refreshHandler,
