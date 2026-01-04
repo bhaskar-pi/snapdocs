@@ -1,22 +1,80 @@
-import { authService } from "@services/auth.services";
+import env from "@config/env";
+import { Environment } from "@enums/environment";
+import { TokenValidity } from "@enums/session";
+import {
+  loginUser,
+  rotateAccessToken,
+  registerUser,
+} from "@services/auth.services";
 import { Request, Response } from "express";
 
-export const login = async (request: Request, response: Response) => {
+export const loginHandler = async (request: Request, response: Response) => {
   try {
-    await authService.login(request.body);
-  } catch (error) {}
+    const { refreshTokenHash, refreshToken, ...session } = await loginUser(
+      request.body
+    );
+
+    response.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: env.NODE_ENV === Environment.PRODUCTION,
+      sameSite: "strict",
+      path: "/refresh",
+      maxAge: TokenValidity.ONE_DAY,
+    });
+    return response.status(200).json({
+      message: "Login successfully.",
+      session,
+    });
+  } catch (error: any) {
+    return response.status(401).json({
+      message: error.message || "Login failed",
+    });
+  }
 };
 
-export const register = async (request: Request, response: Response) => {
+export const registerUserHandler = async (
+  request: Request,
+  response: Response
+) => {
   try {
-    const user = await authService.register(request.body);
+    const user = await registerUser(request.body);
     return response.status(201).json({
       message: "User registered successfully",
       user,
     });
   } catch (error: any) {
     return response.status(400).json({
-      message: error?.message,
+      message: error?.message || "Registration failed. Please try again",
+    });
+  }
+};
+
+export const refreshHandler = async (request: Request, response: Response) => {
+  try {
+    const token = request.cookies.refreshToken;
+    if (!token) {
+      return response.status(401).json({ message: "Missing refresh token" });
+    }
+
+    const { refreshTokenHash, ...session } = await rotateAccessToken(token);
+
+    if (session?.refreshToken) {
+      response.cookie("refreshToken", session.refreshToken, {
+        httpOnly: true,
+        secure: env.NODE_ENV === Environment.PRODUCTION,
+        sameSite: "strict",
+        path: "/refresh",
+        maxAge: TokenValidity.ONE_DAY,
+      });
+    }
+
+    return response.status(200).json({
+      message: "Refresh successfully.",
+      session,
+    });
+  } catch (error: any) {
+    return response.status(401).json({
+      message: error.message || "Refresh failed",
     });
   }
 };

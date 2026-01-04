@@ -10,7 +10,9 @@
       "@config/*": ["config/*"],
       "@models/*": ["models/*"],
       "@validators/*": ["validators/*"],
-      "@database/*": ["database/*"]
+      "@database/*": ["database/*"],
+      "@repositories/*": ["repositories/*"],
+      "@enums/*": ["enums/*"]
     },
     "target": "ES2020",
     "module": "CommonJS",

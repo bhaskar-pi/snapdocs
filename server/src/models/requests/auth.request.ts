@@ -1,3 +1,5 @@
+import { DateString } from "@models/date";
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -10,4 +12,12 @@ export interface UserRegisterRequest {
   phoneNumber: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface RefreshSessionRequest {
+  id: string;
+  userId: string;
+  refreshToken: string | null;
+  createdAt: DateString;
+  expiresAt: DateString | null;
 }
