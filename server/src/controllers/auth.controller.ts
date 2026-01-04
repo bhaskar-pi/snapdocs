@@ -1,7 +1,11 @@
 import { authService } from "@services/auth.services";
 import { Request, Response } from "express";
 
-export const login = async (request: Request, response: Response) => {};
+export const login = async (request: Request, response: Response) => {
+  try {
+    await authService.login(request.body);
+  } catch (error) {}
+};
 
 export const register = async (request: Request, response: Response) => {
   try {

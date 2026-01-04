@@ -1,4 +1,4 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import pool from "./database";
+import pool from "./client";
 
 export const db = drizzle(pool);

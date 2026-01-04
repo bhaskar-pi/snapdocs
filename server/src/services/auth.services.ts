@@ -1,13 +1,18 @@
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
-import { db } from "@config/drizzle";
-import { users } from "@db-schema/users";
-import { UserRegisterRequest } from "@models/requests/auth.request";
+import { db } from "@database/drizzle";
+import { users } from "@database/schema/users.schema";
+import {
+  LoginRequest,
+  UserRegisterRequest,
+} from "@models/requests/auth.request";
 
 class AuthService {
   constructor() {}
 
-  login(email: string, password: string) {}
+  login(data: LoginRequest) {
+    const { email, password } = data;
+  }
 
   async register(data: UserRegisterRequest) {
     const { firstName, lastName, email, phoneNumber, password } = data;
