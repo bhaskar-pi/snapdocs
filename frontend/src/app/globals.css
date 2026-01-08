@@ -1,71 +1,128 @@
 :root {
-  /* Slate (Base UI) */
+  /* ================================================== */
+  /* 1. Base Palette – Slate (source of truth) */
+  /* ================================================== */
+
   --slate-0: #ffffff;
+
   --slate-50: #f8fafc;
   --slate-75: #f7fafc;
   --slate-100: #f1f5f9;
+  --slate-150: #e9eef5;
   --slate-200: #e2e8f0;
+  --slate-250: #d6dee9;
   --slate-300: #cbd5e1;
   --slate-350: #afbccf;
   --slate-400: #94a3b8;
   --slate-450: #7b8aa2;
   --slate-500: #64748b;
+  --slate-550: #56677e;
   --slate-600: #475569;
   --slate-700: #334155;
   --slate-800: #1e293b;
   --slate-900: #0f172a;
   --slate-950: #020617;
-  --slate-150: #e9eef5;
-  --slate-250: #d6dee9;
-  --slate-550: #56677e;
 
-  /* Primary */
+  /* ================================================== */
+  /* 2. Brand / Primary */
+  /* ================================================== */
+
   --primary: var(--slate-900);
-  --primary-light: var(--slate-700);
   --primary-hover: var(--slate-800);
+  --primary-light: var(--slate-700);
 
-  /* Error / Danger (Red) */
-  --error: #dc2626; /* red-600 → error text */
-  --error-hover: #b91c1c; /* red-700 */
-  --error-light: #fee2e2; /* red-100 → bg */
-  --error-border: #fca5a5; /* red-300 */
+  /* ================================================== */
+  /* 3. Semantic Colors */
+  /* ================================================== */
 
-  /* Warning (Amber) */
-  --warning: #d97706; /* amber-600 */
-  --warning-light: #fef3c7; /* amber-100 */
-  --warning-border: #fcd34d; /* amber-300 */
+  /* Error / Danger */
+  --error: #dc2626;
+  --error-hover: #b91c1c;
+  --error-light: #fee2e2;
+  --error-border: #fca5a5;
 
-  /* Success (Green) */
-  --success: #16a34a; /* green-600 */
-  --success-light: #dcfce7; /* green-100 */
-  --success-border: #86efac; /* green-300 */
+  /* Warning */
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --warning-border: #fcd34d;
 
-  /* Info (Blue) */
-  --info: #2563eb; /* blue-600 */
-  --info-light: #dbeafe; /* blue-100 */
-  --info-border: #93c5fd; /* blue-300 */
+  /* Success */
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --success-border: #86efac;
 
-  /* Form spacing */
-  --form-gap-xs: 4px; /* input → error / help */
-  --form-gap-sm: 6px; /* label → input */
-  --form-gap-md: 16px; /* field → field */
-  --form-gap-lg: 24px; /* section → section */
+  /* Info */
+  --info: #2563eb;
+  --info-light: #dbeafe;
+  --info-border: #93c5fd;
+
+  /* ================================================== */
+  /* 4. Text Colors */
+  /* ================================================== */
+
+  --text-primary: var(--slate-900);
+  --text-secondary: var(--slate-600);
+  --text-muted: var(--slate-500);
+  --text-disabled: var(--slate-400);
+  --text-inverted: #ffffff;
+
+  /* ================================================== */
+  /* 5. Typography */
+  /* ================================================== */
+
+  /* Font sizes */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 30px;
+  --font-4xl: 36px;
+
+  /* Line heights */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ================================================== */
+  /* 6. Spacing – Forms */
+  /* ================================================== */
+
+  --form-gap-xs: 4px;
+  --form-gap-sm: 6px;
+  --form-gap-md: 16px;
+  --form-gap-lg: 24px;
   --form-gap-actions: 20px;
 
-  /* Input sizing */
+  /* ================================================== */
+  /* 7. Radius */
+  /* ================================================== */
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  /* ================================================== */
+  /* 8. Inputs */
+  /* ================================================== */
+
+  /* Sizing */
   --input-height: 40px;
   --input-padding-x: 12px;
-
-  /* radius */
-  --radius-md: 10px;
-  --radius-sm: 6px;
-  --radius-xs: 4px;
 
   /* Background */
   --input-bg: var(--slate-0);
   --input-bg-disabled: var(--slate-100);
 
-  /* Border */
+  /* Borders */
   --input-border: var(--slate-300);
   --input-border-hover: var(--slate-350);
   --input-border-focus: var(--slate-900);
@@ -78,57 +135,37 @@
   /* Placeholder */
   --input-placeholder: var(--slate-450);
 
-  /* Focus ring (optional) */
-  --input-ring: rgba(15, 23, 42, 0.12); /* slate-900 @ 12% */
+  /* Focus rings */
+  --input-ring: rgba(15, 23, 42, 0.12);
   --input-ring-blue: rgba(37, 99, 235, 0.18);
 
-  /* Font Sizes */
-  --font-xs: 12px; /* helper, error text */
-  --font-sm: 14px; /* inputs, labels */
-  --font-base: 16px; /* body text */
-  --font-lg: 18px;
-  --font-xl: 20px;
-  --font-2xl: 24px;
-  --font-3xl: 30px;
-  --font-4xl: 36px;
+  /* ================================================== */
+  /* 9. Widths */
+  /* ================================================== */
 
-  /* Line Heights */
-  --lh-tight: 1.2;
-  --lh-snug: 1.35;
-  --lh-normal: 1.5;
-  --lh-relaxed: 1.65;
-
-  /* Font Weights */
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;
-  --fw-bold: 700;
-
-  /* Form controls */
-  --w-input-sm: 160px; /* OTP, short fields */
-  --w-input-md: 240px; /* most inputs */
-  --w-input-l: 320px; /* email, password */
-  --w-input-lg: 380px; /* email, password */
-  --w-input-xl: 420px; /* long text */
+  /* Inputs */
+  --w-input-sm: 160px;
+  --w-input-md: 240px;
+  --w-input-l: 320px;
+  --w-input-lg: 380px;
+  --w-input-xl: 420px;
 
   /* Buttons */
+  --w-btn-xxs: 50px;
+  --w-btn-xs: 70px;
   --w-btn-sm: 96px;
   --w-btn-md: 120px;
   --w-btn-lg: 160px;
+  --w-btn-llg: 240px;
+  --w-btn-xl: 320px;
+  --w-btn-xxl: 380px;
+  --w-btn-xxxl: 420px;
 
   /* Containers */
   --w-card-sm: 320px;
   --w-card-md: 480px;
   --w-card-lg: 640px;
   --w-card-xl: 768px;
-
-  /* Text Colors */
-
-  --text-primary: var(--slate-900); /* main text */
-  --text-secondary: var(--slate-600); /* subtitles, labels */
-  --text-muted: var(--slate-500); /* helper text */
-  --text-disabled: var(--slate-400); /* disabled text */
-  --text-inverted: #ffffff; /* on dark bg */
 }
 
 *,

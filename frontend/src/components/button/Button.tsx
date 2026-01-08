@@ -1,12 +1,13 @@
-import React from "react";
 import styles from "./button.module.css";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "neutral" | "negative";
+  width?: string;
 }
 
 export const Button = ({
   variant = "primary",
+  width = "",
   className = "",
   disabled,
   children,
@@ -14,6 +15,7 @@ export const Button = ({
 }: Props) => {
   return (
     <button
+      style={width ? { width } : undefined}
       className={[
         styles.button,
         styles[variant],

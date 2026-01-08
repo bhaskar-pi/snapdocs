@@ -4,6 +4,7 @@
 }
 
 .input {
+  width: var(--w-input-lg);
   height: var(--input-height);
   padding: var(--input-padding-x);
   border: 1px solid var(--input-border);
