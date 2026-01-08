@@ -1,40 +1,113 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Slate (Base UI) */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #020617;
+
+  /* Primary */
+  --primary: var(--slate-900);
+  --primary-light: var(--slate-700);
+  --primary-hover: var(--slate-800);
+
+  /* Error / Danger (Red) */
+  --error: #dc2626; /* red-600 → error text */
+  --error-hover: #b91c1c; /* red-700 */
+  --error-light: #fee2e2; /* red-100 → bg */
+  --error-border: #fca5a5; /* red-300 */
+
+  /* Warning (Amber) */
+  --warning: #d97706; /* amber-600 */
+  --warning-light: #fef3c7; /* amber-100 */
+  --warning-border: #fcd34d; /* amber-300 */
+
+  /* Success (Green) */
+  --success: #16a34a; /* green-600 */
+  --success-light: #dcfce7; /* green-100 */
+  --success-border: #86efac; /* green-300 */
+
+  /* Info (Blue) */
+  --info: #2563eb; /* blue-600 */
+  --info-light: #dbeafe; /* blue-100 */
+  --info-border: #93c5fd; /* blue-300 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-html,
+/* Root sizing */
+html {
+  height: 100%;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Body baseline */
 body {
-  max-width: 100vw;
+  min-height: 100%;
+  width: 100vw;
   overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(248, 250, 252); /* bg slate 50*/
+  color: rgb(15, 23, 42); /* text-slate-900 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif !important;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+/* Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
+/* Images & media */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Buttons & inputs inherit font */
+button,
+textarea,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* DARK MODE (System-based for now) */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
