@@ -1,8 +1,8 @@
-interface InputProps {
+import styles from "./form.module.css";
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
-  type: string;
-  props: React.InputHTMLAttributes<HTMLInputElement>;
   containerClassName?: string;
   labelClassName?: string;
   inputClassName?: string;
@@ -11,18 +11,23 @@ interface InputProps {
 export const Input: React.FC<InputProps> = ({
   id,
   label,
-  type,
-  containerClassName,
-  labelClassName,
-  inputClassName,
+  type = "text",
+  containerClassName = "",
+  labelClassName = "",
+  inputClassName = "",
   ...props
 }) => {
   return (
-    <div className={containerClassName}>
-      <label className={labelClassName} htmlFor={id}>
+    <div className={`${styles.inputContainer} ${containerClassName}`}>
+      <label className={`${styles.label} ${labelClassName}`} htmlFor={id}>
         {label}
       </label>
-      <input className={inputClassName} type={type} id={id} {...props} />
+      <input
+        className={`${styles.input} ${inputClassName}`}
+        type={type}
+        id={id}
+        {...props}
+      />
     </div>
   );
 };

@@ -1,16 +1,23 @@
 :root {
   /* Slate (Base UI) */
+  --slate-0: #ffffff;
   --slate-50: #f8fafc;
+  --slate-75: #f7fafc;
   --slate-100: #f1f5f9;
   --slate-200: #e2e8f0;
   --slate-300: #cbd5e1;
+  --slate-350: #afbccf;
   --slate-400: #94a3b8;
+  --slate-450: #7b8aa2;
   --slate-500: #64748b;
   --slate-600: #475569;
   --slate-700: #334155;
   --slate-800: #1e293b;
   --slate-900: #0f172a;
   --slate-950: #020617;
+  --slate-150: #e9eef5;
+  --slate-250: #d6dee9;
+  --slate-550: #56677e;
 
   /* Primary */
   --primary: var(--slate-900);
@@ -48,15 +55,19 @@
   /* Input sizing */
   --input-height: 40px;
   --input-padding-x: 12px;
-  --input-radius: 8px;
+
+  /* radius */
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
 
   /* Background */
-  --input-bg: var(--slate-50);
+  --input-bg: var(--slate-0);
   --input-bg-disabled: var(--slate-100);
 
   /* Border */
   --input-border: var(--slate-300);
-  --input-border-hover: var(--slate-400);
+  --input-border-hover: var(--slate-350);
   --input-border-focus: var(--slate-900);
   --input-border-error: var(--error-border);
 
@@ -65,10 +76,11 @@
   --input-text-disabled: var(--slate-400);
 
   /* Placeholder */
-  --input-placeholder: var(--slate-400);
+  --input-placeholder: var(--slate-450);
 
   /* Focus ring (optional) */
   --input-ring: rgba(15, 23, 42, 0.12); /* slate-900 @ 12% */
+  --input-ring-blue: rgba(37, 99, 235, 0.18);
 
   /* Font Sizes */
   --font-xs: 12px; /* helper, error text */
@@ -91,6 +103,32 @@
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
+
+  /* Form controls */
+  --w-input-sm: 160px; /* OTP, short fields */
+  --w-input-md: 240px; /* most inputs */
+  --w-input-l: 320px; /* email, password */
+  --w-input-lg: 380px; /* email, password */
+  --w-input-xl: 420px; /* long text */
+
+  /* Buttons */
+  --w-btn-sm: 96px;
+  --w-btn-md: 120px;
+  --w-btn-lg: 160px;
+
+  /* Containers */
+  --w-card-sm: 320px;
+  --w-card-md: 480px;
+  --w-card-lg: 640px;
+  --w-card-xl: 768px;
+
+  /* Text Colors */
+
+  --text-primary: var(--slate-900); /* main text */
+  --text-secondary: var(--slate-600); /* subtitles, labels */
+  --text-muted: var(--slate-500); /* helper text */
+  --text-disabled: var(--slate-400); /* disabled text */
+  --text-inverted: #ffffff; /* on dark bg */
 }
 
 *,
@@ -112,7 +150,7 @@ body {
   min-height: 100%;
   width: 100vw;
   overflow-x: hidden;
-  background: var(--slate-50);
+  background: var(--slate-0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -121,7 +159,16 @@ body {
 
   font-size: var(--font-base);
   line-height: var(--lh-normal);
-  color: var(--text-primary);
+  color: var(--slate-800);
+}
+
+/* Chrome, Edge, Safari */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--input-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 /* Remove default margins */
