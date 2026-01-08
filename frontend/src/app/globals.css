@@ -37,6 +37,60 @@
   --info: #2563eb; /* blue-600 */
   --info-light: #dbeafe; /* blue-100 */
   --info-border: #93c5fd; /* blue-300 */
+
+  /* Form spacing */
+  --form-gap-xs: 4px; /* input → error / help */
+  --form-gap-sm: 6px; /* label → input */
+  --form-gap-md: 16px; /* field → field */
+  --form-gap-lg: 24px; /* section → section */
+  --form-gap-actions: 20px;
+
+  /* Input sizing */
+  --input-height: 40px;
+  --input-padding-x: 12px;
+  --input-radius: 8px;
+
+  /* Background */
+  --input-bg: var(--slate-50);
+  --input-bg-disabled: var(--slate-100);
+
+  /* Border */
+  --input-border: var(--slate-300);
+  --input-border-hover: var(--slate-400);
+  --input-border-focus: var(--slate-900);
+  --input-border-error: var(--error-border);
+
+  /* Text */
+  --input-text: var(--slate-900);
+  --input-text-disabled: var(--slate-400);
+
+  /* Placeholder */
+  --input-placeholder: var(--slate-400);
+
+  /* Focus ring (optional) */
+  --input-ring: rgba(15, 23, 42, 0.12); /* slate-900 @ 12% */
+
+  /* Font Sizes */
+  --font-xs: 12px; /* helper, error text */
+  --font-sm: 14px; /* inputs, labels */
+  --font-base: 16px; /* body text */
+  --font-lg: 18px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 30px;
+  --font-4xl: 36px;
+
+  /* Line Heights */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  /* Font Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 }
 
 *,
@@ -50,6 +104,7 @@ html {
   height: 100%;
   width: 100%;
   -webkit-text-size-adjust: 100%;
+  font-size: 16px;
 }
 
 /* Body baseline */
@@ -57,13 +112,16 @@ body {
   min-height: 100%;
   width: 100vw;
   overflow-x: hidden;
-  background: rgb(248, 250, 252); /* bg slate 50*/
-  color: rgb(15, 23, 42); /* text-slate-900 */
+  background: var(--slate-50);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif !important;
+    Roboto, sans-serif;
+
+  font-size: var(--font-base);
+  line-height: var(--lh-normal);
+  color: var(--text-primary);
 }
 
 /* Remove default margins */
