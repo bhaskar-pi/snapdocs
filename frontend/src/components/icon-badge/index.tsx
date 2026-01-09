@@ -3,6 +3,7 @@ import styles from "./icon-badge.module.css";
 type IconSize = "sm" | "md" | "lg" | "xl" | "xxl";
 type IconVariant =
   | "neutral"
+  | "neutralL"
   | "primary"
   | "success"
   | "info"

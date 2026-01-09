@@ -1,65 +1,17 @@
-/** login form */
-.loginContainer {
-  background-color: var(--slate-75);
-  width: 100%;
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  width: 100%;
-  max-width: 420px;
-}
-
-.badges {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 16px;
-  margin-top: 10px;
-}
-
-.header > h1 {
-  font-size: var(--font-2xl);
-  font-weight: var(--fw-semibold);
-}
-
-.header > p {
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-}
-
-.button {
-  max-width: var(--w-btn-xxl);
-  margin-top: 8px;
-  font-size: var(--font-sm);
-  font-weight: 500;
-  height: 48px;
-}
-
-/** login info page */
-
-.infoContainer {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 25px;
   gap: 32px;
   max-width: 580px;
+}
+
+.badges {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
 }
 
 .header {
@@ -143,19 +95,44 @@
   font-weight: 400;
 }
 
-.signup {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 12px;
+.reviewCard {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: var(--radius-md);
 
-  color: var(--slate-600);
+  max-width: 580px;
+  background-color: var(--slate-0);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+}
+
+.quoteIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--slate-400);
+  margin-bottom: 8px;
+}
+
+.reviewText {
+  font-size: var(--font-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.reviewer {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reviewerName {
+  font-weight: var(--fw-semibold);
   font-size: var(--font-sm);
 }
 
-.signup > span {
-  color: var(--slate-900);
-  font-weight: 500;
+.reviewerRole {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
 }

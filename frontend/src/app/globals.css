@@ -257,3 +257,13 @@ select {
     color-scheme: dark;
   }
 }
+
+/** common class names*/
+
+.base-two-in-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 6px;
+}

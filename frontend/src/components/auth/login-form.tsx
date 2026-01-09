@@ -1,11 +1,11 @@
-import { Logo } from "@/components/logo/Logo";
-import styles from "./login.module.css";
+import { Logo } from "@/components/logo/logo";
+import styles from "./auth.module.css";
 import { Input } from "@/components/form/input";
 import { Button } from "@/components/button/Button";
 
-const Login = () => {
+const LoginForm = () => {
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.container}>
       <form className={styles.form}>
         <Logo size="lg" />
         <div className={styles.header}>
@@ -34,7 +34,7 @@ const Login = () => {
           Log In
         </Button>
 
-        <div className={styles.signup}>
+        <div className={styles.switch}>
           <p>{`Don't have an account?`}</p>
           <span>Sign up</span>
         </div>
@@ -43,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

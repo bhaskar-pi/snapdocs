@@ -19,25 +19,25 @@
 }
 
 .lg {
+  width: 40px;
+  height: 40px;
+}
+
+.xl {
   width: 44px;
   height: 44px;
 }
 
-.xl {
-  width: 52px;
-  height: 52px;
-}
-
 .xxl {
-  width: 62px;
-  height: 62px;
+  width: 56px;
+  height: 56px;
 }
 
 /* Icon size */
 .icon {
   width: 18px;
   height: 18px;
-  stroke-width: 2.4;
+  stroke-width: 2;
 }
 
 /* Scale icon with badge */
@@ -47,23 +47,28 @@
 }
 
 .lg .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.xl .icon {
   width: 22px;
   height: 22px;
 }
 
-.xl .icon {
-  width: 25px;
-  height: 25px;
-}
-
 .xxl .icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
 }
 
 .neutral {
   background-color: var(--slate-0);
   color: var(--slate-700);
+}
+
+.neutralL {
+  background-color: var(--slate-0);
+  color: var(--slate-400);
 }
 
 .primary {
