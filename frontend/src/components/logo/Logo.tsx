@@ -12,7 +12,7 @@ export const Logo = ({ size = "lg", showText = true }: Props) => {
       <div className={styles.iconWrapper}>
         <FolderOpen
           size={size === "sm" ? 18 : size === "md" ? 22 : 26}
-          strokeWidth={2.6}
+          strokeWidth={2}
           className={styles.icon}
         />
       </div>

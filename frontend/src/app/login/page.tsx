@@ -1,38 +1,9 @@
-import { Logo } from "@/components/logo/Logo";
-import styles from "./login.module.css";
-import { Input } from "@/components/form/Input";
-import { Button } from "@/components/button/Button";
+import { AuthLayout } from "@/components/layouts/auth-layout/auth-layout";
+import Login from "./login";
+import { LoginInfo } from "./login-info";
 
-const Login = () => {
-  return (
-    <div className={styles.container}>
-      <form className={styles.form}>
-        <Logo size="lg" />
-        <div className={styles.header}>
-          <h1>Welcome back</h1>
-          <p>Log in to manage your document requests</p>
-        </div>
-
-        <Input
-          id="email"
-          label="Email"
-          type="email"
-          placeholder="name@company.com"
-        />
-
-        <Input
-          id="password"
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
-        />
-
-        <Button type="submit" variant="primary" className={styles.button}>
-          Log In
-        </Button>
-      </form>
-    </div>
-  );
+const LoginPage = () => {
+  return <AuthLayout left={<Login />} right={<LoginInfo />} />;
 };
 
-export default Login;
+export default LoginPage;

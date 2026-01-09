@@ -1,0 +1,97 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+  flex-shrink: 0;
+}
+
+.sm {
+  width: 28px;
+  height: 28px;
+}
+
+.md {
+  width: 36px;
+  height: 36px;
+}
+
+.lg {
+  width: 44px;
+  height: 44px;
+}
+
+.xl {
+  width: 52px;
+  height: 52px;
+}
+
+.xxl {
+  width: 62px;
+  height: 62px;
+}
+
+/* Icon size */
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.4;
+}
+
+/* Scale icon with badge */
+.sm .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.lg .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.xl .icon {
+  width: 25px;
+  height: 25px;
+}
+
+.xxl .icon {
+  width: 30px;
+  height: 30px;
+}
+
+.neutral {
+  background-color: var(--slate-0);
+  color: var(--slate-700);
+}
+
+.primary {
+  background-color: var(--slate-900);
+  color: var(--text-inverted);
+}
+
+.success {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.info {
+  background-color: var(--info-light);
+  color: var(--info);
+}
+
+.warning {
+  background-color: var(--warning-light);
+  color: var(--warning);
+}
+
+.error {
+  background-color: var(--error-light);
+  color: var(--error);
+}
+
+.light {
+  background-color: var(--slate-100);
+  color: var(--slate-800);
+}
