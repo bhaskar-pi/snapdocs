@@ -23,7 +23,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
       setActiveReview((prev) =>
         prev === content.reviews.length - 1 ? 0 : prev + 1
       );
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [content]);
@@ -52,8 +52,8 @@ export const AuthInfoPanel = ({ type }: Props) => {
       <ul className={styles.featureList}>
         {content.features.map((feature) => (
           <li key={feature} className={styles.featureItem}>
-            <span className={styles.checkIcon}>
-              <Check size={16} strokeWidth={2.5} />
+            <span className={styles.icon}>
+              <Check size={14} strokeWidth={2.5} />
             </span>
             <span className={styles.featureText}>{feature}</span>
           </li>
