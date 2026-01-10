@@ -1,8 +1,10 @@
 import "./globals.css";
-import type { Metadata } from "next";
-import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
+
 import { QueryProvider } from "@/providers/react-query";
+
+import type { Metadata } from "next";
 
 const inter = Inter({
   subsets: ["latin"],

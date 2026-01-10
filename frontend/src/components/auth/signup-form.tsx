@@ -1,13 +1,15 @@
 "use client";
 
-import styles from "./auth.module.css";
 import Link from "next/link";
-import { Logo } from "@/components/logo";
-import { Input } from "@/components/form/input";
-import { Button } from "@/components/button/Button";
 import { useCallback, useState } from "react";
-import { SignUpForm as SignUpFormType } from "@/types/models/auth.model";
+
+import { Button } from "@/components/button/Button";
+import { Input } from "@/components/form/input";
+import { Logo } from "@/components/logo";
 import { useSignup } from "@/hooks/use-signup";
+import { SignUpForm as SignUpFormType } from "@/types/models/auth.model";
+
+import styles from "./auth.module.css";
 
 const initialForm = {
   firstName: "",

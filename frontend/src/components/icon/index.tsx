@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./icon.module.css";
 
 type Size = "sm" | "md" | "lg";

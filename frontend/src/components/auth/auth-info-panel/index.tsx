@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Check, Quote } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import styles from "./auth-info-panel.module.css";
-import { IconBadge } from "../../icon-badge";
 import { AUTH_INFO_CONTENT } from "./content";
+import { IconBadge } from "../../icon-badge";
+
 import type { AuthInfoVariant } from "./content.types";
 
 interface Props {

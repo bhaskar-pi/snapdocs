@@ -1,4 +1,5 @@
 import { FolderOpen } from "lucide-react";
+
 import styles from "./logo.module.css";
 
 interface Props {
