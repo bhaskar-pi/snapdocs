@@ -58,11 +58,6 @@ export const validate = (schema: ZodType) => {
  * - Verifies and decodes the JWT
  * - Attaches the decoded user payload to `req.user`
  * - Blocks the request if authentication fails
- *
- * Usage:
- * ```ts
- * router.get("/documents", authenticate, controller);
- * ```
  */
 export const authenticate = (
   req: AuthenticatedRequest,
@@ -80,11 +75,14 @@ export const authenticate = (
   try {
     const payload = verifyAccessToken(token);
     req.user = payload;
-    next();
-  } catch (error) {
-    console.error("Invalid or expired token", error);
+    return next();
+  } catch {
+    // Access token expired or invalid → client should refresh
+    res.clearCookie("accessToken");
+
     return res.status(401).json({
-      message: "Invalid or expired token",
+      message: "Access token expired",
     });
   }
 };
+

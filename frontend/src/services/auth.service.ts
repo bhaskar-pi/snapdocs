@@ -13,8 +13,8 @@ export const authApi = {
     return POST("/register", { ...data });
   },
 
-  logout(userId: string) {
-    return POST("/logout", { userId });
+  logout() {
+    return POST("/logout");
   },
 
   refresh(userId: string) {

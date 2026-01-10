@@ -41,11 +41,29 @@ export async function findValidSession(
   return session ?? null;
 }
 
-export async function revokeSession(sessionId: string): Promise<void> {
+export async function revokeSessionBySessionId(
+  sessionId: string
+): Promise<void> {
   await db
     .update(sessions)
     .set({
       revokedAt: new Date(),
     })
     .where(eq(sessions.id, sessionId));
+}
+
+export async function revokeSessionByToken(
+  userId: string,
+  refreshTokenHash: string
+) {
+  await db
+    .update(sessions)
+    .set({ revokedAt: new Date() })
+    .where(
+      and(
+        eq(sessions.userId, userId),
+        eq(sessions.refreshTokenHash, refreshTokenHash),
+        isNull(sessions.revokedAt)
+      )
+    );
 }

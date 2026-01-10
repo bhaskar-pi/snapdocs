@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import {
   createSession,
   findValidSession,
-  revokeSession,
+  revokeSessionBySessionId,
 } from "@repositories/session.repository";
 import { createUser, getUserByEmail } from "@repositories/user.repository";
 import {
@@ -95,7 +95,7 @@ export async function rotateAccessToken(token: string) {
 
   // Revoke old session so the previous refresh token
   // can no longer be used
-  await revokeSession(session.id);
+  await revokeSessionBySessionId(session.id);
 
   // Create a new session for the newly issued refresh token.
   const newSession = await createSession(

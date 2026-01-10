@@ -3,16 +3,23 @@
 import { ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCallback } from "react";
 
 import { Icon } from "@/components/icon";
 import { Logo } from "@/components/logo";
 import { SIDEBAR_TABS } from "@/config/tabs";
+import { useLogout } from "@/hooks/auth/use-logout";
 import { useAuthStore } from "@/store/auth.store";
 
 import styles from "./app-layout.module.css";
 
 const Sidebar = () => {
   const user = useAuthStore((store) => store.user);
+  const logout = useLogout();
+
+  const handleLogout = useCallback(() => {
+    logout.mutate();
+  }, [logout]);
 
   const pathName = usePathname();
 
@@ -54,11 +61,13 @@ const Sidebar = () => {
 
       <div className={styles.sidebarFooter}>
         <div className={styles.userInfo}>
-          <p className={styles.userName}>{`${user?.firstName} ${user?.lastName}`}</p>
+          <p
+            className={styles.userName}
+          >{`${user?.firstName} ${user?.lastName}`}</p>
           <p className={styles.userEmail}>{`${user?.email}`}</p>
         </div>
 
-        <button className={styles.logout}>
+        <button className={styles.logout} onClick={handleLogout}>
           <Icon name={LogOut} strokeWidth={2.5} size={18} />
           Sign out
         </button>
