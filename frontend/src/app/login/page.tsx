@@ -1,4 +1,4 @@
-import LoginForm from "../../components/auth/login-form";
+import LoginForm from "@/components/auth/login-form";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 import { AuthInfoPanel } from "@/components/auth/auth-info-panel";
 

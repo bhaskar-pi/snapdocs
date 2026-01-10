@@ -14,7 +14,7 @@
   gap: 20px;
 
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
 }
 
 .badges {
@@ -57,12 +57,13 @@
   justify-content: center;
   gap: 5px;
   margin-top: 8px;
+  max-width: var(--w-btn-xxl);
 
   color: var(--slate-600);
   font-size: var(--font-sm);
 }
 
-.switch > span {
+.switch > :last-child {
   color: var(--slate-900);
   font-weight: 500;
 }

@@ -30,7 +30,7 @@ export const Icon = ({
   size = "md",
   tone = "primary",
   className = "",
-  strokeWidth = 2,
+  strokeWidth,
 }: Props) => {
   return (
     <IconComponent

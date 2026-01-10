@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body cz-shortcut-listen="true">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

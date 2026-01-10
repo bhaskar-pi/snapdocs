@@ -64,8 +64,8 @@ export const AuthInfoPanel = ({ type }: Props) => {
         <div className={styles.trustedCard}>
           <IconBadge icon={content.trust.icon} variant="light" />
           <div className={styles.trustedCardInfo}>
-            <p className={styles.trustedTitle}>{content.trust.title}</p>
-            <p className={styles.trustedSubtitle}>{content.trust.subtitle}</p>
+            <p>{content.trust.title}</p>
+            <p>{content.trust.subtitle}</p>
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
-import { Logo } from "@/components/logo/logo";
+import Link from "next/link";
+import { Logo } from "@/components/logo";
 import styles from "./auth.module.css";
 import { Input } from "@/components/form/input";
 import { Button } from "@/components/button/Button";
@@ -36,7 +37,7 @@ const LoginForm = () => {
 
         <div className={styles.switch}>
           <p>{`Don't have an account?`}</p>
-          <span>Sign up</span>
+          <Link href="/signup">Sign up</Link>
         </div>
       </form>
     </div>

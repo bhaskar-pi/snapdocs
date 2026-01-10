@@ -11,7 +11,7 @@ export const Logo = ({ size = "lg", showText = true }: Props) => {
     <div className={`${styles.logo} ${styles[size]}`}>
       <div className={styles.iconWrapper}>
         <FolderOpen
-          size={size === "sm" ? 18 : size === "md" ? 22 : 26}
+          size={{ sm: 18, md: 22, lg: 26 }[size]}
           strokeWidth={2}
           className={styles.icon}
         />
