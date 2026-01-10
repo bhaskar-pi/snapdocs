@@ -1,0 +1,70 @@
+"use client";
+
+import { ChevronRight, LogOut } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { Icon } from "@/components/icon";
+import { Logo } from "@/components/logo";
+import { SIDEBAR_TABS } from "@/config/tabs";
+import { useAuthStore } from "@/store/auth.store";
+
+import styles from "./app-layout.module.css";
+
+const Sidebar = () => {
+  const user = useAuthStore((store) => store.user);
+
+  const pathName = usePathname();
+
+  return (
+    <aside className={styles.sidebar}>
+      <div className={styles.sidebarHeader}>
+        <Logo size="md" />
+      </div>
+
+      <nav className={styles.nav}>
+        {SIDEBAR_TABS.map((tab) => {
+          const isActive = tab.isActive(pathName);
+
+          return (
+            <Link
+              key={tab.id}
+              href={tab.path}
+              className={`${styles.navItem} ${isActive ? styles.active : ""}`}
+            >
+              <Icon
+                name={tab.icon}
+                size={18}
+                strokeWidth={2}
+                className={styles.navIcon}
+              />
+              <span>{tab.title}</span>
+              {isActive && (
+                <Icon
+                  name={ChevronRight}
+                  size={18}
+                  strokeWidth={2}
+                  className={`${styles.chevron}`}
+                />
+              )}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className={styles.sidebarFooter}>
+        <div className={styles.userInfo}>
+          <p className={styles.userName}>{`${user?.firstName} ${user?.lastName}`}</p>
+          <p className={styles.userEmail}>{`${user?.email}`}</p>
+        </div>
+
+        <button className={styles.logout}>
+          <Icon name={LogOut} strokeWidth={2.5} size={18} />
+          Sign out
+        </button>
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;

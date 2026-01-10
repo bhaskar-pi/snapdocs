@@ -81,7 +81,8 @@ export const authenticate = (
     const payload = verifyAccessToken(token);
     req.user = payload;
     next();
-  } catch {
+  } catch (error) {
+    console.error("Invalid or expired token", error);
     return res.status(401).json({
       message: "Invalid or expired token",
     });
