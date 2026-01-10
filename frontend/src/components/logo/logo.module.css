@@ -1,0 +1,61 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: var(--radius-sm);
+  background: var(--slate-100);
+}
+
+.icon {
+  color: var(--primary);
+}
+
+.text {
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.textBrand {
+  font-size: 10px;
+}
+
+.sm .iconWrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+}
+
+.sm .textBrand {
+  font-size: 18px;
+}
+
+.md .iconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+
+.md .textBrand {
+  font-size: 20px;
+}
+
+.lg .iconWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+}
+
+.lg .textBrand {
+  font-size: 22px;
+}

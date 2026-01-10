@@ -1,42 +1,270 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ================================================== */
+  /* 1. Base Palette – Slate (source of truth) */
+  /* ================================================== */
+
+  --slate-0: #ffffff;
+
+  --slate-50: #f8fafc;
+  --slate-75: #f7fafc;
+  --slate-100: #f1f5f9;
+  --slate-150: #e9eef5;
+  --slate-200: #e2e8f0;
+  --slate-250: #d6dee9;
+  --slate-300: #cbd5e1;
+  --slate-350: #afbccf;
+  --slate-400: #94a3b8;
+  --slate-450: #7b8aa2;
+  --slate-500: #64748b;
+  --slate-550: #56677e;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #020617;
+
+  /* ================================================== */
+  /* 2. Brand / Primary */
+  /* ================================================== */
+
+  --primary: var(--slate-900);
+  --primary-hover: var(--slate-800);
+  --primary-light: var(--slate-700);
+
+  /* ================================================== */
+  /* 3. Semantic Colors */
+  /* ================================================== */
+
+  /* Error / Danger */
+  --error: #dc2626;
+  --error-hover: #b91c1c;
+  --error-light: #fee2e2;
+  --error-border: #fca5a5;
+
+  /* Warning */
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --warning-border: #fcd34d;
+
+  /* Success */
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --success-border: #86efac;
+
+  /* Info */
+  --info: #2563eb;
+  --info-light: #dbeafe;
+  --info-border: #93c5fd;
+
+  /* ================================================== */
+  /* 4. Text Colors */
+  /* ================================================== */
+
+  --text-primary: var(--slate-900);
+  --text-secondary: var(--slate-600);
+  --text-muted: var(--slate-500);
+  --text-disabled: var(--slate-400);
+  --text-inverted: #ffffff;
+
+  /* ================================================== */
+  /* 5. Typography */
+  /* ================================================== */
+
+  /* Font sizes */
+  --font-xxs: 8px;
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 30px;
+  --font-4xl: 36px;
+
+  /* Line heights */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ================================================== */
+  /* 6. Spacing – Forms */
+  /* ================================================== */
+
+  --form-gap-xs: 4px;
+  --form-gap-sm: 6px;
+  --form-gap-md: 16px;
+  --form-gap-lg: 24px;
+  --form-gap-actions: 20px;
+
+  /* ================================================== */
+  /* 7. Radius */
+  /* ================================================== */
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* ================================================== */
+  /* 8. Inputs */
+  /* ================================================== */
+
+  /* Sizing */
+  --input-height: 40px;
+  --input-padding-x: 12px;
+
+  /* Background */
+  --input-bg: var(--slate-0);
+  --input-bg-disabled: var(--slate-100);
+
+  /* Borders */
+  --input-border: var(--slate-300);
+  --input-border-hover: var(--slate-350);
+  --input-border-focus: var(--slate-900);
+  --input-border-error: var(--error-border);
+
+  /* Text */
+  --input-text: var(--slate-900);
+  --input-text-disabled: var(--slate-400);
+
+  /* Placeholder */
+  --input-placeholder: var(--slate-450);
+
+  /* Focus rings */
+  --input-ring: rgba(15, 23, 42, 0.12);
+  --input-ring-blue: rgba(37, 99, 235, 0.18);
+
+  /* ================================================== */
+  /* 9. Widths */
+  /* ================================================== */
+
+  /* Inputs */
+  --w-input-sm: 160px;
+  --w-input-md: 240px;
+  --w-input-l: 320px;
+  --w-input-lg: 380px;
+  --w-input-xl: 420px;
+
+  /* Buttons */
+  --w-btn-xxs: 50px;
+  --w-btn-xs: 70px;
+  --w-btn-sm: 96px;
+  --w-btn-md: 120px;
+  --w-btn-lg: 160px;
+  --w-btn-llg: 240px;
+  --w-btn-xl: 320px;
+  --w-btn-xxl: 380px;
+  --w-btn-xxxl: 420px;
+
+  /* Containers */
+  --w-card-sm: 320px;
+  --w-card-md: 480px;
+  --w-card-lg: 640px;
+  --w-card-xl: 768px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-html,
+/* Root sizing */
+html {
+  height: 100%;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+}
+
+/* Body baseline */
 body {
-  max-width: 100vw;
+  min-height: 100%;
+  width: 100vw;
   overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--slate-0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+
+  font-size: var(--font-base);
+  line-height: var(--lh-normal);
+  color: var(--slate-800);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+/* Chrome, Edge, Safari */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--input-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
+/* Images & media */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Buttons & inputs inherit font */
+button,
+textarea,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* DARK MODE (System-based for now) */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+}
+
+/** common class names*/
+
+.base-two-in-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  gap: 6px;
 }

@@ -1,0 +1,86 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 45px;
+  padding: 0 16px;
+
+  font-size: var(--font-sm);
+  font-weight: 600;
+  line-height: 1;
+
+  border-radius: 8px;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--text-inverted);
+}
+
+.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25); /* info blue */
+}
+
+.secondary {
+  background-color: var(--slate-100);
+  color: var(--text-primary);
+  border-color: var(--slate-200);
+}
+
+.secondary:hover {
+  background-color: var(--slate-200);
+}
+
+.secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.35); /* slate-400 */
+}
+
+.neutral {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.neutral:hover {
+  background-color: var(--slate-100);
+}
+
+.neutral:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.35);
+}
+
+.negative {
+  background-color: var(--error);
+  color: #ffffff;
+}
+
+.negative:hover {
+  background-color: var(--error-hover);
+}
+
+.negative:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.35); /* red-600 */
+}
+
+.button:disabled,
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
