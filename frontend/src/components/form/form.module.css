@@ -54,9 +54,6 @@
   max-width: 100%;
   word-break: break-word;
   overflow-wrap: break-word;
-}
-
-.message {
   padding-left: var(--input-padding-x);
 }
 
