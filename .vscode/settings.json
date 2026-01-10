@@ -3,5 +3,13 @@
     "**/node_modules": true,
     "**/.next": true
   },
-  "cSpell.words": ["Rahul", "supabase", "SUPABASE", "vercel", "Vikram"]
+  "cSpell.words": [
+    "Bhaskar",
+    "Pasupurathi",
+    "Rahul",
+    "supabase",
+    "SUPABASE",
+    "vercel",
+    "Vikram"
+  ]
 }

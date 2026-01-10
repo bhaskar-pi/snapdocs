@@ -1,4 +1,4 @@
-import { FolderOpen } from "lucide-react";
+import { FileText } from "lucide-react";
 
 import styles from "./logo.module.css";
 
@@ -11,8 +11,8 @@ export const Logo = ({ size = "lg", showText = true }: Props) => {
   return (
     <div className={`${styles.logo} ${styles[size]}`}>
       <div className={styles.iconWrapper}>
-        <FolderOpen
-          size={{ sm: 18, md: 22, lg: 26 }[size]}
+        <FileText
+          size={{ sm: 18, md: 20, lg: 24 }[size]}
           strokeWidth={2}
           className={styles.icon}
         />
