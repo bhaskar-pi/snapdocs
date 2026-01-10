@@ -45,9 +45,6 @@ export const validate = (schema: ZodType) => {
       return;
     }
 
-    const token = request.cookies.get("accessToken").value;
-    verifyAccessToken(token);
-
     request.body = result.data;
     nextFunction();
   };

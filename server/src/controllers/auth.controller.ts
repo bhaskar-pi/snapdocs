@@ -11,7 +11,9 @@ import { TokenValidity } from "@enums/session";
 
 export const loginHandler = async (request: Request, response: Response) => {
   try {
-    const { session, user, refreshToken, accessToken } = await loginUser(request.body);
+    const { session, user, refreshToken, accessToken } = await loginUser(
+      request.body
+    );
 
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,
@@ -28,9 +30,9 @@ export const loginHandler = async (request: Request, response: Response) => {
     });
     return response.status(200).json({
       message: "Login successfully.",
-      // session,
-      // user,
-      // isAuthorized: true,
+      session,
+      user,
+      isAuthorized: true,
     });
   } catch (error: any) {
     console.error("Login failed", error);

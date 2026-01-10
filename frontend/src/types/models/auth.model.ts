@@ -11,7 +11,7 @@ export interface Session {
   id: string;
   userId: string;
   accessToken: string;
-  expiresAt: Date;
+  expiresAt: string;
 }
 
 export interface LoginResponse {

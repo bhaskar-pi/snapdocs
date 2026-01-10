@@ -1,14 +1,15 @@
 "use client";
 
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import { authApi } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
-import { getErrorMessage } from "@/utils/api";
 import { LoginResponse } from "@/types/models/auth.model";
-import { AxiosError } from "axios";
-import { ApiError } from "next/dist/server/api-utils";
+import { ApiError } from "@/types/models/misc";
+import { getErrorMessage } from "@/utils/api";
 
 export function useLogin() {
   const { setUser, setSession } = useAuthStore((store) => store);

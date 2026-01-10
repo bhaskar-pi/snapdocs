@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
 
-  if (!token && PROTECTED_ROUTES.some((route) => route.startsWith(pathname))) {
+  if (!token && PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {
