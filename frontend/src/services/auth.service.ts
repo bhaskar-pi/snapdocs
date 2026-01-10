@@ -1,0 +1,23 @@
+import { POST } from "@/api/http";
+import { LoginResponse, SignUpForm } from "@/types/models/auth.model";
+
+export const authApi = {
+  login(email: string, password: string) {
+    return POST<LoginResponse>("/login", {
+      email,
+      password,
+    });
+  },
+
+  signup(data: SignUpForm) {
+    return POST("/register", { ...data });
+  },
+
+  logout(userId: string) {
+    return POST("/logout", { userId });
+  },
+
+  refresh(userId: string) {
+    return POST("/refresh", { userId });
+  },
+};

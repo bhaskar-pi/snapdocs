@@ -37,8 +37,8 @@ export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent>
     type: "signup",
     badges: [
       { icon: FileCheck, variant: "neutral" },
-      { icon: Users, variant: "neutralL" },
-      { icon: Zap, variant: "neutralL" },
+      { icon: Users, variant: "info" },
+      { icon: Zap, variant: "error" },
     ],
     title: "Built for professionals",
     subtitle:

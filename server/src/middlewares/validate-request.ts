@@ -1,5 +1,7 @@
-import { Request, Response, NextFunction } from "express";
 import { ZodType } from "zod";
+import { Request, Response, NextFunction } from "express";
+import { AuthenticatedRequest } from "@models/express";
+import { verifyAccessToken } from "@utils/session";
 
 /**
  * Validation middleware factory.
@@ -46,4 +48,42 @@ export const validate = (schema: ZodType) => {
     request.body = result.data;
     nextFunction();
   };
+};
+
+/**
+ * authenticate
+ *
+ * Authentication middleware that:
+ * - Reads the access token from cookies
+ * - Verifies and decodes the JWT
+ * - Attaches the decoded user payload to `req.user`
+ * - Blocks the request if authentication fails
+ *
+ * Usage:
+ * ```ts
+ * router.get("/documents", authenticate, controller);
+ * ```
+ */
+export const authenticate = (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.cookies?.accessToken;
+
+  if (!token) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  try {
+    const payload = verifyAccessToken(token);
+    req.user = payload;
+    next();
+  } catch {
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
+  }
 };

@@ -12,9 +12,12 @@ export const registerSchema = z
     email: z.email("Invalid email"),
     phoneNumber: z.string().optional(),
     password: z.string().min(6, "Password at least 6 characters"),
-    confirmPassword: z.string(),
+    confirmPassword: z.string().optional(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+  .refine(
+    (data) => !data.confirmPassword || data.password === data.confirmPassword,
+    {
+      message: "Passwords do not match",
+      path: ["confirmPassword"],
+    }
+  );

@@ -57,7 +57,16 @@ export async function loginUser(data: LoginRequest) {
 
   const session = await createSession(user.id, refreshTokenHash, expiresAt);
 
-  return { ...session, accessToken, refreshToken };
+  return {
+    session: {
+      id: session.id,
+      userId: session.userId,
+      expiresAt: session.expiresAt,
+    },
+    user,
+    refreshToken,
+    accessToken,
+  };
 }
 
 export async function rotateAccessToken(token: string) {

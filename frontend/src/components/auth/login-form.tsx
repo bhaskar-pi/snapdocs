@@ -1,13 +1,31 @@
+"use client";
+
 import Link from "next/link";
-import { Logo } from "@/components/logo";
-import styles from "./auth.module.css";
-import { Input } from "@/components/form/input";
+import { useState } from "react";
+
 import { Button } from "@/components/button/Button";
+import { Input } from "@/components/form/input";
+import { Logo } from "@/components/logo";
+import { useLogin } from "@/hooks/use-login";
+
+import styles from "./auth.module.css";
+
 
 const LoginForm = () => {
+  const login = useLogin();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    login.mutate({ email, password });
+  };
+
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <Logo size="lg" />
         <div className={styles.header}>
           <h1>Welcome back</h1>
@@ -15,24 +33,30 @@ const LoginForm = () => {
         </div>
 
         <Input
+          required
           id="email"
           label="Email"
           type="email"
           placeholder="name@company.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <Input
+          required
           id="password"
           label="Password"
           type="password"
           placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           message="forgot password?"
           messagePosition="right"
           messageType="info"
         />
 
         <Button type="submit" variant="primary" className={styles.button}>
-          Log In
+          {login.isPending ? "Logging in..." : "Log In"}
         </Button>
 
         <div className={styles.switch}>

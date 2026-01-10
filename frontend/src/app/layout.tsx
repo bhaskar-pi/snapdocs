@@ -1,6 +1,10 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
+
+import { QueryProvider } from "@/providers/react-query";
+
+import type { Metadata } from "next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster position="top-center" richColors />
+      </body>
     </html>
   );
 }
