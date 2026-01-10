@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { User } from "@/types/models/user.model";
+
 import { Session } from "@/types/models/auth.model";
+import { User } from "@/types/models/user.model";
 
 
 interface AuthState {
