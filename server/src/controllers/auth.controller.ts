@@ -11,9 +11,7 @@ import { TokenValidity } from "@enums/session";
 
 export const loginHandler = async (request: Request, response: Response) => {
   try {
-    const { refreshTokenHash, refreshToken, ...session } = await loginUser(
-      request.body
-    );
+    const { session, user, refreshToken, accessToken } = await loginUser(request.body);
 
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,
@@ -22,15 +20,22 @@ export const loginHandler = async (request: Request, response: Response) => {
       path: "/refresh",
       maxAge: TokenValidity.ONE_DAY,
     });
+    response.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 15 * 60 * 1000,
+    });
     return response.status(200).json({
       message: "Login successfully.",
-      session,
+      // session,
+      // user,
+      // isAuthorized: true,
     });
   } catch (error: any) {
+    console.error("Login failed", error);
     return response.status(401).json({
-      message:
-        error?.message ||
-        "Login failed. Please check your credentials and try again",
+      message: "Login failed. Please check your credentials and try again",
     });
   }
 };

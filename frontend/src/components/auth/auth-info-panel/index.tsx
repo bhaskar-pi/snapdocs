@@ -23,7 +23,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
       setActiveReview((prev) =>
         prev === content.reviews.length - 1 ? 0 : prev + 1
       );
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [content]);
