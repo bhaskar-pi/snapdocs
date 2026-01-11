@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/button/Button";
 import { Input } from "@/components/form/input";
 import { Logo } from "@/components/logo";
-import { useLogin } from "@/hooks/use-login";
+import { useLogin } from "@/hooks/auth/use-login";
 
 import styles from "./auth.module.css";
 

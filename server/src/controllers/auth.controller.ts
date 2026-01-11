@@ -8,6 +8,8 @@ import {
 import env from "@config/env";
 import { Environment } from "@enums/environment";
 import { TokenValidity } from "@enums/session";
+import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
+import { revokeSessionByToken } from "@repositories/session.repository";
 
 export const loginHandler = async (request: Request, response: Response) => {
   try {
@@ -19,7 +21,7 @@ export const loginHandler = async (request: Request, response: Response) => {
       httpOnly: true,
       secure: env.NODE_ENV === Environment.PRODUCTION,
       sameSite: "strict",
-      path: "/refresh",
+      path: "/",
       maxAge: TokenValidity.ONE_DAY,
     });
     response.cookie("accessToken", accessToken, {
@@ -56,6 +58,28 @@ export const registerUserHandler = async (
     return response.status(400).json({
       message: error?.message || "Registration failed. Please try again",
     });
+  }
+};
+
+export const logoutHandler = async (request: Request, response: Response) => {
+  try {
+    const token = request.cookies.refreshToken;
+    const payload = verifyRefreshToken(token);
+
+    const refreshTokenHash = hashRefreshToken(token);
+
+    await revokeSessionByToken(payload.userId, refreshTokenHash);
+
+    response.clearCookie("accessToken");
+    response.clearCookie("refreshToken");
+
+    return response.status(204).send();
+  } catch (error) {
+    console.error("Error at logout", error);
+
+    response.clearCookie("accessToken");
+    response.clearCookie("refreshToken");
+    return response.status(204).send();
   }
 };
 

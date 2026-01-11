@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/button/Button";
 import { Input } from "@/components/form/input";
 import { Logo } from "@/components/logo";
-import { useSignup } from "@/hooks/use-signup";
+import { useSignup } from "@/hooks/auth/use-signup";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth.model";
 
 import styles from "./auth.module.css";
