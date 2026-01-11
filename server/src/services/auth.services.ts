@@ -10,7 +10,7 @@ import {
   LoginRequest,
   UserRegisterRequest,
 } from "@models/requests/auth.request";
-import { User } from "@models/user";
+import { User } from "@database/schema/users.schema";
 import {
   getSecurityTokens,
   hashRefreshToken,

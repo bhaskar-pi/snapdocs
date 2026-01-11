@@ -1,14 +1,13 @@
 import { eq } from "drizzle-orm";
 import { db } from "@database/drizzle";
 
-import { users } from "@database/schema/users.schema";
-import { User } from "@models/user";
+import { User, usersTable } from "@database/schema/users.schema";
 
 export async function getUserByEmail(email: string) {
   const user = await db
     .select()
-    .from(users)
-    .where(eq(users.email, email))
+    .from(usersTable)
+    .where(eq(usersTable.email, email))
     .limit(1);
 
   return user[0];
@@ -16,7 +15,7 @@ export async function getUserByEmail(email: string) {
 
 export async function createUser(data: User): Promise<User> {
   const user = await db
-    .insert(users)
+    .insert(usersTable)
     .values({
       ...data,
     })

@@ -1,7 +1,7 @@
 import { eq, and, isNull, gt } from "drizzle-orm";
 
 import { db } from "@database/drizzle";
-import { sessions } from "@database/schema/sessions.schema";
+import { sessionsTable } from "@database/schema/sessions.schema";
 import { Session } from "@models/session";
 
 export async function createSession(
@@ -10,7 +10,7 @@ export async function createSession(
   expiresAt: Date
 ) {
   const session = await db
-    .insert(sessions)
+    .insert(sessionsTable)
     .values({
       userId,
       refreshTokenHash,
@@ -27,13 +27,13 @@ export async function findValidSession(
 ): Promise<Session | null> {
   const [session] = await db
     .select()
-    .from(sessions)
+    .from(sessionsTable)
     .where(
       and(
-        eq(sessions.userId, userId),
-        eq(sessions.refreshTokenHash, refreshTokenHash),
-        isNull(sessions.revokedAt),
-        gt(sessions.expiresAt, new Date())
+        eq(sessionsTable.userId, userId),
+        eq(sessionsTable.refreshTokenHash, refreshTokenHash),
+        isNull(sessionsTable.revokedAt),
+        gt(sessionsTable.expiresAt, new Date())
       )
     )
     .limit(1);
@@ -45,11 +45,11 @@ export async function revokeSessionBySessionId(
   sessionId: string
 ): Promise<void> {
   await db
-    .update(sessions)
+    .update(sessionsTable)
     .set({
       revokedAt: new Date(),
     })
-    .where(eq(sessions.id, sessionId));
+    .where(eq(sessionsTable.id, sessionId));
 }
 
 export async function revokeSessionByToken(
@@ -57,13 +57,13 @@ export async function revokeSessionByToken(
   refreshTokenHash: string
 ): Promise<void> {
   await db
-    .update(sessions)
+    .update(sessionsTable)
     .set({ revokedAt: new Date() })
     .where(
       and(
-        eq(sessions.userId, userId),
-        eq(sessions.refreshTokenHash, refreshTokenHash),
-        isNull(sessions.revokedAt)
+        eq(sessionsTable.userId, userId),
+        eq(sessionsTable.refreshTokenHash, refreshTokenHash),
+        isNull(sessionsTable.revokedAt)
       )
     );
 }
