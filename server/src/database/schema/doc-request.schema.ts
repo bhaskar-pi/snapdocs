@@ -8,7 +8,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { clientsTable } from "./client.schema";
 import { usersTable } from "./users.schema";
-import { InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export const requestStatusEnum = pgEnum("request_status", [
   "draft",
@@ -30,8 +30,8 @@ export const requestsTable = pgTable(
       .notNull()
       .references(() => usersTable.id, { onDelete: "cascade" }),
     title: text("title").notNull(),
-    description: text("description").notNull(),
-    status: requestStatusEnum("status").notNull().default("draft"),
+    description: text("description"),
+    status: requestStatusEnum("status").notNull().default("pending"),
     dueDate: timestamp("due_date"),
     sentAt: timestamp("sent_at"),
     completedAt: timestamp("completed_at"),
@@ -48,3 +48,4 @@ export const requestsTable = pgTable(
 );
 
 export type DocRequest = InferSelectModel<typeof requestsTable>;
+export type DocRequestInsert = InferInsertModel<typeof requestsTable>;

@@ -1,6 +1,6 @@
 import { index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { usersTable } from "./users.schema";
-import { InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export const clientsTable = pgTable(
   "clients",
@@ -23,3 +23,4 @@ export const clientsTable = pgTable(
 );
 
 export type Client = InferSelectModel<typeof clientsTable>;
+export type ClientInsert = InferInsertModel<typeof clientsTable>

@@ -20,6 +20,7 @@ const env = {
   SUPABASE_DB_URL: getEnv("SUPABASE_DB_URL"),
   JWT_ACCESS_TOKEN_SECRET: getEnv("JWT_ACCESS_TOKEN_SECRET"),
   JWT_REFRESH_TOKEN_SECRET: getEnv("JWT_REFRESH_TOKEN_SECRET"),
+  APP_URL: getEnv("APP_URL"),
 };
 
 export default env;
