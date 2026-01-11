@@ -8,8 +8,7 @@ import {
 import env from "@config/env";
 import { Environment } from "@enums/environment";
 import { TokenValidity } from "@enums/session";
-import { AuthenticatedRequest } from "@models/express";
-import { hashRefreshToken } from "@utils/session";
+import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
 
 export const loginHandler = async (request: Request, response: Response) => {
@@ -62,19 +61,14 @@ export const registerUserHandler = async (
   }
 };
 
-export const logoutHandler = async (
-  request: AuthenticatedRequest,
-  response: Response
-) => {
+export const logoutHandler = async (request: Request, response: Response) => {
   try {
     const token = request.cookies.refreshToken;
-    const userId = request?.user?.userId;
-
-    if (!token || !userId) throw Error;
+    const payload = verifyRefreshToken(token);
 
     const refreshTokenHash = hashRefreshToken(token);
 
-    await revokeSessionByToken(request.user?.userId, refreshTokenHash);
+    await revokeSessionByToken(payload.userId, refreshTokenHash);
 
     response.clearCookie("accessToken");
     response.clearCookie("refreshToken");

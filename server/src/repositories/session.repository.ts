@@ -55,7 +55,7 @@ export async function revokeSessionBySessionId(
 export async function revokeSessionByToken(
   userId: string,
   refreshTokenHash: string
-) {
+): Promise<void> {
   await db
     .update(sessions)
     .set({ revokedAt: new Date() })
