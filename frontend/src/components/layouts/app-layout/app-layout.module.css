@@ -55,7 +55,7 @@
 
 .active {
   background-color: var(--slate-150);
-  color: var(--slate-900);
+  color: var(--slate-950);
 }
 
 .chevron {
@@ -65,7 +65,7 @@
 }
 
 .chevron:hover {
-  color: var(--slate-900);
+  color: var(--slate-950);
 }
 
 .navIcon {
@@ -87,7 +87,7 @@
 .userName {
   font-size: var(--font-sm);
   font-weight: 600;
-  color: var(--slate-900);
+  color: var(--slate-950);
 }
 
 .userEmail {
@@ -110,8 +110,20 @@
   font-weight: 600;
 }
 
+.logout > :first-child {
+  color: var(--slate-600);
+}
+
+.logout > :first-child {
+  color: var(--slate-600);
+}
+
+.logout:hover > :first-child {
+  color: var(--slate-950);
+}
+
 .logout:hover {
-  color: var(--slate-900);
+  color: var(--slate-950);
 }
 
 /* Main Content */

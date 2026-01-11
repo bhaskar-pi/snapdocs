@@ -64,6 +64,6 @@
 }
 
 .switch > :last-child {
-  color: var(--slate-900);
+  color: var(--slate-950);
   font-weight: 500;
 }

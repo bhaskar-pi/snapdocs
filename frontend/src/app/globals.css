@@ -19,7 +19,7 @@
   --slate-900: #0f172a;
   --slate-950: #020617;
 
-  --primary: var(--slate-900);
+  --primary: var(--slate-950);
   --primary-hover: var(--slate-800);
   --primary-light: var(--slate-700);
 
@@ -48,7 +48,7 @@
   /* 4. Text Colors */
   /* ================================================== */
 
-  --text-primary: var(--slate-900);
+  --text-primary: var(--slate-950);
   --text-secondary: var(--slate-600);
   --text-muted: var(--slate-500);
   --text-disabled: var(--slate-400);
@@ -115,7 +115,7 @@
   /* Borders */
   --input-border: var(--slate-300);
   --input-border-hover: var(--slate-350);
-  --input-border-focus: var(--slate-900);
+  --input-border-focus: var(--slate-950);
   --input-border-error: var(--error-border);
 
   /* Text */

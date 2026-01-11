@@ -69,7 +69,7 @@ const Sidebar = () => {
 
         <button className={styles.logout} onClick={handleLogout}>
           <Icon name={LogOut} strokeWidth={2.5} size={18} />
-          Sign out
+          <span>Sign out</span>
         </button>
       </div>
     </aside>
