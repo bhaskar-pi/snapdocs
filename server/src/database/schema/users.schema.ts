@@ -1,3 +1,4 @@
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import {
   pgTable,
   uuid,
@@ -6,7 +7,7 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
-export const users = pgTable(
+export const usersTable = pgTable(
   "users",
   {
     id: uuid("id").defaultRandom().primaryKey(),
@@ -23,3 +24,6 @@ export const users = pgTable(
   },
   (table) => [uniqueIndex("users_email_idx").on(table.email)]
 );
+
+export type User = InferSelectModel<typeof usersTable>;
+export type UserInsert = InferInsertModel<typeof usersTable>;
