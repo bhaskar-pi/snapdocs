@@ -16,8 +16,6 @@ export const checklistStatusEnum = pgEnum("checklist_status", [
   "received",
 ]);
 
-// we show this checklist items to client  - added this just to remember will remove later
-
 export const checklistItemsTable = pgTable(
   "doc_checklist_items",
   {

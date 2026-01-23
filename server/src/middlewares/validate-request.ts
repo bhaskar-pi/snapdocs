@@ -1,5 +1,5 @@
 import { ZodType } from "zod";
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { AuthenticatedRequest } from "@models/express";
 import { verifyAccessToken } from "@utils/session";
 

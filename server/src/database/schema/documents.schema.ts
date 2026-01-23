@@ -1,4 +1,4 @@
-import { index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { checklistItemsTable } from "./checklist-items.schema";
 
@@ -12,7 +12,7 @@ export const documentsTable = pgTable(
       .references(() => checklistItemsTable.id, { onDelete: "cascade" }),
 
     fileName: text("file_name").notNull(),
-    fileSize: text("file_size").notNull(),
+    fileSize: integer("file_size").notNull(),
     storagePath: text("storage_path").notNull(),
 
     uploadedAt: timestamp("uploaded_at").notNull().defaultNow(),

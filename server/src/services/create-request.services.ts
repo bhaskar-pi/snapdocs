@@ -15,12 +15,18 @@ export async function sendDocRequest(
   userId: string,
   payload: CreateDocumentsRequest
 ) {
+  if (!userId) {
+    throw new Error("Missing user details");
+  }
+
   const clientPayload = payload.client;
   const requestPayload = payload.request as CustomRequest;
 
   const requiredDocuments = requestPayload.documents;
   if (requiredDocuments?.length < 1) {
-    throw new Error("At least one document is required");
+    throw new Error(
+      "Document request must include at least one required document"
+    );
   }
 
   const clientRecord =
@@ -29,7 +35,9 @@ export async function sendDocRequest(
 
   if (requestPayload.templateId) {
     // TODO: fetch template details and follow up
-    throw new Error("Template-based requests not implemented yet");
+    throw new Error(
+      "Template-based document requests are not currently supported"
+    );
   }
 
   const { title, dueDate, description } = requestPayload;

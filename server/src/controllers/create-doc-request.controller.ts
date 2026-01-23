@@ -1,13 +1,15 @@
 import { AuthenticatedRequest } from "@models/express";
 import { CreateDocumentsRequest } from "@models/requests/create-doc-request";
-import { Response } from "express";
+import { sendDocRequest } from "@services/create-request.services";
 
-export const createDocRequestHandler = (
-  request: AuthenticatedRequest,
-  response: Response
+export const createDocRequestHandler = async (
+  request: AuthenticatedRequest
 ) => {
-  try {
-    const data = request.data as CreateDocumentsRequest;
+  const data = request.data as CreateDocumentsRequest;
+  const linkToUpload = await sendDocRequest(request?.user?.userId, data);
 
-  } catch (error) {}
+  return {
+    data: linkToUpload,
+    message: "Document(s) request created successfully",
+  };
 };

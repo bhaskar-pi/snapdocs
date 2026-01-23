@@ -6,6 +6,6 @@ import {
 
 export async function createCheckListItems(
   checklistItems: ChecklistItemInsert[]
-) {
+): Promise<void> {
   await db.insert(checklistItemsTable).values(checklistItems);
 }

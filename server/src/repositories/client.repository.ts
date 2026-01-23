@@ -21,7 +21,7 @@ export async function getClientByEmail(
 export async function createClient(
   userId: string,
   client: ClientRequest
-): Promise<Client> {
+): Promise<Client | undefined> {
   const [result] = await db
     .insert(clientsTable)
     .values({
