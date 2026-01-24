@@ -9,7 +9,8 @@ type Tone =
   | "success"
   | "info"
   | "warning"
-  | "error";
+  | "error"
+  | "white"
 
 interface Props {
   name: React.ElementType;

@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
-import { Button } from "@/components/button/Button";
+import { Button } from "@/components/common/button";
+import { Logo } from "@/components/common/logo";
 import { Input } from "@/components/form/input";
-import { Logo } from "@/components/logo";
 import { useSignup } from "@/hooks/auth/use-signup";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth.model";
 
@@ -30,7 +30,7 @@ const SignUpForm = () => {
         [prop]: value,
       }));
     },
-    []
+    [],
   );
 
   const handleCreateAccount = useCallback(
@@ -38,7 +38,7 @@ const SignUpForm = () => {
       e.preventDefault();
       signup.mutate(form);
     },
-    [form, signup]
+    [form, signup],
   );
 
   return (

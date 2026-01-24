@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 
-import { Icon } from "@/components/icon";
-import { Logo } from "@/components/logo";
+import { Icon } from "@/components/common/icon";
+import { Logo } from "@/components/common/logo";
 import { SIDEBAR_TABS } from "@/config/tabs";
 import { useLogout } from "@/hooks/auth/use-logout";
 import { useAuthStore } from "@/store/auth.store";

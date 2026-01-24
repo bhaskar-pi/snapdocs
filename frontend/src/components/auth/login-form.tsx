@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { Button } from "@/components/button/Button";
+import { Button } from "@/components/common/button";
+import { Logo } from "@/components/common/logo";
 import { Input } from "@/components/form/input";
-import { Logo } from "@/components/logo";
 import { useLogin } from "@/hooks/auth/use-login";
 
 import styles from "./auth.module.css";
-
 
 const LoginForm = () => {
   const login = useLogin();

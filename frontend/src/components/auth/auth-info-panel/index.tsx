@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./auth-info-panel.module.css";
 import { AUTH_INFO_CONTENT } from "./content";
-import { IconBadge } from "../../icon-badge";
+import { IconBadge } from "../../common/icon-badge";
 
 import type { AuthInfoVariant } from "./content.types";
 

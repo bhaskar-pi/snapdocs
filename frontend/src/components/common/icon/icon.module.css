@@ -45,3 +45,7 @@
 .error {
   color: var(--error);
 }
+
+.white {
+  color: var(--slate-0);
+}

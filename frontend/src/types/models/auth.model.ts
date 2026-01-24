@@ -14,7 +14,10 @@ export interface Session {
   expiresAt: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   user: User;
   session: Session;
 }
+
+export type LoginResponse = AuthResponse;
+export type RefreshResponse = AuthResponse;

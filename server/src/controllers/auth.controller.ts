@@ -14,7 +14,7 @@ import { revokeSessionByToken } from "@repositories/session.repository";
 export const loginHandler = async (request: Request, response: Response) => {
   try {
     const { session, user, refreshToken, accessToken } = await loginUser(
-      request.body
+      request.body,
     );
 
     response.cookie("refreshToken", refreshToken, {
@@ -46,7 +46,7 @@ export const loginHandler = async (request: Request, response: Response) => {
 
 export const registerUserHandler = async (
   request: Request,
-  response: Response
+  response: Response,
 ) => {
   try {
     const user = await registerUser(request.body);
@@ -90,21 +90,30 @@ export const refreshHandler = async (request: Request, response: Response) => {
       return response.status(401).json({ message: "Missing refresh token" });
     }
 
-    const { refreshTokenHash, ...session } = await rotateAccessToken(token);
+    const { session, user, newRefreshToken } = await rotateAccessToken(token);
 
-    if (session?.refreshToken) {
-      response.cookie("refreshToken", session.refreshToken, {
+    if (newRefreshToken) {
+      response.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
         secure: env.NODE_ENV === Environment.PRODUCTION,
         sameSite: "strict",
-        path: "/refresh",
+        path: "/",
         maxAge: TokenValidity.ONE_DAY,
       });
     }
 
+    response.cookie("accessToken", session.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 15 * 60 * 1000,
+    });
+
     return response.status(200).json({
       message: "Refresh successfully.",
       session,
+      user,
+      isAuthorized: true,
     });
   } catch (error: any) {
     return response.status(401).json({

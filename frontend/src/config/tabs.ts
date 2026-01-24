@@ -11,7 +11,7 @@ export const SIDEBAR_TABS = [
   {
     id: 2,
     title: "Client Requests",
-    path: "/clients",
+    path: "/client-requests",
     isActive: (pathName: string) => pathName.startsWith("/clients"),
     icon: FileText,
   },
