@@ -13,6 +13,7 @@ import { useAuthStore } from "@/store/auth.store";
 
 import styles from "./app-layout.module.css";
 
+
 const Sidebar = () => {
   const user = useAuthStore((store) => store.user);
   const logout = useLogout();
