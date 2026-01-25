@@ -2,7 +2,9 @@ import PageHeader from "@/components/common/page-header";
 import Layout from "@/components/layouts/app-layout";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
-const CreateDocumentRequest = () => {
+import CreateDocumentRequest from "./create-document-request";
+
+const Page = () => {
   return (
     <Layout>
       <PageHeader
@@ -11,8 +13,9 @@ const CreateDocumentRequest = () => {
         backText="Back to Client Requests"
         backLink={SCREEN_PATHS.CLIENT_REQUESTS}
       />
+      <CreateDocumentRequest />
     </Layout>
   );
 };
 
-export default CreateDocumentRequest;
+export default Page;

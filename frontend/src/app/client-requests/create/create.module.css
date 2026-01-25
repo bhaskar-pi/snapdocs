@@ -1,0 +1,60 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  grid-area: 12px;
+}
+
+.stepperWrapper {
+  margin-top: 42px;
+}
+
+.formContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  background-color: var(--slate-0);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--slate-200);
+
+  padding: 15px 20px;
+  margin: 30px 0;
+}
+
+.stepHeader > h1 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.stepHeader > p {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--slate-500);
+}
+
+.clientActions {
+  display: flex;
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.clientActions > :first-child,
+.clientActions > :last-child {
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
+  font-size: var(--font-sm);
+  cursor: pointer;
+}
+
+.clientActions [is-active="true"] {
+  background-color: var(--primary);
+  color: var(--slate-0);
+}
+
+.clientActions [is-active="false"] {
+  background-color: var(--disabled-bg);
+  color: var(--primary);
+}

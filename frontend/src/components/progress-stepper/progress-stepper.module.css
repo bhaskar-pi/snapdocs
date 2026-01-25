@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 20px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.step > p {
+  color: var(--slate-900);
+  font-weight: 500;
+  font-size: var(--font-sm);
+}
+
+.icon {
+  border-radius: var(--radius-100) !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.divider {
+  flex: 1;
+  height: 2px;
+  background-color: var(--slate-200);
+  border: none;
+}
+
+.dividerActive {
+  background-color: var(--primary);
+}
+
+.disabledText {
+  color: var(--disabled-color);
+}
+
+.active {
+  font-weight: 600;
+}

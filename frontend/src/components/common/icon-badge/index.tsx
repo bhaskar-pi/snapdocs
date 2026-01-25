@@ -15,15 +15,21 @@ interface Props {
   icon: React.ElementType;
   size?: IconSize;
   variant?: IconVariant;
+  containerClassName?: string;
+  disabled?: boolean;
 }
 
 export const IconBadge = ({
   icon: Icon,
   size = "md",
   variant = "neutral",
+  containerClassName = "",
+  disabled = false,
 }: Props) => {
   return (
-    <div className={`${styles.badge} ${styles[size]} ${styles[variant]}`}>
+    <div
+      className={`${styles.badge} ${styles[size]} ${styles[variant]} ${containerClassName} ${disabled ? styles.disabled : ""}`}
+    >
       <Icon className={styles.icon} />
     </div>
   );

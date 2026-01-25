@@ -100,3 +100,8 @@
   background-color: var(--slate-100);
   color: var(--slate-800);
 }
+
+.disabled {
+  background-color: var(--disabled-bg);
+  color: var(--disabled-color);
+}
