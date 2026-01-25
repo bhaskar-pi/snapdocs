@@ -4,8 +4,8 @@
   justify-content: center;
   gap: 8px;
 
-  height: 44px;
-  padding: 0 16px;
+  height: 42px;
+  padding: 0 18px;
 
   font-size: var(--font-sm);
   font-weight: 600;
@@ -59,7 +59,6 @@
 .secondary {
   background-color: var(--slate-100);
   color: var(--text-primary);
-  border-color: var(--slate-200);
 }
 
 .secondary:hover {
@@ -76,12 +75,22 @@
 }
 
 .negative {
-  background-color: var(--error);
+  background-color: var(--negative);
   color: #fff;
 }
 
 .negative:hover {
-  background-color: var(--error-hover);
+  background-color: var(--negativeL);
+}
+
+.negativeL {
+  background-color: var(--negativeD);
+  color: var(--slate-0);
+}
+
+.negativeL:hover {
+  background-color: var(--negative);
+  color: var(--slate-0);
 }
 
 .button:disabled,

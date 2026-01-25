@@ -2,77 +2,80 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/common/button";
 import { Input } from "@/components/form/input";
 import { Select } from "@/components/form/select";
 
 import styles from "./create.module.css";
 
-enum ClientAction {
-  EXISTING = "Existing Clients",
-  ADD_NEW = "Add New Client",
+enum ClientMode {
+  EXISTING_CLIENT = "existing_client",
+  NEW_CLIENT = "new_client",
 }
 
 const SelectClient = () => {
-  const [action, setAction] = useState<ClientAction>(ClientAction.EXISTING);
+  const [mode, setMode] = useState<ClientMode>(ClientMode.EXISTING_CLIENT);
 
   return (
-    <div className={styles.formContainer}>
+    <>
       <div className={styles.stepHeader}>
         <h1>Select Client</h1>
         <p>Choose an existing client or add a new one</p>
       </div>
-      <div className={styles.clientActions}>
+
+      <div className={styles.stepActions}>
         <div
-          is-active={`${action === ClientAction.EXISTING}`}
-          onClick={() => setAction(ClientAction.EXISTING)}
+          data-active={mode === ClientMode.EXISTING_CLIENT}
+          onClick={() => setMode(ClientMode.EXISTING_CLIENT)}
         >
-          {ClientAction.EXISTING}
+          Existing Client
         </div>
+
         <div
-          is-active={`${action === ClientAction.ADD_NEW}`}
-          onClick={() => setAction(ClientAction.ADD_NEW)}
+          data-active={mode === ClientMode.NEW_CLIENT}
+          onClick={() => setMode(ClientMode.NEW_CLIENT)}
         >
-          {ClientAction.ADD_NEW}
+          Add New Client
         </div>
       </div>
-      {action === ClientAction.EXISTING && (
-        <form className={styles.clientForm}>
-          <Select id="existing-clients" label="Clients" options={[]} />
+
+      {mode === ClientMode.EXISTING_CLIENT && (
+        <form className={styles.stepForm}>
+          <Select
+            id="existing-client"
+            label="Client"
+            placeholder="Select a client"
+            options={[]}
+          />
         </form>
       )}
 
-      {action === ClientAction.ADD_NEW && (
-        <form className={styles.clientForm}>
+      {mode === ClientMode.NEW_CLIENT && (
+        <form className={styles.stepForm}>
           <Input
             required
-            id="client-full-name"
+            id="client-name"
             label="Full Name"
             placeholder="Enter full name"
-            filedClassName={styles.inputFiled}
+            fieldClassName={styles.stepFormInput}
           />
+
           <Input
             required
-            id="client-full-name"
+            id="client-email"
             label="Email"
             placeholder="Enter email address"
-            filedClassName={styles.inputFiled}
+            fieldClassName={styles.stepFormInput}
           />
+
           <Input
-            required
-            id="client-full-name"
+            id="client-phone"
             label="Phone Number (optional)"
             placeholder="Enter phone number"
-            filedClassName={styles.inputFiled}
+            fieldClassName={styles.stepFormInput}
           />
         </form>
       )}
-
-      <div className={styles.formActions}>
-        <p></p>
-        <Button>Next</Button>
-      </div>
-    </div>
+    </>
   );
 };
 

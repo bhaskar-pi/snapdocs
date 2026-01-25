@@ -6,7 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   containerClassName?: string;
   labelClassName?: string;
   inputClassName?: string;
-  filedClassName?: string;
+  fieldClassName?: string;
   message?: string;
   messageType?: "error" | "warning" | "info" | "neutral";
   messagePosition?: "left" | "right" | "center";
@@ -28,7 +28,7 @@ export const Input: React.FC<InputProps> = ({
   containerClassName = "",
   labelClassName = "",
   inputClassName = "",
-  filedClassName = "",
+  fieldClassName = "",
   message,
   messageType = "error",
   messagePosition = "left",
@@ -49,7 +49,7 @@ export const Input: React.FC<InputProps> = ({
         {label}
       </label>
 
-      <div className={`${styles.field} ${filedClassName}`}>
+      <div className={`${styles.field} ${fieldClassName}`}>
         <input
           className={`${styles.input} ${inputClassName} ${errorBorder}`}
           type={type}

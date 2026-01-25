@@ -8,7 +8,7 @@
   margin-top: 42px;
 }
 
-.formContainer {
+.stepContent {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -33,33 +33,38 @@
   color: var(--slate-500);
 }
 
-.clientActions {
+.stepActions {
   display: flex;
   margin-top: 15px;
   border-radius: 8px;
   overflow: hidden;
+  background-color: var(--slate-100);
+  padding: 8px;
+  gap: 10px;
+  font-size: var(--font-sm);
+  font-weight: 500;
 }
 
-.clientActions > :first-child,
-.clientActions > :last-child {
+.stepActions > :first-child,
+.stepActions > :last-child {
   width: 50%;
   text-align: center;
   padding: 10px 0;
   font-size: var(--font-sm);
   cursor: pointer;
+  border-radius: 10px;
 }
 
-.clientActions [is-active="true"] {
-  background-color: var(--primary);
+.stepActions [data-active="true"] {
+  background-color: var(--slate-900);
   color: var(--slate-0);
 }
 
-.clientActions [is-active="false"] {
-  background-color: var(--disabled-bg);
-  color: var(--primary);
+.stepActions [data-active="false"] {
+  color: var(--slate-500);
 }
 
-.clientForm {
+.stepForm {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -67,14 +72,68 @@
   width: 100%;
 }
 
-.inputFiled {
+.stepFormInput {
   max-width: 100% !important;
 }
 
-.formActions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    margin-top: 50px;
+.addDocBtnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.addDocBtnContainer > p {
+  color: var(--slate-500);
+  font-size: var(--font-sm);
+  font-weight: 400;
+}
+
+.addDocBtn {
+  background-color: transparent;
+  border: 1px solid var(--slate-200);
+  color: var(--slate-500);
+  margin-top: 40px;
+  height: 55px;
+  font-size: var(--font-sm);
+  transition: all 0.2s ease;
+  width: 200px;
+  height: 44px;
+}
+
+.addDocBtn:hover {
+  background-color: var(--slate-800);
+  color: var(--slate-0);
+}
+
+.addIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--slate-500);
+  transition: all 0.2s ease;
+}
+
+.addDocBtn:hover .addIcon {
+  width: 19px;
+  height: 19px;
+  color: var(--slate-0);
+}
+
+.stepFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 70px;
+}
+
+.stepFooter > :last-child {
+  color: var(--slate-0);
+}
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

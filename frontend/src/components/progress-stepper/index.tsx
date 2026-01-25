@@ -1,4 +1,4 @@
-import { Check, FileText, SearchCheck, User } from "lucide-react";
+import { Check, FileText, Search, User } from "lucide-react";
 
 import styles from "./progress-stepper.module.css";
 import { IconBadge } from "../common/icon-badge";
@@ -8,9 +8,9 @@ interface Props {
 }
 
 const steps = [
-  { title: "Select Client", icon: User },
+  { title: "Choose Client", icon: User },
   { title: "Choose Template", icon: FileText },
-  { title: "Review & Send", icon: SearchCheck },
+  { title: "Review & Send", icon: Search },
 ];
 
 const ProgressStepper = ({ currentStep }: Props) => {

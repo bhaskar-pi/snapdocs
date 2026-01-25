@@ -24,10 +24,13 @@
   --primary-light: var(--slate-700);
 
   /* Error / Danger */
-  --error: #dc2626;
-  --error-hover: #b91c1c;
-  --error-light: #fee2e2;
+
   --error-border: #fca5a5;
+
+  --negative: #f44336;
+  --negativeD: #e53935;
+  --negativeL: #ffebee;
+  --negativeXL: #fff9fa;
 
   /* Warning */
   --warning: #d97706;
@@ -161,6 +164,12 @@
   /** disabled states */
   --disabled-bg: var(--slate-200);
   --disabled-color: var(--slate-400);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 *,

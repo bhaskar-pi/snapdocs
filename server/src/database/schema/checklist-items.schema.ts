@@ -24,7 +24,7 @@ export const checklistItemsTable = pgTable(
       .notNull()
       .references(() => requestsTable.id, { onDelete: "cascade" }),
 
-    documentName: text("document_name").notNull(),
+    name: text("name").notNull(),
     status: checklistStatusEnum("status").notNull().default("pending"),
     isRequired: boolean("is_required").notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),

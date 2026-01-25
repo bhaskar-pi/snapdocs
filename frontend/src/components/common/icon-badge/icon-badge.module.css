@@ -92,8 +92,8 @@
 }
 
 .error {
-  background-color: var(--error-light);
-  color: var(--error);
+  background-color: var(--negative);
+  color: var(--negativeL);
 }
 
 .light {

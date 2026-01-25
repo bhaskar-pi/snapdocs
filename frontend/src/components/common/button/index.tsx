@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./button.module.css";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "neutral" | "negative";
+  variant?: "primary" | "secondary" | "neutral" | "negative" | "negativeL";
   width?: string;
 
   icon?: React.ReactNode;
@@ -43,7 +43,7 @@ export const Button = ({
       {children && <span className={styles.label}>{children}</span>}
 
       {icon && iconPosition === "right" && (
-        <span className={styles.icon}>{icon}</span>
+        <span className={[styles.icon, styles].join(" ")}>{icon}</span>
       )}
     </button>
   );
