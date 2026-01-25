@@ -92,3 +92,48 @@
   color: var(--input-text);
   margin-bottom: var(--form-gap-sm);
 }
+
+/** select classes */
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.selectDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  background-color: var(--slate-200);
+  border: 1px solid var(--border-border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.selectOption {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  font-size: var(--font-sm);
+  color: var(--input-text);
+}
+
+.selectOption:hover {
+  background-color: var(--slate-700);
+  color: var(--text-inverted);
+}
+
+.selectEmpty {
+  padding: 10px;
+  text-align: center;
+  font-size: var(--font-sm);
+  color: var(--input-placeholder);
+}

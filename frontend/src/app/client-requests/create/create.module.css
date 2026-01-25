@@ -58,3 +58,23 @@
   background-color: var(--disabled-bg);
   color: var(--primary);
 }
+
+.clientForm {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.inputFiled {
+  max-width: 100% !important;
+}
+
+.formActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    margin-top: 50px;
+}
