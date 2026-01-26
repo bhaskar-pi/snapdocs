@@ -80,7 +80,7 @@
 }
 
 .negative:hover {
-  background-color: var(--negativeL);
+  background-color: var(--negativeD);
 }
 
 .negativeL {
@@ -90,6 +90,11 @@
 
 .negativeL:hover {
   background-color: var(--negative);
+  color: var(--slate-0);
+}
+
+.info {
+  background-color: var(--neutral);
   color: var(--slate-0);
 }
 

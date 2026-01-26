@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Session } from "@/types/models/auth.model";
-import { User } from "@/types/models/user.model";
+import { Session } from "@/types/models/auth";
+import { User } from "@/types/models/user";
 
 interface PersistedUser {
   userId: string;
@@ -14,7 +14,9 @@ interface AuthState {
   session: Session | null;
   persistedUser: PersistedUser | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
 
+  setLoading: (loading: boolean) => void;
   setUser: (user: User) => void;
   setSession: (session: Session) => void;
   clearUser: () => void;
@@ -27,6 +29,9 @@ export const useAuthStore = create<AuthState>()(
       session: null,
       persistedUser: null,
       isAuthenticated: false,
+      isLoading: false,
+
+      setLoading: (loading) => set({ isLoading: loading }),
 
       setUser: (user) =>
         set({
@@ -51,7 +56,6 @@ export const useAuthStore = create<AuthState>()(
           persistedUser: null,
           isAuthenticated: false,
         }),
-        
     }),
     {
       name: "auth-user",

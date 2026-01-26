@@ -32,14 +32,22 @@
   --negativeL: #ffebee;
   --negativeXL: #fff9fa;
 
+  /** neutral */
+
+  --neutral: #2196f3;
+  --neutralD: #1e87e4;
+  --neutralL: #e3f2fd;
+  --neutralXL: #f7fbfd;
+
   /* Warning */
-  --warning: #d97706;
-  --warning-light: #fef3c7;
+  --warning: #ff9800;
+  --warningD: #fb8c00;
+  --warningL: #fff8e1;
   --warning-border: #fcd34d;
 
   /* Success */
   --success: #16a34a;
-  --success-light: #dcfce7;
+  --successL: #dcfce7;
   --success-border: #86efac;
 
   /* Info */
@@ -232,6 +240,12 @@ blockquote,
 dl,
 dd {
   margin: 0;
+}
+
+h1 {
+  color: var(--slate-900);
+  font-size: var(--font-base);
+  font-weight: 600;
 }
 
 /* Images & media */

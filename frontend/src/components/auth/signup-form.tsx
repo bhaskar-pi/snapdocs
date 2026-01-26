@@ -7,7 +7,7 @@ import { Button } from "@/components/common/button";
 import { Logo } from "@/components/common/logo";
 import { Input } from "@/components/form/input";
 import { useSignup } from "@/hooks/auth/use-signup";
-import { SignUpForm as SignUpFormType } from "@/types/models/auth.model";
+import { SignUpForm as SignUpFormType } from "@/types/models/auth";
 
 import styles from "./auth.module.css";
 

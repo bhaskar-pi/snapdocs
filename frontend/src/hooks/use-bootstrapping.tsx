@@ -6,19 +6,26 @@ import { authApi } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
 
 export function useBootstrapping() {
-  const { setUser, setSession, clearUser } = useAuthStore((store) => store);
+  const { setUser, setSession, clearUser, setLoading } = useAuthStore(
+    (store) => store,
+  );
   const router = useRouter();
 
   return useMutation({
-    mutationFn: () => authApi.refresh(),
+    mutationFn: async () => {
+      setLoading(true);
+      return authApi.refresh();
+    },
 
     onSuccess: (data) => {
       setUser(data.user);
       setSession(data.session);
+      setLoading(false);
     },
 
     onError: () => {
       clearUser();
+      setLoading(false);
       router.replace("/login");
     },
   });

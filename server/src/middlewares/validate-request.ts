@@ -19,7 +19,7 @@ export const validate = (schema: ZodType) => {
   return (
     request: AuthenticatedRequest,
     response: Response,
-    nextFunction: NextFunction
+    nextFunction: NextFunction,
   ) => {
     const result = schema.safeParse(request.body);
     if (!result.success) {
@@ -30,7 +30,7 @@ export const validate = (schema: ZodType) => {
       return;
     }
 
-    request.data = result.data;
+    request.body = result.data;
     nextFunction();
   };
 };
@@ -47,7 +47,7 @@ export const validate = (schema: ZodType) => {
 export const authenticate = (
   req: AuthenticatedRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const token = req.cookies?.accessToken;
 

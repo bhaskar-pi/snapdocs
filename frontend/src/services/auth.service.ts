@@ -1,5 +1,5 @@
 import { POST } from "@/api/http";
-import { LoginResponse, SignUpForm } from "@/types/models/auth.model";
+import { LoginResponse, SignUpForm } from "@/types/models/auth";
 
 export const authApi = {
   login(email: string, password: string) {

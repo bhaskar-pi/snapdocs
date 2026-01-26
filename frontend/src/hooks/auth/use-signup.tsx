@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { authApi } from "@/services/auth.service";
-import { SignUpForm } from "@/types/models/auth.model";
+import { SignUpForm } from "@/types/models/auth";
 import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
 
