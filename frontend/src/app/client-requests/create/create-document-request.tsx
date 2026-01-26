@@ -139,6 +139,7 @@ const CreateDocumentRequest = () => {
             onChange={onChangeRequest}
             documents={clientRequest?.request.documents}
             clientName={clientRequest?.client?.fullName}
+            isLoading={sendRequest.isPending}
           />
         );
 

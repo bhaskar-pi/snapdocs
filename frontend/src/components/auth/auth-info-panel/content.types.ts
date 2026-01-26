@@ -1,13 +1,12 @@
 import type { LucideIcon } from "lucide-react";
 
 export type BadgeVariant =
-  | "neutral"
-  | "neutralL"
+  | "default"
+  | "primary"
   | "success"
-  | "warning"
   | "info"
-  | "light"
-  | "error";
+  | "warning"
+  | "negative";
 
 export interface BadgeItem {
   icon: LucideIcon;

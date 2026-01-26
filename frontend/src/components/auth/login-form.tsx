@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/ui/logo";
 import { Input } from "@/components/ui/form/input";
+import { Logo } from "@/components/ui/logo";
 import { useLogin } from "@/hooks/auth/use-login";
 
 import styles from "./auth.module.css";
@@ -54,7 +54,7 @@ const LoginForm = () => {
           messageType="info"
         />
 
-        <Button type="submit" variant="primary" className={styles.button}>
+        <Button type="submit" className={styles.button}>
           {login.isPending ? "Logging in..." : "Log In"}
         </Button>
 

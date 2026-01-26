@@ -15,6 +15,7 @@ export function useCreateRequest() {
     mutationFn: (data: ClientRequest) => createRequestApi.sendRequest(data),
 
     onSuccess() {
+      toast.success("Request sent to the client successfully");
       router.push("/client-requests");
     },
 

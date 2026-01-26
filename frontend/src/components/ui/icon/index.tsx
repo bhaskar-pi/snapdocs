@@ -2,42 +2,48 @@ import React from "react";
 
 import styles from "./icon.module.css";
 
-type Tone =
-  | "primary"
-  | "secondary"
+type IconTone =
+  | "inherit"
+  | "default"
   | "muted"
+  | "primary"
   | "success"
   | "info"
   | "warning"
-  | "error"
-  | "white";
+  | "negative"
+  | "inverted";
 
 interface Props {
   name: React.ElementType;
-  onClick?: () => void;
   size?: number;
-  tone?: Tone;
+  tone?: IconTone;
   strokeWidth?: number;
+  onClick?: () => void;
   className?: string;
   containerClassName?: string;
 }
 
 export const Icon = ({
-  name: Icon,
-  onClick,
+  name: IconComponent,
   size = 18,
-  tone = "primary",
+  tone = "inherit",
+  strokeWidth = 2,
+  onClick,
   className = "",
   containerClassName = "",
-  strokeWidth,
 }: Props) => {
   return (
-    <div onClick={onClick} className={`${styles.container} ${containerClassName}`}>
-      <Icon
-        strokeWidth={strokeWidth}
+    <span
+      onClick={onClick}
+      className={[styles.container, containerClassName].join(" ")}
+    >
+      <IconComponent
         size={size}
-        className={[styles.icon, styles[tone], className].join(" ")}
+        strokeWidth={strokeWidth}
+        className={[styles.icon, tone !== "inherit" && styles[tone], className]
+          .filter(Boolean)
+          .join(" ")}
       />
-    </div>
+    </span>
   );
 };

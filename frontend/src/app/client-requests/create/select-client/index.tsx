@@ -4,9 +4,9 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/form/input";
 import { Select } from "@/components/ui/form/select";
+import { Icon } from "@/components/ui/icon";
 import { Client } from "@/types/models/client";
 
 import styles from "../create.module.css";
@@ -92,12 +92,10 @@ const SelectClient = ({ onNext, onChange, client }: Props) => {
       )}
 
       <div className={styles.stepFooter}>
-        <Button variant="secondary" icon={<Icon name={ArrowLeft} />} disabled>
-          Previous
-        </Button>
+        <p></p>
         <Button
           iconPosition="right"
-          icon={<Icon name={ArrowRight} tone="white" />}
+          icon={<Icon name={ArrowRight} />}
           onClick={onNext}
         >
           Next

@@ -5,9 +5,9 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/form/input";
 import { Select } from "@/components/ui/form/select";
+import { Icon } from "@/components/ui/icon";
 import { Modal } from "@/components/ui/modal";
 import { Toggle } from "@/components/ui/toggle";
 import { Document } from "@/types/models/document";
@@ -149,11 +149,11 @@ const ChooseTemplate = ({
 
           <div className={styles.addDocBtnContainer}>
             <Button
-              icon={<Icon name={Plus} className={styles.addIcon} />}
-              className={styles.addDocBtn}
+              intent="neutral"
+              icon={<Icon name={Plus} />}
               onClick={() => setOpenModal(true)}
             >
-              {documents.length === 0 ? "Add Document" : "Add Another Document"}
+              Add Document
             </Button>
 
             {documents.length === 0 && (
@@ -165,7 +165,7 @@ const ChooseTemplate = ({
 
       <div className={styles.stepFooter}>
         <Button
-          variant="secondary"
+          intent="secondary"
           icon={<Icon name={ArrowLeft} />}
           onClick={onPrevious}
         >
@@ -173,7 +173,7 @@ const ChooseTemplate = ({
         </Button>
         <Button
           iconPosition="right"
-          icon={<Icon name={ArrowRight} tone="white" />}
+          icon={<Icon name={ArrowRight} />}
           onClick={onNext}
         >
           Next

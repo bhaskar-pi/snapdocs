@@ -1,9 +1,9 @@
 import { ArrowLeft, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/form/input";
 import { TextArea } from "@/components/ui/form/text-area";
+import { Icon } from "@/components/ui/icon";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";
@@ -15,6 +15,7 @@ interface Props {
   onChange: (prop: string, value: string | Date) => void;
   documents: Document[];
   clientName: string;
+  isLoading?: boolean;
 }
 
 const ReviewAndSend = ({
@@ -23,6 +24,7 @@ const ReviewAndSend = ({
   onChange,
   documents = [],
   clientName,
+  isLoading,
 }: Props) => {
   return (
     <>
@@ -69,16 +71,17 @@ const ReviewAndSend = ({
 
       <div className={styles.stepFooter}>
         <Button
-          variant="secondary"
+          intent="secondary"
           icon={<Icon name={ArrowLeft} />}
           onClick={onPrevious}
         >
           Previous
         </Button>
         <Button
+          loading={isLoading}
           iconPosition="left"
-          icon={<Icon name={Check} tone="white" />}
-          onClick={() => onSendRequest()}
+          icon={<Icon name={Check} />}
+          onClick={onSendRequest}
         >
           Send Request
         </Button>

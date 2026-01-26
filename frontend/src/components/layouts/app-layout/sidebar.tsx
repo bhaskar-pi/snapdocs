@@ -51,7 +51,7 @@ const Sidebar = () => {
                   name={ChevronRight}
                   size={18}
                   strokeWidth={2}
-                  className={`${styles.chevron}`}
+                  containerClassName={`${styles.chevron}`}
                 />
               )}
             </Link>
@@ -68,7 +68,12 @@ const Sidebar = () => {
         </div>
 
         <button className={styles.logout} onClick={handleLogout}>
-          <Icon name={LogOut} strokeWidth={2.5} size={18} />
+          <Icon
+            className={styles.logoutIcon}
+            name={LogOut}
+            strokeWidth={2}
+            size={18}
+          />
           <span>Sign out</span>
         </button>
       </div>

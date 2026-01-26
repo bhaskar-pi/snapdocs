@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/ui/logo";
 import { Input } from "@/components/ui/form/input";
+import { Logo } from "@/components/ui/logo";
 import { useSignup } from "@/hooks/auth/use-signup";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth";
 
@@ -91,7 +91,7 @@ const SignUpForm = () => {
           onChange={(e) => onChangeForm("password", e.target.value)}
         />
 
-        <Button type="submit" variant="primary" className={styles.button}>
+        <Button type="submit" className={styles.button}>
           Create Account
         </Button>
 

@@ -2,48 +2,65 @@ import React from "react";
 
 import styles from "./button.module.css";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "neutral" | "negative" | "negativeL" | 'info';
-  width?: string;
+type ButtonIntent =
+  | "primary"
+  | "secondary"
+  | "neutral"
+  | "success"
+  | "info"
+  | "warning"
+  | "negative";
 
+type ButtonVariant = "solid" | "outline" | "ghost";
+
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  intent?: ButtonIntent;
+  variant?: ButtonVariant;
+  loading?: boolean;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
 }
 
 export const Button = ({
-  variant = "primary",
-  width,
-  className = "",
+  intent = "primary",
+  variant = "solid",
+  loading = false,
   disabled,
-  children,
   icon,
   iconPosition = "left",
+  children,
+  className = "",
   ...props
 }: Props) => {
   const isIconOnly = !!icon && !children;
+  const isDisabled = disabled || loading;
 
   return (
     <button
       type="button"
-      style={width ? { width } : undefined}
-      disabled={disabled}
+      disabled={isDisabled}
       className={[
         styles.button,
         styles[variant],
-        isIconOnly ? styles.iconOnly : "",
-        disabled ? styles.disabled : "",
+        styles[intent],
+        isIconOnly && styles.iconOnly,
+        loading && styles.loading,
         className,
-      ].join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     >
-      {icon && iconPosition === "left" && (
+      {loading && <span className={styles.spinner} />}
+
+      {!loading && icon && iconPosition === "left" && (
         <span className={styles.icon}>{icon}</span>
       )}
 
       {children && <span className={styles.label}>{children}</span>}
 
-      {icon && iconPosition === "right" && (
-        <span className={[styles.icon].join(" ")}>{icon}</span>
+      {!loading && icon && iconPosition === "right" && (
+        <span className={styles.icon}>{icon}</span>
       )}
     </button>
   );
