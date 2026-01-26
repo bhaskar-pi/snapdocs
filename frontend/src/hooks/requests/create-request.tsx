@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { createRequestApi } from "@/services/create-request.service";
 import { ClientRequest } from "@/types/models/client";
+import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
 
 export function useCreateRequest() {

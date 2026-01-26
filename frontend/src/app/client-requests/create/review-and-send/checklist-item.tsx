@@ -1,10 +1,9 @@
-import { CircleCheck, FileText, Grip, SquareCheck, SquareCheckBig, SquareDot } from "lucide-react";
+import { FileText } from "lucide-react";
 
 import { Icon } from "@/components/common/icon";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";
-
 
 interface Props {
   document: Document;
@@ -17,7 +16,7 @@ const CheckListItem = ({ document }: Props) => {
         <Icon name={FileText} className={styles.squareDot} />
         <p>{document.name}</p>
       </div>
-      <button>{document.isRequired ? "Required" : "Optional"}</button>
+      <span>{document.isRequired ? "Required" : "Optional"}</span>
     </div>
   );
 };

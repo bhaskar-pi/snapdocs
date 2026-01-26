@@ -94,6 +94,10 @@ export async function rotateAccessToken(token: string) {
 
   const user = await getUserById(payload.userId);
 
+  if (!user) {
+    throw new Error("User not found for this session.");
+  }
+
   if (!shouldRotate) {
     return { session: { accessToken, id: oldSession.id }, user };
   }

@@ -1,13 +1,12 @@
 "use client";
 
-import { use, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import ProgressStepper from "@/components/progress-stepper";
 import { useCreateRequest } from "@/hooks/requests/create-request";
 import { RequestStatus } from "@/types/enums/request";
-import { Client, ClientRequest } from "@/types/models/client";
-import { Document } from "@/types/models/document";
+import { ClientRequest } from "@/types/models/client";
 
 import ChooseTemplate from "./choose-template";
 import styles from "./create.module.css";
@@ -74,7 +73,10 @@ const CreateDocumentRequest = () => {
   const onRemoveDocument = useCallback((name: string) => {
     setClientRequest((prev) => ({
       ...prev,
-      documents: prev.request.documents.filter((doc) => doc.name !== name),
+      request: {
+        ...prev.request,
+        documents: prev.request.documents.filter((doc) => doc.name !== name),
+      },
     }));
   }, []);
 

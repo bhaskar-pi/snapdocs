@@ -58,8 +58,8 @@ const ReviewAndSend = ({
 
       <div className={styles.checklistReview}>
         <h1>{`Document CheckList (${documents.length} items)`}</h1>
-        {documents.map((doc, index) => (
-          <CheckListItem key={index} document={doc} />
+        {documents.map((doc) => (
+          <CheckListItem key={doc.name} document={doc} />
         ))}
       </div>
 

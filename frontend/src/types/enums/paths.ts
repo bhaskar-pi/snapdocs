@@ -1,4 +1,7 @@
 export enum SCREEN_PATHS {
+  LOGIN = "/login",
+  SIGNUP = "/signup",
+
   DASHBOARD = "/dashboard",
 
   CLIENT_REQUESTS = "/client-requests",

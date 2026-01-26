@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { authApi } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
+import { SCREEN_PATHS } from "@/types/enums/paths";
 
 export function useBootstrapping() {
   const { setUser, setSession, clearUser, setLoading } = useAuthStore(
@@ -26,7 +27,7 @@ export function useBootstrapping() {
     onError: () => {
       clearUser();
       setLoading(false);
-      router.replace("/login");
+      router.replace(SCREEN_PATHS.LOGIN);
     },
   });
 }
