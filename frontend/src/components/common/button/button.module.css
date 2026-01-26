@@ -4,8 +4,8 @@
   justify-content: center;
   gap: 8px;
 
-  height: 45px;
-  padding: 0 16px;
+  height: 42px;
+  padding: 0 18px;
 
   font-size: var(--font-sm);
   font-weight: 600;
@@ -17,10 +17,31 @@
   cursor: pointer;
   user-select: none;
 
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
+/* Icon-only button */
+.iconOnly {
+  padding: 0;
+  width: 45px;
+}
+
+/* Inner elements */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+/* Variants */
 .primary {
   background-color: var(--primary);
   color: var(--text-inverted);
@@ -32,22 +53,16 @@
 
 .primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25); /* info blue */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
 
 .secondary {
   background-color: var(--slate-100);
   color: var(--text-primary);
-  border-color: var(--slate-200);
 }
 
 .secondary:hover {
   background-color: var(--slate-200);
-}
-
-.secondary:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.35); /* slate-400 */
 }
 
 .neutral {
@@ -59,23 +74,28 @@
   background-color: var(--slate-100);
 }
 
-.neutral:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.35);
-}
-
 .negative {
-  background-color: var(--error);
-  color: #ffffff;
+  background-color: var(--negative);
+  color: #fff;
 }
 
 .negative:hover {
-  background-color: var(--error-hover);
+  background-color: var(--negativeD);
 }
 
-.negative:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.35); /* red-600 */
+.negativeL {
+  background-color: var(--negativeD);
+  color: var(--slate-0);
+}
+
+.negativeL:hover {
+  background-color: var(--negative);
+  color: var(--slate-0);
+}
+
+.info {
+  background-color: var(--neutral);
+  color: var(--slate-0);
 }
 
 .button:disabled,

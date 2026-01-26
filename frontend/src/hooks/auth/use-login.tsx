@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { authApi } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
-import { LoginResponse } from "@/types/models/auth.model";
+import { LoginResponse } from "@/types/models/auth";
 import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
 

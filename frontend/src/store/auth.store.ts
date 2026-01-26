@@ -1,39 +1,68 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-import { Session } from "@/types/models/auth.model";
-import { User } from "@/types/models/user.model";
+import { Session } from "@/types/models/auth";
+import { User } from "@/types/models/user";
 
+interface PersistedUser {
+  userId: string;
+  email: string;
+}
 
 interface AuthState {
   user: User | null;
   session: Session | null;
+  persistedUser: PersistedUser | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
+
+  setLoading: (loading: boolean) => void;
   setUser: (user: User) => void;
   setSession: (session: Session) => void;
   clearUser: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  session: null,
-  isAuthenticated: false,
-
-  setUser: (user) =>
-    set({
-      user,
-      isAuthenticated: true,
-    }),
-
-  setSession: (session) =>
-    set({
-      session,
-      isAuthenticated: true,
-    }),
-
-  clearUser: () =>
-    set({
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
       user: null,
-      isAuthenticated: false,
       session: null,
+      persistedUser: null,
+      isAuthenticated: false,
+      isLoading: false,
+
+      setLoading: (loading) => set({ isLoading: loading }),
+
+      setUser: (user) =>
+        set({
+          user,
+          persistedUser: {
+            userId: user.id,
+            email: user.email,
+          },
+          isAuthenticated: true,
+        }),
+
+      setSession: (session) =>
+        set({
+          session,
+          isAuthenticated: true,
+        }),
+
+      clearUser: () =>
+        set({
+          user: null,
+          session: null,
+          persistedUser: null,
+          isAuthenticated: false,
+        }),
     }),
-}));
+    {
+      name: "auth-user",
+      partialize: (state) => ({
+        persistedUser: state.persistedUser,
+        isAuthenticated: state.isAuthenticated,
+      }),
+    },
+  ),
+);

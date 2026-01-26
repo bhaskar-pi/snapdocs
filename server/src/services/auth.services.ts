@@ -5,13 +5,19 @@ import {
   findValidSession,
   revokeSessionBySessionId,
 } from "@repositories/session.repository";
-import { createUser, getUserByEmail } from "@repositories/user.repository";
+import {
+  createUser,
+  getUserByEmail,
+  getUserById,
+} from "@repositories/user.repository";
 import {
   LoginRequest,
   UserRegisterRequest,
 } from "@models/requests/auth.request";
 import { User } from "@database/schema/users.schema";
 import {
+  generateAccessToken,
+  generateRefreshToken,
   getSecurityTokens,
   hashRefreshToken,
   verifyRefreshToken,
@@ -73,8 +79,8 @@ export async function rotateAccessToken(token: string) {
   const payload = verifyRefreshToken(token); // it will throw error if token has issue/expired
 
   const refreshTokenHash = hashRefreshToken(token);
-  const session = await findValidSession(payload.userId, refreshTokenHash);
-  if (!session) {
+  const oldSession = await findValidSession(payload.userId, refreshTokenHash);
+  if (!oldSession) {
     throw new Error("Invalid session");
   }
 
@@ -82,27 +88,32 @@ export async function rotateAccessToken(token: string) {
   // This avoids unnecessary DB writes while limiting the lifetime
   // of stolen refresh tokens.
   const shouldRotate =
-    session.expiresAt.getTime() - Date.now() < TokenValidity.ONE_HOUR;
+    oldSession.expiresAt.getTime() - Date.now() < TokenValidity.ONE_HOUR;
 
-  const { accessToken, refreshToken } = getSecurityTokens(
-    payload.userId,
-    payload.email
-  );
+  const accessToken = generateAccessToken(payload.userId, payload.email);
+
+  const user = await getUserById(payload.userId);
+
+  if (!user) {
+    throw new Error("User not found for this session.");
+  }
 
   if (!shouldRotate) {
-    return { accessToken, refreshToken: null, ...session };
+    return { session: { accessToken, id: oldSession.id }, user };
   }
 
   // Revoke old session so the previous refresh token
   // can no longer be used
-  await revokeSessionBySessionId(session.id);
+  await revokeSessionBySessionId(oldSession.id);
+
+  const newRefreshToken = generateRefreshToken(payload.userId, payload.email);
 
   // Create a new session for the newly issued refresh token.
   const newSession = await createSession(
     payload.userId,
-    hashRefreshToken(refreshToken),
-    new Date(Date.now() + TokenValidity.ONE_DAY)
+    hashRefreshToken(newRefreshToken),
+    new Date(Date.now() + TokenValidity.ONE_DAY),
   );
 
-  return { ...newSession, accessToken, refreshToken };
+  return { session: { accessToken, id: newSession.id }, user, newRefreshToken };
 }

@@ -92,11 +92,16 @@
 }
 
 .error {
-  background-color: var(--error-light);
-  color: var(--error);
+  background-color: var(--negative);
+  color: var(--negativeL);
 }
 
 .light {
   background-color: var(--slate-100);
   color: var(--slate-800);
+}
+
+.disabled {
+  background-color: var(--disabled-bg);
+  color: var(--disabled-color);
 }

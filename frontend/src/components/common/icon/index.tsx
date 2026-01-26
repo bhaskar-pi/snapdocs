@@ -9,28 +9,35 @@ type Tone =
   | "success"
   | "info"
   | "warning"
-  | "error";
+  | "error"
+  | "white";
 
 interface Props {
   name: React.ElementType;
+  onClick?: () => void;
   size?: number;
   tone?: Tone;
   strokeWidth?: number;
   className?: string;
+  containerClassName?: string;
 }
 
 export const Icon = ({
   name: Icon,
+  onClick,
   size = 18,
   tone = "primary",
   className = "",
+  containerClassName = "",
   strokeWidth,
 }: Props) => {
   return (
-    <Icon
-      strokeWidth={strokeWidth}
-      size={size}
-      className={[styles.icon, styles[tone], className].join(" ")}
-    />
+    <div onClick={onClick} className={`${styles.container} ${containerClassName}`}>
+      <Icon
+        strokeWidth={strokeWidth}
+        size={size}
+        className={[styles.icon, styles[tone], className].join(" ")}
+      />
+    </div>
   );
 };

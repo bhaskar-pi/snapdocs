@@ -1,0 +1,24 @@
+import { FileText } from "lucide-react";
+
+import { Icon } from "@/components/common/icon";
+import { Document } from "@/types/models/document";
+
+import styles from "../create.module.css";
+
+interface Props {
+  document: Document;
+}
+
+const CheckListItem = ({ document }: Props) => {
+  return (
+    <div className={styles.checklistItem}>
+      <div>
+        <Icon name={FileText} className={styles.squareDot} />
+        <p>{document.name}</p>
+      </div>
+      <span>{document.isRequired ? "Required" : "Optional"}</span>
+    </div>
+  );
+};
+
+export default CheckListItem;

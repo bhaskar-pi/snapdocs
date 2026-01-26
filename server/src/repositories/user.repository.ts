@@ -13,6 +13,16 @@ export async function getUserByEmail(email: string) {
   return user[0];
 }
 
+export async function getUserById(id: string) {
+  const user = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.id, id))
+    .limit(1);
+
+  return user[0];
+}
+
 export async function createUser(data: User): Promise<User> {
   const user = await db
     .insert(usersTable)

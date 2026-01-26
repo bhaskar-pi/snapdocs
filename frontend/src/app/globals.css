@@ -24,19 +24,30 @@
   --primary-light: var(--slate-700);
 
   /* Error / Danger */
-  --error: #dc2626;
-  --error-hover: #b91c1c;
-  --error-light: #fee2e2;
+
   --error-border: #fca5a5;
 
+  --negative: #f44336;
+  --negativeD: #e53935;
+  --negativeL: #ffebee;
+  --negativeXL: #fff9fa;
+
+  /** neutral */
+
+  --neutral: #2196f3;
+  --neutralD: #1e87e4;
+  --neutralL: #e3f2fd;
+  --neutralXL: #f7fbfd;
+
   /* Warning */
-  --warning: #d97706;
-  --warning-light: #fef3c7;
+  --warning: #ff9800;
+  --warningD: #fb8c00;
+  --warningL: #fff8e1;
   --warning-border: #fcd34d;
 
   /* Success */
   --success: #16a34a;
-  --success-light: #dcfce7;
+  --successL: #dcfce7;
   --success-border: #86efac;
 
   /* Info */
@@ -99,6 +110,7 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
+  --radius-100: 100%;
 
   /* ================================================== */
   /* 8. Inputs */
@@ -156,6 +168,16 @@
   --w-card-md: 480px;
   --w-card-lg: 640px;
   --w-card-xl: 768px;
+
+  /** disabled states */
+  --disabled-bg: var(--slate-200);
+  --disabled-color: var(--slate-400);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 *,
@@ -181,8 +203,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 
   font-size: var(--font-base);
   line-height: var(--lh-normal);
@@ -212,6 +240,12 @@ blockquote,
 dl,
 dd {
   margin: 0;
+}
+
+h1 {
+  color: var(--slate-900);
+  font-size: var(--font-base);
+  font-weight: 600;
 }
 
 /* Images & media */

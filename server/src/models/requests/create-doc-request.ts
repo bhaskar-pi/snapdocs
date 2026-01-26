@@ -1,7 +1,8 @@
 import { RequestStatus } from "@enums/request";
 
 export interface DocumentRequest {
-  documentName: string;
+  /** name -> document name */
+  name: string;
   isRequired: boolean;
 }
 
