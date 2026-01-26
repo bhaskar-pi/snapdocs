@@ -3,10 +3,10 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
-import { Button } from "@/components/common/button";
-import { Icon } from "@/components/common/icon";
-import { Input } from "@/components/form/input";
-import { Select } from "@/components/form/select";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/form/input";
+import { Select } from "@/components/ui/form/select";
 import { Client } from "@/types/models/client";
 
 import styles from "../create.module.css";

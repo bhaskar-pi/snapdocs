@@ -1,5 +1,5 @@
-import PageHeader from "@/components/common/page-header";
 import Layout from "@/components/layouts/app-layout";
+import PageHeader from "@/components/ui/page-header";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
 import CreateDocumentRequest from "./create-document-request";

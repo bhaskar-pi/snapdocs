@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { Button } from "@/components/common/button";
-import { Logo } from "@/components/common/logo";
-import { Input } from "@/components/form/input";
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
+import { Input } from "@/components/ui/form/input";
 import { useLogin } from "@/hooks/auth/use-login";
 
 import styles from "./auth.module.css";

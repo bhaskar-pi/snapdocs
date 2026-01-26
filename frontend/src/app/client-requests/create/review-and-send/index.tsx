@@ -1,9 +1,9 @@
 import { ArrowLeft, Check } from "lucide-react";
 
-import { Button } from "@/components/common/button";
-import { Icon } from "@/components/common/icon";
-import { Input } from "@/components/form/input";
-import { TextArea } from "@/components/form/text-area";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/form/input";
+import { TextArea } from "@/components/ui/form/text-area";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";

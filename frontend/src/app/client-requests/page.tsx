@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 
-import { Icon } from "@/components/common/icon";
-import PageHeader from "@/components/common/page-header";
+import { Icon } from "@/components/ui/icon";
+import PageHeader from "@/components/ui/page-header";
 import Layout from "@/components/layouts/app-layout";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 

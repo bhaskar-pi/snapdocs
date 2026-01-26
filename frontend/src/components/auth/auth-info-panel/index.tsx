@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./auth-info-panel.module.css";
 import { AUTH_INFO_CONTENT } from "./content";
-import { IconBadge } from "../../common/icon-badge";
+import { IconBadge } from "../../ui/icon-badge";
 
 import type { AuthInfoVariant } from "./content.types";
 
@@ -22,7 +22,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
 
     const interval = setInterval(() => {
       setActiveReview((prev) =>
-        prev === content.reviews.length - 1 ? 0 : prev + 1
+        prev === content.reviews.length - 1 ? 0 : prev + 1,
       );
     }, 10000);
 

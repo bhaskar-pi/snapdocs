@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import { Button } from "@/components/common/button";
+import { Button } from "@/components/ui/button";
 
 import styles from "./modal.module.css";
 

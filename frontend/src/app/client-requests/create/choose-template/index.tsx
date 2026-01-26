@@ -4,12 +4,12 @@ import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/common/button";
-import { Icon } from "@/components/common/icon";
-import { Input } from "@/components/form/input";
-import { Select } from "@/components/form/select";
-import { Modal } from "@/components/modal";
-import { Toggle } from "@/components/toggle";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/form/input";
+import { Select } from "@/components/ui/form/select";
+import { Modal } from "@/components/ui/modal";
+import { Toggle } from "@/components/ui/toggle";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";
