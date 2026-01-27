@@ -8,12 +8,12 @@ import { useCreateRequest } from "@/hooks/requests/create-request";
 import { RequestStatus } from "@/types/enums/request";
 import { ClientRequest } from "@/types/models/client";
 
-import ChooseTemplate from "./choose-template";
+import SelectClient from "./client-section";
 import styles from "./create.module.css";
-import ReviewAndSend from "./review-and-send";
-import SelectClient from "./select-client";
+import ChooseTemplate from "./documents-section";
+import ReviewAndSend from "./review-section";
 
-const CreateDocumentRequest = () => {
+const DocumentsRequest = () => {
   const sendRequest = useCreateRequest();
 
   const [progressStep, setProgressStep] = useState(0);
@@ -52,23 +52,34 @@ const CreateDocumentRequest = () => {
     }));
   }, []);
 
-  const onChangeDocuments = useCallback((name: string, isRequired: boolean) => {
-    setClientRequest((prev) => {
-      const exists = prev?.request.documents?.some((doc) => doc.name === name);
+  const onChangeDocuments = useCallback(
+    (name: string, isRequired: boolean, index?: number | null) => {
+      setClientRequest((prev) => {
+        const documents = prev.request.documents;
 
-      return {
-        ...prev,
-        request: {
-          ...prev.request,
-          documents: exists
-            ? prev?.request.documents?.map((doc) =>
-                doc.name === name ? { ...doc, isRequired } : doc,
-              )
-            : [...prev.request.documents, { name, isRequired }],
-        },
-      };
-    });
-  }, []);
+        if (typeof index === "number") {
+          return {
+            ...prev,
+            request: {
+              ...prev.request,
+              documents: documents.map((doc, i) =>
+                i === index ? { ...doc, name, isRequired } : doc,
+              ),
+            },
+          };
+        }
+
+        return {
+          ...prev,
+          request: {
+            ...prev.request,
+            documents: [...documents, { name, isRequired }],
+          },
+        };
+      });
+    },
+    [],
+  );
 
   const onRemoveDocument = useCallback((name: string) => {
     setClientRequest((prev) => ({
@@ -90,21 +101,26 @@ const CreateDocumentRequest = () => {
     }));
   }, []);
 
-  const onNextFromClient = useCallback(() => {
+  const onNextFromClient = () => {
     const isClientValid =
       Boolean(clientRequest?.client?.email) &&
       Boolean(clientRequest?.client?.fullName);
 
     if (!isClientValid) {
-      toast.error("Please provide the client details.");
+      return toast.error("Please provide the client details.");
     }
 
     incrementProgressStep();
-  }, [
-    clientRequest?.client?.email,
-    clientRequest?.client?.fullName,
-    incrementProgressStep,
-  ]);
+  };
+
+  const onNextFromDocuments = useCallback(() => {
+    if (clientRequest.request.documents.length === 0) {
+      toast.error("Please add at least one document to continue.");
+      return;
+    }
+
+    incrementProgressStep();
+  }, [clientRequest.request.documents.length, incrementProgressStep]);
 
   const onSendRequest = useCallback(() => {
     sendRequest.mutate(clientRequest);
@@ -124,7 +140,7 @@ const CreateDocumentRequest = () => {
       case 1:
         return (
           <ChooseTemplate
-            onNext={incrementProgressStep}
+            onNext={onNextFromDocuments}
             onPrevious={decrementProgressStep}
             onChange={onChangeDocuments}
             documents={clientRequest.request.documents}
@@ -161,4 +177,4 @@ const CreateDocumentRequest = () => {
   );
 };
 
-export default CreateDocumentRequest;
+export default DocumentsRequest;

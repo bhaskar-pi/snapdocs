@@ -10,14 +10,11 @@ import {
 
 import type { AuthInfoContent } from "./content.types";
 
-export const AUTH_INFO_CONTENT: Record<
-  AuthInfoContent["type"],
-  AuthInfoContent
-> = {
+export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent> = {
   login: {
     type: "login",
     badges: [
-      { icon: FileText, variant: "default" },
+      { icon: FileText, variant: "secondary" },
       { icon: Shield, variant: "negative" },
       { icon: Clock3, variant: "success" },
     ],
@@ -39,7 +36,7 @@ export const AUTH_INFO_CONTENT: Record<
   signup: {
     type: "signup",
     badges: [
-      { icon: FileCheck, variant: "default" },
+      { icon: FileCheck, variant: "secondary" },
       { icon: Users, variant: "info" },
       { icon: Zap, variant: "negative" },
     ],

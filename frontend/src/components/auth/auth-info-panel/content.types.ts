@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 
 export type BadgeVariant =
   | "default"
+  | "secondary"
   | "primary"
   | "success"
   | "info"

@@ -1,13 +1,11 @@
-import { ArrowLeft, Check } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/form/input";
 import { TextArea } from "@/components/ui/form/text-area";
-import { Icon } from "@/components/ui/icon";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";
 import CheckListItem from "./checklist-item";
+import SectionFooter from "../section-footer";
+import SectionHeader from "../section-header";
 
 interface Props {
   onSendRequest: () => void;
@@ -28,10 +26,10 @@ const ReviewAndSend = ({
 }: Props) => {
   return (
     <>
-      <div className={styles.stepHeader}>
-        <h1>Review & Send</h1>
-        <p>Review the request details before sending</p>
-      </div>
+      <SectionHeader
+        title="Review & Send"
+        description="Review the request details before sending"
+      />
 
       <div className={styles.reviewForm}>
         <Input
@@ -69,23 +67,12 @@ const ReviewAndSend = ({
         Sending to: <span>{`${clientName}`}</span>
       </div>
 
-      <div className={styles.stepFooter}>
-        <Button
-          intent="secondary"
-          icon={<Icon name={ArrowLeft} />}
-          onClick={onPrevious}
-        >
-          Previous
-        </Button>
-        <Button
-          loading={isLoading}
-          iconPosition="left"
-          icon={<Icon name={Check} />}
-          onClick={onSendRequest}
-        >
-          Send Request
-        </Button>
-      </div>
+      <SectionFooter
+        text={isLoading ? "Sending Request..." : "Send Request"}
+        isLoading={isLoading}
+        onNext={onSendRequest}
+        onPrevious={onPrevious}
+      />
     </>
   );
 };
