@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import ProgressStepper from "@/components/progress-stepper";
@@ -13,24 +13,27 @@ import ChooseTemplate from "./documents-section";
 import ReviewAndSend from "./review-section";
 import styles from "./styles.module.css";
 
+const initialClientRequest = {
+  client: {
+    email: "",
+    fullName: "",
+    whatsappNumber: "",
+  },
+  request: {
+    documents: [],
+    title: "",
+    description: "",
+    dueDate: "",
+    status: RequestStatus.PENDING,
+  },
+};
+
 const DocumentRequests = () => {
   const sendRequest = useCreateRequest();
 
   const [progressStep, setProgressStep] = useState(0);
-  const [clientRequest, setClientRequest] = useState<ClientRequest>({
-    client: {
-      email: "",
-      fullName: "",
-      whatsappNumber: "",
-    },
-    request: {
-      documents: [],
-      title: "",
-      description: "",
-      dueDate: "",
-      status: RequestStatus.PENDING,
-    },
-  });
+  const [clientRequest, setClientRequest] =
+    useState<ClientRequest>(initialClientRequest);
 
   const incrementProgressStep = useCallback(
     () => setProgressStep((prev) => prev + 1),
@@ -124,7 +127,12 @@ const DocumentRequests = () => {
   }, [clientRequest.request.documents.length, incrementProgressStep]);
 
   const onSendRequest = useCallback(() => {
-    sendRequest.mutate(clientRequest);
+    sendRequest.mutate(clientRequest, {
+      onSuccess: () => {
+        setProgressStep(0);
+        setClientRequest(initialClientRequest);
+      },
+    });
   }, [clientRequest, sendRequest]);
 
   const renderCurrentStep = (step: number) => {

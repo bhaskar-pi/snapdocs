@@ -5,6 +5,7 @@ import React, { useMemo, useState } from "react";
 
 import styles from "./data-table.module.css";
 import { Icon } from "../ui/icon";
+import { ContentLoader } from "../ui/loader/content-loader";
 
 interface DataTableProps {
   columns: React.ReactNode;
@@ -47,54 +48,58 @@ export function DataTable({
 
   return (
     <>
-      {!isLoading && rows?.length === 0 ? (
+      {!isLoading && rows?.length === 0 && (
         <div className={styles.emptyState}>
           {emptyText && <p className={styles.emptyTitle}>{emptyText}</p>}
           {emptyDescription && (
             <p className={styles.emptyDescription}>{emptyDescription}</p>
           )}
         </div>
-      ) : (
-        <div className={styles.table}>
-          <div
-            style={{ display: "grid", gridTemplateColumns: columnWidths }}
-            className={styles.columns}
-          >
-            {columns}
-          </div>
+      )}
 
-          <div className={styles.rows}>
-            {isLoading && <p className={styles.state}>Loading…</p>}
+      {(isLoading || (rows && rows?.length > 0)) && (
+        <>
+          {isLoading && <ContentLoader open />}
 
-            {!isLoading && <div className={styles.rows}>{paginatedRows}</div>}
-          </div>
-
-          {totalPages > 1 && (
-            <div className={styles.pagination}>
-              <p>
-                Showing {page} of {totalPages} pages(s)
-              </p>
-
-              <div className={styles.paginationActions}>
-                <Icon
-                  containerClassName={styles.iconContainer}
-                  name={ArrowLeft}
-                  size={16}
-                  onClick={onPrev}
-                  className={page === 1 ? styles.disabled : ""}
-                />
-
-                <Icon
-                  containerClassName={styles.iconContainer}
-                  name={ArrowRight}
-                  size={16}
-                  onClick={onNext}
-                  className={page === totalPages ? styles.disabled : ""}
-                />
+          {!isLoading && (
+            <div className={styles.table}>
+              <div
+                className={styles.columns}
+                style={{ display: "grid", gridTemplateColumns: columnWidths }}
+              >
+                {columns}
               </div>
+
+              <div className={styles.rows}>{paginatedRows}</div>
+
+              {totalPages > 1 && (
+                <div className={styles.pagination}>
+                  <p>
+                    Showing {page} of {totalPages} page(s)
+                  </p>
+
+                  <div className={styles.paginationActions}>
+                    <Icon
+                      containerClassName={styles.iconContainer}
+                      name={ArrowLeft}
+                      size={16}
+                      onClick={onPrev}
+                      className={page === 1 ? styles.disabled : ""}
+                    />
+
+                    <Icon
+                      containerClassName={styles.iconContainer}
+                      name={ArrowRight}
+                      size={16}
+                      onClick={onNext}
+                      className={page === totalPages ? styles.disabled : ""}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
-        </div>
+        </>
       )}
     </>
   );

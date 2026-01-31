@@ -15,8 +15,10 @@ export function useCreateRequest() {
     mutationFn: (data: ClientRequest) =>
       documentRequestsApi.sendDocumentsRequest(data),
 
-    onSuccess() {
-      toast.success("Request sent to the client successfully");
+    onSuccess(_, variables) {
+      toast.success(
+        `Request sent to ${variables.client.fullName} successfully.`,
+      );
 
       queryClient.invalidateQueries({ queryKey: ["clients"] });
       queryClient.invalidateQueries({ queryKey: ["requests"] });
