@@ -5,7 +5,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { Icon } from "@/components/ui/icon";
 import { Document } from "@/types/models/document";
 
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 
 interface Props {
   document: Document;

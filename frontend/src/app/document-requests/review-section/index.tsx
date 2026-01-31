@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/form/input";
 import { TextArea } from "@/components/ui/form/text-area";
 import { Document } from "@/types/models/document";
 
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 import CheckListItem from "./checklist-item";
 import SectionFooter from "../section-footer";
 import SectionHeader from "../section-header";

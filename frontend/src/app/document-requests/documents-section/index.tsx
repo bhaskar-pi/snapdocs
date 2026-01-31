@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Select } from "@/components/ui/form/select";
 import { Document } from "@/types/models/document";
 
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 import ChooseDocuments from "./documents";
 import SectionFooter from "../section-footer";
 import SectionHeader from "../section-header";

@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
-import styles from "./create.module.css";
+import styles from "./styles.module.css";
 
 interface Props {
   isLoading?: boolean;

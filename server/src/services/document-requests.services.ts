@@ -1,8 +1,8 @@
-import { DocRequestInsert } from "@database/schema/doc-request.schema";
+import { DocRequestInsert } from "@database/schema/document-requests.schema";
 import {
   CreateDocumentsRequest,
   CustomRequest,
-} from "@models/requests/create-doc-request";
+} from "@models/requests/documents-request";
 import { createCheckListItems } from "@repositories/checklist-items.repository";
 import {
   createClient,
@@ -13,7 +13,7 @@ import { generateClientUploadLink } from "@utils/doc-requests";
 
 export async function sendDocRequest(
   userId: string,
-  payload: CreateDocumentsRequest
+  payload: CreateDocumentsRequest,
 ) {
   if (!userId) {
     throw new Error("Missing user details");
@@ -25,7 +25,7 @@ export async function sendDocRequest(
   const requiredDocuments = requestPayload.documents;
   if (requiredDocuments?.length < 1) {
     throw new Error(
-      "Document request must include at least one required document"
+      "Document request must include at least one required document",
     );
   }
 
@@ -36,7 +36,7 @@ export async function sendDocRequest(
   if (requestPayload.templateId) {
     // TODO: fetch template details and follow up
     throw new Error(
-      "Template-based document requests are not currently supported"
+      "Template-based document requests are not currently supported",
     );
   }
 
@@ -64,7 +64,7 @@ export async function sendDocRequest(
   const linkToUpload = generateClientUploadLink(
     userId,
     clientRecord.id,
-    createdRequest.id
+    createdRequest.id,
   );
 
   return linkToUpload;

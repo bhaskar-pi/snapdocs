@@ -6,7 +6,7 @@ import { asyncHandler } from "@middlewares/async-handler";
 const router = Router();
 
 router.post(
-  "/documents-request",
+  "/document-requests",
   authenticate,
   asyncHandler(sendDocRequestHandler),
 );

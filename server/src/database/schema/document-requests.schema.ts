@@ -6,7 +6,7 @@ import {
   timestamp,
   index,
 } from "drizzle-orm/pg-core";
-import { clientsTable } from "./client.schema";
+import { clientsTable } from "./clients.schema";
 import { usersTable } from "./users.schema";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
@@ -44,7 +44,7 @@ export const requestsTable = pgTable(
   (table) => [
     index("requests_client_id_user_id_idx").on(table.clientId, table.userId),
     index("requests_status_idx").on(table.status),
-  ]
+  ],
 );
 
 export type DocRequest = InferSelectModel<typeof requestsTable>;

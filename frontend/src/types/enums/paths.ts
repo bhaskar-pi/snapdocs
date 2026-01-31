@@ -4,8 +4,8 @@ export enum SCREEN_PATHS {
 
   DASHBOARD = "/dashboard",
 
-  CLIENT_REQUESTS = "/client-requests",
-  CREATE_CLIENT_REQUEST = "/client-requests/create",
+  CLIENTS = "/clients",
+  DOCUMENT_REQUESTS = "/document-requests",
 
   TEMPLATES = "/templates",
 

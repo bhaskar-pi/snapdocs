@@ -35,7 +35,10 @@ const PageHeader = ({
   return (
     <div className={styles.container}>
       {backText && (
-        <div className={styles.backContainer} onClick={() => backLink && router.push(backLink)}>
+        <div
+          className={styles.backContainer}
+          onClick={() => backLink && router.push(backLink)}
+        >
           <Icon name={ArrowLeft} />
           <p>{backText}</p>
         </div>
@@ -48,8 +51,7 @@ const PageHeader = ({
 
         {button && (
           <Button
-            className={styles.button}
-            variant={button.variant}
+            intent={button.variant}
             icon={button.icon}
             onClick={() => button.path && router.push(button.path)}
           >

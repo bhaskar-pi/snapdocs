@@ -1,4 +1,4 @@
-import styles from "./create.module.css";
+import styles from "./styles.module.css";
 
 interface Props {
   title: string;

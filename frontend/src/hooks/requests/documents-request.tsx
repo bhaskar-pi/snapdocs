@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { documentsRequestApi } from "@/services/documents-request.service";
+import { documentRequestsApi } from "@/services/document-requests.service";
 import { ClientRequest } from "@/types/models/client";
 import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
@@ -13,7 +13,7 @@ export function useCreateRequest() {
 
   return useMutation({
     mutationFn: (data: ClientRequest) =>
-      documentsRequestApi.sendDocumentsRequest(data),
+      documentRequestsApi.sendDocumentsRequest(data),
 
     onSuccess() {
       toast.success("Request sent to the client successfully");

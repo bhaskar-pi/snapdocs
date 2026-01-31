@@ -12,7 +12,7 @@ import { Toggle } from "@/components/ui/toggle";
 import { Document } from "@/types/models/document";
 
 import DocumentRow from "./document-row";
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 
 interface Props {
   documents: Document[];

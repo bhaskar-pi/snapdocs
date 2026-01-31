@@ -3,10 +3,10 @@ import {
   DocRequest,
   DocRequestInsert,
   requestsTable,
-} from "@database/schema/doc-request.schema";
+} from "@database/schema/document-requests.schema";
 
 export async function createRequest(
-  request: DocRequestInsert
+  request: DocRequestInsert,
 ): Promise<DocRequest> {
   const [result] = await db
     .insert(requestsTable)

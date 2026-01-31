@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Select } from "@/components/ui/form/select";
 import { Client } from "@/types/models/client";
 
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 import NewClient from "./new-client-form";
 import SectionFooter from "../section-footer";
 import SectionHeader from "../section-header";

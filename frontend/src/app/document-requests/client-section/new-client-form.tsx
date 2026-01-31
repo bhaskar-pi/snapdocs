@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/form/input";
 import { Client } from "@/types/models/client";
 
-import styles from "../create.module.css";
+import styles from "../styles.module.css";
 
 interface Props {
   client: Client;

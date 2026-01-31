@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
-import { requestsTable } from "./doc-request.schema";
+import { requestsTable } from "./document-requests.schema";
 
 export const checklistStatusEnum = pgEnum("checklist_status", [
   "pending",
@@ -17,7 +17,7 @@ export const checklistStatusEnum = pgEnum("checklist_status", [
 ]);
 
 export const checklistItemsTable = pgTable(
-  "doc_checklist_items",
+  "request_checklist_items",
   {
     id: uuid("id").defaultRandom().primaryKey(),
     requestId: uuid("request_id")
@@ -33,7 +33,7 @@ export const checklistItemsTable = pgTable(
       .defaultNow()
       .$onUpdate(() => new Date()),
   },
-  (table) => [index("checklist_items_request_id_idx").on(table.requestId)]
+  (table) => [index("checklist_items_request_id_idx").on(table.requestId)],
 );
 
 export type ChecklistItem = InferSelectModel<typeof checklistItemsTable>;
