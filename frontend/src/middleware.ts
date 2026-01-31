@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_ROUTES = ["/dashboard", "/settings", "/templates"];
+const PROTECTED_ROUTES = [
+  "/dashboard",
+  "/settings",
+  "/templates",
+  "/clients",
+  "/document-requests",
+];
 
 const AUTH_ROUTES = ["/login", "/signup"];
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
+
+  console.log(token);
 
   if (!token && PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/login", request.url));
