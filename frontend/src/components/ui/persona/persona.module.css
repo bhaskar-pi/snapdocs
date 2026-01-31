@@ -1,7 +1,7 @@
 .persona {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .avatar {
@@ -35,18 +35,17 @@
   font-size: var(--font-sm);
   font-weight: var(--fw-medium);
   color: var(--primaryD);
-  line-height: 20px;
 }
 
 .subText {
   font-size: var(--font-xs);
-  color: var(--slate-600);
+  color: var(--slate-500);
   line-height: 16px;
 }
 
 .slate {
-  background-color: #f1f5f9;
-  color: #334155;
+  background-color: var(--slate-700);
+  color: var(--slate-0);
 }
 
 .amber {

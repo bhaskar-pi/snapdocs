@@ -303,7 +303,7 @@ select {
 .data-table-row {
   display: grid;
   align-items: center;
-  padding: 6px 10px;
+  padding: 8px 10px;
   border-top: 1px solid var(--slate-200);
   font-size: var(--font-sm) !important;
 }
@@ -329,15 +329,27 @@ select {
 .status {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
 
-  padding: 6px 8px;
-  border-radius: var(--radius-xs);
+  padding: 6px 14px;
+  border-radius: 30px;
 
   color: var(--primaryD);
   font-weight: 500;
   font-size: var(--font-sm);
   line-height: 1;
   justify-self: start;
+}
+
+.status > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status > span {
+  background-color: currentColor;
 }
 
 .neutral {

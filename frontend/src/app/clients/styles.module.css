@@ -19,28 +19,56 @@
 }
 
 .activeRequests {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  background-color: var(--slate-200);
   color: var(--primaryD);
   font-weight: 500;
   display: flex;
   gap: 10px;
 }
 
-.activeRequests > span {
-  color: var(--slate-600);
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.progress {
-  color: var(--primaryD);
-  font-weight: 500;
+.progressBar {
+  width: 90px;
+  height: 7px;
+  background-color: var(--slate-200);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  max-width: 90px;
+  background-color: var(--success);
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: var(--font-xs);
+  color: var(--primaryD) !important;
+  white-space: nowrap;
 }
 
 .viewAction {
   display: flex;
   align-items: center;
 
-  color: var(--primaryD);
+  color: var(--slate-500);
   font-weight: 500;
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
   gap: 10px;
   cursor: pointer;
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 import styles from "./persona.module.css";
 
 interface PersonaProps {
