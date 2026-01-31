@@ -53,7 +53,7 @@ const DocumentsRequest = () => {
   }, []);
 
   const onChangeDocuments = useCallback(
-    (name: string, isRequired: boolean, index?: number | null) => {
+    (name: string, isRequired: boolean, index?: number) => {
       setClientRequest((prev) => {
         const documents = prev.request.documents;
 
@@ -101,17 +101,18 @@ const DocumentsRequest = () => {
     }));
   }, []);
 
-  const onNextFromClient = () => {
+  const onNextFromClient = useCallback(() => {
     const isClientValid =
-      Boolean(clientRequest?.client?.email) &&
-      Boolean(clientRequest?.client?.fullName);
+      Boolean(clientRequest.client.email) &&
+      Boolean(clientRequest.client.fullName);
 
     if (!isClientValid) {
-      return toast.error("Please provide the client details.");
+      toast.error("Please provide the client details.");
+      return;
     }
 
     incrementProgressStep();
-  };
+  }, [clientRequest.client, incrementProgressStep]);
 
   const onNextFromDocuments = useCallback(() => {
     if (clientRequest.request.documents.length === 0) {

@@ -148,7 +148,7 @@
   --input-border: var(--slate-300);
   --input-border-hover: var(--slate-350);
   --input-border-focus: var(--slate-950);
-  --input-border-error: #fca5a5;
+  --input-border-error: var(--negative-border);
 
   --input-text: var(--slate-900);
   --input-text-disabled: var(--slate-400);

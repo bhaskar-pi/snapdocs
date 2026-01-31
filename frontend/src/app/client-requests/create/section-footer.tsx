@@ -24,7 +24,7 @@ const SectionFooter = ({ onNext, onPrevious, isLoading, text }: Props) => {
           Previous
         </Button>
       ) : (
-        <p></p>
+        <div></div>
       )}
       {onNext ? (
         <Button
@@ -36,7 +36,7 @@ const SectionFooter = ({ onNext, onPrevious, isLoading, text }: Props) => {
           {text ?? "Next"}
         </Button>
       ) : (
-        <p></p>
+        <div></div>
       )}
     </div>
   );

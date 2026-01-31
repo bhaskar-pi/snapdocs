@@ -36,8 +36,7 @@ const ChooseTemplate = ({
     <>
       <SectionHeader
         title="Choose Template"
-        description="Select a template with a predefined checklist or manually add required
-          documents."
+        description="Select a template with a predefined checklist or manually add required documents."
       />
 
       <div className={styles.stepActions}>
