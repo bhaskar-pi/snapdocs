@@ -13,7 +13,7 @@ export function useCreateRequest() {
 
   return useMutation({
     mutationFn: (data: ClientRequest) =>
-      documentRequestsApi.sendDocumentRequests(data),
+      documentRequestsApi.sendDocumentsRequest(data),
 
     onSuccess() {
       toast.success("Request sent to the client successfully");
