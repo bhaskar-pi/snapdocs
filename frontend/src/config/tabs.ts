@@ -12,14 +12,22 @@ export const SIDEBAR_TABS = [
   },
   {
     id: 2,
-    title: "Client Requests",
-    path: SCREEN_PATHS.CLIENT_REQUESTS,
+    title: "Documents Request",
+    path: SCREEN_PATHS.DOCUMENTS_REQUEST,
     isActive: (pathName: string) =>
-      pathName.startsWith(SCREEN_PATHS.CLIENT_REQUESTS),
+      pathName.startsWith(SCREEN_PATHS.DOCUMENTS_REQUEST),
     icon: FileText,
   },
   {
     id: 3,
+    title: "Clients",
+    path: SCREEN_PATHS.CLIENTS,
+    isActive: (pathName: string) => pathName.startsWith(SCREEN_PATHS.CLIENTS),
+    icon: FileText,
+  },
+
+  {
+    id: 4,
     title: "Templates",
     path: SCREEN_PATHS.TEMPLATES,
     isActive: (pathName: string) => pathName.startsWith(SCREEN_PATHS.TEMPLATES),
@@ -27,7 +35,7 @@ export const SIDEBAR_TABS = [
   },
 
   {
-    id: 4,
+    id: 5,
     title: "Settings",
     path: SCREEN_PATHS.SETTINGS,
     isActive: (pathName: string) => pathName.startsWith(SCREEN_PATHS.SETTINGS),

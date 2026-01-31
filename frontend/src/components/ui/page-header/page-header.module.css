@@ -40,8 +40,3 @@
   font-size: var(--font-base);
   font-weight: 500;
 }
-
-.button {
-  width: 185px;
-  gap: 18px !important;
-}

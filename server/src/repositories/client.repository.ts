@@ -1,17 +1,17 @@
 import { db } from "@database/drizzle";
-import { Client, clientsTable } from "@database/schema/client.schema";
-import { ClientRequest } from "@models/requests/create-doc-request";
+import { Client, clientsTable } from "@database/schema/clients.schema";
+import { ClientRequest } from "@models/requests/documents-request";
 import { and, eq } from "drizzle-orm";
 
 export async function getClientByEmail(
   userId: string,
-  clientEmail: string
+  clientEmail: string,
 ): Promise<Client> {
   const [result] = await db
     .select()
     .from(clientsTable)
     .where(
-      and(eq(clientsTable.userId, userId), eq(clientsTable.email, clientEmail))
+      and(eq(clientsTable.userId, userId), eq(clientsTable.email, clientEmail)),
     )
     .limit(1);
 
@@ -20,7 +20,7 @@ export async function getClientByEmail(
 
 export async function createClient(
   userId: string,
-  client: ClientRequest
+  client: ClientRequest,
 ): Promise<Client | undefined> {
   const [result] = await db
     .insert(clientsTable)
