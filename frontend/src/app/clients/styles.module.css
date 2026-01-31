@@ -1,0 +1,46 @@
+.filter {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.clientName {
+  color: var(--primaryD);
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.email {
+  font-size: var(--font-xs);
+  color: var(--slate-600);
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.activeRequests {
+  color: var(--primaryD);
+  font-weight: 500;
+  display: flex;
+  gap: 10px;
+}
+
+.activeRequests > span {
+  color: var(--slate-600);
+}
+
+.progress {
+  color: var(--primaryD);
+  font-weight: 500;
+}
+
+.viewAction {
+  display: flex;
+  align-items: center;
+
+  color: var(--primaryD);
+  font-weight: 500;
+  font-size: var(--font-sm);
+  gap: 10px;
+  cursor: pointer;
+}

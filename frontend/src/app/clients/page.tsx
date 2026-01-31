@@ -5,7 +5,9 @@ import { Icon } from "@/components/ui/icon";
 import PageHeader from "@/components/ui/page-header";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
-const ClientRequests = () => {
+import ClientsTable from "./clients-table";
+
+const Clients = () => {
   return (
     <Layout>
       <PageHeader
@@ -17,8 +19,9 @@ const ClientRequests = () => {
           path: SCREEN_PATHS.DOCUMENT_REQUESTS,
         }}
       />
+      <ClientsTable />
     </Layout>
   );
 };
 
-export default ClientRequests;
+export default Clients;

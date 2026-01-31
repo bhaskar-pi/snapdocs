@@ -1,6 +1,10 @@
+import { Search } from "lucide-react";
+import React from "react";
+
+import { Icon } from "../../icon";
 import styles from "../form.module.css";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   containerClassName?: string;
@@ -13,7 +17,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const messagePositionStyles: Record<
-  NonNullable<InputProps["messagePosition"]>,
+  NonNullable<Props["messagePosition"]>,
   string
 > = {
   left: styles.messageLeft,
@@ -21,10 +25,9 @@ const messagePositionStyles: Record<
   right: styles.messageRight,
 };
 
-export const Input: React.FC<InputProps> = ({
+export const SearchInput: React.FC<Props> = ({
   id,
   label,
-  type = "text",
   containerClassName = "",
   labelClassName = "",
   inputClassName = "",
@@ -52,12 +55,17 @@ export const Input: React.FC<InputProps> = ({
       )}
 
       <div className={`${styles.field} ${fieldClassName}`}>
-        <input
-          className={`${styles.input} ${inputClassName} ${errorBorder}`}
-          type={type}
-          id={id}
-          {...props}
-        />
+        <div className={styles.searchWrapper}>
+          <Icon className={styles.searchIcon} name={Search} />
+
+          <input
+            id={id}
+            type="search"
+            className={`${styles.input} ${styles.searchInput} ${inputClassName} ${errorBorder}`}
+            {...props}
+          />
+        </div>
+
         {message && <p className={messageClassName}>{message}</p>}
       </div>
     </div>

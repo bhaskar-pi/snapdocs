@@ -2,7 +2,7 @@ export enum RequestStatus {
   // Request is being created by the user
   // Not visible to the client yet
   // Fully editable
-  DRAFT = "draft",
+  // DRAFT = "draft",
 
   // Request has been sent to the client
   // Client has not uploaded any documents yet
@@ -19,9 +19,9 @@ export enum RequestStatus {
 
   // Due date has passed without completing the request
   // Client uploads may be blocked or flagged
-  EXPIRED = "expired",
+  // EXPIRED = "expired",
 
   // Request was manually cancelled by the user
   // No further action is allowed
-  CANCELLED = "cancelled",
+  // CANCELLED = "cancelled",
 }
