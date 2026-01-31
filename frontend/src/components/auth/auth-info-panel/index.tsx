@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./auth-info-panel.module.css";
 import { AUTH_INFO_CONTENT } from "./content";
-import { IconBadge } from "../../common/icon-badge";
+import { IconBadge } from "../../ui/icon-badge";
 
 import type { AuthInfoVariant } from "./content.types";
 
@@ -22,7 +22,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
 
     const interval = setInterval(() => {
       setActiveReview((prev) =>
-        prev === content.reviews.length - 1 ? 0 : prev + 1
+        prev === content.reviews.length - 1 ? 0 : prev + 1,
       );
     }, 10000);
 
@@ -30,7 +30,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
   }, [content]);
 
   const getIconSize = (index: number) =>
-    index === 0 ? "xxl" : index === 1 ? "xl" : "lg";
+    index === 0 ? "xl" : index === 1 ? "lg" : "md";
 
   return (
     <section className={styles.container}>
@@ -63,7 +63,7 @@ export const AuthInfoPanel = ({ type }: Props) => {
 
       {content.type === "login" && (
         <div className={styles.trustedCard}>
-          <IconBadge icon={content.trust.icon} variant="light" />
+          <IconBadge icon={content.trust.icon} />
           <div className={styles.trustedCardInfo}>
             <p>{content.trust.title}</p>
             <p>{content.trust.subtitle}</p>

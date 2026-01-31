@@ -1,0 +1,145 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 42px;
+  padding: 0 18px;
+
+  font-size: var(--font-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 20px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  user-select: none;
+
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+}
+
+.button:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+.loading {
+  pointer-events: none;
+}
+
+.solid {
+  border-color: transparent;
+}
+
+.outline {
+  background: transparent;
+  border-color: currentColor;
+}
+
+.outline:hover:not(:disabled) {
+  background: var(--btn-bg-light);
+}
+
+.ghost {
+  background: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--btn-bg-light);
+}
+
+/* PRIMARY */
+.primary {
+  --btn-bg: var(--primary-bg);
+  --btn-bg-hover: var(--primary-bg-hover);
+  --btn-bg-light: var(--primaryL);
+  --btn-fg: var(--on-primary);
+}
+
+/* SECONDARY */
+.secondary {
+  --btn-bg: var(--secondary-bg);
+  --btn-bg-hover: var(--secondary-bg-hover);
+  --btn-bg-light: var(--secondary-bg);
+  --btn-fg: var(--secondary-text);
+}
+
+/** NEUTRAL */
+.neutral {
+  --btn-bg: var(--slate-100);
+  --btn-bg-hover: var(--slate-200);
+  --btn-bg-light: var(--slate-75);
+  --btn-fg: var(--slate-500);
+}
+
+/* SUCCESS */
+.success {
+  --btn-bg: var(--success);
+  --btn-bg-hover: var(--successD);
+  --btn-bg-light: var(--successL);
+  --btn-fg: var(--text-inverted);
+}
+
+/* INFO */
+.info {
+  --btn-bg: var(--neutral);
+  --btn-bg-hover: var(--neutralD);
+  --btn-bg-light: var(--neutralL);
+  --btn-fg: var(--text-inverted);
+}
+
+/* WARNING */
+.warning {
+  --btn-bg: var(--warning);
+  --btn-bg-hover: var(--warningD);
+  --btn-bg-light: var(--warningL);
+  --btn-fg: #000000;
+}
+
+/* NEGATIVE */
+.negative {
+  --btn-bg: var(--negative);
+  --btn-bg-hover: var(--negativeD);
+  --btn-bg-light: var(--dangerL);
+  --btn-fg: var(--text-inverted);
+}
+
+.icon,
+.label {
+  display: inline-flex;
+  align-items: center;
+  color: currentColor;
+}
+
+.iconOnly {
+  width: 42px;
+  padding: 0;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

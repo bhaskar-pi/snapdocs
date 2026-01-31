@@ -19,45 +19,87 @@
   --slate-900: #0f172a;
   --slate-950: #020617;
 
+  /* PRIMARY (brand / emphasis) */
   --primary: var(--slate-950);
-  --primary-hover: var(--slate-800);
-  --primary-light: var(--slate-700);
+  --primaryD: var(--slate-800);
+  --primaryL: var(--slate-100);
+  --primaryXL: var(--slate-50);
 
-  /* Error / Danger */
+  /* SECONDARY (supporting emphasis, derived from slate) */
+  --secondary: var(--slate-700);
+  --secondaryD: var(--slate-800);
+  --secondaryL: var(--slate-200);
+  --secondaryXL: var(--slate-75);
 
-  --error-border: #fca5a5;
-
-  --negative: #f44336;
-  --negativeD: #e53935;
-  --negativeL: #ffebee;
-  --negativeXL: #fff9fa;
-
-  /** neutral */
-
+  /* NEUTRAL (quiet blue) */
   --neutral: #2196f3;
   --neutralD: #1e87e4;
   --neutralL: #e3f2fd;
   --neutralXL: #f7fbfd;
 
-  /* Warning */
+  /* INFO (stronger blue) */
+  --info: #2563eb;
+  --infoD: #1d4ed8;
+  --infoL: #dbeafe;
+
+  /* SUCCESS */
+  --success: #16a34a;
+  --successD: #15803d;
+  --successL: #dcfce7;
+
+  /* WARNING */
   --warning: #ff9800;
   --warningD: #fb8c00;
   --warningL: #fff8e1;
+
+  /* DANGER */
+  --negative: #f44336;
+  --negativeD: #e53935;
+  --negativeL: #ffebee;
+  --negativeXL: #fff9fa;
+
+  /* Primary surface (buttons, CTA) */
+  --primary-bg: var(--slate-950);
+  --primary-bg-hover: var(--slate-800);
+  --primary-bg-active: var(--slate-700);
+  --on-primary: #ffffff;
+  --primary-border: var(--slate-950);
+
+  /* Secondary surface */
+  --secondary-bg: var(--slate-100);
+  --secondary-bg-hover: var(--slate-200);
+  --secondary-bg-active: var(--slate-300);
+  --secondary-text: var(--slate-900);
+  --secondary-border: var(--slate-300);
+
+  /* Neutral surface */
+  --neutral-bg: var(--neutralL);
+  --neutral-bg-hover: var(--neutralXL);
+  --neutral-border: var(--neutral);
+
+  /* Danger surface */
+  --negative-bg: var(--danger);
+  --negative-bg-hover: var(--dangerD);
+  --on-negative: #ffffff;
+  --negative-border: #fca5a5;
+
+  /* Warning surface */
+  --warning-bg: var(--warning);
+  --warning-bg-hover: var(--warningD);
+  --on-warning: #000000;
   --warning-border: #fcd34d;
 
-  /* Success */
-  --success: #16a34a;
-  --successL: #dcfce7;
+  /* Success surface */
+  --success-bg: var(--success);
+  --success-bg-light: var(--successL);
+  --on-success: #ffffff;
   --success-border: #86efac;
 
-  /* Info */
-  --info: #2563eb;
-  --info-light: #dbeafe;
+  /* Info surface */
+  --info-bg: var(--info);
+  --info-bg-light: var(--infoL);
+  --on-info: #ffffff;
   --info-border: #93c5fd;
-
-  /* ================================================== */
-  /* 4. Text Colors */
-  /* ================================================== */
 
   --text-primary: var(--slate-950);
   --text-secondary: var(--slate-600);
@@ -65,11 +107,6 @@
   --text-disabled: var(--slate-400);
   --text-inverted: #ffffff;
 
-  /* ================================================== */
-  /* 5. Typography */
-  /* ================================================== */
-
-  /* Font sizes */
   --font-xxs: 8px;
   --font-xs: 12px;
   --font-sm: 14px;
@@ -80,21 +117,15 @@
   --font-3xl: 30px;
   --font-4xl: 36px;
 
-  /* Line heights */
   --lh-tight: 1.2;
   --lh-snug: 1.35;
   --lh-normal: 1.5;
   --lh-relaxed: 1.65;
 
-  /* Font weights */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
-
-  /* ================================================== */
-  /* 6. Spacing – Forms */
-  /* ================================================== */
 
   --form-gap-xs: 4px;
   --form-gap-sm: 6px;
@@ -102,57 +133,36 @@
   --form-gap-lg: 24px;
   --form-gap-actions: 20px;
 
-  /* ================================================== */
-  /* 7. Radius */
-  /* ================================================== */
-
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-100: 100%;
 
-  /* ================================================== */
-  /* 8. Inputs */
-  /* ================================================== */
-
-  /* Sizing */
   --input-height: 40px;
   --input-padding-x: 12px;
 
-  /* Background */
   --input-bg: var(--slate-0);
   --input-bg-disabled: var(--slate-100);
 
-  /* Borders */
   --input-border: var(--slate-300);
   --input-border-hover: var(--slate-350);
   --input-border-focus: var(--slate-950);
-  --input-border-error: var(--error-border);
+  --input-border-error: var(--negative-border);
 
-  /* Text */
   --input-text: var(--slate-900);
   --input-text-disabled: var(--slate-400);
-
-  /* Placeholder */
   --input-placeholder: var(--slate-450);
 
-  /* Focus rings */
   --input-ring: rgba(15, 23, 42, 0.12);
   --input-ring-blue: rgba(37, 99, 235, 0.18);
 
-  /* ================================================== */
-  /* 9. Widths */
-  /* ================================================== */
-
-  /* Inputs */
   --w-input-sm: 160px;
   --w-input-md: 240px;
   --w-input-l: 320px;
   --w-input-lg: 380px;
   --w-input-xl: 420px;
 
-  /* Buttons */
   --w-btn-xxs: 50px;
   --w-btn-xs: 70px;
   --w-btn-sm: 96px;
@@ -163,17 +173,14 @@
   --w-btn-xxl: 380px;
   --w-btn-xxxl: 420px;
 
-  /* Containers */
   --w-card-sm: 320px;
   --w-card-md: 480px;
   --w-card-lg: 640px;
   --w-card-xl: 768px;
 
-  /** disabled states */
   --disabled-bg: var(--slate-200);
   --disabled-color: var(--slate-400);
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.12);
@@ -286,7 +293,7 @@ select {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
 
+  width: 100%;
   gap: 6px;
 }

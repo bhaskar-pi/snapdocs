@@ -14,8 +14,8 @@ export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent>
   login: {
     type: "login",
     badges: [
-      { icon: FileText, variant: "neutral" },
-      { icon: Shield, variant: "error" },
+      { icon: FileText, variant: "secondary" },
+      { icon: Shield, variant: "negative" },
       { icon: Clock3, variant: "success" },
     ],
     title: "Collect client documents effortlessly",
@@ -36,9 +36,9 @@ export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent>
   signup: {
     type: "signup",
     badges: [
-      { icon: FileCheck, variant: "neutral" },
+      { icon: FileCheck, variant: "secondary" },
       { icon: Users, variant: "info" },
-      { icon: Zap, variant: "error" },
+      { icon: Zap, variant: "negative" },
     ],
     title: "Built for professionals",
     subtitle:

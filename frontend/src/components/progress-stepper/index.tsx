@@ -1,7 +1,7 @@
 import { Check, FileText, Search, User } from "lucide-react";
 
 import styles from "./progress-stepper.module.css";
-import { IconBadge } from "../common/icon-badge";
+import { IconBadge } from "../ui/icon-badge";
 
 interface Props {
   currentStep: number; // 0-based index

@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 
 import env from "@config/env";
 import authRouter from "@routes/auth.routes";
-import createRequestRouter from "@routes/create-request.routes";
+import createRequestRouter from "@routes/documents-request.routes";
 
 const app = express();
 

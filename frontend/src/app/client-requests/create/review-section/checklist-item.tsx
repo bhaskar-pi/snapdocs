@@ -1,6 +1,6 @@
 import { FileText } from "lucide-react";
 
-import { Icon } from "@/components/common/icon";
+import { Icon } from "@/components/ui/icon";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";

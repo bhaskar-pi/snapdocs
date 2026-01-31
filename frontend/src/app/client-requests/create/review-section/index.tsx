@@ -1,13 +1,11 @@
-import { ArrowLeft, Check } from "lucide-react";
-
-import { Button } from "@/components/common/button";
-import { Icon } from "@/components/common/icon";
-import { Input } from "@/components/form/input";
-import { TextArea } from "@/components/form/text-area";
+import { Input } from "@/components/ui/form/input";
+import { TextArea } from "@/components/ui/form/text-area";
 import { Document } from "@/types/models/document";
 
 import styles from "../create.module.css";
 import CheckListItem from "./checklist-item";
+import SectionFooter from "../section-footer";
+import SectionHeader from "../section-header";
 
 interface Props {
   onSendRequest: () => void;
@@ -15,6 +13,7 @@ interface Props {
   onChange: (prop: string, value: string | Date) => void;
   documents: Document[];
   clientName: string;
+  isLoading?: boolean;
 }
 
 const ReviewAndSend = ({
@@ -23,13 +22,14 @@ const ReviewAndSend = ({
   onChange,
   documents = [],
   clientName,
+  isLoading,
 }: Props) => {
   return (
     <>
-      <div className={styles.stepHeader}>
-        <h1>Review & Send</h1>
-        <p>Review the request details before sending</p>
-      </div>
+      <SectionHeader
+        title="Review & Send"
+        description="Review the request details before sending"
+      />
 
       <div className={styles.reviewForm}>
         <Input
@@ -67,22 +67,12 @@ const ReviewAndSend = ({
         Sending to: <span>{`${clientName}`}</span>
       </div>
 
-      <div className={styles.stepFooter}>
-        <Button
-          variant="secondary"
-          icon={<Icon name={ArrowLeft} />}
-          onClick={onPrevious}
-        >
-          Previous
-        </Button>
-        <Button
-          iconPosition="left"
-          icon={<Icon name={Check} tone="white" />}
-          onClick={() => onSendRequest()}
-        >
-          Send Request
-        </Button>
-      </div>
+      <SectionFooter
+        text={isLoading ? "Sending Request..." : "Send Request"}
+        isLoading={isLoading}
+        onNext={onSendRequest}
+        onPrevious={onPrevious}
+      />
     </>
   );
 };

@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { Button } from "@/components/common/button";
-import { Logo } from "@/components/common/logo";
-import { Input } from "@/components/form/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/form/input";
+import { Logo } from "@/components/ui/logo";
 import { useLogin } from "@/hooks/auth/use-login";
+import { SCREEN_PATHS } from "@/types/enums/paths";
 
 import styles from "./auth.module.css";
 
@@ -39,6 +40,7 @@ const LoginForm = () => {
           placeholder="name@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={login.isPending}
         />
 
         <Input
@@ -52,15 +54,20 @@ const LoginForm = () => {
           message="forgot password?"
           messagePosition="right"
           messageType="info"
+          disabled={login.isPending}
         />
 
-        <Button type="submit" variant="primary" className={styles.button}>
+        <Button
+          loading={login.isPending}
+          type="submit"
+          className={styles.button}
+        >
           {login.isPending ? "Logging in..." : "Log In"}
         </Button>
 
         <div className={styles.switch}>
           <p>{`Don't have an account?`}</p>
-          <Link href="/signup">Sign up</Link>
+          <Link href={SCREEN_PATHS.SIGNUP}>Sign up</Link>
         </div>
       </form>
     </div>

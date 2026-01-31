@@ -2,9 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   border-radius: var(--radius-lg);
-  border: 1px solid var(--slate-200);
+  border: 1px solid transparent;
   flex-shrink: 0;
 }
 
@@ -12,96 +11,82 @@
   width: 28px;
   height: 28px;
 }
-
 .md {
   width: 36px;
   height: 36px;
 }
-
 .lg {
   width: 40px;
   height: 40px;
 }
-
 .xl {
   width: 44px;
   height: 44px;
 }
-
 .xxl {
   width: 56px;
   height: 56px;
 }
 
-/* Icon size */
 .icon {
   width: 18px;
   height: 18px;
   stroke-width: 2;
 }
 
-/* Scale icon with badge */
 .sm .icon {
   width: 14px;
   height: 14px;
 }
-
 .lg .icon {
   width: 18px;
   height: 18px;
 }
-
 .xl .icon {
   width: 22px;
   height: 22px;
 }
-
 .xxl .icon {
   width: 28px;
   height: 28px;
 }
 
-.neutral {
-  background-color: var(--slate-0);
-  color: var(--slate-700);
+.default {
+  background: var(--primaryL);
+  color: var(--text-secondary);
 }
 
-.neutralL {
-  background-color: var(--slate-0);
-  color: var(--slate-400);
+.secondary {
+  background: var(--slate-0);
+  color: var(--text-secondary);
 }
 
 .primary {
-  background-color: var(--slate-950);
-  color: var(--text-inverted);
+  background: var(--primary-bg);
+  color: var(--on-primary);
 }
 
 .success {
-  background-color: var(--success-light);
+  background: var(--successL);
   color: var(--success);
 }
 
 .info {
-  background-color: var(--info-light);
+  background: var(--infoL);
   color: var(--info);
 }
 
 .warning {
-  background-color: var(--warning-light);
+  background: var(--warningL);
   color: var(--warning);
 }
 
-.error {
-  background-color: var(--negative);
-  color: var(--negativeL);
-}
-
-.light {
-  background-color: var(--slate-100);
-  color: var(--slate-800);
+.negative {
+  background: var(--negativeL);
+  color: var(--negative);
 }
 
 .disabled {
-  background-color: var(--disabled-bg);
+  background: var(--disabled-bg);
   color: var(--disabled-color);
 }

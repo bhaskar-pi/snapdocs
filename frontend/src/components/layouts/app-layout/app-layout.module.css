@@ -24,14 +24,14 @@
 
   border-bottom: 1px solid var(--slate-200);
 
-  margin: 0 -20px 32px -20px;
+  margin: 0 -20px 18px -20px;
   padding: 0 20px 18px 20px;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
 }
 
@@ -41,11 +41,12 @@
   gap: 10px;
 
   padding: 9px 12px;
-  border-radius: 8px;
+  line-height: 19px;
+  border-radius: var(--radius-sm);
 
-  color: var(--slate-600);
+  color: var(--primaryD);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   font-size: var(--font-sm);
 
   transition:
@@ -53,24 +54,24 @@
     color 0.2s ease;
 }
 
-.navItem:not(.active):hover {
-  background-color: var(--slate-75);
-  color: var(--slate-800);
+.navItem:hover {
+  background-color: var(--primaryL);
+  color: var(--primary);
 }
 
 .active {
-  background-color: var(--slate-150);
-  color: var(--slate-950);
+  background-color: var(--primaryL);
+  color: var(--primary);
 }
 
 .chevron {
   flex-shrink: 0;
   margin-left: auto;
-  color: var(--slate-600);
+  color: var(--primaryD);
 }
 
 .chevron:hover {
-  color: var(--slate-950);
+  color: var(--primary);
 }
 
 .navIcon {
@@ -78,7 +79,7 @@
 }
 
 .sidebarFooter {
-  border-top: 1px solid var(--slate-200);
+  border-top: 1px solid var(--secondaryL);
   display: flex;
   flex-direction: column;
 
@@ -86,25 +87,27 @@
   padding-left: 24px;
   padding-top: 15px;
 
-  gap: 20px;
+  gap: 15px;
 }
 
 .userName {
   font-size: var(--font-sm);
-  font-weight: 600;
-  color: var(--slate-950);
+  font-weight: var(--fw-semibold);
+  color: var(--primary);
+  line-height: 20px;
 }
 
 .userEmail {
   font-size: var(--font-xs);
-  color: var(--slate-500);
+  color: var(--secondary);
+  line-height: 18px;
 }
 
 .logout {
   background: none;
   border: none;
   padding: 0;
-  color: var(--slate-600);
+  color: var(--secondary);
   cursor: pointer;
   font-size: var(--font-sm);
 
@@ -112,29 +115,25 @@
   align-items: center;
   gap: 8px;
 
-  font-weight: 600;
+  font-weight: var(--fw-medium);
 }
 
-.logout > :first-child {
-  color: var(--slate-600);
+.logoutIcon {
+  color: var(--secondary);
 }
 
-.logout > :first-child {
-  color: var(--slate-600);
-}
-
-.logout:hover > :first-child {
-  color: var(--slate-950);
+.logoutIcon:hover {
+  color: var(--primary);
 }
 
 .logout:hover {
-  color: var(--slate-950);
+  color: var(--primary);
 }
 
 /* Main Content */
 .content {
   flex: 1;
   padding: 36px;
-  background-color: var(--slate-100);
+  background-color: var(--primaryL);
   overflow-y: auto;
 }

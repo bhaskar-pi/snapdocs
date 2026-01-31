@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
-import { Button } from "@/components/common/button";
-import { Logo } from "@/components/common/logo";
-import { Input } from "@/components/form/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/form/input";
+import { Logo } from "@/components/ui/logo";
 import { useSignup } from "@/hooks/auth/use-signup";
+import { SCREEN_PATHS } from "@/types/enums/paths";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth";
 
 import styles from "./auth.module.css";
@@ -59,6 +60,7 @@ const SignUpForm = () => {
             placeholder="John"
             value={form.firstName}
             onChange={(e) => onChangeForm("firstName", e.target.value)}
+            disabled={signup.isPending}
           />
           <Input
             required
@@ -68,6 +70,7 @@ const SignUpForm = () => {
             placeholder="Smith"
             value={form.lastName}
             onChange={(e) => onChangeForm("lastName", e.target.value)}
+            disabled={signup.isPending}
           />
         </div>
 
@@ -79,6 +82,7 @@ const SignUpForm = () => {
           placeholder="name@company.com"
           value={form.email}
           onChange={(e) => onChangeForm("email", e.target.value)}
+          disabled={signup.isPending}
         />
 
         <Input
@@ -89,15 +93,20 @@ const SignUpForm = () => {
           placeholder="Create a secure password"
           value={form.password}
           onChange={(e) => onChangeForm("password", e.target.value)}
+          disabled={signup.isPending}
         />
 
-        <Button type="submit" variant="primary" className={styles.button}>
-          Create Account
+        <Button
+          disabled={signup.isPending}
+          type="submit"
+          className={styles.button}
+        >
+          {signup.isPending ? "Creating..." : "Create Account"}
         </Button>
 
         <div className={styles.switch}>
           <p>{`Already have an account?`}</p>
-          <Link href="/login">Log In</Link>
+          <Link href={SCREEN_PATHS.LOGIN}>Log In</Link>
         </div>
       </form>
     </div>

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 
-import { Icon } from "@/components/common/icon";
-import { Logo } from "@/components/common/logo";
+import { Icon } from "@/components/ui/icon";
+import { Logo } from "@/components/ui/logo";
 import { SIDEBAR_TABS } from "@/config/tabs";
 import { useLogout } from "@/hooks/auth/use-logout";
 import { useAuthStore } from "@/store/auth.store";
@@ -51,7 +51,7 @@ const Sidebar = () => {
                   name={ChevronRight}
                   size={18}
                   strokeWidth={2}
-                  className={`${styles.chevron}`}
+                  containerClassName={`${styles.chevron}`}
                 />
               )}
             </Link>
@@ -68,7 +68,12 @@ const Sidebar = () => {
         </div>
 
         <button className={styles.logout} onClick={handleLogout}>
-          <Icon name={LogOut} strokeWidth={2.5} size={18} />
+          <Icon
+            className={styles.logoutIcon}
+            name={LogOut}
+            strokeWidth={2}
+            size={18}
+          />
           <span>Sign out</span>
         </button>
       </div>

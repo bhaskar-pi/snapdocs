@@ -1,5 +1,5 @@
 .container {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -7,33 +7,19 @@
 .icon {
   display: inline-block;
   flex-shrink: 0;
+  color: currentColor;
 }
 
-.sm {
-  width: 14px;
-  height: 14px;
-}
-
-.md {
-  width: 18px;
-  height: 18px;
-}
-
-.lg {
-  width: 22px;
-  height: 22px;
-}
-
-.primary {
+.default {
   color: var(--text-primary);
-}
-
-.secondary {
-  color: var(--text-secondary);
 }
 
 .muted {
   color: var(--text-muted);
+}
+
+.primary {
+  color: var(--primary);
 }
 
 .success {
@@ -48,10 +34,10 @@
   color: var(--warning);
 }
 
-.error {
+.negative {
   color: var(--negative);
 }
 
-.white {
-  color: var(--slate-0);
+.inverted {
+  color: var(--text-inverted);
 }

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import { Button } from "@/components/common/button";
+import { Button } from "@/components/ui/button";
 
 import styles from "./modal.module.css";
 
@@ -82,7 +82,7 @@ export const Modal = ({
             <div className={styles.footerLeft}>
               {onDismiss && (
                 <Button
-                  variant="secondary"
+                  intent="secondary"
                   onClick={onDismiss.onClick}
                   disabled={onDismiss.disabled}
                 >
@@ -94,7 +94,7 @@ export const Modal = ({
             <div className={styles.footerRight}>
               {onDelete && (
                 <Button
-                  variant="negativeL"
+                  intent="negative"
                   onClick={onDelete.onClick}
                   disabled={onDelete.disabled}
                 >
@@ -104,7 +104,7 @@ export const Modal = ({
 
               {onSave && (
                 <Button
-                  variant="primary"
+                  intent="primary"
                   onClick={onSave.onClick}
                   disabled={onSave.disabled}
                 >
