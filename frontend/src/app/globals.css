@@ -331,19 +331,19 @@ select {
   align-items: center;
   gap: 6px;
 
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 30px;
 
   color: var(--primaryD);
   font-weight: 500;
-  font-size: var(--font-sm);
+  font-size: 13px;
   line-height: 1;
   justify-self: start;
 }
 
 .status > span {
-  width: 5px;
-  height: 5px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -355,24 +355,29 @@ select {
 .neutral {
   background-color: var(--secondaryL);
   color: var(--primary);
+  border: 1px solid var(--primary);
 }
 
 .warning {
   background-color: var(--warningL);
   color: var(--warning);
+  border: 1px solid var(--warningD);
 }
 
 .negative {
   background-color: var(--negativeL);
   color: var(--negative);
+  border: 1px solid var(--negative);
 }
 
 .success {
   background-color: var(--successL);
   color: var(--success);
+  border: 1px solid var(--success);
 }
 
 .info {
   background-color: var(--neutralL);
   color: var(--neutral);
+  border: 1px solid var(--neutral);
 }
