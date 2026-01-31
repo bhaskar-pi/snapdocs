@@ -9,12 +9,12 @@ const ClientRequests = () => {
   return (
     <Layout>
       <PageHeader
-        header="Client Requests"
-        description="Manage all document requests in one place"
+        header="Clients"
+        description="Manage all client documents in one place"
         button={{
           title: "Create Request",
           icon: <Icon name={Plus} />,
-          path: SCREEN_PATHS.DOCUMENTS_REQUEST,
+          path: SCREEN_PATHS.DOCUMENT_REQUESTS,
         }}
       />
     </Layout>

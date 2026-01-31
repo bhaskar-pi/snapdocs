@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { documentsRequestApi } from "@/services/documents-request.service";
+import { documentsRequestApi } from "@/services/document-requests.service";
 import { ClientRequest } from "@/types/models/client";
 import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";

@@ -3,7 +3,7 @@ import {
   DocRequest,
   DocRequestInsert,
   requestsTable,
-} from "@database/schema/documents-request.schema";
+} from "@database/schema/document-requests.schema";
 
 export async function createRequest(
   request: DocRequestInsert,

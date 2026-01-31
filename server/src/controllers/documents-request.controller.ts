@@ -1,6 +1,6 @@
 import { AuthenticatedRequest } from "@models/express";
 import { CreateDocumentsRequest } from "@models/requests/documents-request";
-import { sendDocRequest } from "@services/documents-request.services";
+import { sendDocRequest } from "@services/document-requests.services";
 
 export const sendDocRequestHandler = async (request: AuthenticatedRequest) => {
   const data = request.body as CreateDocumentsRequest;

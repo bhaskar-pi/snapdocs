@@ -1,8 +1,8 @@
 import { POST } from "@/api/http";
 import { ClientRequest } from "@/types/models/client";
 
-export const documentsRequestApi = {
+export const documentRequestsApi = {
   sendDocumentsRequest(data: ClientRequest) {
-    return POST(`/documents-request`, data);
+    return POST(`/document-requests`, data);
   },
 };

@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
-import { requestsTable } from "./documents-request.schema";
+import { requestsTable } from "./document-requests.schema";
 
 export const checklistStatusEnum = pgEnum("checklist_status", [
   "pending",

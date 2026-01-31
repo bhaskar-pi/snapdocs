@@ -13,7 +13,7 @@ import ChooseTemplate from "./documents-section";
 import ReviewAndSend from "./review-section";
 import styles from "./styles.module.css";
 
-const DocumentsRequest = () => {
+const DocumentRequests = () => {
   const sendRequest = useCreateRequest();
 
   const [progressStep, setProgressStep] = useState(0);
@@ -178,4 +178,4 @@ const DocumentsRequest = () => {
   );
 };
 
-export default DocumentsRequest;
+export default DocumentRequests;

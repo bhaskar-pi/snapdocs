@@ -1,4 +1,4 @@
-import { DocRequestInsert } from "@database/schema/documents-request.schema";
+import { DocRequestInsert } from "@database/schema/document-requests.schema";
 import {
   CreateDocumentsRequest,
   CustomRequest,
