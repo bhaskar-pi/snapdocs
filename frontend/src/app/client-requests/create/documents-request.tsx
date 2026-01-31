@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import ProgressStepper from "@/components/progress-stepper";
-import { useCreateRequest } from "@/hooks/requests/create-request";
+import { useCreateRequest } from "@/hooks/requests/documents-request";
 import { RequestStatus } from "@/types/enums/request";
 import { ClientRequest } from "@/types/models/client";
 
