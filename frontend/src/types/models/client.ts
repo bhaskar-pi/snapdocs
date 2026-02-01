@@ -21,3 +21,11 @@ export interface ClientRequest {
   client: Client;
   request: DocRequest;
 }
+
+export interface ClientSummary extends Client {
+  activeRequests: number;
+  totalChecklists: number;
+  completedChecklists: number;
+
+  status: RequestStatus;
+}

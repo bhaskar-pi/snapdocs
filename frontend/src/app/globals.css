@@ -147,7 +147,7 @@
 
   --input-border: var(--slate-300);
   --input-border-hover: var(--slate-350);
-  --input-border-focus: var(--slate-950);
+  --input-border-focus: var(--slate-600);
   --input-border-error: var(--negative-border);
 
   --input-text: var(--slate-900);
@@ -280,6 +280,8 @@ select {
   color: inherit;
 }
 
+/** Scroll bar */
+
 /* DARK MODE (System-based for now) */
 @media (prefers-color-scheme: dark) {
   html {
@@ -296,4 +298,86 @@ select {
 
   width: 100%;
   gap: 6px;
+}
+
+.data-table-row {
+  display: grid;
+  align-items: center;
+  padding: 8px 10px;
+  border-top: 1px solid var(--slate-200);
+  font-size: var(--font-sm) !important;
+}
+
+.data-table-row:hover {
+  background-color: var(--slate-50);
+}
+
+.input-width {
+  max-width: 100% !important;
+}
+
+.input-height {
+  height: 44px !important;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 14px;
+  border-radius: 30px;
+
+  color: var(--primaryD);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1;
+  justify-self: start;
+}
+
+.status > span {
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status > span {
+  background-color: currentColor;
+}
+
+.neutral {
+  background-color: var(--secondaryL);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.warning {
+  background-color: var(--warningL);
+  color: var(--warning);
+  border: 1px solid var(--warningD);
+}
+
+.negative {
+  background-color: var(--negativeL);
+  color: var(--negative);
+  border: 1px solid var(--negative);
+}
+
+.success {
+  background-color: var(--successL);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.info {
+  background-color: var(--neutralL);
+  color: var(--neutral);
+  border: 1px solid var(--neutral);
 }

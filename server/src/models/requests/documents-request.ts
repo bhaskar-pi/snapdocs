@@ -1,4 +1,4 @@
-import { RequestStatus } from "@enums/request";
+import { RequestStatus } from "@enums/document-requests";
 
 export interface DocumentRequest {
   /** name -> document name */

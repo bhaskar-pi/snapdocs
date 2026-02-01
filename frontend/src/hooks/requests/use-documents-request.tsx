@@ -1,6 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { documentRequestsApi } from "@/services/document-requests.service";
@@ -9,15 +8,19 @@ import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
 
 export function useCreateRequest() {
-  const router = useRouter();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: ClientRequest) =>
       documentRequestsApi.sendDocumentsRequest(data),
 
-    onSuccess() {
-      toast.success("Request sent to the client successfully");
-      router.push("/client-requests");
+    onSuccess(_, variables) {
+      toast.success(
+        `Request sent to ${variables.client.fullName} successfully.`,
+      );
+
+      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      queryClient.invalidateQueries({ queryKey: ["requests"] });
     },
 
     onError(error) {

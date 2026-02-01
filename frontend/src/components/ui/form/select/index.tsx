@@ -11,8 +11,8 @@ interface Option {
 }
 
 interface Props {
-  id: string;
-  label: string;
+  id?: string;
+  label?: string;
   options: Option[];
 
   value?: string;
@@ -93,9 +93,11 @@ export const Select = ({
 
   return (
     <div className={`${styles.inputContainer} ${containerClassName}`}>
-      <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>
+          {label}
+        </label>
+      )}
 
       <div
         ref={wrapperRef}
@@ -114,7 +116,10 @@ export const Select = ({
         />
 
         {open && (
-          <div className={styles.selectDropdown}>
+          <div
+            data-type={filteredOptions.length === 0 ? 'noResults' : ''}
+            className={styles.selectDropdown}
+          >
             {filteredOptions.length === 0 && (
               <div className={styles.selectEmpty}>No results found</div>
             )}

@@ -25,3 +25,8 @@ export enum RequestStatus {
   // No further action is allowed
   CANCELLED = "cancelled",
 }
+
+export enum ChecklistStatus {
+  PENDING = "pending",
+  RECEIVED = "received",
+}
