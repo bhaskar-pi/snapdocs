@@ -133,7 +133,6 @@
 
   font-size: var(--font-sm);
   color: var(--input-text);
-  font-size: var(--font-sm);
 }
 
 .selectOption:hover {

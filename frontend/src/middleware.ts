@@ -14,8 +14,6 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
 
-  console.log(token);
-
   if (!token && PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

@@ -57,7 +57,9 @@ const ClientsTable = () => {
     const completed = Number(summary.completedChecklists);
     const total = Number(summary.totalChecklists);
 
-    return Math.min((completed / total) * 100, 100) ;
+    if (total === 0) return 0;
+
+    return Math.min((completed / total) * 100, 100);
   };
 
   const onChangeFilters = useCallback((prop: string, value: string) => {

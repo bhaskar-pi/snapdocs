@@ -5,7 +5,6 @@ import { requestsTable } from "@database/schema/document-requests.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
 import { ClientRequest } from "@models/requests/documents-request";
 import { and, eq, inArray, sql } from "drizzle-orm";
-import { email } from "zod";
 
 export async function getClientByEmail(
   userId: string,
@@ -49,7 +48,7 @@ export async function getClientsByUserId(
 }
 
 export async function getClientSummariesByUserId(userId: string) {
-  const result = db
+  const result = await db
     .select({
       id: clientsTable.id,
       fullName: clientsTable.fullName,

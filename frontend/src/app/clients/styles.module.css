@@ -30,7 +30,6 @@
   background-color: var(--slate-200);
   color: var(--primaryD);
   font-weight: 500;
-  display: flex;
   gap: 10px;
 }
 
