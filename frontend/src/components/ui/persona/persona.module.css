@@ -44,11 +44,16 @@
 }
 
 .slate {
-  background-color: var(--slate-700);
+  background-color: var(--slate-800);
   color: var(--slate-0);
 }
 
 .amber {
   background-color: #fffbeb;
   color: #92400e;
+}
+
+.neutral {
+  background-color: var(--neutralL);
+  color: var(--info);
 }

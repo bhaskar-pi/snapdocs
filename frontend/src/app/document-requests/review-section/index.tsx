@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/form/input";
 import { TextArea } from "@/components/ui/form/text-area";
-import { Document } from "@/types/models/document";
+import { DocumentModal } from "@/types/models/document";
 
 import styles from "../styles.module.css";
 import CheckListItem from "./checklist-item";
@@ -11,7 +11,7 @@ interface Props {
   onSendRequest: () => void;
   onPrevious: () => void;
   onChange: (prop: string, value: string | Date) => void;
-  documents: Document[];
+  documents: DocumentModal[];
   clientName: string;
   isLoading?: boolean;
 }

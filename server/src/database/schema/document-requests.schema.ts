@@ -11,12 +11,12 @@ import { usersTable } from "./users.schema";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export const requestStatusEnum = pgEnum("request_status", [
-  "draft",
+  // "draft",
   "pending",
   "in_progress",
   "completed",
-  "expired",
-  "cancelled",
+  // "expired",
+  // "cancelled",
 ]);
 
 export const requestsTable = pgTable(

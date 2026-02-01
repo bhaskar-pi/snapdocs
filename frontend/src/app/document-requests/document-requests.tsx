@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import ProgressStepper from "@/components/progress-stepper";
 import { useCreateRequest } from "@/hooks/requests/use-documents-request";
 import { RequestStatus } from "@/types/enums/request";
-import { ClientRequest } from "@/types/models/client";
+import { ClientRequestInputForm } from "@/types/models/client";
 
 import SelectClient from "./client-section";
 import ChooseTemplate from "./documents-section";
@@ -33,7 +33,7 @@ const DocumentRequests = () => {
 
   const [progressStep, setProgressStep] = useState(0);
   const [clientRequest, setClientRequest] =
-    useState<ClientRequest>(initialClientRequest);
+    useState<ClientRequestInputForm>(initialClientRequest);
 
   const incrementProgressStep = useCallback(
     () => setProgressStep((prev) => prev + 1),
