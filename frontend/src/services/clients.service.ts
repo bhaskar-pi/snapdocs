@@ -1,5 +1,9 @@
 import { GET } from "@/api/http";
-import { ClientRequestDetails, ClientSummary } from "@/types/models/client";
+import {
+  Client,
+  ClientRequestDetails,
+  ClientSummary,
+} from "@/types/models/client";
 
 export const clientsApi = {
   getClientsSummary() {
@@ -7,6 +11,10 @@ export const clientsApi = {
   },
 
   getClientDetails(clientId: string) {
-    return GET<ClientRequestDetails>(`clients/${clientId}`);
+    return GET<ClientRequestDetails>(`/clients/${clientId}`);
+  },
+
+  getClients() {
+    return GET<Client[]>(`/clients`);
   },
 };

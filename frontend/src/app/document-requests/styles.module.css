@@ -21,7 +21,7 @@
   margin: 30px 0;
   gap: 18px;
 
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .stepHeader > h1 {

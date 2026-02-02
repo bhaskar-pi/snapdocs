@@ -105,6 +105,30 @@
   width: 100%;
 }
 
+.loader {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  border: 2px solid #ccc;
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  pointer-events: none;
+}
+
+.inputWithLoader {
+  padding-right: 36px;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
 .selectDropdown {
   position: absolute;
   top: calc(100% + 6px);
@@ -119,7 +143,7 @@
 
   max-height: 250px;
   overflow-y: auto;
-  z-index: 20;
+  z-index: 9999;
 }
 
 .selectDropdown[data-type="noResults"] {

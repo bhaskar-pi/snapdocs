@@ -19,6 +19,8 @@ interface Props {
   onChange?: (value: string) => void;
 
   placeholder?: string;
+  disabled?: boolean;
+  isLoading?: boolean;
 
   containerClassName?: string;
   labelClassName?: string;
@@ -46,6 +48,8 @@ export const Select = ({
   value,
   onChange,
   placeholder = "Select...",
+  disabled = false,
+  isLoading = false,
 
   containerClassName = "",
   labelClassName = "",
@@ -105,7 +109,9 @@ export const Select = ({
       >
         <input
           id={id}
-          className={`${styles.input} ${inputClassName} ${errorBorder}`}
+          className={`${styles.input} ${inputClassName} ${errorBorder} ${
+            isLoading ? styles.inputWithLoader : ""
+          }`}
           placeholder={placeholder}
           value={open ? search : selectedOption?.label || ""}
           onFocus={() => setOpen(true)}
@@ -113,11 +119,14 @@ export const Select = ({
             setSearch(e.target.value);
             setOpen(true);
           }}
+          disabled={disabled}
         />
+
+        {isLoading && <span className={styles.loader} aria-hidden />}
 
         {open && (
           <div
-            data-type={filteredOptions.length === 0 ? 'noResults' : ''}
+            data-type={filteredOptions.length === 0 ? "noResults" : ""}
             className={styles.selectDropdown}
           >
             {filteredOptions.length === 0 && (
