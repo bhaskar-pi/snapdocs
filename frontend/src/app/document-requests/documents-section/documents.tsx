@@ -9,13 +9,13 @@ import { Input } from "@/components/ui/form/input";
 import { Icon } from "@/components/ui/icon";
 import { Modal } from "@/components/ui/modal";
 import { Toggle } from "@/components/ui/toggle";
-import { Document } from "@/types/models/document";
+import { DocumentModal } from "@/types/models/document";
 
 import DocumentRow from "./document-row";
 import styles from "../styles.module.css";
 
 interface Props {
-  documents: Document[];
+  documents: DocumentModal[];
   onRemove: (name: string) => void;
   onChange: (name: string, isRequired: boolean, index?: number) => void;
 }
@@ -67,7 +67,7 @@ const ChooseDocuments = ({ documents, onRemove, onChange }: Props) => {
     closeModal();
   };
 
-  const handleEditDocument = (doc: Document, index: number) => {
+  const handleEditDocument = (doc: DocumentModal, index: number) => {
     setDocumentName(doc.name);
     setIsRequired(doc.isRequired);
     setEditingName(doc.name);

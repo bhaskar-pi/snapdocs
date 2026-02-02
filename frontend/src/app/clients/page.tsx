@@ -7,7 +7,7 @@ import { SCREEN_PATHS } from "@/types/enums/paths";
 
 import ClientsTable from "./clients-table";
 
-const Clients = () => {
+const ClientsPage = () => {
   return (
     <Layout>
       <PageHeader
@@ -24,4 +24,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default ClientsPage;

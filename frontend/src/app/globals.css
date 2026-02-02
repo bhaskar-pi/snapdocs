@@ -332,11 +332,13 @@ select {
   gap: 6px;
 
   padding: 5px 14px;
-  border-radius: 30px;
+  border-radius: 25px;
 
-  color: var(--primaryD);
+  background-color: var(--slate-150);
+  color: var(--slate-700);
+
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1;
   justify-self: start;
 }
@@ -353,31 +355,64 @@ select {
 }
 
 .neutral {
-  background-color: var(--secondaryL);
+  background-color: var(--slate-200);
   color: var(--primary);
-  border: 1px solid var(--primary);
 }
 
 .warning {
   background-color: var(--warningL);
   color: var(--warning);
-  border: 1px solid var(--warningD);
 }
 
 .negative {
   background-color: var(--negativeL);
   color: var(--negative);
-  border: 1px solid var(--negative);
 }
 
 .success {
   background-color: var(--successL);
   color: var(--success);
-  border: 1px solid var(--success);
 }
 
 .info {
   background-color: var(--neutralL);
   color: var(--neutral);
-  border: 1px solid var(--neutral);
+}
+
+.card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  background-color: var(--slate-0);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--slate-200);
+
+  padding: 15px 20px;
+  margin: 20px 0;
+  gap: 18px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.label {
+  color: var(--slate-600);
+  font-size: var(--font-xs);
+  font-weight: 400;
+}
+
+.value {
+  color: var(--primaryD);
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.line {
+  height: 1px;
+  background-color: var(--slate-300);
+  position: relative;
+  left: -24px;
+  width: calc(100% + 48px);
+  margin: 6px 0;
 }

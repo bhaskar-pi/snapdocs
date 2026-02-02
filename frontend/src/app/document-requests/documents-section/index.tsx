@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Select } from "@/components/ui/form/select";
-import { Document } from "@/types/models/document";
+import { DocumentModal } from "@/types/models/document";
 
 import styles from "../styles.module.css";
 import ChooseDocuments from "./documents";
@@ -13,7 +13,7 @@ import SectionHeader from "../section-header";
 interface Props {
   onNext: () => void;
   onPrevious: () => void;
-  documents: Document[];
+  documents: DocumentModal[];
   onChange: (name: string, isRequired: boolean, index?: number) => void;
   onRemove: (name: string) => void;
 }

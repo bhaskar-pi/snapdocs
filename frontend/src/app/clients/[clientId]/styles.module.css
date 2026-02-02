@@ -1,0 +1,131 @@
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientInfo > :last-child {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 220px;
+}
+
+.requestCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleRow h2 {
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.meta {
+  font-size: var(--font-sm);
+  color: var(--slate-600);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: var(--font-sm);
+  color: var(--slate-700);
+}
+
+.dueDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.closeToggle {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.documentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -2px;
+}
+
+.documentsHeader p {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklistRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border-radius: 10px;
+}
+
+.checklistInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.docName {
+  font-weight: 500;
+  font-size: var(--font-sm);
+  color: var(--secondary);
+}
+
+.uploadedAt {
+  font-size: var(--font-xs);
+  color: var(--slate-600);
+}
+
+.checklistActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--slate-700);
+}

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Select } from "@/components/ui/form/select";
-import { Client } from "@/types/models/client";
+import { ClientFormInput } from "@/types/models/client";
 
 import styles from "../styles.module.css";
 import NewClient from "./new-client-form";
@@ -13,7 +13,7 @@ import SectionHeader from "../section-header";
 interface Props {
   onNext: () => void;
   onChange: (prop: string, value: string) => void;
-  client: Client;
+  client: ClientFormInput;
 }
 
 enum ClientMode {

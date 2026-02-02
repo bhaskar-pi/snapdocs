@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -8,6 +9,7 @@ import { DataTable } from "@/components/data-table";
 import { Icon } from "@/components/ui/icon";
 import { Persona } from "@/components/ui/persona";
 import { useClientsSummary } from "@/hooks/clients/use-clients-summary";
+import { SCREEN_PATHS } from "@/types/enums/paths";
 import { RequestStatus } from "@/types/enums/request";
 import { ClientSummary } from "@/types/models/client";
 import { getErrorMessage } from "@/utils/api";
@@ -23,6 +25,7 @@ interface Filters {
 }
 
 const ClientsTable = () => {
+  const router = useRouter();
   const { data: clientsSummaries, isLoading, error } = useClientsSummary();
 
   const [filters, setFilters] = useState<Filters>({
@@ -121,10 +124,17 @@ const ClientsTable = () => {
               {formatEnumLabel(summary.status)}
             </p>
 
-            <p className={styles.viewAction}>
+            <div
+              role="button"
+              tabIndex={0}
+              className={styles.viewAction}
+              onClick={() =>
+                router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+              }
+            >
               View
               <Icon name={ArrowRight} size={14} tone="muted" />
-            </p>
+            </div>
           </div>
         ))}
       />

@@ -1,10 +1,10 @@
 import { Input } from "@/components/ui/form/input";
-import { Client } from "@/types/models/client";
+import { ClientFormInput } from "@/types/models/client";
 
 import styles from "../styles.module.css";
 
 interface Props {
-  client: Client;
+  client: ClientFormInput;
   onChange: (prop: string, value: string) => void;
 }
 

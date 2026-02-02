@@ -10,8 +10,8 @@ import { Button } from "../button";
 import { Icon } from "../icon";
 
 interface Props {
-  header: string;
-  description: string;
+  header?: string;
+  description?: string;
   backText?: string;
   backLink?: string;
   button?: {
@@ -44,10 +44,12 @@ const PageHeader = ({
         </div>
       )}
       <div className={styles.headerContainer}>
-        <div>
-          <h1 className={styles.header}>{header}</h1>
-          <p className={styles.description}>{description}</p>
-        </div>
+        {header && (
+          <div>
+            <h1 className={styles.header}>{header}</h1>
+            {description && <p className={styles.description}>{description}</p>}
+          </div>
+        )}
 
         {button && (
           <Button
