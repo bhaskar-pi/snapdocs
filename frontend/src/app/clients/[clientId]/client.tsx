@@ -11,8 +11,6 @@ import { formatDate } from "@/utils/date";
 import ClientInfo from "./client-info";
 import ClientRequests from "./document-requests/requests";
 
-import { ContentLoader } from "@/components/ui/loader/content-loader";
-
 const Client = () => {
   const params = useParams<{ clientId: string }>();
   const clientId = params?.clientId;
@@ -20,10 +18,6 @@ const Client = () => {
   const { data, isLoading } = useClientDetails(clientId);
   const client = data?.client;
   const requests = data?.requests ?? [];
-
-  if (isLoading) {
-    return <ContentLoader open />;
-  }
 
   return (
     <Layout isLoading={isLoading}>

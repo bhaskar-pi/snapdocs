@@ -42,7 +42,7 @@ const ClientInfo = ({ email, phoneNumber, notes }: Props) => {
   if (items.every((item) => !item.value)) return null;
 
   return (
-    <section className={`${styles.clientInfo} card`}>
+    <section className={`card`}>
       <h1>Contact Information</h1>
 
       <div className={styles.clientInfoRow}>

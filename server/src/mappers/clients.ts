@@ -19,7 +19,7 @@ export function getClientDetailsDto(records: ClientDetailsRow[]) {
       requestsMap.set(requestId, {
         ...record.request,
         checklistItems: [],
-      });
+      } as DocumentRequestDto);
     }
 
     const request = requestsMap.get(requestId)!;

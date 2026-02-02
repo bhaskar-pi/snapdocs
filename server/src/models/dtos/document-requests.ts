@@ -1,10 +1,4 @@
-type RequestStatus =
-  | "draft"
-  | "pending"
-  | "in_progress"
-  | "completed"
-  | "expired"
-  | "cancelled";
+import { RequestStatus } from "@enums/document-requests";
 
 export interface DocumentDto {
   id: string;

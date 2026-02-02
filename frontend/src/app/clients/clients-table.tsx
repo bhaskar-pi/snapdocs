@@ -125,6 +125,8 @@ const ClientsTable = () => {
             </p>
 
             <div
+              role="button"
+              tabIndex={0}
               className={styles.viewAction}
               onClick={() =>
                 router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)

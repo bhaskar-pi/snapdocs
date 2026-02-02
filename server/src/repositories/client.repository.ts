@@ -3,6 +3,7 @@ import { checklistItemsTable } from "@database/schema/checklist-items.schema";
 import { Client, clientsTable } from "@database/schema/clients.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import { documentsTable } from "@database/schema/documents.schema";
+import { usersTable } from "@database/schema/users.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
 import { ClientRequest } from "@models/requests/documents-request";
 import { and, eq, inArray, sql } from "drizzle-orm";
@@ -99,7 +100,7 @@ export async function getClientSummariesByUserId(userId: string) {
   return result;
 }
 
-export async function getClientDetailsById(clientId: string) {
+export async function getClientDetailsById(userId: string, clientId: string) {
   const result = await db
     .select({
       client: clientsTable,
@@ -117,7 +118,7 @@ export async function getClientDetailsById(clientId: string) {
       documentsTable,
       eq(documentsTable.checklistItemId, checklistItemsTable.id),
     )
-    .where(eq(clientsTable.id, clientId));
+    .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)));
 
   return result;
 }

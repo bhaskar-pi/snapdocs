@@ -33,6 +33,6 @@ export const getClientDetailsHandler = async (
     throw new Error("Missing client id");
   }
 
-  const details = await getClientDetailsById(clientId);
+  const details = await getClientDetailsById(userId,clientId);
   return getClientDetailsDto(details);
 };

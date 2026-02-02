@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 
 import { ChevronDown, ChevronUp, Clock } from "lucide-react";
 import { useState } from "react";
@@ -18,13 +18,10 @@ interface Props {
 }
 
 const RequestBox = ({ request }: Props) => {
-  const [viewRequests, setViewRequests] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const receivedCount = (request?.checklistItems ?? []).filter(
     (item) => item.status === ChecklistItemStatus.RECEIVED,
-  ).length;
-  const pendingCount = (request?.checklistItems ?? []).filter(
-    (item) => item.status === ChecklistItemStatus.PENDING,
   ).length;
 
   return (
@@ -52,25 +49,19 @@ const RequestBox = ({ request }: Props) => {
           </p>
           <Icon
             size={22}
-            name={viewRequests.includes(request.id) ? ChevronUp : ChevronDown}
+            name={isOpen ? ChevronUp : ChevronDown}
             containerClassName={styles.closeToggle}
-            onClick={() =>
-              setViewRequests((prev) =>
-                viewRequests.includes(request.id)
-                  ? prev.filter((id) => id !== request.id)
-                  : [...prev, request.id],
-              )
-            }
+            onClick={() => setIsOpen((prev) => !prev)}
           />
         </div>
       </div>
 
-      {viewRequests.includes(request.id) && (
+      {isOpen && (
         <>
           <p className="line"></p>
 
           <div className={styles.documentsHeader}>
-            <p>{`Documents (${receivedCount}/${pendingCount} received)`}</p>
+            <p>{`Documents (${receivedCount}/${request?.checklistItems?.length} received)`}</p>
           </div>
 
           <ChecklistItems items={request.checklistItems} />
