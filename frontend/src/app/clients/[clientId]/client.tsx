@@ -6,7 +6,6 @@ import Layout from "@/components/layouts/app-layout";
 import PageHeader from "@/components/ui/page-header";
 import { useClientDetails } from "@/hooks/clients/use-client-details";
 import { SCREEN_PATHS } from "@/types/enums/paths";
-import { formatDate } from "@/utils/date";
 
 import ClientInfo from "./client-info";
 import ClientRequests from "./document-requests/requests";
@@ -21,13 +20,8 @@ const Client = () => {
 
   return (
     <Layout isLoading={isLoading}>
-      <PageHeader
-        header={client?.fullName}
-        description={`Client since: ${formatDate(client?.createdAt)}`}
-        backLink={SCREEN_PATHS.CLIENTS}
-        backText="Back to Clients"
-      />
-      <ClientInfo email={client?.email} phoneNumber={client?.whatsappNumber} />
+      <PageHeader backLink={SCREEN_PATHS.CLIENTS} backText="Back to Clients" />
+      <ClientInfo client={client} />
       <ClientRequests requests={requests} />
     </Layout>
   );

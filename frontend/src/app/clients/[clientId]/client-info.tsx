@@ -1,13 +1,13 @@
 import { Mail, NotebookPen, Phone } from "lucide-react";
 
 import { IconBadge } from "@/components/ui/icon-badge";
+import { Client } from "@/types/models/client";
+import { formatDate } from "@/utils/date";
 
 import styles from "./styles.module.css";
 
 interface Props {
-  email?: string;
-  phoneNumber?: string;
-  notes?: string;
+  client?: Client;
 }
 
 type InfoItem = {
@@ -17,23 +17,23 @@ type InfoItem = {
   icon: React.ElementType;
 };
 
-const ClientInfo = ({ email, phoneNumber, notes }: Props) => {
+const ClientInfo = ({ client }: Props) => {
   const items: InfoItem[] = [
     {
       label: "Email",
-      value: email,
+      value: client?.email,
       fallback: "NA",
       icon: Mail,
     },
     {
       label: "Phone Number",
-      value: phoneNumber,
+      value: client?.whatsappNumber,
       fallback: "NA",
       icon: Phone,
     },
     {
       label: "Notes",
-      value: notes,
+      value: client?.notes,
       fallback: "No notes available",
       icon: NotebookPen,
     },
@@ -43,7 +43,10 @@ const ClientInfo = ({ email, phoneNumber, notes }: Props) => {
 
   return (
     <section className={`card`}>
-      <h1>Contact Information</h1>
+      <h1 className="title">{client?.fullName}</h1>
+      <p className="description">{`Client since: ${formatDate(
+        client?.createdAt,
+      )}`}</p>
 
       <div className={styles.clientInfoRow}>
         {items.map(({ label, value, fallback, icon }) => (
