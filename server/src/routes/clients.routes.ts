@@ -1,5 +1,6 @@
 import {
   getClientDetailsHandler,
+  getClientsHandler,
   getClientsSummariesHandler,
 } from "@controllers/clients.controller";
 import { asyncHandler } from "@middlewares/async-handler";
@@ -19,5 +20,7 @@ router.get(
   authenticate,
   asyncHandler(getClientDetailsHandler),
 );
+
+router.get("/clients", authenticate, asyncHandler(getClientsHandler));
 
 export default router;

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import ProgressStepper from "@/components/progress-stepper";
 import { useCreateRequest } from "@/hooks/requests/use-documents-request";
 import { RequestStatus } from "@/types/enums/request";
-import { ClientRequestInputForm } from "@/types/models/client";
+import { ClientFormInput, ClientRequestInputForm } from "@/types/models/client";
 
 import SelectClient from "./client-section";
 import ChooseTemplate from "./documents-section";
@@ -52,6 +52,13 @@ const DocumentRequests = () => {
         ...prev.client,
         [prop]: value,
       },
+    }));
+  }, []);
+
+  const onChangeExistingClient = useCallback((client: ClientFormInput) => {
+    setClientRequest((prev) => ({
+      ...prev,
+      client,
     }));
   }, []);
 
@@ -140,7 +147,8 @@ const DocumentRequests = () => {
       case 0:
         return (
           <SelectClient
-            onChange={onChangeClient}
+            onChangeClient={onChangeClient}
+            onChangeExistingClient={onChangeExistingClient}
             onNext={onNextFromClient}
             client={clientRequest.client}
           />
