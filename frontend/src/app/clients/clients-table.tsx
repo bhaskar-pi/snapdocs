@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { DataTable } from "@/components/data-table";
+import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
 import { Persona } from "@/components/ui/persona";
 import { useClientsSummary } from "@/hooks/clients/use-clients-summary";
@@ -118,23 +119,31 @@ const ClientsTable = () => {
             </div>
 
             <p
-              className={`status ${getStatusClassName(summary.status as RequestStatus)}`}
+              className={`status ${getStatusClassName(
+                summary.status as RequestStatus,
+              )}`}
             >
               <span />
               {formatEnumLabel(summary.status)}
             </p>
 
-            <div
-              role="button"
-              tabIndex={0}
-              className={styles.viewAction}
-              onClick={() =>
-                router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
-              }
-            >
-              View
-              <Icon name={ArrowRight} size={14} tone="muted" />
-            </div>
+            <ActionMenu>
+              <Icon
+                text="View Details"
+                name={Eye}
+                onClick={() =>
+                  router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+                }
+              />
+              <Icon
+                tone="negative"
+                text="Delete"
+                name={Trash2}
+                onClick={() =>
+                  router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+                }
+              />
+            </ActionMenu>
           </div>
         ))}
       />

@@ -1,0 +1,61 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-xs);
+  padding: 4px 6px;
+  border-radius: 6px;
+  color: var(--slate-900);
+}
+
+.trigger:hover {
+  background: var(--slate-200);
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 20;
+  margin-top: 6px;
+  background: var(--slate-0);
+  border-radius: 8px;
+  min-width: 160px;
+  z-index: 1000;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--slate-200);
+}
+
+.menu > * {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.menu > *:hover {
+  background: var(--slate-50);
+}
+
+.item {
+  width: 100%;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: var(--font-sm);
+  color: var(--primaryD);
+}
+
+.item:hover {
+  background: var(--slate-50);
+}
