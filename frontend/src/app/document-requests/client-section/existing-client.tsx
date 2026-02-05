@@ -19,12 +19,12 @@ const ExistingClient = ({ client, onChange }: Props) => {
     })) ?? [];
 
   const onSelectClient = (email: string) => {
-    const client = clients?.find((client) => client.email === email);
+    const selectedClient = clients?.find((c) => c.email === email);
 
     onChange({
-      fullName: client?.fullName || "",
-      email: client?.email || "",
-      whatsappNumber: client?.whatsappNumber,
+      fullName: selectedClient?.fullName || "",
+      email: selectedClient?.email || "",
+      whatsappNumber: selectedClient?.whatsappNumber,
     });
   };
 
@@ -38,7 +38,7 @@ const ExistingClient = ({ client, onChange }: Props) => {
         placeholder={isLoading ? "Loading Clients..." : "Select a client"}
         options={clientOptions}
         disabled={isLoading}
-        onChange={(clientId) => onSelectClient(clientId)}
+        onChange={(email) => onSelectClient(email)}
       />
     </form>
   );
