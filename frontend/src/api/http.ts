@@ -2,7 +2,6 @@ import { apiClient } from "./axios";
 
 export const GET = async <T>(url: string, params?: object): Promise<T> => {
   const res = await apiClient.get<T>(url, { params });
-  console.log({res})
   return res.data;
 };
 

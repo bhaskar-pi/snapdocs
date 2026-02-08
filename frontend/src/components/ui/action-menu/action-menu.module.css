@@ -34,5 +34,5 @@
 
 .menu > *:hover {
   background: var(--slate-100);
-  border-radius: none;
+  border-radius: 0;
 }

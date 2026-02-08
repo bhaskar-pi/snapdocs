@@ -45,7 +45,7 @@ const ClientInfo = ({ client }: Props) => {
     <section className={`card`}>
       <h1 className="title">{client?.fullName}</h1>
       <p className="description">{`Client since: ${formatDate(
-        client?.createdAt,
+        client?.createdAt
       )}`}</p>
 
       <div className={styles.clientInfoRow}>

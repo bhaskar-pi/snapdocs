@@ -17,6 +17,7 @@
   white-space: nowrap;
   font-size: var(--font-sm);
   font-weight: 600;
+  color: currentColor;
 }
 
 .default {

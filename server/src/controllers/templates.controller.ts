@@ -34,9 +34,13 @@ export const getTemplateHandler = async (request: AuthenticatedRequest) => {
 };
 
 export const updateTemplateHandler = async (request: AuthenticatedRequest) => {
+  const authUser = request.user;
   const templateRequest = request.body;
 
-  const template = await updateTemplate(templateRequest);
+  const template = await updateTemplate({
+    ...templateRequest,
+    userId: authUser?.userId,
+  });
   return template;
 };
 

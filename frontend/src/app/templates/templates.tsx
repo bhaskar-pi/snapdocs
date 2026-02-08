@@ -58,7 +58,7 @@ const Templates = () => {
   }, []);
 
   const onAddDocument = useCallback(
-    (name: string, isRequired?: boolean) => {
+    (name: string) => {
       const documents = template?.documents ?? [];
 
       const isDuplicate = documents.some(
@@ -66,13 +66,13 @@ const Templates = () => {
       );
 
       if (isDuplicate) {
-        toast.error(`${name} is already exists.`);
+        toast.error(`${name} already exists.`);
         return;
       }
 
       setTemplate((prev) => ({
         ...(prev || ({} as Template)),
-        documents: [...documents, { name, isRequired: isRequired ?? true }],
+        documents: [...documents, { name, isRequired: true }],
       }));
 
       setDocumentName("");

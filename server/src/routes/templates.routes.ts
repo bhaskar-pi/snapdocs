@@ -12,7 +12,7 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/templates", authenticate, asyncHandler(createTemplateHandler));
-router.post(
+router.put(
   "/templates/:templateId",
   authenticate,
   asyncHandler(updateTemplateHandler)

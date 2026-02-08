@@ -25,7 +25,7 @@ export async function getTemplates(userId: string): Promise<Template[]> {
 export async function getTemplateById(
   userId: string,
   templateId: string
-): Promise<Template> {
+): Promise<Template | undefined> {
   const [template] = await db
     .select()
     .from(templatesTable)
@@ -37,11 +37,12 @@ export async function getTemplateById(
 }
 
 export async function updateTemplate(template: Template): Promise<Template> {
+  const { id, userId, createdAt, updatedAt, ...updatableFields } = template;
+
   const [updated] = await db
     .update(templatesTable)
     .set({
-      ...template,
-      createdAt: new Date(template.createdAt),
+      ...updatableFields,
       updatedAt: new Date(),
     })
     .where(

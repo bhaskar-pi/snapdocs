@@ -1,4 +1,4 @@
-import { DELETE, GET, POST } from "@/api/http";
+import { DELETE, GET, POST, PUT } from "@/api/http";
 import { Template } from "@/types/models/templates";
 
 export const templatesApi = {
@@ -15,7 +15,7 @@ export const templatesApi = {
   },
 
   updateTemplate(template: Template) {
-    return POST<Template>(`/templates/:${template.id}`, template);
+    return PUT<Template>(`/templates/${template.id}`, template);
   },
 
   deleteTemplate(templateId: string) {

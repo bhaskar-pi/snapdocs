@@ -49,7 +49,7 @@ export const Icon = ({
       {text && (
         <span
           className={[
-            styles.icon,
+            styles.text,
             tone !== "inherit" && styles[tone],
             className,
           ]

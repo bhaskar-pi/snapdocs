@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { ApiError } from "next/dist/server/api-utils";
 import { toast } from "sonner";
 
 import { templatesApi } from "@/services/templates.service";
+import { ApiError } from "@/types/models/misc";
 import { Template } from "@/types/models/templates";
 import { getErrorMessage } from "@/utils/api";
 

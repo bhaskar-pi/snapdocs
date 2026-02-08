@@ -101,6 +101,7 @@ const TemplateModal = ({
             onChange={(e) => setDocumentName(e.target.value)}
           />
           <Button
+            type="button"
             className={styles.addButton}
             onClick={() => onAddDocument(documentName)}
             disabled={!documentName.trim()}

@@ -26,7 +26,7 @@ export function ActionMenu({ context, trigger }: Props) {
   }, []);
 
   return (
-    <div ref={ref} className={styles.wrapper}>
+    <div role="button" tabIndex={0} ref={ref} className={styles.wrapper}>
       <div onClick={() => setOpen((v) => !v)}>{trigger}</div>
       {open && (
         <div className={styles.menu} role="menu">
