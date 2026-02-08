@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { Select } from "@/components/ui/form/select";
 import { DocumentModal } from "@/types/models/document";
 
 import styles from "../styles.module.css";
