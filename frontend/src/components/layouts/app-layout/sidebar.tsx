@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { Icon } from "@/components/ui/icon";
 import { Logo } from "@/components/ui/logo";
 import { SIDEBAR_TABS } from "@/config/tabs";
-import { useLogout } from "@/hooks/auth/use-logout";
+import { useLogout } from "@/hooks/data/auth/use-logout";
 import { useAuthStore } from "@/store/auth.store";
 
 import styles from "./app-layout.module.css";

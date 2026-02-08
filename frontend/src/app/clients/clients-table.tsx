@@ -1,14 +1,15 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { Ellipsis, Eye, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { DataTable } from "@/components/data-table";
+import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
 import { Persona } from "@/components/ui/persona";
-import { useClientsSummary } from "@/hooks/clients/use-clients-summary";
+import { useClientsSummary } from "@/hooks/data/clients/use-clients-summary";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 import { RequestStatus } from "@/types/enums/request";
 import { ClientSummary } from "@/types/models/client";
@@ -100,7 +101,10 @@ const ClientsTable = () => {
               gridTemplateColumns: "1fr 200px 200px 160px 68px",
             }}
           >
-            <Persona name={summary.fullName} subText={summary.email} />
+            <div>
+              <p className="data-table-col-value">{summary.fullName}</p>
+              <p className="data-table-col-value-des">{summary.email}</p>
+            </div>
 
             <p className={styles.activeRequests}>{summary.activeRequests}</p>
 
@@ -118,23 +122,43 @@ const ClientsTable = () => {
             </div>
 
             <p
-              className={`status ${getStatusClassName(summary.status as RequestStatus)}`}
+              className={`status ${getStatusClassName(
+                summary.status as RequestStatus
+              )}`}
             >
               <span />
               {formatEnumLabel(summary.status)}
             </p>
 
-            <div
-              role="button"
-              tabIndex={0}
-              className={styles.viewAction}
-              onClick={() =>
-                router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+            <ActionMenu
+              trigger={
+                <Icon
+                  name={Ellipsis}
+                  tone="muted"
+                  size={16}
+                  containerClassName="ellipsis"
+                />
               }
-            >
-              View
-              <Icon name={ArrowRight} size={14} tone="muted" />
-            </div>
+              context={
+                <>
+                  <Icon
+                    text="View Details"
+                    name={Eye}
+                    onClick={() =>
+                      router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+                    }
+                  />
+                  <Icon
+                    tone="negative"
+                    text="Delete"
+                    name={Trash2}
+                    onClick={() =>
+                      router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+                    }
+                  />
+                </>
+              }
+            ></ActionMenu>
           </div>
         ))}
       />

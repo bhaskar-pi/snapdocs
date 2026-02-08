@@ -1,0 +1,38 @@
+.documentRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px;
+
+  background-color: var(--slate-150);
+  color: var(--slate-700);
+  border-radius: var(--radius-sm);
+
+  font-size: var(--font-sm);
+}
+
+.documentRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.documentRowLeft > :last-child {
+  color: var(--slate-900);
+  font-weight: 500;
+  font-size: var(--font-sm);
+}
+
+.documentRowRight {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.documentRowRight > :first-child {
+  color: var(--slate-500);
+  font-weight: 400;
+  font-size: var(--font-xs);
+  font-weight: 500;
+}
+

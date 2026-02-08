@@ -15,6 +15,7 @@ type IconTone =
 
 interface Props {
   name: React.ElementType;
+  text?: string;
   size?: number;
   tone?: IconTone;
   strokeWidth?: number;
@@ -25,6 +26,7 @@ interface Props {
 
 export const Icon = ({
   name: IconComponent,
+  text = "",
   size = 18,
   tone = "inherit",
   strokeWidth = 2,
@@ -44,6 +46,19 @@ export const Icon = ({
           .filter(Boolean)
           .join(" ")}
       />
+      {text && (
+        <span
+          className={[
+            styles.text,
+            tone !== "inherit" && styles[tone],
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          {text}
+        </span>
+      )}
     </span>
   );
 };

@@ -1,5 +1,5 @@
 import { Select } from "@/components/ui/form/select";
-import { useClients } from "@/hooks/clients/use-clients";
+import { useClients } from "@/hooks/data/clients/use-clients";
 import { ClientFormInput } from "@/types/models/client";
 
 import styles from "../styles.module.css";

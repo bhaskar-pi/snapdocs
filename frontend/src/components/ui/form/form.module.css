@@ -15,7 +15,7 @@
   height: var(--input-height);
   padding: var(--input-padding-x);
   border: 1px solid var(--input-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   background-color: var(--input-bg);
   color: var(--input-text);
   font-size: var(--font-sm);
@@ -179,7 +179,7 @@
 
   padding: var(--input-padding-x);
   border: 1px solid var(--input-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
 
   background-color: var(--input-bg);
   color: var(--input-text);

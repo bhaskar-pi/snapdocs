@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { useBootstrapping } from "@/hooks/use-bootstrapping";
+import { useBootstrapping } from "@/hooks/data/use-bootstrapping";
 import { useAuthStore } from "@/store/auth.store";
 
 export function AuthBootstrap() {

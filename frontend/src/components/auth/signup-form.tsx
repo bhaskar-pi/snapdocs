@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/form/input";
 import { Logo } from "@/components/ui/logo";
-import { useSignup } from "@/hooks/auth/use-signup";
+import { useSignup } from "@/hooks/data/auth/use-signup";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth";
 
@@ -31,7 +31,7 @@ const SignUpForm = () => {
         [prop]: value,
       }));
     },
-    [],
+    []
   );
 
   const handleCreateAccount = useCallback(
@@ -39,7 +39,7 @@ const SignUpForm = () => {
       e.preventDefault();
       signup.mutate(form);
     },
-    [form, signup],
+    [form, signup]
   );
 
   return (
