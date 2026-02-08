@@ -1,9 +1,7 @@
-const Templates = () => {
-  return (
-    <div>
-      <h1>Templates</h1>
-    </div>
-  );
+import Templates from "./templates";
+
+const TemplatesPage = () => {
+  return <Templates />;
 };
 
-export default Templates;
+export default TemplatesPage;

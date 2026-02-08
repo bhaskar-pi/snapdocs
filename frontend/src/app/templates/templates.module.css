@@ -1,0 +1,23 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.addDocumentInput {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  align-items: center !important;
+  gap: 20px;
+}
+
+.addButton {
+  margin-top: 20px;
+}
+
+.documentsContainer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}

@@ -1,0 +1,67 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--slate-0);
+  color: var(--primaryD);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  gap: 12px;
+  padding: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.folders {
+  background-color: var(--slate-100);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  color: var(--primaryD);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.description {
+  color: var(--slate-500);
+  font-size: var(--font-xs);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*  max lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-xs);
+}
+
+.footer > :first-child {
+  background-color: var(--slate-200);
+  color: var(--slate-800);
+  padding: 2px 10px;
+  border-radius: var(--radius-xs);
+  font-size: var(--font-xs);
+}
+
+.footer > :last-child {
+  color: var(--slate-500);
+  font-size: var(--font-xs);
+  font-weight: 500;
+}

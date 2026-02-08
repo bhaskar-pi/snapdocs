@@ -15,6 +15,7 @@ interface Props {
   backText?: string;
   backLink?: string;
   button?: {
+    onClick?: () => void;
     title: string;
     icon?: React.ReactNode;
     path?: SCREEN_PATHS;
@@ -55,7 +56,11 @@ const PageHeader = ({
           <Button
             intent={button.variant}
             icon={button.icon}
-            onClick={() => button.path && router.push(button.path)}
+            onClick={() =>
+              button.path
+                ? router.push(button.path)
+                : button?.onClick && button?.onClick()
+            }
           >
             {button.title}
           </Button>

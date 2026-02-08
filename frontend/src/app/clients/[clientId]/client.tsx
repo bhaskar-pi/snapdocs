@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 
 import Layout from "@/components/layouts/app-layout";
 import PageHeader from "@/components/ui/page-header";
-import { useClientDetails } from "@/hooks/clients/use-client-details";
+import { useClientDetails } from "@/hooks/data/clients/use-client-details";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
 import ClientInfo from "./client-info";

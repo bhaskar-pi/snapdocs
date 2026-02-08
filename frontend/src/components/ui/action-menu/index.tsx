@@ -5,10 +5,11 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import styles from "./action-menu.module.css";
 
 interface Props {
-  children: ReactNode;
+  trigger: ReactNode;
+  context: ReactNode;
 }
 
-export function ActionMenu({ children }: Props) {
+export function ActionMenu({ context, trigger }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -26,18 +27,10 @@ export function ActionMenu({ children }: Props) {
 
   return (
     <div ref={ref} className={styles.wrapper}>
-      <button
-        className={styles.trigger}
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-      >
-        •••
-      </button>
-
+      <div onClick={() => setOpen((v) => !v)}>{trigger}</div>
       {open && (
         <div className={styles.menu} role="menu">
-          {children}
+          {context}
         </div>
       )}
     </div>

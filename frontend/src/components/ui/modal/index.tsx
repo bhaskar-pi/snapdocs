@@ -11,6 +11,7 @@ interface ModalAction {
   label: string;
   onClick: () => void;
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 interface ModalProps {
@@ -94,6 +95,7 @@ export const Modal = ({
             <div className={styles.footerRight}>
               {onDelete && (
                 <Button
+                  loading={onDelete.isLoading}
                   intent="negative"
                   onClick={onDelete.onClick}
                   disabled={onDelete.disabled}
@@ -104,6 +106,7 @@ export const Modal = ({
 
               {onSave && (
                 <Button
+                  loading={onSave.isLoading}
                   intent="primary"
                   onClick={onSave.onClick}
                   disabled={onSave.disabled}
@@ -116,6 +119,6 @@ export const Modal = ({
         )}
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };

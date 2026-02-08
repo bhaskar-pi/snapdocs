@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { use, useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import ProgressStepper from "@/components/progress-stepper";
-import { useCreateRequest } from "@/hooks/requests/use-documents-request";
+import { useCreateRequest } from "@/hooks/data/requests/use-documents-request";
 import { RequestStatus } from "@/types/enums/request";
 import { ClientFormInput, ClientRequestInputForm } from "@/types/models/client";
+import { DocumentModal } from "@/types/models/document";
 
 import SelectClient from "./client-section";
 import ChooseTemplate from "./documents-section";
@@ -37,12 +38,12 @@ const DocumentRequests = () => {
 
   const incrementProgressStep = useCallback(
     () => setProgressStep((prev) => prev + 1),
-    [],
+    []
   );
 
   const decrementProgressStep = useCallback(
     () => setProgressStep((prev) => prev - 1),
-    [],
+    []
   );
 
   const onChangeClient = useCallback((prop: string, value: string) => {
@@ -62,6 +63,16 @@ const DocumentRequests = () => {
     }));
   }, []);
 
+  const onChangeExistingTemplate = useCallback((documents: DocumentModal[]) => {
+    setClientRequest((prev) => ({
+      ...prev,
+      request: {
+        ...prev.request,
+        documents,
+      },
+    }));
+  }, []);
+
   const onChangeDocuments = useCallback(
     (name: string, isRequired: boolean, index?: number) => {
       setClientRequest((prev) => {
@@ -73,7 +84,7 @@ const DocumentRequests = () => {
             request: {
               ...prev.request,
               documents: documents.map((doc, i) =>
-                i === index ? { ...doc, name, isRequired } : doc,
+                i === index ? { ...doc, name, isRequired } : doc
               ),
             },
           };
@@ -88,7 +99,7 @@ const DocumentRequests = () => {
         };
       });
     },
-    [],
+    []
   );
 
   const onRemoveDocument = useCallback((name: string) => {
@@ -162,6 +173,7 @@ const DocumentRequests = () => {
             onChange={onChangeDocuments}
             documents={clientRequest.request.documents}
             onRemove={onRemoveDocument}
+            onChangeExistingTemplate={onChangeExistingTemplate}
           />
         );
       case 2:
