@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  background: var(--slate-0);
+  border-radius: var(--radius-sm);
+  width: max-content;
+  max-width: 240px;
+  z-index: 1000;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.menu > * {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primaryD);
+}
+
+.menu > *:hover {
+  background: var(--slate-100);
+  border-radius: 0;
+}

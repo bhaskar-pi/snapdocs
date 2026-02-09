@@ -2,17 +2,18 @@
 
 import { useState } from "react";
 
-import { Select } from "@/components/ui/form/select";
 import { ClientFormInput } from "@/types/models/client";
 
 import styles from "../styles.module.css";
 import NewClient from "./new-client-form";
 import SectionFooter from "../section-footer";
 import SectionHeader from "../section-header";
+import ExistingClient from "./existing-client";
 
 interface Props {
   onNext: () => void;
-  onChange: (prop: string, value: string) => void;
+  onChangeClient: (prop: string, value: string) => void;
+  onChangeExistingClient: (client: ClientFormInput) => void;
   client: ClientFormInput;
 }
 
@@ -21,7 +22,12 @@ enum ClientMode {
   NEW_CLIENT = "new_client",
 }
 
-const SelectClient = ({ onNext, onChange, client }: Props) => {
+const SelectClient = ({
+  onNext,
+  onChangeClient,
+  onChangeExistingClient,
+  client,
+}: Props) => {
   const [mode, setMode] = useState<ClientMode>(ClientMode.NEW_CLIENT);
 
   return (
@@ -47,18 +53,11 @@ const SelectClient = ({ onNext, onChange, client }: Props) => {
       </div>
 
       {mode === ClientMode.NEW_CLIENT && (
-        <NewClient client={client} onChange={onChange} />
+        <NewClient client={client} onChange={onChangeClient} />
       )}
 
       {mode === ClientMode.EXISTING_CLIENT && (
-        <form className={styles.stepForm}>
-          <Select
-            id="existing-client"
-            label="Client"
-            placeholder="Select a client"
-            options={[]}
-          />
-        </form>
+        <ExistingClient onChange={onChangeExistingClient} client={client} />
       )}
 
       <SectionFooter onNext={onNext} />

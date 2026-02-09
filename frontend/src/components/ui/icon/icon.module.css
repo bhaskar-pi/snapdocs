@@ -2,11 +2,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  vertical-align: middle;
+  gap: 8px;
 }
 
 .icon {
   display: inline-block;
   flex-shrink: 0;
+  color: currentColor;
+}
+
+.text {
+  line-height: 1;
+  white-space: nowrap;
+  font-size: var(--font-sm);
+  font-weight: 600;
   color: currentColor;
 }
 

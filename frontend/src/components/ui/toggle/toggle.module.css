@@ -8,7 +8,6 @@
   background-color: var(--slate-200);
   color: var(--input-text);
   padding: var(--input-padding-x);
-
 }
 
 .text {
@@ -33,6 +32,7 @@
   width: 42px;
   height: 24px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .input {
@@ -49,6 +49,7 @@
   background-color: var(--slate-300);
   border-radius: 999px;
   transition: background-color 0.2s ease;
+  pointer-events: none;
 }
 
 .switch::after {
@@ -84,4 +85,62 @@
 
 .disabled .input {
   cursor: not-allowed;
+}
+
+.switchWrapper_xs {
+  width: 28px;
+  height: 16px;
+}
+
+.switch_xs::after {
+  width: 12px;
+  height: 12px;
+  top: 2px;
+  left: 2px;
+}
+
+.input:checked + .switch_xs::after {
+  transform: translateX(12px);
+}
+
+.switchWrapper_sm {
+  width: 34px;
+  height: 20px;
+}
+
+.switch_sm::after {
+  width: 16px;
+  height: 16px;
+  top: 2px;
+  left: 2px;
+}
+
+.input:checked + .switch_sm::after {
+  transform: translateX(14px);
+}
+
+.switchWrapper_md {
+  width: 42px;
+  height: 24px;
+}
+
+.switch_md::after {
+  width: 20px;
+  height: 20px;
+}
+
+.switchWrapper_lg {
+  width: 52px;
+  height: 30px;
+}
+
+.switch_lg::after {
+  width: 26px;
+  height: 26px;
+  top: 2px;
+  left: 2px;
+}
+
+.input:checked + .switch_lg::after {
+  transform: translateX(22px);
 }

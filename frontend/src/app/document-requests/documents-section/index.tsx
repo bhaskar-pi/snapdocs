@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 
-import { Select } from "@/components/ui/form/select";
 import { DocumentModal } from "@/types/models/document";
 
 import styles from "../styles.module.css";
 import ChooseDocuments from "./documents";
 import SectionFooter from "../section-footer";
 import SectionHeader from "../section-header";
+import ExistingTemplates from "./existing-templates";
 
 interface Props {
   onNext: () => void;
   onPrevious: () => void;
   documents: DocumentModal[];
+  templateId?: string;
   onChange: (name: string, isRequired: boolean, index?: number) => void;
+  onChangeExistingTemplate: (documents: DocumentModal[]) => void;
   onRemove: (name: string) => void;
 }
 
@@ -28,6 +30,7 @@ const ChooseTemplate = ({
   onPrevious,
   documents = [],
   onChange,
+  onChangeExistingTemplate,
   onRemove,
 }: Props) => {
   const [mode, setMode] = useState<TemplateMode>(TemplateMode.ADD_DOCUMENTS);
@@ -55,14 +58,7 @@ const ChooseTemplate = ({
       </div>
 
       {mode === TemplateMode.USE_TEMPLATE && (
-        <form className={styles.stepForm}>
-          <Select
-            id="template"
-            label="Template"
-            placeholder="Select a template"
-            options={[]}
-          />
-        </form>
+        <ExistingTemplates onChange={onChangeExistingTemplate} />
       )}
 
       {mode === TemplateMode.ADD_DOCUMENTS && (
