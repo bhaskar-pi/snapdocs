@@ -30,6 +30,8 @@ export const config = {
     "/dashboard/:path*",
     "/settings/:path*",
     "/templates/:path*",
+    "/clients/:path*",
+    "/document-requests/:path*",
     "/login",
     "/signup",
   ],
