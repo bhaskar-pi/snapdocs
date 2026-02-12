@@ -43,7 +43,6 @@
 }
 
 .button {
-  max-width: var(--w-btn-xxl);
   margin-top: 8px;
   font-size: var(--font-sm);
   font-weight: 500;

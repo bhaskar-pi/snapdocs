@@ -31,7 +31,7 @@ const SignUpForm = () => {
         [prop]: value,
       }));
     },
-    []
+    [],
   );
 
   const handleCreateAccount = useCallback(
@@ -39,7 +39,7 @@ const SignUpForm = () => {
       e.preventDefault();
       signup.mutate(form);
     },
-    [form, signup]
+    [form, signup],
   );
 
   return (
@@ -83,6 +83,7 @@ const SignUpForm = () => {
           value={form.email}
           onChange={(e) => onChangeForm("email", e.target.value)}
           disabled={signup.isPending}
+          fieldClassName="input-width"
         />
 
         <Input
@@ -94,6 +95,7 @@ const SignUpForm = () => {
           value={form.password}
           onChange={(e) => onChangeForm("password", e.target.value)}
           disabled={signup.isPending}
+          fieldClassName="input-width"
         />
 
         <Button
