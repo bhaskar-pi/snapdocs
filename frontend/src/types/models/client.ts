@@ -8,7 +8,7 @@ export interface ClientFormInput {
 }
 
 export interface DocRequestFormInput {
-  templateId?: never;
+  templateId?: string;
   title: string;
   dueDate?: string;
   description?: string;

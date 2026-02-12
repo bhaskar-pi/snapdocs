@@ -51,7 +51,7 @@ const SignUpForm = () => {
           <p>Start collecting documents the smart way</p>
         </div>
 
-        <div className="base-two-in-row">
+        <div style={{ display: "flex", gap: "10px" }}>
           <Input
             required
             id="firstName"
@@ -83,7 +83,6 @@ const SignUpForm = () => {
           value={form.email}
           onChange={(e) => onChangeForm("email", e.target.value)}
           disabled={signup.isPending}
-          fieldClassName="input-width"
         />
 
         <Input
@@ -95,7 +94,6 @@ const SignUpForm = () => {
           value={form.password}
           onChange={(e) => onChangeForm("password", e.target.value)}
           disabled={signup.isPending}
-          fieldClassName="input-width"
         />
 
         <Button

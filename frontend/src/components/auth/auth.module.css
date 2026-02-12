@@ -47,6 +47,7 @@
   font-size: var(--font-sm);
   font-weight: 500;
   height: 48px;
+  max-width: var(--w-btn-xxl);
 }
 
 .switch {
