@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from "axios";
+
 import { apiClient } from "./axios";
 
 export const GET = async <T>(url: string, params?: object): Promise<T> => {
@@ -5,8 +7,12 @@ export const GET = async <T>(url: string, params?: object): Promise<T> => {
   return res.data;
 };
 
-export const POST = async <T>(url: string, data?: unknown): Promise<T> => {
-  const res = await apiClient.post<T>(url, data);
+export const POST = async <T>(
+  url: string,
+  data?: unknown,
+  config?: AxiosRequestConfig,
+): Promise<T> => {
+  const res = await apiClient.post<T>(url, data, config);
   return res.data;
 };
 

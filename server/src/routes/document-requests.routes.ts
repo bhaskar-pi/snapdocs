@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { sendDocRequestHandler } from "@controllers/documents-request.controller";
+import {
+  getClientUploadChecklistItems,
+  sendDocRequestHandler,
+} from "@controllers/documents-request.controller";
 import { authenticate } from "@middlewares/validate-request";
 import { asyncHandler } from "@middlewares/async-handler";
 
@@ -9,6 +12,11 @@ router.post(
   "/document-requests",
   authenticate,
   asyncHandler(sendDocRequestHandler),
+);
+
+router.get(
+  "/upload-documents/checklist/:token",
+  asyncHandler(getClientUploadChecklistItems),
 );
 
 export default router;

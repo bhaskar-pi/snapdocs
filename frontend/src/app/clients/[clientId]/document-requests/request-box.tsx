@@ -41,12 +41,12 @@ const RequestBox = ({ request }: Props) => {
         </div>
 
         <div className={styles.headerRight}>
-          <p className={styles.dueDate}>
-            <Icon name={Clock} size={16} />
-            <span>
-              Due: {request.dueDate ? formatDate(request.dueDate) : "—"}
-            </span>
-          </p>
+          {request.dueDate && (
+            <p className={styles.dueDate}>
+              <Icon name={Clock} size={16} />
+              <span>Due: {formatDate(request.dueDate)}</span>
+            </p>
+          )}
           <Icon
             size={22}
             name={isOpen ? ChevronUp : ChevronDown}

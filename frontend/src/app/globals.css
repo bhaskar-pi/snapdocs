@@ -46,6 +46,7 @@
   --success: #16a34a;
   --successD: #15803d;
   --successL: #dcfce7;
+  --successXL: #f2faf6;
 
   /* WARNING */
   --warning: #ff9800;
@@ -210,8 +211,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 
   font-size: var(--font-base);
   line-height: var(--lh-normal);
@@ -459,5 +466,3 @@ select {
   color: var(--negative);
   cursor: pointer;
 }
-
-

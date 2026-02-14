@@ -5,7 +5,8 @@ export interface DocumentDto {
   fileName: string;
   fileSize: number;
   storagePath: string;
-  uploadedAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ChecklistItemDto {

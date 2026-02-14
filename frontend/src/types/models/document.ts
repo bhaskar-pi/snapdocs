@@ -1,26 +1,29 @@
-import { RequestStatus } from "../enums/request";
+import { ChecklistItemStatus, RequestStatus } from "../enums/request";
 
 export interface DocumentModal {
   name: string;
   isRequired: boolean;
 }
 
-export interface Document {
+export interface DocumentItem {
   id: string;
+  checklistItemId: string;
   fileName: string;
   fileSize: number;
   storagePath: string;
-  uploadedAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ChecklistItem {
   id: string;
+  requestId: string;
   name: string;
-  status: "received" | "pending";
+  status: ChecklistItemStatus;
   isRequired: boolean;
   createdAt: Date;
   updatedAt: Date;
-  documents: Document[];
+  documents: DocumentItem[];
 }
 
 export interface DocumentRequest {
@@ -33,5 +36,14 @@ export interface DocumentRequest {
   completedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
+  checklistItems: ChecklistItem[];
+}
+
+export interface DocumentsUploadChecklist {
+  requestedBy: string;
+  requestedOn: Date;
+  clientName: string;
+  dueDate: Date;
+  requestTitle: string;
   checklistItems: ChecklistItem[];
 }

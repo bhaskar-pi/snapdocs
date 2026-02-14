@@ -16,7 +16,7 @@ export function useCreateRequest() {
 
     onSuccess(_, variables) {
       toast.success(
-        `Request sent to ${variables.client.fullName} successfully.`
+        `Request sent to ${variables.client.fullName} successfully.`,
       );
 
       queryClient.invalidateQueries({ queryKey: ["clients"] });

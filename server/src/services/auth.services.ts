@@ -56,7 +56,7 @@ export async function loginUser(data: LoginRequest) {
     throw new Error("Invalid credentials.");
   }
 
-  const { accessToken, refreshToken } = getSecurityTokens(user.id, user.email);
+  const { accessToken, refreshToken } = getSecurityTokens(user);
 
   const refreshTokenHash = hashRefreshToken(refreshToken);
   const expiresAt = new Date(Date.now() + TokenValidity.ONE_DAY);
@@ -76,10 +76,10 @@ export async function loginUser(data: LoginRequest) {
 }
 
 export async function rotateAccessToken(token: string) {
-  const payload = verifyRefreshToken(token); // it will throw error if token has issue/expired
+  const userPayload = verifyRefreshToken(token); // it will throw error if token has issue/expired
 
   const refreshTokenHash = hashRefreshToken(token);
-  const oldSession = await findValidSession(payload.userId, refreshTokenHash);
+  const oldSession = await findValidSession(userPayload.id, refreshTokenHash);
   if (!oldSession) {
     throw new Error("Invalid session");
   }
@@ -90,9 +90,9 @@ export async function rotateAccessToken(token: string) {
   const shouldRotate =
     oldSession.expiresAt.getTime() - Date.now() < TokenValidity.ONE_HOUR;
 
-  const accessToken = generateAccessToken(payload.userId, payload.email);
+  const accessToken = generateAccessToken(userPayload);
 
-  const user = await getUserById(payload.userId);
+  const user = await getUserById(userPayload.id);
 
   if (!user) {
     throw new Error("User not found for this session.");
@@ -106,11 +106,11 @@ export async function rotateAccessToken(token: string) {
   // can no longer be used
   await revokeSessionBySessionId(oldSession.id);
 
-  const newRefreshToken = generateRefreshToken(payload.userId, payload.email);
+  const newRefreshToken = generateRefreshToken(userPayload);
 
   // Create a new session for the newly issued refresh token.
   const newSession = await createSession(
-    payload.userId,
+    userPayload.id,
     hashRefreshToken(newRefreshToken),
     new Date(Date.now() + TokenValidity.ONE_DAY),
   );

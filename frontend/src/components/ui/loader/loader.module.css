@@ -65,6 +65,23 @@
   color: #374151;
 }
 
+@media (max-width: 640px) {
+  .loadingModal {
+    padding: 10px;
+    width: 70%;
+    height: 110px;
+  }
+
+  .loadingSpinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .loadingText {
+    font-size: 13px;
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

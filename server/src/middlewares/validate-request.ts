@@ -1,5 +1,5 @@
 import { ZodType } from "zod";
-import { Response, NextFunction } from "express";
+import { Response, NextFunction, Request } from "express";
 import { AuthenticatedRequest } from "@models/express";
 import { verifyAccessToken } from "@utils/session";
 
@@ -17,7 +17,7 @@ import { verifyAccessToken } from "@utils/session";
 
 export const validate = (schema: ZodType) => {
   return (
-    request: AuthenticatedRequest,
+    request: Request,
     response: Response,
     nextFunction: NextFunction,
   ) => {
