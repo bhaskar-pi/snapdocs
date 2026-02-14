@@ -82,7 +82,7 @@ export default function UploadDocuments() {
         </div>
 
         <div className={styles.disclosure}>
-          <IconBadge icon={Shield} variant="success" size="lg" />
+          <Icon containerClassName={styles.shield} name={Shield} tone="success" size={22} />
           <p>
             <span>Your files are safe.</span> <br />
             All uploads are encrypted end-to-end and only accessible by your

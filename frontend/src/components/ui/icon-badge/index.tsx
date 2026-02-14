@@ -37,9 +37,7 @@ export const IconBadge = ({
         containerClassName,
       ].join(" ")}
     >
-      <Icon
-        className={[styles.icon, iconClassName, styles[variant]].join(" ")}
-      />
+      <Icon className={[styles.icon, iconClassName].join(" ")} />
     </span>
   );
 };
