@@ -1,4 +1,11 @@
-import { index, integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  index,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { checklistItemsTable } from "./checklist-items.schema";
 
@@ -14,12 +21,15 @@ export const documentsTable = pgTable(
     fileName: text("file_name").notNull(),
     fileSize: integer("file_size").notNull(),
     storagePath: text("storage_path").notNull(),
-
-    uploadedAt: timestamp("uploaded_at").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at")
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
   },
   (table) => [
     index("documents_checklist_item_id_idx").on(table.checklistItemId),
-  ]
+  ],
 );
 
 export type Document = InferSelectModel<typeof documentsTable>;

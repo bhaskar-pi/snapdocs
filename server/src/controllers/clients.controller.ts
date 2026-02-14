@@ -1,15 +1,18 @@
 import { getClientDetailsDto } from "@mappers/clients";
 import { AuthenticatedRequest } from "@models/express";
 import {
+  getClientById,
   getClientDetailsById,
   getClientsByUserId,
   getClientSummariesByUserId,
 } from "@repositories/client.repository";
+import { getUserById } from "@repositories/user.repository";
+import { verifyDocumentsRequestToken } from "@utils/session";
 
 export const getClientsSummariesHandler = async (
   request: AuthenticatedRequest,
 ) => {
-  const userId = request.user?.userId;
+  const userId = request.user?.id;
 
   if (!userId) {
     throw new Error("Invalid Session");
@@ -23,7 +26,7 @@ export const getClientsSummariesHandler = async (
 export const getClientDetailsHandler = async (
   request: AuthenticatedRequest,
 ) => {
-  const userId = request.user?.userId;
+  const userId = request.user?.id;
   const clientId = request.params.clientId;
 
   if (!userId) {
@@ -39,7 +42,7 @@ export const getClientDetailsHandler = async (
 };
 
 export const getClientsHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.user?.userId;
+  const userId = request.user?.id;
 
   if (!userId) {
     throw new Error("Invalid Session");

@@ -118,7 +118,7 @@
 
 .uploadedAt {
   font-size: var(--font-xs);
-  color: var(--slate-600);
+  color: var(--slate-500);
 }
 
 .checklistActions {

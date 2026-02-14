@@ -10,12 +10,15 @@ import {
 } from "@repositories/client.repository";
 import { createRequest } from "@repositories/request.repository";
 import { generateClientUploadLink } from "@utils/doc-requests";
+import { sendDocumentRequestEmail } from "./brevo-email/send-doc-request";
+import { User } from "@database/schema/users.schema";
 
 export async function sendDocRequest(
-  userId: string,
+  user: User,
   payload: CreateDocumentsRequest,
 ) {
-  if (!userId) {
+  const userId = user.id;
+  if (!user.id) {
     throw new Error("Missing user details");
   }
 
@@ -33,13 +36,6 @@ export async function sendDocRequest(
     (await getClientByEmail(userId, clientPayload.email)) ??
     (await createClient(userId, clientPayload));
 
-  if (requestPayload.templateId) {
-    // TODO: fetch template details and follow up
-    throw new Error(
-      "Template-based document requests are not currently supported",
-    );
-  }
-
   const { title, dueDate, description } = requestPayload;
 
   const newRequest: DocRequestInsert = {
@@ -47,6 +43,7 @@ export async function sendDocRequest(
     description,
     userId,
     clientId: clientRecord.id,
+    sentAt: new Date(),
     ...(dueDate && {
       dueDate: new Date(dueDate),
     }),
@@ -61,11 +58,20 @@ export async function sendDocRequest(
 
   await createCheckListItems(checklistItems);
 
-  const linkToUpload = generateClientUploadLink(
+  const uploadLink = generateClientUploadLink(
     userId,
     clientRecord.id,
     createdRequest.id,
   );
 
-  return linkToUpload;
+  await sendDocumentRequestEmail({
+    clientEmail: clientRecord.email,
+    clientName: clientRecord.fullName,
+    userName: `${user.firstName} ${user.lastName}`,
+    docCount: requestPayload.documents.length,
+    requestTitle: requestPayload.title,
+    uploadLink,
+  });
+
+  return uploadLink;
 }

@@ -28,7 +28,7 @@ const ChecklistItems = ({ items }: Props) => {
 
                 {document && (
                   <p className={styles.uploadedAt}>
-                    Uploaded {formatDate(document?.uploadedAt)}
+                    Uploaded {formatDate(document?.updatedAt)}
                   </p>
                 )}
               </div>

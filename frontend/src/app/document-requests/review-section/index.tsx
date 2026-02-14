@@ -14,6 +14,9 @@ interface Props {
   documents: DocumentModal[];
   clientName: string;
   isLoading?: boolean;
+  title: string;
+  description: string;
+  dueDate?: string;
 }
 
 const ReviewAndSend = ({
@@ -23,6 +26,9 @@ const ReviewAndSend = ({
   documents = [],
   clientName,
   isLoading,
+  title,
+  description,
+  dueDate,
 }: Props) => {
   return (
     <>
@@ -37,6 +43,7 @@ const ReviewAndSend = ({
           label="Request Title"
           placeholder="e.g., ITR Filing 2026"
           fieldClassName={styles.stepFormInput}
+          value={title}
           onChange={(e) => onChange("title", e.target.value)}
         />
         <Input
@@ -45,6 +52,7 @@ const ReviewAndSend = ({
           placeholder=""
           type="date"
           fieldClassName={styles.stepFormInput}
+          value={dueDate}
           onChange={(e) => onChange("dueDate", new Date(e.target.value))}
         />
         <TextArea
@@ -52,6 +60,7 @@ const ReviewAndSend = ({
           label="Message"
           placeholder="Add a personal message to the client..."
           fieldClassName={styles.stepFormInput}
+          value={description}
           onChange={(e) => onChange("description", e.target.value)}
         />
       </div>

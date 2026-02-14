@@ -56,14 +56,12 @@ const ChooseDocuments = ({ documents, onRemove, onChange }: Props) => {
         normalizeName(doc.name) === normalizeName(documentName) &&
         doc.name !== editingName,
     );
-
     if (duplicate) {
       toast.error("A document with this name already exists.");
       return;
     }
 
     onChange(documentName, isRequired, editingIndex);
-
     closeModal();
   };
 

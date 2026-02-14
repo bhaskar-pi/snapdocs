@@ -20,11 +20,24 @@
   color: var(--slate-0);
 }
 
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .text {
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
   font-size: var(--font-base);
+}
+
+.description {
+  font-weight: 500;
+  color: var(--slate-600);
+  line-height: 1;
+  font-size: var(--font-sm);
 }
 
 .textBrand {

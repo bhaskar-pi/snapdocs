@@ -12,7 +12,12 @@ interface Props {
   onPrevious?: () => void;
 }
 
-const SectionFooter = ({ onNext, onPrevious, isLoading, text }: Props) => {
+const SectionFooter = ({
+  onNext,
+  onPrevious,
+  isLoading = false,
+  text,
+}: Props) => {
   return (
     <div className={styles.stepFooter}>
       {onPrevious ? (

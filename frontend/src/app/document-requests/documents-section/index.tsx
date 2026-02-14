@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DocumentModal } from "@/types/models/document";
+import { Template } from "@/types/models/templates";
 
 import styles from "../styles.module.css";
 import ChooseDocuments from "./documents";
@@ -16,7 +17,7 @@ interface Props {
   documents: DocumentModal[];
   templateId?: string;
   onChange: (name: string, isRequired: boolean, index?: number) => void;
-  onChangeExistingTemplate: (documents: DocumentModal[]) => void;
+  onChangeExistingTemplate: (template: Template) => void;
   onRemove: (name: string) => void;
 }
 
@@ -29,6 +30,7 @@ const ChooseTemplate = ({
   onNext,
   onPrevious,
   documents = [],
+  templateId,
   onChange,
   onChangeExistingTemplate,
   onRemove,
@@ -58,7 +60,10 @@ const ChooseTemplate = ({
       </div>
 
       {mode === TemplateMode.USE_TEMPLATE && (
-        <ExistingTemplates onChange={onChangeExistingTemplate} />
+        <ExistingTemplates
+          onChange={onChangeExistingTemplate}
+          templateId={templateId}
+        />
       )}
 
       {mode === TemplateMode.ADD_DOCUMENTS && (

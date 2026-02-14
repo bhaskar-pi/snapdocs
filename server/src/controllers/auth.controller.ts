@@ -64,11 +64,11 @@ export const registerUserHandler = async (
 export const logoutHandler = async (request: Request, response: Response) => {
   try {
     const token = request.cookies.refreshToken;
-    const payload = verifyRefreshToken(token);
+    const userPayload = verifyRefreshToken(token);
 
     const refreshTokenHash = hashRefreshToken(token);
 
-    await revokeSessionByToken(payload.userId, refreshTokenHash);
+    await revokeSessionByToken(userPayload.id, refreshTokenHash);
 
     response.clearCookie("accessToken");
     response.clearCookie("refreshToken");
@@ -106,6 +106,7 @@ export const refreshHandler = async (request: Request, response: Response) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
+      path: "/",
       maxAge: 15 * 60 * 1000,
     });
 

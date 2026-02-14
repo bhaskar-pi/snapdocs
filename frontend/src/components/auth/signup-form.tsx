@@ -31,7 +31,7 @@ const SignUpForm = () => {
         [prop]: value,
       }));
     },
-    []
+    [],
   );
 
   const handleCreateAccount = useCallback(
@@ -39,7 +39,7 @@ const SignUpForm = () => {
       e.preventDefault();
       signup.mutate(form);
     },
-    [form, signup]
+    [form, signup],
   );
 
   return (
@@ -51,7 +51,7 @@ const SignUpForm = () => {
           <p>Start collecting documents the smart way</p>
         </div>
 
-        <div className="base-two-in-row">
+        <div style={{ display: "flex", gap: "10px" }}>
           <Input
             required
             id="firstName"

@@ -3,10 +3,9 @@ import { checklistItemsTable } from "@database/schema/checklist-items.schema";
 import { Client, clientsTable } from "@database/schema/clients.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import { documentsTable } from "@database/schema/documents.schema";
-import { usersTable } from "@database/schema/users.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
 import { ClientRequest } from "@models/requests/documents-request";
-import { and, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 
 export async function getClientByEmail(
   userId: string,
@@ -18,6 +17,18 @@ export async function getClientByEmail(
     .where(
       and(eq(clientsTable.userId, userId), eq(clientsTable.email, clientEmail)),
     )
+    .limit(1);
+
+  return result;
+}
+
+export async function getClientById(
+  clientId: string,
+): Promise<Client | undefined> {
+  const [result] = await db
+    .select()
+    .from(clientsTable)
+    .where(and(eq(clientsTable.id, clientId)))
     .limit(1);
 
   return result;
@@ -118,7 +129,8 @@ export async function getClientDetailsById(userId: string, clientId: string) {
       documentsTable,
       eq(documentsTable.checklistItemId, checklistItemsTable.id),
     )
-    .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)));
+    .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
+    .orderBy(desc(requestsTable.createdAt));
 
   return result;
 }

@@ -7,7 +7,7 @@ export function getStatusClassName(
     case RequestStatus.PENDING:
       return "neutral";
     case RequestStatus.IN_PROGRESS:
-      return "info";
+      return "warning";
     case RequestStatus.COMPLETED:
     case ChecklistItemStatus.RECEIVED:
       return "success";
