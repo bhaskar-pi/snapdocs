@@ -15,7 +15,7 @@ export function generateAccessToken(user: User): string {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.lastName,
+      email: user.email,
     },
     env.JWT_ACCESS_TOKEN_SECRET,
     {
@@ -37,7 +37,7 @@ export function generateRefreshToken(user: User): string {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.lastName,
+      email: user.email,
     },
     env.JWT_REFRESH_TOKEN_SECRET,
     {

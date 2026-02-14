@@ -18,11 +18,6 @@ export async function createDocument(
       .values({ ...document })
       .returning();
 
-    await tx
-      .update(checklistItemsTable)
-      .set({ status: ChecklistStatus.RECEIVED })
-      .where(eq(checklistItemsTable.id, document.checklistItemId));
-
     if (!createdDocument.checklistItemId) {
       throw new Error("Checklist item missing on document");
     }

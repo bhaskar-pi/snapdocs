@@ -61,7 +61,6 @@ const LoginForm = () => {
           loading={login.isPending}
           type="submit"
           className={styles.button}
-          
         >
           {login.isPending ? "Logging in..." : "Log In"}
         </Button>

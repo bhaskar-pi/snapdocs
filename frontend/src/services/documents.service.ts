@@ -12,9 +12,9 @@ export const documentsApi = {
     formData.append("file", file);
     formData.append("checklistItemId", checklistItemId);
     formData.append("requestId", requestId);
-    
+
     if (documentId) {
-      formData.append("documentId", documentId || "");
+      formData.append("documentId", documentId);
     }
 
     return POST<DocumentItem>("/upload-document", formData);

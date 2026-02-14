@@ -21,7 +21,7 @@ export async function uploadChecklistItemDocument(
 
   if (error) {
     throw new Error(
-      "error at uploading document to supabase storage" + error.message,
+      `Error uploading document to supabase storage: ${error.message}`,
     );
   }
 

@@ -42,7 +42,12 @@ export const getClientUploadChecklistItems = async (
     getCheckListItemsByRequestId(requestId),
   ]);
 
-  if (!documentRequest || !checklistItems || checklistItems.length === 0) {
+  if (
+    !user ||
+    !documentRequest ||
+    !checklistItems ||
+    checklistItems.length === 0
+  ) {
     throw new Error("No checklist items found");
   }
 

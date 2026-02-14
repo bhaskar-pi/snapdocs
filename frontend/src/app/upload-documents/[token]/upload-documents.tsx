@@ -7,9 +7,8 @@ import {
   Shield,
   Upload,
   User,
-  X,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 import { FileUploadButton } from "@/components/ui/file-upload";
@@ -27,8 +26,8 @@ import { ChecklistItemStatus } from "@/types/enums/request";
 import styles from "../upload-documents.module.css";
 
 export default function UploadDocuments() {
-  const pathname = usePathname();
-  const token = pathname.split("/").filter(Boolean).pop();
+  const params = useParams();
+  const token = params.token as string;
 
   const { data, isLoading } = useGetUploadChecklistItems(token);
   const uploadDocument = useUploadDocument(token);
@@ -82,7 +81,12 @@ export default function UploadDocuments() {
         </div>
 
         <div className={styles.disclosure}>
-          <Icon containerClassName={styles.shield} name={Shield} tone="success" size={22} />
+          <Icon
+            containerClassName={styles.shield}
+            name={Shield}
+            tone="success"
+            size={22}
+          />
           <p>
             <span>Your files are safe.</span> <br />
             All uploads are encrypted end-to-end and only accessible by your
