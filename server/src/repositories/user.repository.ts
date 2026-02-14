@@ -33,3 +33,13 @@ export async function createUser(data: User): Promise<User> {
 
   return user[0];
 }
+
+export async function updateUser(user: Partial<User>): Promise<User> {
+  const [updatedUser] = await db
+    .update(usersTable)
+    .set({ ...user })
+    .where(eq(usersTable.id, user.id as string))
+    .returning();
+
+  return updatedUser;
+}

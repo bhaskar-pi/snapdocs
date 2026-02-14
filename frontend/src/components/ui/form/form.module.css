@@ -4,8 +4,8 @@
 }
 
 .field {
+  position: relative;
   width: 100%;
-  max-width: var(--w-input-lg);
 }
 
 /** input styles */
@@ -49,6 +49,26 @@
 
 .inputError {
   border-color: var(--input-border-error);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--slate-500);
+}
+
+.eyeButton:hover {
+  color: var(--slate-900);
 }
 
 .message {

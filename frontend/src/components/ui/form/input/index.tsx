@@ -1,3 +1,8 @@
+"use client";
+
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+
 import styles from "../form.module.css";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -34,6 +39,11 @@ export const Input: React.FC<InputProps> = ({
   messagePosition = "left",
   ...props
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isPassword = type === "password";
+  const resolvedType = isPassword && showPassword ? "text" : type;
+
   const messageClassName = [
     styles.message,
     styles[messageType],
@@ -54,10 +64,22 @@ export const Input: React.FC<InputProps> = ({
       <div className={`${styles.field} ${fieldClassName}`}>
         <input
           className={`${styles.input} ${inputClassName} ${errorBorder}`}
-          type={type}
+          type={resolvedType}
           id={id}
           {...props}
         />
+
+        {isPassword && (
+          <button
+            type="button"
+            className={styles.eyeButton}
+            onClick={() => setShowPassword((prev) => !prev)}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        )}
+
         {message && <p className={messageClassName}>{message}</p>}
       </div>
     </div>

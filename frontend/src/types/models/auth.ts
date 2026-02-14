@@ -21,3 +21,9 @@ export interface AuthResponse {
 
 export type LoginResponse = AuthResponse;
 export type RefreshResponse = AuthResponse;
+
+export interface UpdatePassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
