@@ -295,7 +295,7 @@ select {
 .base-two-in-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 12px;
 }
 
 .data-table-row {
@@ -392,6 +392,24 @@ select {
 
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.card-sm {
+  padding: 12px 16px;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.card-md {
+  padding: 16px 20px;
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.card-lg {
+  padding: 24px 28px;
+  gap: 24px;
+  margin: 28px 0;
 }
 
 .label {

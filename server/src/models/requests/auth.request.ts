@@ -21,3 +21,9 @@ export interface RefreshSessionRequest {
   createdAt: DateString;
   expiresAt: DateString | null;
 }
+
+export interface UpdatePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}

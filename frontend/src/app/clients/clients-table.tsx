@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/data-table";
 import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
-import { Persona } from "@/components/ui/persona";
 import { useClientsSummary } from "@/hooks/data/clients/use-clients-summary";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 import { RequestStatus } from "@/types/enums/request";

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import bcrypt from "bcrypt";
 import {
   loginUser,
   rotateAccessToken,
@@ -10,6 +10,10 @@ import { Environment } from "@enums/environment";
 import { TokenValidity } from "@enums/session";
 import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
+import { AuthenticatedRequest } from "@models/express";
+import { UpdatePasswordRequest } from "@models/requests/auth.request";
+import { getUserById, updateUser } from "@repositories/user.repository";
+import { User } from "@database/schema/users.schema";
 
 export const loginHandler = async (request: Request, response: Response) => {
   try {
@@ -121,4 +125,25 @@ export const refreshHandler = async (request: Request, response: Response) => {
       message: error.message || "Refresh failed",
     });
   }
+};
+
+export const updatePasswordHandler = async (request: AuthenticatedRequest) => {
+  const authUser = request.user;
+  const passwords = request.body as UpdatePasswordRequest;
+
+  if (passwords.confirmNewPassword !== passwords.newPassword) {
+    throw new Error("Password not matched");
+  }
+
+  const user = await getUserById(authUser?.id || "");
+  const passwordHash = await bcrypt.hash(passwords.newPassword, 10);
+
+  const userDetails: User = {
+    ...user,
+    createdAt: new Date(user.createdAt),
+    updatedAt: new Date(),
+    password: passwordHash,
+  };
+
+  return updateUser(userDetails);
 };

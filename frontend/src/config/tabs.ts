@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { SCREEN_PATHS } from "@/types/enums/paths";
+import { SETTINGS_TABS } from "@/types/enums/tabs";
 
 export const SIDEBAR_TABS = [
   {
@@ -45,5 +46,16 @@ export const SIDEBAR_TABS = [
     path: SCREEN_PATHS.SETTINGS,
     isActive: (pathName: string) => pathName.startsWith(SCREEN_PATHS.SETTINGS),
     icon: Settings,
+  },
+];
+
+export const SettingsTabs = [
+  {
+    id: "1",
+    name: SETTINGS_TABS.PROFILE,
+  },
+  {
+    id: "2",
+    name: SETTINGS_TABS.SECURITY,
   },
 ];

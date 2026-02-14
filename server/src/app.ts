@@ -8,6 +8,7 @@ import documentsRequestRouter from "@routes/document-requests.routes";
 import clientsRouter from "@routes/clients.routes";
 import documentsRouter from "@routes/documents.routes";
 import templatesRouter from "@routes/templates.routes";
+import userRouter from "@routes/user.routes";
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use(env.API_PATH, documentsRequestRouter);
 app.use(env.API_PATH, clientsRouter);
 app.use(env.API_PATH, documentsRouter);
 app.use(env.API_PATH, templatesRouter);
+app.use(env.API_PATH, userRouter);
 
 export default app;
