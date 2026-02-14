@@ -15,7 +15,7 @@ const Profile = () => {
   const authUser = useAuthStore((store) => store.user);
   const updateUser = useUpdateUser();
 
-  const [user, setUser] = useState<User>(authUser as User);
+  const [user, setUser] = useState<User>(authUser || {} as User);
   const [isUserDetailsChanged, setIsUserDetailsChanged] = useState(false);
 
   const onChangeUser = useCallback((prop: string, value: string) => {

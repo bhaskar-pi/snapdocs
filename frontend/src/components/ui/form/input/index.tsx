@@ -53,8 +53,6 @@ export const Input: React.FC<InputProps> = ({
   const errorBorder =
     message && messageType === "error" ? styles.inputError : "";
 
-    console.log({isPassword})
-
   return (
     <div className={`${styles.inputContainer} ${containerClassName}`}>
       {label && (

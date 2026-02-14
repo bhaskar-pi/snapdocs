@@ -131,16 +131,32 @@ export const updatePasswordHandler = async (request: AuthenticatedRequest) => {
   const authUser = request.user;
   const passwords = request.body as UpdatePasswordRequest;
 
-  if (passwords.confirmNewPassword !== passwords.newPassword) {
-    throw new Error("Password not matched");
+  if (!authUser?.id) {
+    throw new Error("Authentication required");
   }
 
-  const user = await getUserById(authUser?.id || "");
+  if (passwords.confirmNewPassword !== passwords.newPassword) {
+    throw new Error("New password and confirm new password do not match");
+  }
+
+  const user = await getUserById(authUser.id);
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const isCurrentPasswordValid = await bcrypt.compare(
+    passwords.currentPassword,
+    user.password,
+  );
+
+  if (!isCurrentPasswordValid) {
+    throw new Error("Invalid current password");
+  }
+
   const passwordHash = await bcrypt.hash(passwords.newPassword, 10);
 
   const userDetails: User = {
     ...user,
-    createdAt: new Date(user.createdAt),
     updatedAt: new Date(),
     password: passwordHash,
   };

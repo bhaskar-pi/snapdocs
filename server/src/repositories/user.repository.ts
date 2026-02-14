@@ -38,7 +38,7 @@ export async function updateUser(user: Partial<User>): Promise<User> {
   const [updatedUser] = await db
     .update(usersTable)
     .set({ ...user })
-    .where(eq(usersTable.id, user.id || ""))
+    .where(eq(usersTable.id, user.id as string))
     .returning();
 
   return updatedUser;

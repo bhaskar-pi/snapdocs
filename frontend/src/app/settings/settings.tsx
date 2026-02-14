@@ -21,6 +21,8 @@ const Settings = () => {
         return <Profile />;
       case SETTINGS_TABS.SECURITY:
         return <Security />;
+      default:
+        return null;
     }
   };
 

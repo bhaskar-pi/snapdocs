@@ -31,7 +31,7 @@ const Security = () => {
     e.preventDefault();
 
     updatePassword.mutate(passwords, {
-      onSettled: () => setPasswords(initialPasswords),
+      onSuccess: () => setPasswords(initialPasswords),
     });
   };
 
