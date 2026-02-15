@@ -71,15 +71,15 @@ export const logoutHandler = async (
 
     await revokeSessionByToken(userPayload.id, refreshTokenHash);
 
-    response.clearCookie("accessToken");
-    response.clearCookie("refreshToken");
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
 
     return response.status(204).send();
   } catch (error) {
     console.error("Error at logout", error);
 
-    response.clearCookie("accessToken");
-    response.clearCookie("refreshToken");
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
     return response.status(204).send();
   }
 };
@@ -127,8 +127,8 @@ export const refreshHandler = async (
     };
   } catch (error) {
     console.error("Failed to refresh token", error);
-    response.clearCookie("accessToken");
-    response.clearCookie("accessToken");
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
 
     throw new AppError(
       "Your session has expired. Please login again.",
