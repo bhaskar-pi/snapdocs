@@ -7,7 +7,7 @@ import {
 } from "@services/auth.services";
 import env from "@config/env";
 import { Environment } from "@enums/environment";
-import { TokenValidity } from "@enums/session";
+import { TokenErrors, TokenValidity } from "@enums/session";
 import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
 import { AuthenticatedRequest } from "@models/express";
@@ -129,6 +129,12 @@ export const refreshHandler = async (
     console.error("Failed to refresh token", error);
     response.clearCookie("accessToken");
     response.clearCookie("accessToken");
+
+    throw new AppError(
+      "Your session has expired. Please login again.",
+      401,
+      TokenErrors.REFRESH_TOKEN_EXPIRED,
+    );
   }
 };
 

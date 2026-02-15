@@ -20,6 +20,17 @@ export const apiClient = axios.create({
 let isRefreshing = false;
 
 /**
+ * Clean logout handler
+ */
+const handleSessionExpired = () => {
+  if (typeof window === "undefined") return;
+
+  setTimeout(() => {
+    window.location.href = "/login";
+  }, 800);
+};
+
+/**
  * Queue for requests waiting during refresh
  */
 let failedQueue: {
@@ -57,8 +68,6 @@ apiClient.interceptors.response.use(
     const errorCode = error.response?.data?.code;
     const requestUrl = originalRequest?.url ?? "";
 
-    console.log({ status, errorCode, requestUrl });
-
     /**
      * If we don't even have config → just reject
      */
@@ -72,9 +81,8 @@ apiClient.interceptors.response.use(
      * → force login
      */
     if (requestUrl.includes("/refresh") && status === 401) {
-      if (typeof window !== "undefined") {
-        window.location.href = "/login";
-      }
+      processQueue(error);
+      handleSessionExpired();
       return Promise.reject(error);
     }
 
@@ -114,30 +122,10 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
-
-        if (typeof window !== "undefined") {
-          window.location.href = "/login";
-        }
-
+        handleSessionExpired();
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
-      }
-    }
-
-    /**
-     * If 401 but NOT access token expired
-     * → invalid / missing / refresh expired
-     * → logout immediately
-     */
-    if (
-      status === 401 ||
-      errorCode === "ACCESS_TOKEN_INVALID" ||
-      errorCode === "ACCESS_TOKEN_MISSING" ||
-      errorCode === "REFRESH_TOKEN_EXPIRED"
-    ) {
-      if (typeof window !== "undefined") {
-        window.location.href = "/login";
       }
     }
 
