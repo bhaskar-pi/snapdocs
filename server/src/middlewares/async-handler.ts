@@ -11,7 +11,11 @@ export const asyncHandler =
       if (result !== undefined && !res.headersSent) {
         const { statusCode = 200, ...data } = result;
 
-        res.status(statusCode).json(data);
+        if (statusCode === 204) {
+          res.status(204).send();
+        } else {
+          res.status(statusCode).json(data);
+        }
       }
     } catch (err) {
       next(err);

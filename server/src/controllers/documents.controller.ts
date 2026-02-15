@@ -36,5 +36,6 @@ export const uploadDocumentHandler = async ({
   return {
     message: "Document uploaded successfully.",
     data: document,
+    statusCode: documentId ? 200 : 201,
   };
 };

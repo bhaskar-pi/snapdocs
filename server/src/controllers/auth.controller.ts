@@ -11,7 +11,7 @@ import { TokenValidity } from "@enums/session";
 import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
 import { AuthenticatedRequest } from "@models/express";
-import { UpdatePasswordRequest } from "@models/payloads/auth.payoad";
+import { UpdatePasswordRequest } from "@models/payloads/auth.payload";
 import { getUserById, updateUser } from "@repositories/user.repository";
 import { User } from "@database/schema/users.schema";
 import { AppError } from "@utils/error";
@@ -34,7 +34,7 @@ export const loginHandler = async (
   });
   response.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: env.NODE_ENV === Environment.PRODUCTION,
     sameSite: "lax",
     maxAge: 15 * 60 * 1000,
   });
@@ -107,14 +107,14 @@ export const refreshHandler = async (
 
   response.cookie("accessToken", session.accessToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: env.NODE_ENV === Environment.PRODUCTION,
     sameSite: "lax",
     path: "/",
     maxAge: 15 * 60 * 1000,
   });
 
   return {
-    statusCode: 201,
+    statusCode: 200,
     message: "Refresh successfully.",
     data: {
       user,

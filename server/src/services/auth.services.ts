@@ -13,7 +13,7 @@ import {
 import {
   LoginRequest,
   UserRegisterRequest,
-} from "@models/payloads/auth.payoad";
+} from "@models/payloads/auth.payload";
 import { User } from "@database/schema/users.schema";
 import {
   generateAccessToken,
@@ -82,7 +82,7 @@ export async function rotateAccessToken(token: string) {
   const refreshTokenHash = hashRefreshToken(token);
   const oldSession = await findValidSession(userPayload.id, refreshTokenHash);
   if (!oldSession) {
-    throw new Error("Invalid session");
+    throw new AppError("Invalid session", 401);
   }
 
   // Rotate refresh token only when it is close to expiry.
@@ -96,7 +96,7 @@ export async function rotateAccessToken(token: string) {
   const user = await getUserById(userPayload.id);
 
   if (!user) {
-    throw new Error("User not found for this session.");
+    throw new AppError("User not found for this session.", 400);
   }
 
   if (!shouldRotate) {

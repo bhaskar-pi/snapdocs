@@ -11,7 +11,7 @@ import {
   requestsTable,
 } from "@database/schema/document-requests.schema";
 import { CreateRequestPayload } from "@models/payloads/documents-request.payload";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 export async function createRequest(
   request: DocRequestInsert,
@@ -44,22 +44,27 @@ export async function createDocumentRequest(
   const { title, dueDate, description } = docRequest;
 
   return await db.transaction(async (tx) => {
-    let [clientRecord] = await tx
-      .select()
-      .from(clientsTable)
-      .where(eq(clientsTable.email, client.email))
-      .limit(1);
+    const [insertedClient] = await tx
+      .insert(clientsTable)
+      .values({ ...client, userId })
+      .onConflictDoNothing({
+        target: [clientsTable.email, clientsTable.userId],
+      })
+      .returning();
+
+    let clientRecord = insertedClient;
 
     if (!clientRecord) {
-      const [createdClient] = await tx
-        .insert(clientsTable)
-        .values({
-          ...client,
-          userId,
-        })
-        .returning();
-
-      clientRecord = createdClient;
+      [clientRecord] = await tx
+        .select()
+        .from(clientsTable)
+        .where(
+          and(
+            eq(clientsTable.email, client.email),
+            eq(clientsTable.userId, userId),
+          ),
+        )
+        .limit(1);
     }
 
     // Create request

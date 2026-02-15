@@ -1,5 +1,4 @@
 import { Template, TemplateInsert } from "@database/schema/templates.schema";
-import { AuthenticatedRequest } from "@models/express";
 import { AuthenticatedUser } from "@models/user";
 import {
   createTemplate,
@@ -51,7 +50,7 @@ export const getTemplateHandler = async ({
   params: { templateId: string };
 }) => {
   if (!params.templateId) {
-    throw new AppError("TemplateId not found", 404);
+    throw new AppError("TemplateId not found", 400);
   }
 
   const template = await getTemplateById(authUser.id, params.templateId);
@@ -89,7 +88,7 @@ export const deleteTemplateHandler = async ({
   params: { templateId: string };
 }) => {
   if (!params.templateId) {
-    throw new AppError("TemplateId not found.", 404);
+    throw new AppError("TemplateId not found.", 400);
   }
 
   await deleteTemplate(authUser.id, params.templateId);

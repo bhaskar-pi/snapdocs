@@ -29,7 +29,7 @@ export const updateUserHandler = async ({
   params: { userId: string };
 }) => {
   if (!params.userId) {
-    throw new AppError("User Id not found.", 404);
+    throw new AppError("User Id not found.", 400);
   }
 
   const userDetails = {

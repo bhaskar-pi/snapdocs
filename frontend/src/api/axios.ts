@@ -87,16 +87,30 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
+    const status = error.response?.status;
+    const errorCode = error.response?.data?.code;
+
+    /**
+     * If refresh endpoint itself fails
+     * → refresh token expired or invalid
+     * → user must login again
+     */
+    if (originalRequest?.url?.includes("/refresh")) {
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      }
+      return Promise.reject(error);
+    }
+
     /**
      * If request failed with 401 (Unauthorized)
      * AND we haven't retried it before
      */
 
     if (
-      error.response?.status === 401 &&
+      status === 401 &&
       !originalRequest._retry &&
-      error.response?.data?.code === "TOKEN_EXPIRED" &&
-      !originalRequest.url?.includes("/refresh")
+      error.response?.data?.code === "ACCESS_TOKEN_EXPIRED"
     ) {
       // Mark this request as retried
       // This prevents infinite loop
@@ -182,6 +196,22 @@ apiClient.interceptors.response.use(
       } finally {
         // Refresh process finished
         isRefreshing = false;
+      }
+    }
+
+    /**
+     * If error is 401 but NOT access token expired
+     * (invalid token, missing token, refresh token expired)
+     * → logout immediately
+     */
+    if (
+      status === 401 &&
+      (errorCode === "ACCESS_TOKEN_INVALID" ||
+        errorCode === "ACCESS_TOKEN_MISSING" ||
+        errorCode === "REFRESH_TOKEN_EXPIRED")
+    ) {
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
       }
     }
 
