@@ -1,4 +1,4 @@
-import { CreateDocumentsRequest } from "@models/requests/documents-request";
+import { CreateDocumentsRequest } from "@models/payloads/documents-request.payload";
 import { createDocumentRequest } from "@repositories/request.repository";
 import { generateClientUploadLink } from "@utils/doc-requests";
 import { sendDocumentRequestEmail } from "./brevo-email/send-doc-request";

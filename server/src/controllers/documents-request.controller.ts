@@ -1,5 +1,5 @@
 import { AuthenticatedRequest } from "@models/express";
-import { CreateDocumentsRequest } from "@models/requests/documents-request";
+import { CreateDocumentsRequest } from "@models/payloads/documents-request.payload";
 import { AuthenticatedUser } from "@models/user";
 import { getCheckListItemsByRequestId } from "@repositories/checklist-items.repository";
 import { getClientById } from "@repositories/client.repository";

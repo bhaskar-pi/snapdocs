@@ -5,7 +5,7 @@ import { Client, clientsTable } from "@database/schema/clients.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import { documentsTable } from "@database/schema/documents.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
-import { CreateClientPayload } from "@models/requests/documents-request";
+import { CreateClientPayload } from "@models/payloads/documents-request.payload";
 
 export async function getClientByEmail(
   userId: string,

@@ -13,7 +13,7 @@ import {
 import {
   LoginRequest,
   UserRegisterRequest,
-} from "@models/requests/auth.request";
+} from "@models/payloads/auth.payoad";
 import { User } from "@database/schema/users.schema";
 import {
   generateAccessToken,

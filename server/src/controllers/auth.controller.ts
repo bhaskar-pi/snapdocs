@@ -11,7 +11,7 @@ import { TokenValidity } from "@enums/session";
 import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
 import { AuthenticatedRequest } from "@models/express";
-import { UpdatePasswordRequest } from "@models/requests/auth.request";
+import { UpdatePasswordRequest } from "@models/payloads/auth.payoad";
 import { getUserById, updateUser } from "@repositories/user.repository";
 import { User } from "@database/schema/users.schema";
 import { AppError } from "@utils/error";

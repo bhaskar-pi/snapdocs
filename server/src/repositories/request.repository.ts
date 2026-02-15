@@ -10,7 +10,7 @@ import {
   DocRequestInsert,
   requestsTable,
 } from "@database/schema/document-requests.schema";
-import { CreateRequestPayload } from "@models/requests/documents-request";
+import { CreateRequestPayload } from "@models/payloads/documents-request.payload";
 import { eq } from "drizzle-orm";
 
 export async function createRequest(
