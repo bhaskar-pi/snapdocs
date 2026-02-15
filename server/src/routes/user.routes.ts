@@ -2,14 +2,14 @@ import {
   getUserHandler,
   updateUserHandler,
 } from "@controllers/user.controller";
-import { asyncHandler } from "@middlewares/async-handler";
+import { protectedHandler } from "@middlewares/async-handler";
 import { authenticate } from "@middlewares/validate-request";
 import Router from "express";
 
 const router = Router();
 
-router.get("/user", authenticate, asyncHandler(getUserHandler));
+router.get("/user", authenticate, protectedHandler(getUserHandler));
 
-router.put("/user/:userId", authenticate, asyncHandler(updateUserHandler));
+router.put("/user/:userId", authenticate, protectedHandler(updateUserHandler));
 
 export default router;

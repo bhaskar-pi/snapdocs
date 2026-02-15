@@ -1,25 +1,35 @@
 import { User } from "@database/schema/users.schema";
-import { AuthenticatedRequest } from "@models/express";
 import { getUserById, updateUser } from "@repositories/user.repository";
+import { AppError } from "@utils/error";
 
-export const getUserHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.authUser?.id;
+export const getUserHandler = async (authUser: User) => {
+  const user = await getUserById(authUser.id);
 
-  if (!userId) {
-    throw new Error("Missing user details");
+  if (!user) {
+    throw new AppError("User not found", 404);
   }
 
-  const user = await getUserById(userId);
-  return user;
+  return {
+    message: "User retrieved successfully",
+    statusCode: 200,
+    data: user,
+  };
 };
 
-export const updateUserHandler = async (request: AuthenticatedRequest) => {
-  const userDetails: User = {
-    ...request.body,
-    createdAt: new Date(request.body.createdAt),
+export const updateUserHandler = async (
+  authUser: User,
+  request: Partial<User>,
+) => {
+  const userDetails = {
+    ...request,
+    createdAt: new Date(request.createdAt!),
     updatedAt: new Date(),
   };
 
   const user = await updateUser(userDetails);
-  return user;
+  return {
+    message: "Your details have been updated successfully.",
+    statusCode: 200,
+    data: user,
+  };
 };

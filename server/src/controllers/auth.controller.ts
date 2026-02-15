@@ -115,7 +115,6 @@ export const refreshHandler = async (
   return {
     statusCode: 201,
     message: "Refresh successfully.",
-
     data: {
       user,
       session: {
@@ -127,8 +126,8 @@ export const refreshHandler = async (
 };
 
 export const updatePasswordHandler = async (
-  request: UpdatePasswordRequest,
   authUser: User,
+  request: UpdatePasswordRequest,
 ) => {
   if (request.confirmNewPassword !== request.newPassword) {
     throw new AppError(

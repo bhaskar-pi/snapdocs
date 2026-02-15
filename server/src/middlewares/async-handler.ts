@@ -19,7 +19,7 @@ export const asyncHandler =
   };
 
 export const protectedHandler = <TBody>(
-  handler: (body: TBody, user: User, res: Response) => Promise<any>,
+  handler: (user: User, body: TBody, res: Response) => Promise<any>,
 ) =>
   asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
     const user = req.authUser;
@@ -30,5 +30,5 @@ export const protectedHandler = <TBody>(
 
     const body = req.body as TBody;
 
-    return handler(body, user, res);
+    return handler(user, body, res);
   });
