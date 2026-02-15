@@ -8,7 +8,7 @@ import {
   registerUserHandler,
   updatePasswordHandler,
 } from "@controllers/auth.controller";
-import { asyncHandler } from "@middlewares/async-handler";
+import { asyncHandler, protectedHandler } from "@middlewares/async-handler";
 
 const router = Router();
 
@@ -23,7 +23,7 @@ router.post("/logout", logoutHandler);
 router.post(
   "/update-password",
   authenticate,
-  asyncHandler(updatePasswordHandler),
+  protectedHandler(updatePasswordHandler),
 );
 
 export default router;

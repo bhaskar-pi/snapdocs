@@ -16,7 +16,10 @@ import { getUserById, updateUser } from "@repositories/user.repository";
 import { User } from "@database/schema/users.schema";
 import { AppError } from "@utils/error";
 
-export const loginHandler = async (request: AuthenticatedRequest, response: Response) => {
+export const loginHandler = async (
+  request: AuthenticatedRequest,
+  response: Response,
+) => {
   const { session, user, refreshToken, accessToken } = await loginUser(
     request.body,
   );
@@ -123,11 +126,11 @@ export const refreshHandler = async (
   };
 };
 
-export const updatePasswordHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser!;
-  const passwords = request.body as UpdatePasswordRequest;
-
-  if (passwords.confirmNewPassword !== passwords.newPassword) {
+export const updatePasswordHandler = async (
+  request: UpdatePasswordRequest,
+  authUser: User,
+) => {
+  if (request.confirmNewPassword !== request.newPassword) {
     throw new AppError(
       "New password and confirm new password do not match",
       400,
@@ -140,7 +143,7 @@ export const updatePasswordHandler = async (request: AuthenticatedRequest) => {
   }
 
   const isCurrentPasswordValid = await bcrypt.compare(
-    passwords.currentPassword,
+    request.currentPassword,
     user.password,
   );
 
@@ -148,7 +151,7 @@ export const updatePasswordHandler = async (request: AuthenticatedRequest) => {
     throw new AppError("Invalid current password", 400);
   }
 
-  const passwordHash = await bcrypt.hash(passwords.newPassword, 10);
+  const passwordHash = await bcrypt.hash(request.newPassword, 10);
 
   const userDetails: User = {
     ...user,
