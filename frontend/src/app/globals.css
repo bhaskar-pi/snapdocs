@@ -314,6 +314,10 @@ select {
   max-width: 100% !important;
 }
 
+.input-lg {
+  max-width: var(--w-input-lg);
+}
+
 .input-height {
   height: 44px !important;
 }

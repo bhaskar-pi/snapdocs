@@ -2,6 +2,7 @@ import { ZodType } from "zod";
 import { Response, NextFunction, Request } from "express";
 import { AuthenticatedRequest } from "@models/express";
 import { verifyAccessToken } from "@utils/session";
+import { User } from "@database/schema/users.schema";
 
 /**
  * Validation middleware factory.
@@ -16,11 +17,7 @@ import { verifyAccessToken } from "@utils/session";
  */
 
 export const validate = (schema: ZodType) => {
-  return (
-    request: Request,
-    response: Response,
-    nextFunction: NextFunction,
-  ) => {
+  return (request: Request, response: Response, nextFunction: NextFunction) => {
     const result = schema.safeParse(request.body);
     if (!result.success) {
       response.status(400).json({
@@ -54,12 +51,13 @@ export const authenticate = (
   if (!token) {
     return res.status(401).json({
       message: "Unauthorized",
+      code: "TOKEN_EXPIRED",
     });
   }
 
   try {
     const payload = verifyAccessToken(token);
-    req.user = payload;
+    req.authUser = payload as User;
     return next();
   } catch {
     // Access token expired or invalid → client should refresh
@@ -67,6 +65,7 @@ export const authenticate = (
 
     return res.status(401).json({
       message: "Access token expired",
+      code: "TOKEN_EXPIRED",
     });
   }
 };

@@ -23,13 +23,14 @@ import {
   verifyRefreshToken,
 } from "@utils/session";
 import { TokenValidity } from "@enums/session";
+import { AppError } from "@utils/error";
 
 export async function registerUser(data: UserRegisterRequest) {
   const { firstName, lastName, email, phoneNumber, password } = data;
 
   const existsUser = await getUserByEmail(email);
   if (existsUser) {
-    throw new Error("Email already registered");
+    throw new AppError("An account with this email already exists.", 409);
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -48,12 +49,12 @@ export async function loginUser(data: LoginRequest) {
 
   const user = await getUserByEmail(email);
   if (!user) {
-    throw new Error("Invalid credentials.");
+    throw new AppError("Invalid credentials.", 401);
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    throw new Error("Invalid credentials.");
+    throw new AppError("Invalid credentials.", 401);
   }
 
   const { accessToken, refreshToken } = getSecurityTokens(user);

@@ -12,11 +12,7 @@ import { verifyDocumentsRequestToken } from "@utils/session";
 export const sendDocRequestHandler = async (request: AuthenticatedRequest) => {
   const data = request.body as CreateDocumentsRequest;
 
-  if (!request.user) {
-    throw new Error("Missing user details");
-  }
-
-  const linkToUpload = await sendDocRequest(request?.user, data);
+  const linkToUpload = await sendDocRequest(request?.authUser!, data);
 
   return {
     data: linkToUpload,

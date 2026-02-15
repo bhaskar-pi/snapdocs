@@ -19,7 +19,7 @@
 
 .sectionTitle {
   color: var(--slate-900);
-  font-size: var(--font-base);
+  font-size: var(--font-sm);
   font-weight: 600;
 }
 

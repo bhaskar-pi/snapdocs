@@ -8,6 +8,6 @@ import { Request } from "express";
  * the authenticated user's JWT payload.
  */
 export interface AuthenticatedRequest extends Request {
-  user?: User;
+  authUser?: User;
   data?: unknown;
 }

@@ -1,22 +1,15 @@
 import { getClientDetailsDto } from "@mappers/clients";
 import { AuthenticatedRequest } from "@models/express";
 import {
-  getClientById,
   getClientDetailsById,
   getClientsByUserId,
   getClientSummariesByUserId,
 } from "@repositories/client.repository";
-import { getUserById } from "@repositories/user.repository";
-import { verifyDocumentsRequestToken } from "@utils/session";
 
 export const getClientsSummariesHandler = async (
   request: AuthenticatedRequest,
 ) => {
-  const userId = request.user?.id;
-
-  if (!userId) {
-    throw new Error("Invalid Session");
-  }
+  const userId = request.authUser?.id!;
 
   const clientSummaries = await getClientSummariesByUserId(userId);
 
@@ -26,12 +19,8 @@ export const getClientsSummariesHandler = async (
 export const getClientDetailsHandler = async (
   request: AuthenticatedRequest,
 ) => {
-  const userId = request.user?.id;
+  const userId = request.authUser?.id!;
   const clientId = request.params.clientId;
-
-  if (!userId) {
-    throw new Error("Invalid Session");
-  }
 
   if (!clientId) {
     throw new Error("Missing client id");
@@ -42,7 +31,7 @@ export const getClientDetailsHandler = async (
 };
 
 export const getClientsHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.user?.id;
+  const userId = request.authUser?.id;
 
   if (!userId) {
     throw new Error("Invalid Session");

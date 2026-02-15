@@ -33,7 +33,7 @@
 }
 
 .header > h1 {
-  font-size: var(--font-2xl);
+  font-size: var(--font-xl);
   font-weight: var(--fw-semibold);
 }
 

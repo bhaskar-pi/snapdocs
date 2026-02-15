@@ -1,5 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+import { ApiError } from "@/types/models/misc";
+
 /**
  * This is your main axios instance.
  * All API calls (GET, POST, etc.) use this.
@@ -71,7 +73,7 @@ const processQueue = (error: unknown = null) => {
 apiClient.interceptors.response.use(
   (response) => response,
 
-  async (error: AxiosError) => {
+  async (error: AxiosError<ApiError>) => {
     /**
      * originalRequest contains:
      * - URL (ex: /clients)
@@ -89,7 +91,13 @@ apiClient.interceptors.response.use(
      * If request failed with 401 (Unauthorized)
      * AND we haven't retried it before
      */
-    if (error.response?.status === 401 && !originalRequest._retry) {
+
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      error.response?.data?.code === "TOKEN_EXPIRED" &&
+      !originalRequest.url?.includes("/refresh")
+    ) {
       // Mark this request as retried
       // This prevents infinite loop
       originalRequest._retry = true;

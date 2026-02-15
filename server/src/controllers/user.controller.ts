@@ -3,7 +3,7 @@ import { AuthenticatedRequest } from "@models/express";
 import { getUserById, updateUser } from "@repositories/user.repository";
 
 export const getUserHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.user?.id;
+  const userId = request.authUser?.id;
 
   if (!userId) {
     throw new Error("Missing user details");
@@ -14,12 +14,6 @@ export const getUserHandler = async (request: AuthenticatedRequest) => {
 };
 
 export const updateUserHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.user?.id;
-
-  if (!userId) {
-    throw new Error("Missing user details");
-  }
-
   const userDetails: User = {
     ...request.body,
     createdAt: new Date(request.body.createdAt),

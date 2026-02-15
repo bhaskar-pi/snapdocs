@@ -12,9 +12,13 @@ import { asyncHandler } from "@middlewares/async-handler";
 
 const router = Router();
 
-router.post("/login", validate(loginSchema), loginHandler);
-router.post("/register", validate(registerSchema), registerUserHandler);
-router.post("/refresh", refreshHandler);
+router.post("/login", validate(loginSchema), asyncHandler(loginHandler));
+router.post(
+  "/register",
+  validate(registerSchema),
+  asyncHandler(registerUserHandler),
+);
+router.post("/refresh", asyncHandler(refreshHandler));
 router.post("/logout", logoutHandler);
 router.post(
   "/update-password",

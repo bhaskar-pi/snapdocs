@@ -62,23 +62,25 @@ export const Input: React.FC<InputProps> = ({
       )}
 
       <div className={`${styles.field} ${fieldClassName}`}>
-        <input
-          className={`${styles.input} ${inputClassName} ${errorBorder}`}
-          type={resolvedType}
-          id={id}
-          {...props}
-        />
+        <div className={styles.inputWrapper}>
+          <input
+            className={`${styles.input} ${inputClassName} ${errorBorder}`}
+            type={resolvedType}
+            id={id}
+            {...props}
+          />
 
-        {isPassword && (
-          <button
-            type="button"
-            className={styles.eyeButton}
-            onClick={() => setShowPassword((prev) => !prev)}
-            tabIndex={-1}
-          >
-            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-          </button>
-        )}
+          {isPassword && (
+            <button
+              type="button"
+              className={styles.eyeButton}
+              onClick={() => setShowPassword((prev) => !prev)}
+              tabIndex={-1}
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          )}
+        </div>
 
         {message && <p className={messageClassName}>{message}</p>}
       </div>

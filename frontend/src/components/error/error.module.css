@@ -1,0 +1,104 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--slate-50);
+  padding: 24px;
+}
+
+.errorCard {
+  max-width: 520px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.errorBox {
+  border: 1px solid var(--negative-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.errorLabel {
+  font-size: var(--font-sm);
+  font-weight: var(--fw-medium);
+  color: var(--negative);
+}
+
+.errorMessage {
+  font-size: var(--font-sm);
+  color: var(--negative);
+  word-break: break-word;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  font-size: var(--font-sm);
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--input-ring);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.primaryBtn {
+  background: var(--primary-bg);
+  color: var(--on-primary);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: var(--fw-medium);
+}
+
+.primaryBtn:hover {
+  background: var(--primary-bg-hover);
+}
+
+.secondaryBtn {
+  background: var(--secondary-bg);
+  color: var(--secondary-text);
+  border: 1px solid var(--secondary-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: var(--fw-medium);
+}
+
+.secondaryBtn:hover {
+  background: var(--secondary-bg-hover);
+}
+
+.successMessage {
+  background: var(--successXL);
+  border: 1px solid var(--success-border);
+  color: var(--success);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+}

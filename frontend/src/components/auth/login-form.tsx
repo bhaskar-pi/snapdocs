@@ -41,6 +41,7 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={login.isPending}
+          fieldClassName="input-lg"
         />
 
         <Input
@@ -55,6 +56,7 @@ const LoginForm = () => {
           messagePosition="right"
           messageType="info"
           disabled={login.isPending}
+          fieldClassName="input-lg"
         />
 
         <Button
