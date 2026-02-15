@@ -1,9 +1,9 @@
 import {
   getClientDetailsHandler,
   getClientsHandler,
-  getClientsSummariesHandler,
+  getUserClientsStatsHandler,
 } from "@controllers/clients.controller";
-import { asyncHandler } from "@middlewares/async-handler";
+import { protectedHandler } from "@middlewares/async-handler";
 import { authenticate } from "@middlewares/validate-request";
 import { Router } from "express";
 
@@ -12,15 +12,15 @@ const router = Router();
 router.get(
   "/clients/summary",
   authenticate,
-  asyncHandler(getClientsSummariesHandler),
+  protectedHandler(getUserClientsStatsHandler),
 );
 
 router.get(
   "/clients/:clientId",
   authenticate,
-  asyncHandler(getClientDetailsHandler),
+  protectedHandler(getClientDetailsHandler),
 );
 
-router.get("/clients", authenticate, asyncHandler(getClientsHandler));
+router.get("/clients", authenticate, protectedHandler(getClientsHandler));
 
 export default router;

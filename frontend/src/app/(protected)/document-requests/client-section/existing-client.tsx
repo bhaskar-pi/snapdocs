@@ -13,13 +13,13 @@ const ExistingClient = ({ client, onChange }: Props) => {
   const { data: clients, isLoading } = useClients();
 
   const clientOptions =
-    clients?.map((client) => ({
+    clients?.data?.map((client) => ({
       label: `${client.fullName} (${client.email})`,
       value: client.email,
     })) ?? [];
 
   const onSelectClient = (email: string) => {
-    const selectedClient = clients?.find((c) => c.email === email);
+    const selectedClient = clients?.data?.find((c) => c.email === email);
 
     onChange({
       fullName: selectedClient?.fullName || "",

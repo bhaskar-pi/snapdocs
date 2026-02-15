@@ -1,42 +1,56 @@
 import { getClientDetailsDto } from "@mappers/clients";
-import { AuthenticatedRequest } from "@models/express";
+import { AuthenticatedUser } from "@models/user";
 import {
   getClientDetailsById,
   getClientsByUserId,
-  getClientSummariesByUserId,
+  getClientsStatsByUserId,
 } from "@repositories/client.repository";
 
-export const getClientsSummariesHandler = async (
-  request: AuthenticatedRequest,
-) => {
-  const userId = request.authUser?.id!;
+export const getUserClientsStatsHandler = async ({
+  authUser,
+}: {
+  authUser: AuthenticatedUser;
+}) => {
+  const clientSummaries = await getClientsStatsByUserId(authUser.id);
 
-  const clientSummaries = await getClientSummariesByUserId(userId);
-
-  return clientSummaries;
+  return {
+    message: "Clients stats retrieved successfully.",
+    data: clientSummaries,
+    statusCode: 200,
+  };
 };
 
-export const getClientDetailsHandler = async (
-  request: AuthenticatedRequest,
-) => {
-  const userId = request.authUser?.id!;
-  const clientId = request.params.clientId;
-
-  if (!clientId) {
+export const getClientDetailsHandler = async ({
+  authUser,
+  params,
+}: {
+  authUser: AuthenticatedUser;
+  params: { clientId: string };
+}) => {
+  if (!params.clientId) {
     throw new Error("Missing client id");
   }
 
-  const details = await getClientDetailsById(userId, clientId);
-  return getClientDetailsDto(details);
+  const clientDetails = await getClientDetailsById(
+    authUser.id,
+    params.clientId,
+  );
+
+  const detailsDto = getClientDetailsDto(clientDetails);
+  return {
+    data: detailsDto,
+    statusCode: 200,
+  };
 };
 
-export const getClientsHandler = async (request: AuthenticatedRequest) => {
-  const userId = request.authUser?.id;
-
-  if (!userId) {
-    throw new Error("Invalid Session");
-  }
-
-  const clients = await getClientsByUserId(userId);
-  return clients;
+export const getClientsHandler = async ({
+  authUser,
+}: {
+  authUser: AuthenticatedUser;
+}) => {
+  const clients = await getClientsByUserId(authUser.id);
+  return {
+    data: clients,
+    statusCode: 200,
+  };
 };

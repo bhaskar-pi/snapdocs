@@ -60,7 +60,7 @@ export async function getClientsByUserId(
   return clients;
 }
 
-export async function getClientSummariesByUserId(userId: string) {
+export async function getClientsStatsByUserId(userId: string) {
   const result = await db
     .select({
       id: clientsTable.id,

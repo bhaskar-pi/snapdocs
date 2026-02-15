@@ -4,17 +4,18 @@ import {
   ClientRequestDetails,
   ClientSummary,
 } from "@/types/models/client";
+import { ApiResponse } from "@/types/models/misc";
 
 export const clientsApi = {
   getClientsSummary() {
-    return GET<ClientSummary[]>("/clients/summary");
+    return GET<ApiResponse<ClientSummary[]>>("/clients/summary");
   },
 
   getClientDetails(clientId: string) {
-    return GET<ClientRequestDetails>(`/clients/${clientId}`);
+    return GET<ApiResponse<ClientRequestDetails>>(`/clients/${clientId}`);
   },
 
   getClients() {
-    return GET<Client[]>(`/clients`);
+    return GET<ApiResponse<Client[]>>(`/clients`);
   },
 };

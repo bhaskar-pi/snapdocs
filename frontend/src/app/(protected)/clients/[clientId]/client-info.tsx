@@ -42,11 +42,13 @@ const ClientInfo = ({ client }: Props) => {
   if (items.every((item) => !item.value)) return null;
 
   return (
-    <section className={`card`}>
-      <h1 className="title">{client?.fullName}</h1>
-      <p className="description">{`Client since: ${formatDate(
-        client?.createdAt
-      )}`}</p>
+    <section className={`card ${styles.clientInfo}`}>
+      <div>
+        <h1 className="title">{client?.fullName}</h1>
+        <p className="description">{`Client since: ${formatDate(
+          client?.createdAt,
+        )}`}</p>
+      </div>
 
       <div className={styles.clientInfoRow}>
         {items.map(({ label, value, fallback, icon }) => (
