@@ -1,22 +1,25 @@
 import { Router } from "express";
 import {
-  getClientUploadChecklistItems,
-  sendDocRequestHandler,
+  getUploadRequestDetailsHandler,
+  sendDocumentsRequestHandler,
 } from "@controllers/documents-request.controller";
 import { authenticate } from "@middlewares/validate-request";
-import { asyncHandler } from "@middlewares/async-handler";
+import {
+  protectedHandler,
+  unProtectedHandler,
+} from "@middlewares/async-handler";
 
 const router = Router();
 
 router.post(
   "/document-requests",
   authenticate,
-  asyncHandler(sendDocRequestHandler),
+  protectedHandler(sendDocumentsRequestHandler),
 );
 
 router.get(
   "/upload-documents/checklist/:token",
-  asyncHandler(getClientUploadChecklistItems),
+  unProtectedHandler(getUploadRequestDetailsHandler),
 );
 
 export default router;

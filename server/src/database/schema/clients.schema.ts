@@ -1,4 +1,10 @@
-import { index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+} from "drizzle-orm/pg-core";
 import { usersTable } from "./users.schema";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
@@ -19,8 +25,10 @@ export const clientsTable = pgTable(
       .notNull()
       .$onUpdate(() => new Date()),
   },
-  (table) => [index("clients_email_user_id_idx").on(table.email, table.userId)]
+  (table) => [
+    uniqueIndex("clients_user_email_unique").on(table.userId, table.email),
+  ],
 );
 
 export type Client = InferSelectModel<typeof clientsTable>;
-export type ClientInsert = InferInsertModel<typeof clientsTable>
+export type ClientInsert = InferInsertModel<typeof clientsTable>;

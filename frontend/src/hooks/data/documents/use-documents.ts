@@ -41,7 +41,7 @@ export const useUploadDocument = (requestToken?: string) => {
 };
 
 export function useGetUploadChecklistItems(requestToken?: string | null) {
-  return useQuery<DocumentsUploadChecklist>({
+  return useQuery({
     queryKey: ["uploadChecklistItems", requestToken],
     queryFn: () => documentRequestsApi.getUploadChecklistItems(requestToken!),
     enabled: !!requestToken,

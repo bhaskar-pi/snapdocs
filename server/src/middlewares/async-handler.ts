@@ -46,3 +46,24 @@ export const protectedHandler = <
       res,
     });
   });
+
+export const unProtectedHandler = <
+  TBody = unknown,
+  TParams = unknown,
+  TQuery = unknown,
+>(
+  handler: (context: {
+    request: TBody;
+    params: TParams;
+    query: TQuery;
+    res: Response;
+  }) => Promise<any>,
+) =>
+  asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
+    return handler({
+      request: req.body as TBody,
+      params: req.params as TParams,
+      query: req.query as TQuery,
+      res,
+    });
+  });

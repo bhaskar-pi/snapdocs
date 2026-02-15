@@ -1,14 +1,5 @@
-import { DocRequestInsert } from "@database/schema/document-requests.schema";
-import {
-  CreateDocumentsRequest,
-  CustomRequest,
-} from "@models/requests/documents-request";
-import { createCheckListItems } from "@repositories/checklist-items.repository";
-import {
-  createClient,
-  getClientByEmail,
-} from "@repositories/client.repository";
-import { createRequest } from "@repositories/request.repository";
+import { CreateDocumentsRequest } from "@models/requests/documents-request";
+import { createDocumentRequest } from "@repositories/request.repository";
 import { generateClientUploadLink } from "@utils/doc-requests";
 import { sendDocumentRequestEmail } from "./brevo-email/send-doc-request";
 import { AuthenticatedUser } from "@models/user";
@@ -17,13 +8,8 @@ export async function sendDocRequest(
   user: AuthenticatedUser,
   payload: CreateDocumentsRequest,
 ) {
-  const userId = user.id;
-  if (!user.id) {
-    throw new Error("Missing user details");
-  }
-
   const clientPayload = payload.client;
-  const requestPayload = payload.request as CustomRequest;
+  const requestPayload = payload.request;
 
   const requiredDocuments = requestPayload.documents;
   if (requiredDocuments?.length < 1) {
@@ -32,34 +18,14 @@ export async function sendDocRequest(
     );
   }
 
-  const clientRecord =
-    (await getClientByEmail(userId, clientPayload.email)) ??
-    (await createClient(userId, clientPayload));
-
-  const { title, dueDate, description } = requestPayload;
-
-  const newRequest: DocRequestInsert = {
-    title,
-    description,
-    userId,
-    clientId: clientRecord.id,
-    sentAt: new Date(),
-    ...(dueDate && {
-      dueDate: new Date(dueDate),
-    }),
-  };
-
-  const createdRequest = await createRequest(newRequest);
-
-  const checklistItems = requiredDocuments.map((doc) => ({
-    ...doc,
-    requestId: createdRequest.id,
-  }));
-
-  await createCheckListItems(checklistItems);
+  const { clientRecord, createdRequest } = await createDocumentRequest(
+    user.id,
+    clientPayload,
+    requestPayload,
+  );
 
   const uploadLink = generateClientUploadLink(
-    userId,
+    user.id,
     clientRecord.id,
     createdRequest.id,
   );
