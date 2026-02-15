@@ -35,6 +35,7 @@ const Templates = () => {
 
   const userId = useAuthStore((store) => store.user?.id || "");
   const { data: templates, isLoading: templatesLoading } = useTemplates(userId);
+
   const updateTemplate = useUpdateTemplate(userId);
   const deleteTemplate = useDeleteTemplate(userId);
   const createTemplate = useCreateTemplate(userId);
@@ -62,7 +63,7 @@ const Templates = () => {
       const documents = template?.documents ?? [];
 
       const isDuplicate = documents.some(
-        (doc) => doc.name.toLowerCase() === name.toLowerCase()
+        (doc) => doc.name.toLowerCase() === name.toLowerCase(),
       );
 
       if (isDuplicate) {
@@ -77,7 +78,7 @@ const Templates = () => {
 
       setDocumentName("");
     },
-    [template?.documents]
+    [template?.documents],
   );
 
   const onToggleDocumentRequired = useCallback(
@@ -88,12 +89,12 @@ const Templates = () => {
         return {
           ...prev,
           documents: prev.documents.map((doc) =>
-            doc.name === name ? { ...doc, isRequired } : doc
+            doc.name === name ? { ...doc, isRequired } : doc,
           ),
         };
       });
     },
-    []
+    [],
   );
 
   const onDeleteDocument = useCallback((name: string) => {
@@ -139,7 +140,7 @@ const Templates = () => {
       />
 
       <div className={styles.cards}>
-        {templates?.map((template) => (
+        {templates?.data?.map((template) => (
           <TemplateCard
             key={template.id}
             template={template}

@@ -24,10 +24,11 @@ export const useUpdateUser = () => {
   return useMutation({
     mutationFn: (user: User) => usersApi.updateUser(user),
 
-    onSuccess(updatedUser) {
-      setUser(updatedUser);
+    onSuccess(response) {
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      toast.success("Your details have been updated successfully.");
+
+      setUser(response.data);
+      toast.success(response.message);
     },
 
     onError(error) {

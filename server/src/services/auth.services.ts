@@ -13,7 +13,7 @@ import {
 import {
   LoginRequest,
   UserRegisterRequest,
-} from "@models/requests/auth.request";
+} from "@models/payloads/auth.payload";
 import { User } from "@database/schema/users.schema";
 import {
   generateAccessToken,
@@ -23,13 +23,14 @@ import {
   verifyRefreshToken,
 } from "@utils/session";
 import { TokenValidity } from "@enums/session";
+import { AppError } from "@utils/error";
 
 export async function registerUser(data: UserRegisterRequest) {
   const { firstName, lastName, email, phoneNumber, password } = data;
 
   const existsUser = await getUserByEmail(email);
   if (existsUser) {
-    throw new Error("Email already registered");
+    throw new AppError("An account with this email already exists.", 409);
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -48,12 +49,12 @@ export async function loginUser(data: LoginRequest) {
 
   const user = await getUserByEmail(email);
   if (!user) {
-    throw new Error("Invalid credentials.");
+    throw new AppError("Invalid credentials.", 401);
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    throw new Error("Invalid credentials.");
+    throw new AppError("Invalid credentials.", 401);
   }
 
   const { accessToken, refreshToken } = getSecurityTokens(user);
@@ -81,7 +82,7 @@ export async function rotateAccessToken(token: string) {
   const refreshTokenHash = hashRefreshToken(token);
   const oldSession = await findValidSession(userPayload.id, refreshTokenHash);
   if (!oldSession) {
-    throw new Error("Invalid session");
+    throw new AppError("Invalid session", 401);
   }
 
   // Rotate refresh token only when it is close to expiry.
@@ -95,7 +96,7 @@ export async function rotateAccessToken(token: string) {
   const user = await getUserById(userPayload.id);
 
   if (!user) {
-    throw new Error("User not found for this session.");
+    throw new AppError("User not found for this session.", 400);
   }
 
   if (!shouldRotate) {

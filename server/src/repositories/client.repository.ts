@@ -1,11 +1,11 @@
 import { db } from "@database/drizzle";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { checklistItemsTable } from "@database/schema/checklist-items.schema";
 import { Client, clientsTable } from "@database/schema/clients.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import { documentsTable } from "@database/schema/documents.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
-import { ClientRequest } from "@models/requests/documents-request";
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { CreateClientPayload } from "@models/payloads/documents-request.payload";
 
 export async function getClientByEmail(
   userId: string,
@@ -36,7 +36,7 @@ export async function getClientById(
 
 export async function createClient(
   userId: string,
-  client: ClientRequest,
+  client: CreateClientPayload,
 ): Promise<Client | undefined> {
   const [result] = await db
     .insert(clientsTable)
@@ -60,7 +60,7 @@ export async function getClientsByUserId(
   return clients;
 }
 
-export async function getClientSummariesByUserId(userId: string) {
+export async function getClientsStatsByUserId(userId: string) {
   const result = await db
     .select({
       id: clientsTable.id,

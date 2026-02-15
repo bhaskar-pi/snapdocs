@@ -4,7 +4,6 @@ import { toast } from "sonner";
 
 import { documentRequestsApi } from "@/services/document-requests.service";
 import { documentsApi } from "@/services/documents.service";
-import { DocumentsUploadChecklist } from "@/types/models/document";
 import { ApiError } from "@/types/models/misc";
 import { getErrorMessage } from "@/utils/api";
 
@@ -41,7 +40,7 @@ export const useUploadDocument = (requestToken?: string) => {
 };
 
 export function useGetUploadChecklistItems(requestToken?: string | null) {
-  return useQuery<DocumentsUploadChecklist>({
+  return useQuery({
     queryKey: ["uploadChecklistItems", requestToken],
     queryFn: () => documentRequestsApi.getUploadChecklistItems(requestToken!),
     enabled: !!requestToken,

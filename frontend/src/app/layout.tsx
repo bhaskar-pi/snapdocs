@@ -2,7 +2,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 
-import { AuthBootstrap } from "@/components/auth/auth-bootstrap";
 import { QueryProvider } from "@/providers/react-query";
 
 import type { Metadata } from "next";
@@ -26,10 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <QueryProvider>
-          <AuthBootstrap />
-          {children}
-        </QueryProvider>
+        <QueryProvider>{children}</QueryProvider>
         <Toaster position="top-center" richColors />
       </body>
     </html>

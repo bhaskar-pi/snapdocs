@@ -2,6 +2,9 @@ import { ZodType } from "zod";
 import { Response, NextFunction, Request } from "express";
 import { AuthenticatedRequest } from "@models/express";
 import { verifyAccessToken } from "@utils/session";
+import { AuthenticatedUser } from "@models/user";
+import { TokenErrors } from "@enums/session";
+import { AppError } from "@utils/error";
 
 /**
  * Validation middleware factory.
@@ -16,11 +19,7 @@ import { verifyAccessToken } from "@utils/session";
  */
 
 export const validate = (schema: ZodType) => {
-  return (
-    request: Request,
-    response: Response,
-    nextFunction: NextFunction,
-  ) => {
+  return (request: Request, response: Response, nextFunction: NextFunction) => {
     const result = schema.safeParse(request.body);
     if (!result.success) {
       response.status(400).json({
@@ -52,21 +51,12 @@ export const authenticate = (
   const token = req.cookies?.accessToken;
 
   if (!token) {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
+    throw new AppError("Unauthorized", 401, TokenErrors.ACCESS_TOKEN_INVALID);
   }
 
-  try {
-    const payload = verifyAccessToken(token);
-    req.user = payload;
-    return next();
-  } catch {
-    // Access token expired or invalid → client should refresh
-    res.clearCookie("accessToken");
+  const payload = verifyAccessToken(token);
 
-    return res.status(401).json({
-      message: "Access token expired",
-    });
-  }
+  req.authUser = payload as AuthenticatedUser;
+
+  return next();
 };

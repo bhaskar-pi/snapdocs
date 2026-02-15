@@ -9,6 +9,7 @@ import clientsRouter from "@routes/clients.routes";
 import documentsRouter from "@routes/documents.routes";
 import templatesRouter from "@routes/templates.routes";
 import userRouter from "@routes/user.routes";
+import { errorHandler } from "@middlewares/error";
 
 const app = express();
 
@@ -27,5 +28,8 @@ app.use(env.API_PATH, clientsRouter);
 app.use(env.API_PATH, documentsRouter);
 app.use(env.API_PATH, templatesRouter);
 app.use(env.API_PATH, userRouter);
+
+/** use Error handler middleware at last */
+app.use(errorHandler);
 
 export default app;

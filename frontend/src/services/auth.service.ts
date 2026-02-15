@@ -1,9 +1,10 @@
 import { POST } from "@/api/http";
 import { LoginResponse, SignUpForm, UpdatePassword } from "@/types/models/auth";
+import { ApiResponse } from "@/types/models/misc";
 
 export const authApi = {
   login(email: string, password: string) {
-    return POST<LoginResponse>("/login", {
+    return POST<ApiResponse<LoginResponse>>("/login", {
       email,
       password,
     });
@@ -18,7 +19,7 @@ export const authApi = {
   },
 
   refresh() {
-    return POST<LoginResponse>("/refresh");
+    return POST<ApiResponse<LoginResponse>>("/refresh");
   },
 
   updatePassword(passwords: UpdatePassword) {

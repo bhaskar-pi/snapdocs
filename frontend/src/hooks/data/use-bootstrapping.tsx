@@ -18,9 +18,9 @@ export function useBootstrapping() {
       return authApi.refresh();
     },
 
-    onSuccess: (data) => {
-      setUser(data.user);
-      setSession(data.session);
+    onSuccess: (response) => {
+      setUser(response.data.user);
+      setSession(response.data.session);
       setLoading(false);
     },
 

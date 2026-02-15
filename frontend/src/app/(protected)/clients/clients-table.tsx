@@ -1,6 +1,8 @@
 "use client";
 
+import { AxiosError } from "axios";
 import { Ellipsis, Eye, Trash2 } from "lucide-react";
+import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -8,9 +10,8 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/data-table";
 import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
-import { useClientsSummary } from "@/hooks/data/clients/use-clients-summary";
+import { useClientsSummary } from "@/hooks/data/clients/use-clients";
 import { SCREEN_PATHS } from "@/types/enums/paths";
-import { RequestStatus } from "@/types/enums/request";
 import { ClientSummary } from "@/types/models/client";
 import { getErrorMessage } from "@/utils/api";
 import { formatEnumLabel } from "@/utils/input";
@@ -35,12 +36,12 @@ const ClientsTable = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(getErrorMessage(error));
+      toast.error(getErrorMessage(error as AxiosError<ApiError>));
     }
   }, [error]);
 
   const filteredClientSummaries = useMemo(() => {
-    return clientsSummaries?.filter((summary) => {
+    return clientsSummaries?.data?.filter((summary) => {
       const matchesSearch =
         summary.email
           .toLowerCase()
@@ -50,7 +51,9 @@ const ClientsTable = () => {
           .startsWith(filters.searchText.toLowerCase());
 
       const matchesStatus =
-        filters.status === "All Status" || summary.status === filters.status;
+        !filters.status || filters.status === "All Status"
+          ? true
+          : summary.status === filters.status;
 
       return matchesSearch && matchesStatus;
     });
@@ -120,11 +123,7 @@ const ClientsTable = () => {
               </span>
             </div>
 
-            <p
-              className={`status ${getStatusClassName(
-                summary.status as RequestStatus
-              )}`}
-            >
+            <p className={`status ${getStatusClassName(summary.status)}`}>
               <span />
               {formatEnumLabel(summary.status)}
             </p>

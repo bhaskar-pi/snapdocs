@@ -1,35 +1,35 @@
+import { ClientInsert } from "@database/schema/clients.schema";
+import { DocRequestInsert } from "@database/schema/document-requests.schema";
 import { RequestStatus } from "@enums/document-requests";
 
-export interface DocumentRequest {
+export interface RequestDocumentItem {
   /** name -> document name */
   name: string;
   isRequired: boolean;
 }
 
-export interface ClientRequest {
+export interface CreateClientPayload {
   email: string;
   whatsappNumber: string | null;
   fullName: string;
 }
 
-export interface TemplateBasedRequest {
+export interface TemplateRequestPayload {
   templateId: string;
   dueDate?: string;
   status: RequestStatus;
 }
 
-export interface CustomRequest {
+export interface CreateRequestPayload {
   templateId?: never;
   title: string;
   dueDate?: string;
   description?: string;
   status: RequestStatus;
-  documents: DocumentRequest[];
+  documents: RequestDocumentItem[];
 }
 
-type CreateRequestPayload = TemplateBasedRequest | CustomRequest;
-
 export interface CreateDocumentsRequest {
-  client: ClientRequest;
+  client: ClientInsert;
   request: CreateRequestPayload;
 }

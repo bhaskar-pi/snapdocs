@@ -8,6 +8,8 @@ import {
   SEVEN_DAYS,
 } from "@config/constants";
 import { User } from "@database/schema/users.schema";
+import { AppError } from "./error";
+import { TokenErrors } from "@enums/session";
 
 export function generateAccessToken(user: User): string {
   const token = jwt.sign(
@@ -27,8 +29,23 @@ export function generateAccessToken(user: User): string {
 }
 
 export function verifyAccessToken(token: string) {
-  const payload = jwt.verify(token, env.JWT_ACCESS_TOKEN_SECRET);
-  return payload as User;
+  try {
+    return jwt.verify(token, env.JWT_ACCESS_TOKEN_SECRET);
+  } catch (error: any) {
+    if (error.name === "TokenExpiredError") {
+      throw new AppError(
+        "Access token expired",
+        401,
+        TokenErrors.ACCESS_TOKEN_EXPIRED,
+      );
+    }
+
+    throw new AppError(
+      "Invalid access token",
+      401,
+      TokenErrors.ACCESS_TOKEN_INVALID,
+    );
+  }
 }
 
 export function generateRefreshToken(user: User): string {
@@ -47,8 +64,16 @@ export function generateRefreshToken(user: User): string {
 }
 
 export function verifyRefreshToken(token: string) {
-  const payload = jwt.verify(token, env.JWT_REFRESH_TOKEN_SECRET);
-  return payload as User;
+  try {
+    const payload = jwt.verify(token, env.JWT_REFRESH_TOKEN_SECRET);
+    return payload as User;
+  } catch (error) {
+    throw new AppError(
+      "Refresh token expired",
+      401,
+      TokenErrors.REFRESH_TOKEN_EXPIRED,
+    );
+  }
 }
 
 export function getSecurityTokens(user: User): {
