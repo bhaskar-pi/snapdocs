@@ -1,4 +1,6 @@
+import { Template, TemplateInsert } from "@database/schema/templates.schema";
 import { AuthenticatedRequest } from "@models/express";
+import { AuthenticatedUser } from "@models/user";
 import {
   createTemplate,
   deleteTemplate,
@@ -6,49 +8,95 @@ import {
   getTemplates,
   updateTemplate,
 } from "@repositories/templates.repository";
+import { AppError } from "@utils/error";
 
-export const createTemplateHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser;
-  const templateRequest = request.body;
-
+export const createTemplateHandler = async ({
+  authUser,
+  request,
+}: {
+  authUser: AuthenticatedUser;
+  request: TemplateInsert;
+}) => {
   const template = await createTemplate({
-    ...templateRequest,
+    ...request,
     userId: authUser?.id,
   });
-  return template;
+
+  return {
+    message: "Template created successfully.",
+    statusCode: 201,
+    data: template,
+  };
 };
 
-export const getTemplatesHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser;
+export const getTemplatesHandler = async ({
+  authUser,
+}: {
+  authUser: AuthenticatedUser;
+}) => {
+  const templates = await getTemplates(authUser.id);
 
-  const templates = await getTemplates(authUser?.id!);
-  return templates;
+  return {
+    message: "Templates retrieved successfully.",
+    statusCode: 200,
+    data: templates,
+  };
 };
 
-export const getTemplateHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser;
+export const getTemplateHandler = async ({
+  authUser,
+  params,
+}: {
+  authUser: AuthenticatedUser;
+  params: { templateId: string };
+}) => {
+  if (!params.templateId) {
+    throw new AppError("TemplateId not found", 404);
+  }
 
-  const template = await getTemplateById(
-    authUser?.id!,
-    request.params.templateId,
-  );
-  return template;
+  const template = await getTemplateById(authUser.id, params.templateId);
+  return {
+    message: "Template retrieved successfully.",
+    statusCode: 200,
+    data: template,
+  };
 };
 
-export const updateTemplateHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser;
-  const templateRequest = request.body;
-
+export const updateTemplateHandler = async ({
+  authUser,
+  request,
+}: {
+  authUser: AuthenticatedUser;
+  request: Template;
+}) => {
   const template = await updateTemplate({
-    ...templateRequest,
+    ...request,
     userId: authUser?.id,
   });
-  return template;
+
+  return {
+    message: "Template updated successfully.",
+    statusCode: 200,
+    data: template,
+  };
 };
 
-export const deleteTemplateHandler = async (request: AuthenticatedRequest) => {
-  const authUser = request.authUser;
+export const deleteTemplateHandler = async ({
+  authUser,
+  params,
+}: {
+  authUser: AuthenticatedUser;
+  params: { templateId: string };
+}) => {
+  if (!params.templateId) {
+    throw new AppError("TemplateId not found.", 404);
+  }
 
-  const templateId = request.params.templateId;
-  return await deleteTemplate(authUser?.id!, templateId);
+  await deleteTemplate(authUser.id, params.templateId);
+
+  return {
+    statusCode: 204,
+    success: true,
+    message: "Template deleted successfully.",
+  };
 };

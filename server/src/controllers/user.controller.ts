@@ -1,8 +1,13 @@
 import { User } from "@database/schema/users.schema";
+import { AuthenticatedUser } from "@models/user";
 import { getUserById, updateUser } from "@repositories/user.repository";
 import { AppError } from "@utils/error";
 
-export const getUserHandler = async (authUser: User) => {
+export const getUserHandler = async ({
+  authUser,
+}: {
+  authUser: AuthenticatedUser;
+}) => {
   const user = await getUserById(authUser.id);
 
   if (!user) {
@@ -16,10 +21,17 @@ export const getUserHandler = async (authUser: User) => {
   };
 };
 
-export const updateUserHandler = async (
-  authUser: User,
-  request: Partial<User>,
-) => {
+export const updateUserHandler = async ({
+  request,
+  params,
+}: {
+  request: Partial<User>;
+  params: { userId: string };
+}) => {
+  if (!params.userId) {
+    throw new AppError("User Id not found.", 404);
+  }
+
   const userDetails = {
     ...request,
     createdAt: new Date(request.createdAt!),

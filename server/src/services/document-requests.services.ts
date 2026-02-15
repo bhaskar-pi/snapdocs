@@ -11,10 +11,10 @@ import {
 import { createRequest } from "@repositories/request.repository";
 import { generateClientUploadLink } from "@utils/doc-requests";
 import { sendDocumentRequestEmail } from "./brevo-email/send-doc-request";
-import { User } from "@database/schema/users.schema";
+import { AuthenticatedUser } from "@models/user";
 
 export async function sendDocRequest(
-  user: User,
+  user: AuthenticatedUser,
   payload: CreateDocumentsRequest,
 ) {
   const userId = user.id;

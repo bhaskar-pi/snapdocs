@@ -1,5 +1,5 @@
-import { User } from "@database/schema/users.schema";
 import { Request } from "express";
+import { AuthenticatedUser } from "./user";
 
 /**
  * AuthenticatedRequest
@@ -8,6 +8,6 @@ import { Request } from "express";
  * the authenticated user's JWT payload.
  */
 export interface AuthenticatedRequest extends Request {
-  authUser?: User;
+  authUser?: AuthenticatedUser;
   data?: unknown;
 }

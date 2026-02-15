@@ -3,12 +3,12 @@ import { AxiosError } from "axios";
 import { toast } from "sonner";
 
 import { templatesApi } from "@/services/templates.service";
-import { ApiError } from "@/types/models/misc";
+import { ApiError, ApiResponse } from "@/types/models/misc";
 import { Template } from "@/types/models/templates";
 import { getErrorMessage } from "@/utils/api";
 
 export function useTemplates(userId: string) {
-  return useQuery<Template[]>({
+  return useQuery<ApiResponse<Template[]>>({
     queryKey: ["templates", userId],
     queryFn: () => templatesApi.getTemplates(),
     enabled: !!userId,
@@ -18,7 +18,7 @@ export function useTemplates(userId: string) {
 }
 
 export function useTemplateById(userId: string, templateId: string) {
-  return useQuery({
+  return useQuery<ApiResponse<Template>>({
     queryKey: ["template", userId, templateId],
     queryFn: () => templatesApi.getTemplateById(templateId),
     enabled: !!userId && !!templateId,
@@ -33,14 +33,26 @@ export function useUpdateTemplate(userId: string) {
   return useMutation({
     mutationFn: (payload: Template) => templatesApi.updateTemplate(payload),
 
-    onSuccess: (updatedTemplate: Template) => {
+    onSuccess: (response) => {
+      const updatedTemplate = response.data;
+
       queryClient.setQueryData(
         ["template", userId, updatedTemplate.id],
-        updatedTemplate
+        updatedTemplate,
       );
 
-      queryClient.setQueryData<Template[]>(["templates", userId], (old) =>
-        old?.map((t) => (t.id === updatedTemplate?.id ? updatedTemplate : t))
+      queryClient.setQueryData<ApiResponse<Template[]>>(
+        ["templates", userId],
+        (old) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            data: old.data.map((t) =>
+              t.id === updatedTemplate.id ? updatedTemplate : t,
+            ),
+          };
+        },
       );
 
       toast.success("Template updated successfully.");
@@ -48,7 +60,7 @@ export function useUpdateTemplate(userId: string) {
 
     onError: (error) => {
       const msg = getErrorMessage(error as AxiosError<ApiError>);
-      toast.error(msg);
+      toast.error(msg || "Failed to update template.");
     },
   });
 }
@@ -60,14 +72,24 @@ export function useCreateTemplate(userId: string) {
     mutationFn: (payload: Partial<Template>) =>
       templatesApi.createTemplate(payload),
 
-    onSuccess: (createdTemplate) => {
-      queryClient.setQueryData<Template[]>(["templates", userId], (old) =>
-        old ? [createdTemplate, ...old] : [createdTemplate]
+    onSuccess: (response) => {
+      const createdTemplate = response.data;
+
+      queryClient.setQueryData<ApiResponse<Template[]>>(
+        ["templates", userId],
+        (old) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            data: [createdTemplate, ...old.data],
+          };
+        },
       );
 
       queryClient.setQueryData(
         ["template", userId, createdTemplate.id],
-        createdTemplate
+        createdTemplate,
       );
 
       toast.success("Template created successfully.");
@@ -86,9 +108,17 @@ export function useDeleteTemplate(userId: string) {
   return useMutation({
     mutationFn: (templateId: string) => templatesApi.deleteTemplate(templateId),
 
-    onSuccess: (_data, templateId) => {
-      queryClient.setQueryData<Template[]>(["templates", userId], (old) =>
-        old?.filter((template) => template.id !== templateId)
+    onSuccess: (_, templateId) => {
+      queryClient.setQueryData<ApiResponse<Template[]>>(
+        ["templates", userId],
+        (old) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            data: old.data.filter((template) => template.id !== templateId),
+          };
+        },
       );
 
       queryClient.removeQueries({

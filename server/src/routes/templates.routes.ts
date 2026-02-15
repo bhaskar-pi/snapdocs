@@ -5,28 +5,36 @@ import {
   getTemplatesHandler,
   updateTemplateHandler,
 } from "@controllers/templates.controller";
-import { asyncHandler } from "@middlewares/async-handler";
+import { protectedHandler } from "@middlewares/async-handler";
 import { authenticate } from "@middlewares/validate-request";
 import { Router } from "express";
 
 const router = Router();
 
-router.post("/templates", authenticate, asyncHandler(createTemplateHandler));
+router.post(
+  "/templates",
+  authenticate,
+  protectedHandler(createTemplateHandler),
+);
+
 router.put(
   "/templates/:templateId",
   authenticate,
-  asyncHandler(updateTemplateHandler)
+  protectedHandler(updateTemplateHandler),
 );
+
 router.get(
   "/templates/:templateId",
   authenticate,
-  asyncHandler(getTemplateHandler)
+  protectedHandler(getTemplateHandler),
 );
-router.get("/templates", authenticate, asyncHandler(getTemplatesHandler));
+
+router.get("/templates", authenticate, protectedHandler(getTemplatesHandler));
+
 router.delete(
   "/templates/:templateId",
   authenticate,
-  asyncHandler(deleteTemplateHandler)
+  protectedHandler(deleteTemplateHandler),
 );
 
 export default router;

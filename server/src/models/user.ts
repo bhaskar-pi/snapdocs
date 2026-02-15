@@ -10,3 +10,10 @@ export interface User {
   createdAt: DateString;
   updatedAt: DateString;
 }
+
+export interface AuthenticatedUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}

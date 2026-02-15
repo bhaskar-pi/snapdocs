@@ -15,6 +15,7 @@ import { UpdatePasswordRequest } from "@models/requests/auth.request";
 import { getUserById, updateUser } from "@repositories/user.repository";
 import { User } from "@database/schema/users.schema";
 import { AppError } from "@utils/error";
+import { AuthenticatedUser } from "@models/user";
 
 export const loginHandler = async (
   request: AuthenticatedRequest,
@@ -125,10 +126,13 @@ export const refreshHandler = async (
   };
 };
 
-export const updatePasswordHandler = async (
-  authUser: User,
-  request: UpdatePasswordRequest,
-) => {
+export const updatePasswordHandler = async ({
+  authUser,
+  request,
+}: {
+  authUser: AuthenticatedUser;
+  request: UpdatePasswordRequest;
+}) => {
   if (request.confirmNewPassword !== request.newPassword) {
     throw new AppError(
       "New password and confirm new password do not match",

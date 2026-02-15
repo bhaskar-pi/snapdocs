@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { AuthenticatedRequest } from "@models/express";
-import { User } from "@database/schema/users.schema";
 import { AppError } from "@utils/error";
+import { AuthenticatedUser } from "@models/user";
 
 export const asyncHandler =
   (fn: any) =>
@@ -18,17 +18,31 @@ export const asyncHandler =
     }
   };
 
-export const protectedHandler = <TBody>(
-  handler: (user: User, body: TBody, res: Response) => Promise<any>,
+export const protectedHandler = <
+  TBody = unknown,
+  TParams = unknown,
+  TQuery = unknown,
+>(
+  handler: (context: {
+    authUser: AuthenticatedUser;
+    request: TBody;
+    params: TParams;
+    query: TQuery;
+    res: Response;
+  }) => Promise<any>,
 ) =>
   asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
-    const user = req.authUser;
+    const authUser = req.authUser;
 
-    if (!user) {
+    if (!authUser) {
       throw new AppError("Authentication required", 401);
     }
 
-    const body = req.body as TBody;
-
-    return handler(user, body, res);
+    return handler({
+      authUser,
+      request: req.body as TBody,
+      params: req.params as TParams,
+      query: req.query as TQuery,
+      res,
+    });
   });
