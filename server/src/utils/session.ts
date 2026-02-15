@@ -32,18 +32,10 @@ export function verifyAccessToken(token: string) {
   try {
     return jwt.verify(token, env.JWT_ACCESS_TOKEN_SECRET);
   } catch (error: any) {
-    if (error.name === "TokenExpiredError") {
-      throw new AppError(
-        "Access token expired",
-        401,
-        TokenErrors.ACCESS_TOKEN_EXPIRED,
-      );
-    }
-
     throw new AppError(
-      "Invalid access token",
+      "Access token expired",
       401,
-      TokenErrors.ACCESS_TOKEN_INVALID,
+      TokenErrors.ACCESS_TOKEN_EXPIRED,
     );
   }
 }
@@ -69,7 +61,7 @@ export function verifyRefreshToken(token: string) {
     return payload as User;
   } catch (error) {
     throw new AppError(
-      "Refresh token expired",
+      "Your session has expired. Please login again.",
       401,
       TokenErrors.REFRESH_TOKEN_EXPIRED,
     );

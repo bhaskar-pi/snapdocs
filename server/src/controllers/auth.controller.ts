@@ -7,7 +7,7 @@ import {
 } from "@services/auth.services";
 import env from "@config/env";
 import { Environment } from "@enums/environment";
-import { TokenValidity } from "@enums/session";
+import { TokenErrors, TokenValidity } from "@enums/session";
 import { hashRefreshToken, verifyRefreshToken } from "@utils/session";
 import { revokeSessionByToken } from "@repositories/session.repository";
 import { AuthenticatedRequest } from "@models/express";
@@ -71,15 +71,15 @@ export const logoutHandler = async (
 
     await revokeSessionByToken(userPayload.id, refreshTokenHash);
 
-    response.clearCookie("accessToken");
-    response.clearCookie("refreshToken");
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
 
     return response.status(204).send();
   } catch (error) {
     console.error("Error at logout", error);
 
-    response.clearCookie("accessToken");
-    response.clearCookie("refreshToken");
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
     return response.status(204).send();
   }
 };
@@ -88,42 +88,54 @@ export const refreshHandler = async (
   request: AuthenticatedRequest,
   response: Response,
 ) => {
-  const token = request.cookies.refreshToken;
-  if (!token) {
-    throw new AppError("Missing refresh token", 401);
-  }
+  try {
+    const token = request.cookies.refreshToken;
+    if (!token) {
+      throw new AppError("Missing refresh token", 401);
+    }
 
-  const { session, user, newRefreshToken } = await rotateAccessToken(token);
+    const { session, user, newRefreshToken } = await rotateAccessToken(token);
 
-  if (newRefreshToken) {
-    response.cookie("refreshToken", newRefreshToken, {
+    if (newRefreshToken) {
+      response.cookie("refreshToken", newRefreshToken, {
+        httpOnly: true,
+        secure: env.NODE_ENV === Environment.PRODUCTION,
+        sameSite: "strict",
+        path: "/",
+        maxAge: TokenValidity.ONE_DAY,
+      });
+    }
+
+    response.cookie("accessToken", session.accessToken, {
       httpOnly: true,
       secure: env.NODE_ENV === Environment.PRODUCTION,
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
-      maxAge: TokenValidity.ONE_DAY,
+      maxAge: 15 * 60 * 1000,
     });
-  }
 
-  response.cookie("accessToken", session.accessToken, {
-    httpOnly: true,
-    secure: env.NODE_ENV === Environment.PRODUCTION,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 15 * 60 * 1000,
-  });
-
-  return {
-    statusCode: 200,
-    message: "Refresh successfully.",
-    data: {
-      user,
-      session: {
-        id: session.id,
+    return {
+      statusCode: 200,
+      message: "Refresh successfully.",
+      data: {
+        user,
+        session: {
+          id: session.id,
+        },
+        isAuthorized: true,
       },
-      isAuthorized: true,
-    },
-  };
+    };
+  } catch (error) {
+    console.error("Failed to refresh token", error);
+    response.clearCookie("accessToken", { path: "/" });
+    response.clearCookie("refreshToken", { path: "/" });
+
+    throw new AppError(
+      "Your session has expired. Please login again.",
+      401,
+      TokenErrors.REFRESH_TOKEN_EXPIRED,
+    );
+  }
 };
 
 export const updatePasswordHandler = async ({

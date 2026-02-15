@@ -15,7 +15,7 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
   const { data: templates, isLoading } = useTemplates(userId);
 
   const templateOptions =
-    templates
+    templates?.data
       ?.filter((template) => template.documents?.length)
       ?.map((template) => ({
         label: `${template.title} (${template.documents?.length ?? 0} documents)`,
@@ -23,7 +23,7 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
       })) ?? [];
 
   const onSelectTemplate = (id: string) => {
-    const selectedTemplate = templates?.find((c) => c.id === id);
+    const selectedTemplate = templates?.data?.find((c) => c.id === id);
 
     if (selectedTemplate) {
       onChange(selectedTemplate);

@@ -51,7 +51,7 @@ export const authenticate = (
   const token = req.cookies?.accessToken;
 
   if (!token) {
-    throw new AppError("Unauthorized", 401, TokenErrors.ACCESS_TOKEN_INVALID);
+    throw new AppError("Unauthorized", 401, TokenErrors.ACCESS_TOKEN_EXPIRED);
   }
 
   const payload = verifyAccessToken(token);
