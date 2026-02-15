@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * Routes that require authentication
+ */
 const PROTECTED_ROUTES = [
   "/dashboard",
   "/settings",
@@ -8,26 +11,69 @@ const PROTECTED_ROUTES = [
   "/document-requests",
 ];
 
+/**
+ * Routes only accessible when NOT authenticated
+ */
 const AUTH_ROUTES = ["/login", "/signup"];
 
-const UN_PROTECTED_ROUTES = ["/upload-documents"];
+/**
+ * Fully public routes (no auth needed)
+ */
+const PUBLIC_ROUTES = ["/upload-documents"];
+
+/**
+ * Utility: safer route matching
+ */
+const matchesRoute = (pathname: string, routes: string[]) =>
+  routes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
 
-  if (UN_PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
+  const refreshToken = request.cookies.get("refreshToken")?.value;
+
+  /**
+   * Always allow fully public routes
+   */
+  if (matchesRoute(pathname, PUBLIC_ROUTES)) {
     return NextResponse.next();
   }
 
-  if (!token && PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  const isProtectedRoute = matchesRoute(pathname, PROTECTED_ROUTES);
+  const isAuthRoute = AUTH_ROUTES.includes(pathname);
+
+  /**
+   * Protected routes
+   *
+   * IMPORTANT:
+   * We check refreshToken, NOT accessToken.
+   * Access token may expire (refresh will fix it).
+   * If refresh token missing → user truly logged out.
+   */
+  if (isProtectedRoute) {
+    if (!refreshToken) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    return NextResponse.next();
   }
 
-  if (token && AUTH_ROUTES.includes(pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  /**
+   * Block login/signup if already authenticated
+   */
+  if (isAuthRoute) {
+    if (refreshToken) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+    return NextResponse.next();
   }
 
+  /**
+   * Everything else
+   */
   return NextResponse.next();
 }
 
