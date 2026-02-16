@@ -123,9 +123,15 @@ export const Select = ({
           disabled={disabled}
         />
 
-        <button type="button" className={styles.inputIconButton} tabIndex={-1}>
-          {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-        </button>
+        {!isLoading && (
+          <span
+            className={styles.inputIconButton}
+            aria-hidden="true"
+            style={{ pointerEvents: "none" }}
+          >
+            {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </span>
+        )}
 
         {isLoading && <span className={styles.loader} aria-hidden />}
 
@@ -140,7 +146,9 @@ export const Select = ({
 
             {filteredOptions.map((option) => (
               <div
-              data-type={selectedOption?.label === option.label ? 'active' : ''}
+                data-type={
+                  selectedOption?.label === option.label ? "active" : ""
+                }
                 key={option.value}
                 className={styles.selectOption}
                 onClick={() => {

@@ -32,7 +32,7 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.header}>
             <h1>Welcome!</h1>
-            <p>Log in to manage your documents </p>
+            <p>Log in to manage your documents</p>
           </div>
 
           <div className={styles.formInputs}>
@@ -71,7 +71,7 @@ const LoginForm = () => {
           </Button>
 
           <div className={styles.switch}>
-            <p>{`Don't have an account?`}</p>
+            <p>Don&apos;t have an account?</p>
             <Link href={SCREEN_PATHS.SIGNUP}>Sign up</Link>
           </div>
         </form>

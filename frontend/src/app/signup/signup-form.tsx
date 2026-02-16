@@ -15,6 +15,7 @@ import { mapEnumToOptions } from "@/utils/input";
 
 import styles from "./signup.module.css";
 
+
 const initialForm: SignUpFormType = {
   firstName: "",
   lastName: "",
