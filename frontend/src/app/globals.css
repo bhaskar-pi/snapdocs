@@ -140,7 +140,7 @@
   --radius-lg: 14px;
   --radius-100: 100%;
 
-  --input-height: 46px;
+  --input-height: 42px;
   --input-padding-x: 12px;
 
   --input-bg: var(--slate-0);
@@ -296,6 +296,14 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .base-two-in-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .data-table-row {

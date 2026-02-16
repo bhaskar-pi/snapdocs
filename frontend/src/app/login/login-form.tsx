@@ -5,11 +5,11 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/form/input";
+import { Logo } from "@/components/ui/logo";
 import { useLogin } from "@/hooks/data/auth/use-login";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
-import styles from "./auth.module.css";
-import { Logo } from "../ui/logo";
+import styles from "./login.module.css";
 
 const LoginForm = () => {
   const login = useLogin();
