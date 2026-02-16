@@ -5,11 +5,11 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/form/input";
-import { Logo } from "@/components/ui/logo";
 import { useLogin } from "@/hooks/data/auth/use-login";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
 import styles from "./auth.module.css";
+import { Logo } from "../ui/logo";
 
 const LoginForm = () => {
   const login = useLogin();
@@ -24,55 +24,59 @@ const LoginForm = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <Logo size="lg" />
-        <div className={styles.header}>
-          <h1>Welcome back</h1>
-          <p>Log in to manage your document requests</p>
-        </div>
+    <>
+      <div className={styles.topRightLogo}>
+        <Logo size="sm" showText={false} />
+      </div>
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.header}>
+            <h1>Welcome!</h1>
+            <p>Log in to manage your documents </p>
+          </div>
 
-        <Input
-          required
-          id="email"
-          label="Email"
-          type="email"
-          placeholder="name@company.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={login.isPending}
-          fieldClassName="input-lg"
-        />
+          <div className={styles.formInputs}>
+            <Input
+              required
+              id="email"
+              type="email"
+              placeholder="Enter email *"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={login.isPending}
+              fieldClassName="input-lg"
+            />
 
-        <Input
-          required
-          id="password"
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          message="forgot password?"
-          messagePosition="right"
-          messageType="info"
-          disabled={login.isPending}
-          fieldClassName="input-lg"
-        />
+            <Input
+              required
+              id="password"
+              type="password"
+              placeholder="Enter password *"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              message="forgot password?"
+              messagePosition="right"
+              messageType="info"
+              disabled={login.isPending}
+              fieldClassName="input-lg"
+            />
+          </div>
 
-        <Button
-          loading={login.isPending}
-          type="submit"
-          className={styles.button}
-        >
-          {login.isPending ? "Logging in..." : "Log In"}
-        </Button>
+          <Button
+            loading={login.isPending}
+            type="submit"
+            className={styles.button}
+          >
+            {login.isPending ? "Logging in..." : "Log In"}
+          </Button>
 
-        <div className={styles.switch}>
-          <p>{`Don't have an account?`}</p>
-          <Link href={SCREEN_PATHS.SIGNUP}>Sign up</Link>
-        </div>
-      </form>
-    </div>
+          <div className={styles.switch}>
+            <p>{`Don't have an account?`}</p>
+            <Link href={SCREEN_PATHS.SIGNUP}>Sign up</Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

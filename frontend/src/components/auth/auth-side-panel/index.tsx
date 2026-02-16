@@ -3,7 +3,9 @@
 import { Check, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import styles from "./auth-info-panel.module.css";
+import { Logo } from "@/components/ui/logo";
+
+import styles from "./auth-side-panel.module.css";
 import { AUTH_INFO_CONTENT } from "./content";
 import { IconBadge } from "../../ui/icon-badge";
 
@@ -13,7 +15,7 @@ interface Props {
   type: AuthInfoVariant;
 }
 
-export const AuthInfoPanel = ({ type }: Props) => {
+export const AuthSidePanel = ({ type }: Props) => {
   const content = AUTH_INFO_CONTENT[type];
   const [activeReview, setActiveReview] = useState(0);
 
@@ -29,21 +31,9 @@ export const AuthInfoPanel = ({ type }: Props) => {
     return () => clearInterval(interval);
   }, [content]);
 
-  const getIconSize = (index: number) =>
-    index === 0 ? "xl" : index === 1 ? "lg" : "md";
-
   return (
     <section className={styles.container}>
-      <div className={styles.badges}>
-        {content.badges.map((b, index) => (
-          <IconBadge
-            key={index}
-            icon={b.icon}
-            variant={b.variant}
-            size={getIconSize(index)}
-          />
-        ))}
-      </div>
+      <Logo size="xxl" />
 
       <header className={styles.header}>
         <h1 className={styles.title}>{content.title}</h1>

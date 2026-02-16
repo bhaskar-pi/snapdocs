@@ -7,13 +7,6 @@
   max-width: 580px;
 }
 
-.badges {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 18px;
-}
-
 .header {
   display: flex;
   flex-direction: column;
@@ -21,16 +14,17 @@
 }
 
 .title {
-  font-size: var(--font-3xl);
+  font-size: var(--font-2xl);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
   color: var(--text-primary);
 }
 
 .subtitle {
-  font-size: var(--font-base);
+  font-size: var(--font-sm);
   line-height: var(--lh-normal);
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .featureList {
@@ -58,7 +52,7 @@
   border-radius: 999px;
 
   background-color: var(--slate-200);
-  color: var(--text-secondary);
+  color: var(--slate-600);
   flex-shrink: 0;
 }
 

@@ -1,23 +1,13 @@
-import {
-  FileText,
-  Shield,
-  Clock3,
-  FolderOpen,
-  Users,
-  FileCheck,
-  Zap,
-} from "lucide-react";
+import { FolderOpen } from "lucide-react";
 
 import type { AuthInfoContent } from "./content.types";
 
-export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent> = {
+export const AUTH_INFO_CONTENT: Record<
+  AuthInfoContent["type"],
+  AuthInfoContent
+> = {
   login: {
     type: "login",
-    badges: [
-      { icon: FileText, variant: "secondary" },
-      { icon: Shield, variant: "negative" },
-      { icon: Clock3, variant: "success" },
-    ],
     title: "Collect client documents effortlessly",
     subtitle:
       "Streamline your document collection workflow with a secure, professional platform built for modern practices.",
@@ -35,11 +25,6 @@ export const AUTH_INFO_CONTENT: Record<AuthInfoContent["type"], AuthInfoContent>
 
   signup: {
     type: "signup",
-    badges: [
-      { icon: FileCheck, variant: "secondary" },
-      { icon: Users, variant: "info" },
-      { icon: Zap, variant: "negative" },
-    ],
     title: "Built for professionals",
     subtitle:
       "Join thousands of accountants, lawyers, and consultants who trust SnapDocs for their document collection needs.",

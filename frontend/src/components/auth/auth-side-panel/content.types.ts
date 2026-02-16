@@ -1,19 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 
-export type BadgeVariant =
-  | "default"
-  | "secondary"
-  | "primary"
-  | "success"
-  | "info"
-  | "warning"
-  | "negative";
-
-export interface BadgeItem {
-  icon: LucideIcon;
-  variant: BadgeVariant;
-}
-
 export interface Review {
   quote: string;
   author: string;
@@ -22,7 +8,6 @@ export interface Review {
 
 export interface LoginAuthInfo {
   type: "login";
-  badges: BadgeItem[];
   title: string;
   subtitle: string;
   features: string[];
@@ -35,7 +20,6 @@ export interface LoginAuthInfo {
 
 export interface SignupAuthInfo {
   type: "signup";
-  badges: BadgeItem[];
   title: string;
   subtitle: string;
   features: string[];
