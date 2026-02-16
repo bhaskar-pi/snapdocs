@@ -1,10 +1,11 @@
-import { AuthInfoPanel } from "@/components/auth/auth-info-panel";
-import LoginForm from "@/components/auth/login-form";
+import LoginPanel from "@/components/auth/side-panel/login-pane";
 import { AuthLayout } from "@/components/layouts/auth-layout";
+
+import LoginForm from "./login-form";
 
 const LoginPage = () => {
   return (
-    <AuthLayout left={<LoginForm />} right={<AuthInfoPanel type="login" />} />
+    <AuthLayout type="login" right={<LoginForm />} left={<LoginPanel />} />
   );
 };
 

@@ -1,10 +1,14 @@
 import { User } from "./user";
+import { IndustryType } from "../enums/industry";
 
 export interface SignUpForm {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  businessName: string;
+  businessType: IndustryType;
+  otherBusinessType?: string;
 }
 
 export interface Session {

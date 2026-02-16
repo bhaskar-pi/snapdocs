@@ -21,7 +21,7 @@
   padding: var(--input-padding-x);
   border: 1px solid var(--input-border);
   border-radius: var(--radius-sm);
-  background-color: var(--input-bg);
+  background-color: var(--slate-50);
   color: var(--input-text);
   font-size: var(--font-sm);
   line-height: var(--lh-normal);
@@ -56,7 +56,7 @@
   border-color: var(--input-border-error);
 }
 
-.eyeButton {
+.inputIconButton {
   position: absolute;
   right: 12px;
   top: 50%;
@@ -71,7 +71,7 @@
   color: var(--slate-500);
 }
 
-.eyeButton:hover {
+.inputIconButton:hover {
   color: var(--slate-900);
 }
 
@@ -163,7 +163,6 @@
   background-color: var(--slate-0);
   border: 1px solid var(--input-border);
   border-radius: var(--radius-sm);
-  padding: 6px;
 
   max-height: 250px;
   overflow-y: auto;
@@ -171,21 +170,26 @@
 }
 
 .selectDropdown[data-type="noResults"] {
-  background-color: var(--slate-100);
+  background-color: var(--slate-50);
 }
 
 .selectOption {
-  padding: 6px 8px;
-  border-radius: var(--radius-sm);
+  padding: 10px 12px;
   cursor: pointer;
 
   font-size: var(--font-sm);
   color: var(--input-text);
+
+  border-bottom: 1px solid var(--slate-200);
 }
 
 .selectOption:hover {
-  background-color: var(--slate-800);
-  color: var(--text-inverted);
+  background-color: var(--slate-150);
+}
+
+.selectOption[data-type="active"] {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .selectEmpty {
