@@ -15,7 +15,6 @@ import { mapEnumToOptions } from "@/utils/input";
 
 import styles from "./signup.module.css";
 
-
 const initialForm: SignUpFormType = {
   firstName: "",
   lastName: "",
@@ -58,12 +57,14 @@ const SignUpForm = () => {
       </div>
       <div className={styles.content}>
         <form className={styles.form} onSubmit={handleCreateAccount}>
-          <div className={styles.header}>
-            <h1>Create Account</h1>
-            <p>Fill in the form below to create your Snapdocs account</p>
+          <div className="mb-2">
+            <h3>Create Account</h3>
+            <p className="subtitle-sm">
+              Fill in the form below to create your Snapdocs account
+            </p>
           </div>
 
-          <div className="base-two-in-row">
+          <div className="d-flex gap-3">
             <Input
               required
               id="firstName"
@@ -85,7 +86,7 @@ const SignUpForm = () => {
             />
           </div>
 
-          <div className="base-two-in-row">
+          <div className="d-flex gap-3">
             <Input
               required
               id="email"
@@ -108,7 +109,7 @@ const SignUpForm = () => {
             />
           </div>
 
-          <div className="base-two-in-row">
+          <div className="d-flex gap-3 mb-4">
             <Input
               required
               id="businessName"
@@ -130,15 +131,11 @@ const SignUpForm = () => {
             />
           </div>
 
-          <Button
-            disabled={signup.isPending}
-            type="submit"
-            className={styles.button}
-          >
+          <Button disabled={signup.isPending} type="submit">
             {signup.isPending ? "Creating..." : "Create Account"}
           </Button>
 
-          <div className={styles.switch}>
+          <div className="d-flex items-center justify-center gap-2 mt-1">
             <p>Already have an account?</p>
             <Link href={SCREEN_PATHS.LOGIN}>Log In</Link>
           </div>

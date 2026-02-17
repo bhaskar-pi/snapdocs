@@ -29,17 +29,22 @@ interface Props {
   inputClassName?: string;
 
   message?: string;
-  messageType?: "error" | "warning" | "info" | "neutral";
+  messageType?: "error" | "warning" | "info" | "success" | "primary";
   messagePosition?: "left" | "right" | "center";
 }
 
-const messagePositionStyles: Record<
-  NonNullable<Props["messagePosition"]>,
-  string
-> = {
-  left: styles.messageLeft,
-  center: styles.messageCenter,
-  right: styles.messageRight,
+const messageTypeClasses = {
+  error: styles["form-message-error"],
+  warning: styles["form-message-warning"],
+  info: styles["form-message-info"],
+  success: styles["form-message-success"],
+  primary: styles["form-message-primary"],
+};
+
+const messagePositionClasses = {
+  left: styles["form-message-left"],
+  center: styles["form-message-center"],
+  right: styles["form-message-right"],
 };
 
 export const Select = ({
@@ -64,6 +69,7 @@ export const Select = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
+  const [openUp, setOpenUp] = useState(false);
   const [search, setSearch] = useState("");
 
   const selectedOption = options.find((o) => o.value === value);
@@ -75,7 +81,26 @@ export const Select = ({
     );
   }, [options, search]);
 
-  // close dropdown on outside click
+  const calculateDirection = () => {
+    if (!wrapperRef.current) return;
+
+    const rect = wrapperRef.current.getBoundingClientRect();
+    const dropdownHeight = 260;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    if (spaceBelow < dropdownHeight && spaceAbove > dropdownHeight) {
+      setOpenUp(true);
+    } else {
+      setOpenUp(false);
+    }
+  };
+
+  const openDropdown = () => {
+    calculateDirection();
+    setOpen(true);
+  };
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!wrapperRef.current?.contains(e.target as Node)) {
@@ -83,74 +108,98 @@ export const Select = ({
         setSearch("");
       }
     };
+
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const messageClassName = [
-    styles.message,
-    styles[messageType],
-    messagePositionStyles[messagePosition],
-  ].join(" ");
+  const hasError = message && messageType === "error";
 
-  const errorBorder =
-    message && messageType === "error" ? styles.inputError : "";
+  const inputClasses = [
+    styles.input,
+    hasError && styles["input-error"],
+    isLoading && styles["input-with-loader"],
+    inputClassName,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const messageClasses = [
+    styles["form-message"],
+    message && messageTypeClasses[messageType],
+    messagePositionClasses[messagePosition],
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={`${styles.inputContainer} ${containerClassName}`}>
+    <div
+      className={[styles["form-control"], containerClassName]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {label && (
-        <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>
+        <label
+          htmlFor={id}
+          className={[styles["form-label"], labelClassName]
+            .filter(Boolean)
+            .join(" ")}
+        >
           {label}
         </label>
       )}
 
       <div
         ref={wrapperRef}
-        className={`${styles.selectWrapper} ${fieldClassName}`}
+        className={[styles["select-wrapper"], fieldClassName]
+          .filter(Boolean)
+          .join(" ")}
       >
         <input
           id={id}
-          className={`${styles.input} ${inputClassName} ${errorBorder} ${
-            isLoading ? styles.inputWithLoader : ""
-          }`}
+          className={inputClasses}
           placeholder={placeholder}
           value={open ? search : selectedOption?.label || ""}
-          onFocus={() => setOpen(true)}
+          onFocus={openDropdown}
           onChange={(e) => {
             setSearch(e.target.value);
-            setOpen(true);
+            openDropdown();
           }}
           disabled={disabled}
+          autoComplete="off"
         />
 
         {!isLoading && (
-          <span
-            className={styles.inputIconButton}
-            aria-hidden="true"
-            style={{ pointerEvents: "none" }}
-          >
+          <span className={styles["input-icon-btn"]}>
             {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </span>
         )}
 
-        {isLoading && <span className={styles.loader} aria-hidden />}
+        {isLoading && <span className={styles["input-loader"]} />}
 
         {open && (
           <div
-            data-type={filteredOptions.length === 0 ? "noResults" : ""}
-            className={styles.selectDropdown}
+            className={[
+              styles["select-dropdown"],
+              openUp && styles["select-dropdown-up"],
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
             {filteredOptions.length === 0 && (
-              <div className={styles.selectEmpty}>No results found</div>
+              <div className={styles["select-empty"]}>No results found</div>
             )}
 
             {filteredOptions.map((option) => (
               <div
-                data-type={
-                  selectedOption?.label === option.label ? "active" : ""
-                }
                 key={option.value}
-                className={styles.selectOption}
+                className={[
+                  styles["select-option"],
+                  selectedOption?.value === option.value &&
+                    styles["select-option-active"],
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 onClick={() => {
                   onChange?.(option.value);
                   setOpen(false);
@@ -164,7 +213,7 @@ export const Select = ({
         )}
       </div>
 
-      {message && <p className={messageClassName}>{message}</p>}
+      {message && <p className={messageClasses}>{message}</p>}
     </div>
   );
 };
