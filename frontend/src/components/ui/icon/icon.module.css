@@ -2,12 +2,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   vertical-align: middle;
-  gap: 8px;
 }
 
 .icon {
-  display: inline-block;
+  display: inline-flex;
   flex-shrink: 0;
   color: currentColor;
 }
@@ -15,39 +15,41 @@
 .text {
   line-height: 1;
   white-space: nowrap;
-  font-size: var(--font-sm);
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
   color: currentColor;
 }
+
+/* ---- tones ---- */
 
 .default {
   color: var(--text-primary);
 }
 
 .muted {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .primary {
-  color: var(--primary);
+  color: var(--brand-primary);
 }
 
 .success {
-  color: var(--success);
+  color: var(--success-base);
 }
 
 .info {
-  color: var(--info);
+  color: var(--info-base);
 }
 
 .warning {
-  color: var(--warning);
+  color: var(--warning-base);
 }
 
 .negative {
-  color: var(--negative);
+  color: var(--danger-base);
 }
 
 .inverted {
-  color: var(--text-inverted);
+  color: var(--text-inverse);
 }

@@ -829,7 +829,6 @@
 
   .card:hover {
     background-color: var(--surface-card-hover);
-    box-shadow: var(--shadow-md);
   }
 
   /** subtitle */
@@ -903,6 +902,7 @@
   .status {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
 
     padding: 2px var(--space-2);
@@ -913,7 +913,7 @@
 
     border: 1px solid transparent;
     white-space: nowrap;
-    max-width: 100px;
+    max-width: 110px;
   }
 
   /* Dot */
@@ -927,7 +927,7 @@
   /* Neutral */
 
   .status-neutral {
-    background-color: var(--surface-muted);
+    background-color: var(--surface-skeleton);
     color: var(--text-secondary);
     border-color: var(--border-subtle);
   }
