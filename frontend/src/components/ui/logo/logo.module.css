@@ -99,3 +99,35 @@
 .\32xl .text-brand {
   font-size: var(--text-3xl);
 }
+
+.light .icon-wrapper {
+  background: var(--brand-primary);
+}
+
+.light .icon {
+  color: var(--text-inverse);
+}
+
+.light .text-brand {
+  color: var(--text-primary);
+}
+
+.light .text-description {
+  color: var(--text-secondary);
+}
+
+.dark .icon-wrapper {
+  background: var(--slate-0);
+}
+
+.dark .icon {
+  color: var(--brand-primary);
+}
+
+.dark .text-brand {
+  color: var(--slate-0);
+}
+
+.dark .text-description {
+  color: var(--blue-200);
+}

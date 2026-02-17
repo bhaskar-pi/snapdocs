@@ -88,7 +88,7 @@
   :root {
     /* Brand */
     --brand-primary: var(--blue-800);
-    --brand-primary-dark: var(--blue-800);
+    --brand-primary-dark: var(--blue-950);
     --brand-primary-hover: var(--blue-800);
     --brand-primary-active: var(--blue-900);
     --brand-primary-light: var(--blue-100);
@@ -136,6 +136,11 @@
     --border-strong: var(--slate-300);
     --border-subtle: var(--slate-100);
     --border-inverse: var(--slate-700);
+
+    --brand-border-default: var(--blue-200);
+    --brand-border-strong: var(--blue-300);
+    --brand-border-subtle: var(--blue-100);
+    --brand-border-inverse: var(--blue-700);
 
     /* Success */
     --success-base: var(--green-600);
@@ -237,7 +242,7 @@
     --font-mono: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 
     --text-xs: 11px;
-    --text-sm: 13.5px;
+    --text-sm: 13.35px;
     --text-base: 16px;
     --text-lg: 18px;
     --text-xl: 20px;

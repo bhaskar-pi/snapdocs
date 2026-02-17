@@ -7,6 +7,7 @@ interface Props {
   showText?: boolean;
   showIcon?: boolean;
   description?: string;
+  variant?: "light" | "dark";
 }
 
 const iconSizes = {
@@ -22,12 +23,18 @@ export const Logo = ({
   showText = true,
   description,
   showIcon = true,
+  variant = "light",
 }: Props) => {
   const isDiamond = !showText;
 
   return (
     <div
-      className={[styles.logo, styles[size], isDiamond && styles.diamond]
+      className={[
+        styles.logo,
+        styles[size],
+        styles[variant],
+        isDiamond && styles.diamond,
+      ]
         .filter(Boolean)
         .join(" ")}
     >
@@ -35,7 +42,7 @@ export const Logo = ({
         <div className={styles["icon-wrapper"]}>
           <CloudUpload
             size={iconSizes[size]}
-            strokeWidth={2}
+            strokeWidth={2.5}
             className={styles.icon}
           />
         </div>
@@ -44,7 +51,6 @@ export const Logo = ({
       {showText && (
         <div className={styles["text-container"]}>
           <span className={styles["text-brand"]}>SnapDocs</span>
-
           {description && (
             <span className={styles["text-description"]}>{description}</span>
           )}

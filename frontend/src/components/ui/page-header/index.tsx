@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 
 import { SCREEN_PATHS } from "@/types/enums/paths";
 
-import styles from "./page-header.module.css";
 import { Button } from "../button";
 import { Icon } from "../icon";
+import styles from "./page-header.module.css";
 
 interface Props {
   header?: string;
@@ -19,8 +19,7 @@ interface Props {
     title: string;
     icon?: React.ReactNode;
     path?: SCREEN_PATHS;
-    width?: string;
-    variant?: "primary" | "secondary" | "neutral" | "negative";
+    intent?: "primary" | "secondary" | "success" | "warning" | "negative";
   };
 }
 
@@ -33,20 +32,31 @@ const PageHeader = ({
 }: Props) => {
   const router = useRouter();
 
+  const handleBack = () => {
+    if (backLink) router.push(backLink);
+  };
+
+  const handleButtonClick = () => {
+    if (button?.path) return router.push(button.path);
+    button?.onClick?.();
+  };
+
   return (
     <div className={styles.container}>
       {backText && (
-        <div
+        <button
+          type="button"
           className={styles.backContainer}
-          onClick={() => backLink && router.push(backLink)}
+          onClick={handleBack}
         >
-          <Icon name={ArrowLeft} />
-          <p>{backText}</p>
-        </div>
+          <Icon name={ArrowLeft} size={18} />
+          <span>{backText}</span>
+        </button>
       )}
+
       <div className={styles.headerContainer}>
         {header && (
-          <div>
+          <div className={styles.titleBlock}>
             <h1 className={styles.header}>{header}</h1>
             {description && <p className={styles.description}>{description}</p>}
           </div>
@@ -54,13 +64,9 @@ const PageHeader = ({
 
         {button && (
           <Button
-            intent={button.variant}
+            intent={button.intent ?? "primary"}
+            onClick={handleButtonClick}
             icon={button.icon}
-            onClick={() =>
-              button.path
-                ? router.push(button.path)
-                : button?.onClick && button?.onClick()
-            }
           >
             {button.title}
           </Button>
