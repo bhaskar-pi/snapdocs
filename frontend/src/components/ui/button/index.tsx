@@ -1,33 +1,34 @@
 import React from "react";
 
-import styles from "./button.module.css";
-
 type ButtonIntent =
   | "primary"
   | "secondary"
-  | "neutral"
   | "success"
-  | "info"
   | "warning"
   | "negative";
 
-type ButtonVariant = "solid" | "outline" | "ghost";
+type ButtonVariant = "solid" | "outline" | "ghost" | "soft";
+type ButtonSize = "sm" | "md" | "lg";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   intent?: ButtonIntent;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   loading?: boolean;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
+  block?: boolean;
 }
 
 export const Button = ({
   intent = "primary",
-  variant = "solid",
+  variant = "soft",
+  size = "md",
   loading = false,
   disabled,
   icon,
   iconPosition = "left",
+  block = false,
   children,
   className = "",
   ...props
@@ -35,32 +36,29 @@ export const Button = ({
   const isIconOnly = !!icon && !children;
   const isDisabled = disabled || loading;
 
-  return (
-    <button
-      type="button"
-      disabled={isDisabled}
-      className={[
-        styles.button,
-        styles[variant],
-        styles[intent],
-        isIconOnly && styles.iconOnly,
-        loading && styles.loading,
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      {...props}
-    >
-      {loading && <span className={styles.spinner} />}
+  const classes = [
+    "btn",
+    `btn-${intent}`,
+    variant !== "solid" && `btn-${variant}`,
+    size !== "md" && `btn-${size}`,
+    isIconOnly && "btn-icon",
+    loading && "btn-loading",
+    block && "btn-block",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
+  return (
+    <button type="button" disabled={isDisabled} className={classes} {...props}>
       {!loading && icon && iconPosition === "left" && (
-        <span className={styles.icon}>{icon}</span>
+        <span className="btn-icon-slot">{icon}</span>
       )}
 
-      {children && <span className={styles.label}>{children}</span>}
+      {children && <span className="btn-label">{children}</span>}
 
       {!loading && icon && iconPosition === "right" && (
-        <span className={styles.icon}>{icon}</span>
+        <span className="btn-icon-slot">{icon}</span>
       )}
     </button>
   );
