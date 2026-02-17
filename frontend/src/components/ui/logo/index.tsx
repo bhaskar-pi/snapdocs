@@ -3,11 +3,19 @@ import { CloudUpload } from "lucide-react";
 import styles from "./logo.module.css";
 
 interface Props {
-  size?: "sm" | "md" | "lg" | "xxl" | "xxxl";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
   showText?: boolean;
   showIcon?: boolean;
   description?: string;
 }
+
+const iconSizes = {
+  sm: 14,
+  md: 18,
+  lg: 22,
+  xl: 26,
+  "2xl": 30,
+};
 
 export const Logo = ({
   size = "lg",
@@ -15,12 +23,18 @@ export const Logo = ({
   description,
   showIcon = true,
 }: Props) => {
+  const isDiamond = !showText;
+
   return (
-    <div className={`${styles.logo} ${styles[size]}`}>
+    <div
+      className={[styles.logo, styles[size], isDiamond && styles.diamond]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {showIcon && (
-        <div className={styles.iconWrapper}>
+        <div className={styles["icon-wrapper"]}>
           <CloudUpload
-            size={{ sm: 16, md: 18, lg: 22, xxl: 26, xxxl: 30 }[size]}
+            size={iconSizes[size]}
             strokeWidth={2}
             className={styles.icon}
           />
@@ -28,14 +42,11 @@ export const Logo = ({
       )}
 
       {showText && (
-        <div className={styles.textContainer}>
-          <span
-            className={`${styles.text} ${styles.textBrand} ${styles[size]}`}
-          >
-            SnapDocs
-          </span>
+        <div className={styles["text-container"]}>
+          <span className={styles["text-brand"]}>SnapDocs</span>
+
           {description && (
-            <span className={styles.description}>{description}</span>
+            <span className={styles["text-description"]}>{description}</span>
           )}
         </div>
       )}

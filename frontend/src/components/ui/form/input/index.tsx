@@ -3,8 +3,6 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
-import styles from "../form.module.css";
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
@@ -13,18 +11,9 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   fieldClassName?: string;
   message?: string;
-  messageType?: "error" | "warning" | "info" | "neutral";
+  messageType?: "error" | "warning" | "info" | "success" | "secondary";
   messagePosition?: "left" | "right" | "center";
 }
-
-const messagePositionStyles: Record<
-  NonNullable<InputProps["messagePosition"]>,
-  string
-> = {
-  left: styles.messageLeft,
-  center: styles.messageCenter,
-  right: styles.messageRight,
-};
 
 export const Input: React.FC<InputProps> = ({
   id,
@@ -35,7 +24,7 @@ export const Input: React.FC<InputProps> = ({
   inputClassName = "",
   fieldClassName = "",
   message,
-  messageType = "error",
+  messageType = "",
   messagePosition = "left",
   ...props
 }) => {
@@ -44,46 +33,55 @@ export const Input: React.FC<InputProps> = ({
   const isPassword = type === "password";
   const resolvedType = isPassword && showPassword ? "text" : type;
 
-  const messageClassName = [
-    styles.message,
-    styles[messageType],
-    messagePositionStyles[messagePosition],
+  const hasError = message && messageType === "error";
+
+  const inputClasses = [
+    "input",
+    isPassword && "input-with-icon",
+    hasError && "input-error",
+    inputClassName,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const messageClasses = [
+    "form-message",
+    `form-message-${messageType}`,
+    `form-message-${messagePosition}`,
   ].join(" ");
 
-  const errorBorder =
-    message && messageType === "error" ? styles.inputError : "";
-
   return (
-    <div className={`${styles.inputContainer} ${containerClassName}`}>
+    <div className={["form-control", containerClassName].join(" ")}>
       {label && (
-        <label className={`${styles.label} ${labelClassName}`} htmlFor={id}>
+        <label
+          className={["form-label", labelClassName].join(" ")}
+          htmlFor={id}
+        >
           {label}
         </label>
       )}
 
-      <div className={`${styles.field} ${fieldClassName}`}>
-        <div className={styles.inputWrapper}>
-          <input
-            className={`${styles.input} ${inputClassName} ${errorBorder}`}
-            type={resolvedType}
-            id={id}
-            {...props}
-          />
+      <div className={["form-field", fieldClassName].join(" ")}>
+        <input
+          id={id}
+          type={resolvedType}
+          className={inputClasses}
+          {...props}
+        />
 
-          {isPassword && (
-            <button
-              type="button"
-              className={styles.inputIconButton}
-              onClick={() => setShowPassword((prev) => !prev)}
-              tabIndex={-1}
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          )}
-        </div>
-
-        {message && <p className={messageClassName}>{message}</p>}
+        {isPassword && (
+          <button
+            type="button"
+            className="input-icon-btn"
+            onClick={() => setShowPassword((prev) => !prev)}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        )}
       </div>
+
+      {message && <p className={messageClasses}>{message}</p>}
     </div>
   );
 };
