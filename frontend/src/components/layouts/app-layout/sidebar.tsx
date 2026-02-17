@@ -26,7 +26,7 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
-        <Logo size="md" />
+        <Logo variant="dark" size="md" />
       </div>
 
       <nav className={styles.nav}>
@@ -41,19 +41,19 @@ const Sidebar = () => {
             >
               <Icon
                 name={tab.icon}
-                size={18}
+                size={15}
                 strokeWidth={2}
                 className={styles.navIcon}
               />
               <span>{tab.title}</span>
-              {isActive && (
-                <Icon
-                  name={ChevronRight}
-                  size={18}
-                  strokeWidth={2}
-                  containerClassName={`${styles.chevron}`}
-                />
-              )}
+
+              <Icon
+                data-type={isActive ? "active" : ""}
+                name={ChevronRight}
+                size={18}
+                strokeWidth={2}
+                containerClassName={`${styles.chevron}`}
+              />
             </Link>
           );
         })}

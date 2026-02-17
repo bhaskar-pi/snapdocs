@@ -37,13 +37,13 @@ export const Button = ({
   const isDisabled = disabled || loading;
 
   const classes = [
-    "btn",
-    `btn-${intent}`,
-    variant !== "solid" && `btn-${variant}`,
-    size !== "md" && `btn-${size}`,
-    isIconOnly && "btn-icon",
-    loading && "btn-loading",
-    block && "btn-block",
+    styles.btn,
+    styles[`btn-${intent}`],
+    variant !== "solid" && styles[`btn-${variant}`],
+    size !== "md" && styles[`btn-${size}`],
+    isIconOnly && styles["btn-icon"],
+    loading && styles["btn-loading"],
+    block && styles["btn-block"],
     className,
   ]
     .filter(Boolean)
@@ -52,13 +52,13 @@ export const Button = ({
   return (
     <button type="button" disabled={isDisabled} className={classes} {...props}>
       {!loading && icon && iconPosition === "left" && (
-        <span className="btn-icon-slot">{icon}</span>
+        <span className={styles["btn-icon-slot"]}>{icon}</span>
       )}
 
-      {children && <span className="btn-label">{children}</span>}
+      {children && <span className={styles["btn-label"]}>{children}</span>}
 
       {!loading && icon && iconPosition === "right" && (
-        <span className="btn-icon-slot">{icon}</span>
+        <span className={styles["btn-icon-slot"]}>{icon}</span>
       )}
     </button>
   );

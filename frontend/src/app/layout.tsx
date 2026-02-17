@@ -1,5 +1,4 @@
 import "./globals.css";
-import "@/app/styles/index.css";
 
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
