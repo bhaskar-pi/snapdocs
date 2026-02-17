@@ -10,9 +10,9 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/data-table";
 import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
+import { ProgressBar } from "@/components/ui/progress-bar";
 import { useClientsSummary } from "@/hooks/data/clients/use-clients";
 import { SCREEN_PATHS } from "@/types/enums/paths";
-import { ClientSummary } from "@/types/models/client";
 import { getErrorMessage } from "@/utils/api";
 import { formatEnumLabel } from "@/utils/input";
 import { getStatusClassName } from "@/utils/misc";
@@ -59,15 +59,6 @@ const ClientsTable = () => {
     });
   }, [clientsSummaries, filters]);
 
-  const getProgressPercent = (summary: ClientSummary) => {
-    const completed = Number(summary.completedChecklists);
-    const total = Number(summary.totalChecklists);
-
-    if (total === 0) return 0;
-
-    return Math.min((completed / total) * 100, 100);
-  };
-
   const onChangeFilters = useCallback((prop: string, value: string) => {
     setFilters((prev) => ({
       ...prev,
@@ -76,7 +67,7 @@ const ClientsTable = () => {
   }, []);
 
   return (
-    <section className="section">
+    <section className="d-flex flex-col gap-6">
       <Filter filters={filters} onChange={onChangeFilters} />
 
       <DataTable
@@ -104,26 +95,20 @@ const ClientsTable = () => {
             }}
           >
             <div>
-              <p className="data-table-col-value">{summary.fullName}</p>
-              <p className="data-table-col-value-des">{summary.email}</p>
+              <p className="data-table-primary">{summary.fullName}</p>
+              <p className="data-table-secondary">{summary.email}</p>
             </div>
 
             <p className={styles.activeRequests}>{summary.activeRequests}</p>
 
-            <div className={styles.progressWrapper}>
-              <div className={styles.progressBar}>
-                <div
-                  style={{ width: `${getProgressPercent(summary)}%` }}
-                  className={styles.progressFill}
-                />
-              </div>
+            <ProgressBar
+              completed={summary.completedChecklists}
+              total={summary.totalChecklists}
+            />
 
-              <span className={styles.progressText}>
-                {summary.completedChecklists}/{summary.totalChecklists}
-              </span>
-            </div>
-
-            <p className={`status ${getStatusClassName(summary.status)}`}>
+            <p
+              className={`status status-${getStatusClassName(summary.status)}`}
+            >
               <span />
               {formatEnumLabel(summary.status)}
             </p>
