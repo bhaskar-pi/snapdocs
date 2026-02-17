@@ -5,7 +5,6 @@ import { toast } from "sonner";
 
 import Layout from "@/components/layouts/app-layout";
 import TemplateCard from "@/components/templates/template-card";
-import PageHeader from "@/components/ui/page-header";
 import {
   useCreateTemplate,
   useDeleteTemplate,
@@ -129,16 +128,17 @@ const Templates = () => {
     createTemplate.isPending;
 
   return (
-    <Layout isLoading={isLoading}>
-      <PageHeader
-        header="Templates"
-        description="Create reusable document request templates"
-        button={{
-          title: "Create Template",
+    <Layout
+      header={{
+        title: "Templates",
+        description: "Create reusable document request templates",
+        action: {
+          label: "Create Template",
           onClick: () => onOpenModal(),
-        }}
-      />
-
+        },
+      }}
+      isLoading={isLoading}
+    >
       <div className={styles.cards}>
         {templates?.data?.map((template) => (
           <TemplateCard

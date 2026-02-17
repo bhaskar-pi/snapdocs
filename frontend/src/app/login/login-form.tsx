@@ -29,13 +29,13 @@ const LoginForm = () => {
         <Logo size="sm" showText={false} />
       </div>
       <div className={styles.container}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <div className={styles.header}>
-            <h1>Welcome!</h1>
-            <p>Log in to manage your documents</p>
+        <form onSubmit={handleSubmit}>
+          <div className="d-flex flex-col mb-4">
+            <h3>Welcome!</h3>
+            <p className="subtitle-sm">Log in to manage your documents</p>
           </div>
 
-          <div className={styles.formInputs}>
+          <div className="d-flex flex-col gap-3">
             <Input
               required
               id="email"
@@ -44,7 +44,6 @@ const LoginForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={login.isPending}
-              fieldClassName="input-lg"
             />
 
             <Input
@@ -56,21 +55,16 @@ const LoginForm = () => {
               onChange={(e) => setPassword(e.target.value)}
               message="forgot password?"
               messagePosition="right"
-              messageType="info"
+              messageType="secondary"
               disabled={login.isPending}
-              fieldClassName="input-lg"
             />
           </div>
 
-          <Button
-            loading={login.isPending}
-            type="submit"
-            className={styles.button}
-          >
+          <Button loading={login.isPending} type="submit" className="mt-2">
             {login.isPending ? "Logging in..." : "Log In"}
           </Button>
 
-          <div className={styles.switch}>
+          <div className="d-flex items-center justify-center gap-2 mt-2">
             <p>Don&apos;t have an account?</p>
             <Link href={SCREEN_PATHS.SIGNUP}>Sign up</Link>
           </div>

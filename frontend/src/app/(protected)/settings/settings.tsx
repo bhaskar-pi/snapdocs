@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import Layout from "@/components/layouts/app-layout";
 import Tabs from "@/components/tabs";
-import PageHeader from "@/components/ui/page-header";
 import { SettingsTabs } from "@/config/tabs";
 import { SETTINGS_TABS } from "@/types/enums/tabs";
 
@@ -27,13 +26,13 @@ const Settings = () => {
   };
 
   return (
-    <Layout>
+    <Layout
+      header={{
+        title: "Settings",
+        description: "Manage your account and preferences",
+      }}
+    >
       <div className={styles.settingsContainer}>
-        <PageHeader
-          header="Settings"
-          description="Manage your account and preferences"
-        />
-
         <Tabs
           tabs={SettingsTabs}
           activeTab={activeTab}

@@ -1,71 +1,74 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { SCREEN_PATHS } from "@/types/enums/paths";
-
-import styles from "./page-header.module.css";
 import { Button } from "../button";
-import { Icon } from "../icon";
+import styles from "./page-header.module.css";
+import { PageHeaderAction } from "./page-header.types";
+import { IconBadge } from "../icon-badge";
 
 interface Props {
-  header?: string;
+  title?: string;
   description?: string;
-  backText?: string;
-  backLink?: string;
-  button?: {
-    onClick?: () => void;
-    title: string;
-    icon?: React.ReactNode;
-    path?: SCREEN_PATHS;
-    width?: string;
-    variant?: "primary" | "secondary" | "neutral" | "negative";
-  };
+
+  back?: string;
+  backTitle?: string;
+
+  action?: PageHeaderAction;
 }
 
-const PageHeader = ({
-  header,
-  description,
-  button,
-  backText,
-  backLink,
-}: Props) => {
+const PageHeader = ({ title, description, back, backTitle, action }: Props) => {
   const router = useRouter();
+
+  const handleBack = () => {
+    if (back) router.push(back);
+  };
+
+  const handleAction = () => {
+    if (action?.path) {
+      router.push(action.path);
+      return;
+    }
+
+    action?.onClick?.();
+  };
 
   return (
     <div className={styles.container}>
-      {backText && (
-        <div
-          className={styles.backContainer}
-          onClick={() => backLink && router.push(backLink)}
-        >
-          <Icon name={ArrowLeft} />
-          <p>{backText}</p>
-        </div>
-      )}
-      <div className={styles.headerContainer}>
-        {header && (
-          <div>
-            <h1 className={styles.header}>{header}</h1>
+      <div className={styles.left}>
+        {back && (
+          <button
+            type="button"
+            className={styles.backContainer}
+            onClick={handleBack}
+          >
+            <IconBadge icon={ArrowLeft} />
+          </button>
+        )}
+
+        {(title || backTitle) && (
+          <div className={styles.titleBlock}>
+            <h1 className={styles.header}>{title}</h1>
+            {backTitle && <h3 className={styles.backTitle}>{backTitle}</h3>}
+
             {description && <p className={styles.description}>{description}</p>}
           </div>
         )}
-
-        {button && (
-          <Button
-            intent={button.variant}
-            icon={button.icon}
-            onClick={() =>
-              button.path
-                ? router.push(button.path)
-                : button?.onClick && button?.onClick()
-            }
-          >
-            {button.title}
-          </Button>
-        )}
       </div>
+
+      {action && (
+        <div className={styles.right}>
+          <Button
+            intent={action.intent ?? "primary"}
+            onClick={handleAction}
+            icon={action.icon ?? <Plus size={16} />}
+            size={action.size ?? "sm"}
+          >
+            {action.label}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

@@ -2,10 +2,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
+
+  border-radius: var(--radius-md);
   border: 1px solid transparent;
+
   flex-shrink: 0;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
+
+/*  Sizes  */
 
 .sm {
   width: 28px;
@@ -27,6 +36,8 @@
   width: 56px;
   height: 56px;
 }
+
+/* ================= Icon ================= */
 
 .icon {
   width: 18px;
@@ -51,42 +62,47 @@
   height: 28px;
 }
 
-.default {
-  background: var(--primaryL);
-  color: var(--text-secondary);
-}
+/*  Variants (Match Button)  */
 
+/* Secondary (default subtle) */
 .secondary {
-  background: var(--slate-0);
+  background-color: var(--surface-muted);
   color: var(--text-secondary);
+  border-color: var(--border-subtle);
 }
 
+/* Primary */
 .primary {
-  background: var(--primary-bg);
-  color: var(--on-primary);
+  background-color: var(--brand-primary);
+  color: var(--text-inverse);
 }
 
+/* Success */
 .success {
-  background: var(--successL);
-  color: var(--success);
+  background-color: var(--success-light);
+  color: var(--success-text);
+  border-color: var(--success-border);
 }
 
-.info {
-  background: var(--infoL);
-  color: var(--info);
-}
-
+/* Warning */
 .warning {
-  background: var(--warningL);
-  color: var(--warning);
+  background-color: var(--warning-light);
+  color: var(--warning-text);
+  border-color: var(--warning-border);
 }
 
+/* Negative */
 .negative {
-  background: var(--negativeL);
-  color: var(--negative);
+  background-color: var(--danger-light);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
 }
 
+/* Disabled */
 .disabled {
-  background: var(--disabled-bg);
-  color: var(--disabled-color);
+  background-color: var(--surface-muted);
+  color: var(--text-disabled);
+  border-color: var(--border-subtle);
+  opacity: 0.6;
+  pointer-events: none;
 }

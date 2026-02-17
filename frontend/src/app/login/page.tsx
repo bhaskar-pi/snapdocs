@@ -1,4 +1,4 @@
-import LoginPanel from "@/components/auth/side-panel/login-pane";
+import LoginPanel from "@/components/auth/side-panel/login-panel";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 
 import LoginForm from "./login-form";
