@@ -1,14 +1,8 @@
 import styles from "./icon-badge.module.css";
 
 type IconSize = "sm" | "md" | "lg" | "xl" | "xxl";
-type IconVariant =
-  | "default"
-  | "secondary"
-  | "primary"
-  | "success"
-  | "info"
-  | "warning"
-  | "negative";
+
+type IconVariant = "primary" | "secondary" | "success" | "warning" | "negative";
 
 interface Props {
   icon: React.ElementType;
@@ -22,10 +16,10 @@ interface Props {
 export const IconBadge = ({
   icon: Icon,
   size = "md",
-  variant = "default",
+  variant = "secondary",
   disabled = false,
-  containerClassName = "",
-  iconClassName = "",
+  containerClassName,
+  iconClassName,
 }: Props) => {
   return (
     <span
@@ -35,9 +29,13 @@ export const IconBadge = ({
         styles[variant],
         disabled && styles.disabled,
         containerClassName,
-      ].join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
-      <Icon className={[styles.icon, iconClassName].join(" ")} />
+      <Icon
+        className={[styles.icon, iconClassName].filter(Boolean).join(" ")}
+      />
     </span>
   );
 };

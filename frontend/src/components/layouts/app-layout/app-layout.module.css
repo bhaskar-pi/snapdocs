@@ -47,7 +47,7 @@
   align-items: center;
   gap: var(--space-2);
 
-  padding: var(--space-2) var(--space-2);
+  padding: 6px var(--space-2);
   border-radius: var(--radius-sm);
 
   text-decoration: none;
@@ -63,7 +63,7 @@
 
 .navItem:hover {
   background-color: var(--brand-primary-active);
-  color: var(--slate-0);
+  color: var(--text-inverse);
 }
 
 .active {
@@ -78,6 +78,10 @@
 
 .chevron {
   margin-left: auto;
+  color: var(--slate-400);
+}
+
+.navItem.active .chevron {
   color: var(--text-inverse);
 }
 
@@ -129,9 +133,16 @@
   color: inherit;
 }
 
-.content {
+.main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
   padding: var(--space-10);
   background-color: var(--surface-page);
-  overflow-y: auto;
 }

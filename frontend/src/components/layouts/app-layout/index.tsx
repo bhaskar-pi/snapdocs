@@ -1,29 +1,46 @@
-  "use client";
+"use client";
 
-  import { Loader } from "@/components/ui/loader";
-  import { ContentLoader } from "@/components/ui/loader/content-loader";
-  import { useAuthStore } from "@/store/auth.store";
+import { Loader } from "@/components/ui/loader";
+import { ContentLoader } from "@/components/ui/loader/content-loader";
+import PageHeader from "@/components/ui/page-header";
+import { PageHeaderAction } from "@/components/ui/page-header/page-header.types";
+import { useAuthStore } from "@/store/auth.store";
 
-  import styles from "./app-layout.module.css";
-  import Sidebar from "./sidebar";
+import styles from "./app-layout.module.css";
+import Sidebar from "./sidebar";
 
+interface Props {
+  header?: {
+    title?: string;
+    description?: string;
 
-  interface Props {
-    isLoading?: boolean;
-    children: React.ReactNode;
-  }
+    back?: string;
+    backTitle?: string;
 
-  const Layout = ({ children, isLoading }: Props) => {
-    const authLoading = useAuthStore((s) => s.isLoading);
-    return (
-      <div className={styles.layout}>
-        <Loader open={authLoading} />
-        <Sidebar />
-        <main className={styles.content}>
-          {isLoading && !authLoading ? <ContentLoader open /> : children}
-        </main>
-      </div>
-    );
+    action?: PageHeaderAction;
   };
 
-  export default Layout;
+  isLoading?: boolean;
+  children: React.ReactNode;
+}
+
+const Layout = ({ children, isLoading, header }: Props) => {
+  const authLoading = useAuthStore((s) => s.isLoading);
+
+  return (
+    <div className={styles.layout}>
+      <Loader open={authLoading} />
+      <Sidebar />
+
+      <main className={styles.main}>
+        <PageHeader {...header} />
+
+        <div className={styles.body}>
+          {isLoading && !authLoading ? <ContentLoader open /> : children}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Layout;

@@ -48,6 +48,7 @@ const Sidebar = () => {
               <span>{tab.title}</span>
 
               <Icon
+                data-type={isActive ? "active" : ""}
                 name={ChevronRight}
                 size={18}
                 strokeWidth={2}
