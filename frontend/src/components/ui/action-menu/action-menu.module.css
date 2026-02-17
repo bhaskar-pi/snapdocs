@@ -29,10 +29,10 @@
 .menu > * {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start !important;
   gap: var(--space-2);
 
-  /* width: 100%; */
+  width: 100%;
   padding: 10px var(--space-3);
 
   font-size: var(--text-sm);

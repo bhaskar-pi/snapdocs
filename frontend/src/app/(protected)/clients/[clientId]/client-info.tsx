@@ -1,5 +1,6 @@
-import { Mail, NotebookPen, Phone } from "lucide-react";
+import { Mail, Phone, Pencil, Edit2, Edit } from "lucide-react";
 
+import { Icon } from "@/components/ui/icon";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { Client } from "@/types/models/client";
 import { formatDate } from "@/utils/date";
@@ -8,58 +9,46 @@ import styles from "./styles.module.css";
 
 interface Props {
   client?: Client;
+  onEdit?: () => void;
 }
 
-type InfoItem = {
-  label: string;
-  value?: string;
-  fallback: string;
-  icon: React.ElementType;
-};
-
 const ClientInfo = ({ client }: Props) => {
-  const items: InfoItem[] = [
-    {
-      label: "Email",
-      value: client?.email,
-      fallback: "NA",
-      icon: Mail,
-    },
-    {
-      label: "Phone Number",
-      value: client?.whatsappNumber,
-      fallback: "NA",
-      icon: Phone,
-    },
-    {
-      label: "Notes",
-      value: client?.notes,
-      fallback: "No notes available",
-      icon: NotebookPen,
-    },
-  ];
-
-  if (items.every((item) => !item.value)) return null;
+  if (!client) return null;
 
   return (
     <section className={`card ${styles.clientInfo}`}>
-      <div>
-        <h1 className="title">{client?.fullName}</h1>
-        <p className="description">{`Client since: ${formatDate(
-          client?.createdAt,
-        )}`}</p>
+      <div className={styles.clientHeader}>
+        <div>
+          <h1 className={styles.clientName}>{client.fullName}</h1>
+          <p className={styles.clientMeta}>
+            Client since {formatDate(client.createdAt)}
+          </p>
+        </div>
+
+        <IconBadge
+          icon={Edit}
+          size="md"
+          containerClassName={styles.editBadge}
+          mode="soft"
+        />
       </div>
 
-      <div className={styles.clientInfoRow}>
-        {items.map(({ label, value, fallback, icon }) => (
-          <div key={label} className={styles.infoContainer}>
-            <IconBadge icon={icon} />
-            <div className={styles.info}>
-              <p className="label">{label}</p>
-              <p className="value">{value || fallback}</p>
-            </div>
+      <div className={styles.contactGrid}>
+        <div className={styles.contactCard}>
+          <Icon name={Mail} tone="default" size={20} />
+          <div>
+            <p className={styles.label}>Email</p>
+            <p className={styles.value}>{client.email || "NA"}</p>
           </div>
-        ))}
+        </div>
+
+        <div className={styles.contactCard}>
+          <Icon name={Phone} tone="default" size={20} />
+          <div>
+            <p className={styles.label}>Phone</p>
+            <p className={styles.value}>{client.whatsappNumber || "NA"}</p>
+          </div>
+        </div>
       </div>
     </section>
   );

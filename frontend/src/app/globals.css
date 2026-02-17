@@ -820,11 +820,12 @@
   .card {
     background-color: var(--surface-card);
     border: 1px solid var(--border-default);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-sm);
+    
     transition:
       box-shadow var(--transition-fast),
       background-color var(--transition-fast);
+    padding: var(--space-4);
   }
 
   .card:hover {
