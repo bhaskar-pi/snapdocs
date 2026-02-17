@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "../form.module.css";
@@ -122,6 +123,16 @@ export const Select = ({
           disabled={disabled}
         />
 
+        {!isLoading && (
+          <span
+            className={styles.inputIconButton}
+            aria-hidden="true"
+            style={{ pointerEvents: "none" }}
+          >
+            {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </span>
+        )}
+
         {isLoading && <span className={styles.loader} aria-hidden />}
 
         {open && (
@@ -135,6 +146,9 @@ export const Select = ({
 
             {filteredOptions.map((option) => (
               <div
+                data-type={
+                  selectedOption?.label === option.label ? "active" : ""
+                }
                 key={option.value}
                 className={styles.selectOption}
                 onClick={() => {

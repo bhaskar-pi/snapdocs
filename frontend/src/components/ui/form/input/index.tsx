@@ -73,7 +73,7 @@ export const Input: React.FC<InputProps> = ({
           {isPassword && (
             <button
               type="button"
-              className={styles.eyeButton}
+              className={styles.inputIconButton}
               onClick={() => setShowPassword((prev) => !prev)}
               tabIndex={-1}
             >
