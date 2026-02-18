@@ -43,62 +43,54 @@ export async function createDocumentRequest(
 ) {
   const { title, dueDate, description } = docRequest;
 
-  try {
-    return await db.transaction(async (tx) => {
-      const [insertedClient] = await tx
-        .insert(clientsTable)
-        .values({ ...client, userId })
-        .onConflictDoNothing({
-          target: [clientsTable.email, clientsTable.userId],
-        })
-        .returning();
+  return await db.transaction(async (tx) => {
+    const [insertedClient] = await tx
+      .insert(clientsTable)
+      .values({ ...client, userId })
+      .onConflictDoNothing({
+        target: [clientsTable.email, clientsTable.userId],
+      })
+      .returning();
 
-      let clientRecord = insertedClient;
+    let clientRecord = insertedClient;
 
-      if (!clientRecord) {
-        [clientRecord] = await tx
-          .select()
-          .from(clientsTable)
-          .where(
-            and(
-              eq(clientsTable.email, client.email),
-              eq(clientsTable.userId, userId),
-            ),
-          )
-          .limit(1);
-      }
+    if (!clientRecord) {
+      [clientRecord] = await tx
+        .select()
+        .from(clientsTable)
+        .where(
+          and(
+            eq(clientsTable.email, client.email),
+            eq(clientsTable.userId, userId),
+          ),
+        )
+        .limit(1);
+    }
 
-      // Create request
-      const [createdRequest] = await tx
-        .insert(requestsTable)
-        .values({
-          title: title ?? "",
-          description,
-          userId,
-          clientId: clientRecord.id,
-          sentAt: new Date(),
-          ...(dueDate && { dueDate: new Date(dueDate) }),
-        })
-        .returning();
+    // Create request
+    const [createdRequest] = await tx
+      .insert(requestsTable)
+      .values({
+        title: title ?? "",
+        description,
+        userId,
+        clientId: clientRecord.id,
+        sentAt: new Date(),
+        ...(dueDate && { dueDate: new Date(dueDate) }),
+      })
+      .returning();
 
-      // Prepare checklist rows
-      const checklistRows = docRequest.documents.map((doc) => ({
-        ...doc,
-        requestId: createdRequest.id,
-      }));
+    // Prepare checklist rows
+    const checklistRows = docRequest.documents.map((doc) => ({
+      ...doc,
+      requestId: createdRequest.id,
+    }));
 
-      await tx.insert(checklistItemsTable).values(checklistRows);
+    await tx.insert(checklistItemsTable).values(checklistRows);
 
-      return {
-        clientRecord,
-        createdRequest,
-      };
-    });
-  } catch (error) {
-    console.log({ error });
     return {
-      clientRecord: {} as Client,
-      createdRequest: {} as DocRequest,
+      clientRecord,
+      createdRequest,
     };
-  }
+  });
 }

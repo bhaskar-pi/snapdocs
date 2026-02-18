@@ -1,13 +1,12 @@
 "use client";
 
-import { Ellipsis, FileText, Pencil, Trash2 } from "lucide-react";
+import { Ellipsis, Pencil, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import { DataTable } from "@/components/data-table";
 import Layout from "@/components/layouts/app-layout";
 import { ActionMenu } from "@/components/ui/action-menu";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
 import {
   useCreateTemplate,
@@ -19,7 +18,6 @@ import { useAuthStore } from "@/store/auth.store";
 import { Template } from "@/types/models/templates";
 
 import TemplateModal from "./template-modal";
-import styles from "./templates.module.css";
 
 enum Mode {
   CREATE = "create",

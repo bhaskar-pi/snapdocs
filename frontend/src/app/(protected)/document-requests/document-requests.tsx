@@ -153,7 +153,7 @@ const DocumentRequests = () => {
       request: {
         ...clientRequest.request,
         dueDate: clientRequest.request.dueDate
-          ? `${new Date(clientRequest.request.dueDate)}`
+          ? new Date(clientRequest.request.dueDate).toISOString()
           : undefined,
       },
     };

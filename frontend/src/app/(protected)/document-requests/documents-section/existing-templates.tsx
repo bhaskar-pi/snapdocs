@@ -1,6 +1,6 @@
 import { FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -25,19 +25,14 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
   const userId = useAuthStore((s) => s.user?.id || "");
   const { data: templates, isLoading = true } = useTemplates(userId);
 
-  const [filteredTemplates, setFilteredTemplates] = useState<Template[]>(
-    templates?.data || [],
-  );
+  const [search, setSearch] = useState("");
 
-  const onSearchTemplates = (searchText: string) => {
+  const filteredTemplates = useMemo(() => {
     const baseList = templates?.data || [];
-
-    const filtered = baseList.filter((t) =>
-      t.title.toLowerCase().includes(searchText.toLowerCase()),
+    return baseList.filter((t) =>
+      t.title.toLowerCase().includes(search.toLowerCase()),
     );
-
-    setFilteredTemplates(filtered);
-  };
+  }, [templates?.data, search]);
 
   return (
     <form className={styles.stepForm}>
@@ -50,7 +45,7 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
           id="existing-template"
           placeholder="Search templates..."
           disabled={isLoading}
-          onChange={(e) => onSearchTemplates(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       )}
 

@@ -1,4 +1,4 @@
-import { Mail, Phone, Pencil, Edit2, Edit } from "lucide-react";
+import { Mail, Phone, Edit } from "lucide-react";
 
 import { Icon } from "@/components/ui/icon";
 import { IconBadge } from "@/components/ui/icon-badge";

@@ -55,7 +55,7 @@ export const Button = ({
     .join(" ");
 
   return (
-    <button {...props} disabled={isDisabled} className={classes}>
+    <button type="button" {...props} disabled={isDisabled} className={classes}>
       {!loading && icon && iconPosition === "left" && (
         <span className={styles["btn-icon-slot"]}>{icon}</span>
       )}

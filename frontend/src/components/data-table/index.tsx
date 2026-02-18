@@ -53,7 +53,7 @@ export function DataTable({
 
   return (
     <>
-      {!isLoading && rows?.length === 0 && (
+      {!isLoading && count < 1 && (
         <EmptyState
           title={emptyText}
           description={emptyDescription}
