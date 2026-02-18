@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Eye, FileText } from "lucide-react";
+import { Download, Eye, FileText, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 import DocumentPreviewModal from "@/components/document-preview";
@@ -24,14 +24,46 @@ const ChecklistItems = ({ items }: Props) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [selectedDocToPreview, setSelectedDocToPreview] = useState("");
 
+  const [loadingAction, setLoadingAction] = useState<{
+    id: string;
+    action: "view" | "download";
+  } | null>(null);
+
   const handleView = async (documentId: string, name: string) => {
     try {
+      setLoadingAction({ id: documentId, action: "view" });
+
       const response = await getDocumentUrl.mutateAsync(documentId);
+
       setPreviewUrl(response?.url || "");
       setSelectedDocToPreview(name);
       setIsPreviewOpen(true);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const handleDownload = async (documentId: string, fileName: string) => {
+    try {
+      setLoadingAction({ id: documentId, action: "download" });
+
+      const response = await getDocumentUrl.mutateAsync(documentId);
+
+      const blob = await fetch(response.url || "").then((r) => r.blob());
+      const blobUrl = URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.href = blobUrl;
+      anchor.download = fileName;
+      anchor.click();
+
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingAction(null);
     }
   };
 
@@ -40,15 +72,16 @@ const ChecklistItems = ({ items }: Props) => {
     setIsPreviewOpen(false);
     setSelectedDocToPreview("");
   };
-  const handleDownload = async (documentId: string) => {
-    const response = await getDocumentUrl.mutateAsync(documentId);
-    window.open(response.url, "_blank");
-  };
 
   return (
     <div className={styles.checklist}>
       {items.map((item) => {
         const document = item.documents[0];
+        const isViewLoading =
+          loadingAction?.id === document.id && loadingAction.action === "view";
+        const isDownloadLoading =
+          loadingAction?.id === document.id &&
+          loadingAction.action === "download";
 
         return (
           <div key={item.id} className={styles.checklistRow}>
@@ -79,15 +112,23 @@ const ChecklistItems = ({ items }: Props) => {
                     aria-label="View document"
                     onClick={() => handleView(document.id, item.name)}
                   >
-                    <Eye size={16} />
+                    {isViewLoading ? (
+                      <Loader2 size={16} className="spinner" />
+                    ) : (
+                      <Eye size={16} />
+                    )}
                   </button>
 
                   <button
                     className={styles.iconButton}
                     aria-label="Download document"
-                    onClick={() => handleDownload(document.id)}
+                    onClick={() => handleDownload(document.id, item.name)}
                   >
-                    <Download size={16} />
+                    {isDownloadLoading ? (
+                      <Loader2 size={16} className="spinner" />
+                    ) : (
+                      <Download size={16} />
+                    )}
                   </button>
                 </>
               )}
