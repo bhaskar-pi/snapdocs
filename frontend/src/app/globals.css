@@ -832,6 +832,10 @@
     background-color: var(--surface-card-hover);
   }
 
+  .cursor {
+    cursor: pointer;
+  }
+
   /** subtitle */
 
   .subtitle-sm {

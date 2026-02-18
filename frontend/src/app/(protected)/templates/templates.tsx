@@ -1,10 +1,12 @@
 "use client";
 
+import { FileText } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 import Layout from "@/components/layouts/app-layout";
 import TemplateCard from "@/components/templates/template-card";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   useCreateTemplate,
   useDeleteTemplate,
@@ -139,16 +141,27 @@ const Templates = () => {
       }}
       isLoading={isLoading}
     >
-      <div className={styles.cards}>
-        {templates?.data?.map((template) => (
-          <TemplateCard
-            key={template.id}
-            template={template}
-            onEdit={() => onOpenModal(template)}
-            onDelete={() => onDeleteTemplate(template.id)}
-          />
-        ))}
-      </div>
+      {templates?.data?.length === 0 && !templatesLoading ? (
+        <EmptyState
+          icon={<FileText size={48} />}
+          title="No templates yet"
+          description="Create reusable document request templates to save time and standardize your workflow."
+          primaryActionLabel="Create Template"
+          onPrimaryAction={() => onOpenModal()}
+          size="lg"
+        />
+      ) : (
+        <div className={styles.cards}>
+          {templates?.data?.map((template) => (
+            <TemplateCard
+              key={template.id}
+              template={template}
+              onEdit={() => onOpenModal(template)}
+              onDelete={() => onDeleteTemplate(template.id)}
+            />
+          ))}
+        </div>
+      )}
 
       <TemplateModal
         isLoading={isLoading}

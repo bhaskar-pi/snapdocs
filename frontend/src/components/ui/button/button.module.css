@@ -1,4 +1,6 @@
-/*  BASE  */
+/*  */
+/* BASE */
+/*  */
 
 .btn {
   display: inline-flex;
@@ -40,7 +42,11 @@
   transform: translateY(1px);
 }
 
-/*  INTENTS  */
+/*  */
+/* INTENTS */
+/*  */
+
+/* PRIMARY */
 
 .btn-primary {
   background: var(--brand-primary);
@@ -52,6 +58,8 @@
   background: var(--brand-primary-hover);
 }
 
+/* SECONDARY */
+
 .btn-secondary {
   background: var(--surface-muted);
   color: var(--text-primary);
@@ -59,8 +67,22 @@
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--surface-muted-hover);
+  background: var(--surface-card-hover);
 }
+
+/* NEUTRAL (Slate 800/700 based) */
+
+.btn-neutral {
+  background: var(--slate-800);
+  color: var(--text-inverse);
+  border-color: var(--slate-800);
+}
+
+.btn-neutral:hover:not(:disabled) {
+  background: var(--slate-700);
+}
+
+/* SUCCESS */
 
 .btn-success {
   background: var(--success-base);
@@ -72,6 +94,8 @@
   background: var(--success-hover);
 }
 
+/* WARNING */
+
 .btn-warning {
   background: var(--warning-base);
   color: var(--text-inverse);
@@ -81,6 +105,8 @@
 .btn-warning:hover:not(:disabled) {
   background: var(--warning-hover);
 }
+
+/* NEGATIVE */
 
 .btn-negative {
   background: var(--danger-base);
@@ -92,7 +118,9 @@
   background: var(--danger-hover);
 }
 
-/*  OUTLINE  */
+/*  */
+/* OUTLINE */
+/*  */
 
 .btn-outline {
   background: transparent;
@@ -114,6 +142,15 @@
 
 .btn-outline.btn-secondary:hover:not(:disabled) {
   background: var(--surface-muted);
+}
+
+.btn-outline.btn-neutral {
+  color: var(--slate-800);
+  border-color: var(--slate-800);
+}
+
+.btn-outline.btn-neutral:hover:not(:disabled) {
+  background: var(--slate-100);
 }
 
 .btn-outline.btn-success {
@@ -143,7 +180,9 @@
   background: var(--danger-light);
 }
 
-/*  GHOST  */
+/*  */
+/* GHOST */
+/*  */
 
 .btn-ghost {
   background: transparent;
@@ -154,7 +193,9 @@
   background: var(--surface-muted);
 }
 
-/*  SOFT  */
+/*  */
+/* SOFT */
+/*  */
 
 .btn-soft {
   border: 1px solid transparent;
@@ -175,7 +216,16 @@
 }
 
 .btn-soft.btn-secondary:hover:not(:disabled) {
-  background: var(--surface-muted-hover);
+  background: var(--surface-card-hover);
+}
+
+.btn-soft.btn-neutral {
+  background: var(--slate-100);
+  color: var(--slate-800);
+}
+
+.btn-soft.btn-neutral:hover:not(:disabled) {
+  background: var(--slate-200);
 }
 
 .btn-soft.btn-success {
@@ -205,7 +255,9 @@
   background: var(--danger-lighter);
 }
 
-/*  SIZES  */
+/*  */
+/* SIZES */
+/*  */
 
 .btn-sm {
   height: 37px;
@@ -222,19 +274,13 @@
   font-size: var(--text-base);
 }
 
-/*  ICON SUPPORT  */
+/*  */
+/* ICON SUPPORT */
+/*  */
 
 .btn-icon {
   padding: 0;
-  width: 44px;
-}
-
-.btn-icon.btn-sm {
-  width: 36px;
-}
-
-.btn-icon.btn-lg {
-  width: 48px;
+  aspect-ratio: 1; /* keeps square */
 }
 
 .btn-icon-slot {
@@ -248,13 +294,17 @@
   align-items: center;
 }
 
-/*  BLOCK  */
+/*  */
+/* BLOCK */
+/*  */
 
 .btn-block {
   width: 100%;
 }
 
-/*  LOADING  */
+/*  */
+/* LOADING */
+/*  */
 
 .btn-loading {
   pointer-events: none;

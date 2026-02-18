@@ -9,7 +9,8 @@ type ButtonIntent =
   | "secondary"
   | "success"
   | "warning"
-  | "negative";
+  | "negative"
+  | "neutral";
 
 type ButtonVariant = "solid" | "outline" | "ghost" | "soft";
 type ButtonSize = "sm" | "md" | "lg";
