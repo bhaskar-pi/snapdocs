@@ -45,7 +45,6 @@ export async function createDocumentRequest(
 
   try {
     return await db.transaction(async (tx) => {
-      console.log("1");
       const [insertedClient] = await tx
         .insert(clientsTable)
         .values({ ...client, userId })
@@ -69,8 +68,6 @@ export async function createDocumentRequest(
           .limit(1);
       }
 
-      console.log("1");
-
       // Create request
       const [createdRequest] = await tx
         .insert(requestsTable)
@@ -84,8 +81,6 @@ export async function createDocumentRequest(
         })
         .returning();
 
-      console.log("2");
-
       // Prepare checklist rows
       const checklistRows = docRequest.documents.map((doc) => ({
         ...doc,
@@ -94,7 +89,6 @@ export async function createDocumentRequest(
 
       await tx.insert(checklistItemsTable).values(checklistRows);
 
-      console.log("3");
       return {
         clientRecord,
         createdRequest,

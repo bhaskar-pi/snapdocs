@@ -128,7 +128,7 @@
 /* Card */
 
 .existingTemplateCard {
-  min-height: 130px;
+  min-height: 135px;
 
   height: 100%;
   display: flex;
@@ -142,7 +142,6 @@
 /* Hover */
 
 .existingTemplateCard[data-type="active"] {
-  background-color: var(--brand-surface-page);
   border-color: var(--brand-border-strong);
 }
 
@@ -179,6 +178,8 @@
 .documents {
   font-size: var(--text-sm);
   color: var(--text-secondary);
+  font-weight: var(--fw-medium);
+  margin-top: var(--space-1);
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -186,6 +187,17 @@
 
 .documents {
   margin-top: auto; /* pushes documents to bottom consistently */
+}
+
+.documents > span {
+  color: var(--danger-base);
+  margin-left: var(--space-1);
+}
+
+.cardFooter {
+  margin-top: var(--space-3);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .stepFooter {

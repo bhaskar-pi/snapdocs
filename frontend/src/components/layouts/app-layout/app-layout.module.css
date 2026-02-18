@@ -143,8 +143,8 @@
 .container {
   width: 100%;
   margin: 0 auto;
-  padding-left: var(--space-6);
-  padding-right: var(--space-6);
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
 }
 
 .container-sm {

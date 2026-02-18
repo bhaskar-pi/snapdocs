@@ -1,12 +1,14 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { Ellipsis, FileText, Pencil, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
+import { DataTable } from "@/components/data-table";
 import Layout from "@/components/layouts/app-layout";
-import TemplateCard from "@/components/templates/template-card";
+import { ActionMenu } from "@/components/ui/action-menu";
 import { EmptyState } from "@/components/ui/empty-state";
+import { Icon } from "@/components/ui/icon";
 import {
   useCreateTemplate,
   useDeleteTemplate,
@@ -141,27 +143,78 @@ const Templates = () => {
       }}
       isLoading={isLoading}
     >
-      {templates?.data?.length === 0 && !templatesLoading ? (
-        <EmptyState
-          icon={<FileText size={48} />}
-          title="No templates yet"
-          description="Create reusable document request templates to save time and standardize your workflow."
-          primaryActionLabel="Create Template"
-          onPrimaryAction={() => onOpenModal()}
-          size="lg"
-        />
-      ) : (
-        <div className={styles.cards}>
-          {templates?.data?.map((template) => (
-            <TemplateCard
+      <DataTable
+        title="Templates"
+        onEmptyAction={() => onOpenModal()}
+        columnWidths="1fr 160px 180px 160px 68px"
+        emptyText="No templates found"
+        emptyDescription="Create reusable document request templates to standardize your workflow."
+        isLoading={templatesLoading}
+        count={templates?.data?.length || 0}
+        columns={
+          <>
+            <p>Template</p>
+            <p>Documents</p>
+            <p>Category</p>
+            <p>Last Updated</p>
+            <p />
+          </>
+        }
+        rows={templates?.data?.map((template) => {
+          const requiredCount = template.documents.filter(
+            (d) => d.isRequired,
+          ).length;
+
+          return (
+            <div
               key={template.id}
-              template={template}
-              onEdit={() => onOpenModal(template)}
-              onDelete={() => onDeleteTemplate(template.id)}
-            />
-          ))}
-        </div>
-      )}
+              className="data-table-row"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 160px 180px 160px 68px",
+              }}
+            >
+              <div>
+                <p className="data-table-primary">{template.title}</p>
+                <p className="data-table-secondary truncate">
+                  {template.description}
+                </p>
+              </div>
+
+              <p className="data-table-primary-row">
+                {template.documents.length} docs • {requiredCount} required
+              </p>
+
+              <p className="data-table-primary-row">
+                {template.category ?? "NA"} requests
+              </p>
+
+              <p className="data-table-primary-row">
+                {new Date(template.updatedAt).toLocaleDateString()}
+              </p>
+
+              <ActionMenu
+                trigger={<Icon name={Ellipsis} tone="muted" size={16} />}
+                context={
+                  <>
+                    <Icon
+                      text="Edit"
+                      name={Pencil}
+                      onClick={() => onOpenModal(template)}
+                    />
+                    <Icon
+                      tone="negative"
+                      text="Delete"
+                      name={Trash2}
+                      onClick={() => onDeleteTemplate(template.id)}
+                    />
+                  </>
+                }
+              />
+            </div>
+          );
+        })}
+      />
 
       <TemplateModal
         isLoading={isLoading}

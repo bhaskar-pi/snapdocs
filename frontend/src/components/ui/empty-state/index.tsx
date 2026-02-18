@@ -33,7 +33,7 @@ export function EmptyState({
       {icon && <div className={styles.icon}>{icon}</div>}
 
       <div className={styles.content}>
-        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.title}>{title}</p>
 
         {description && <p className={styles.description}>{description}</p>}
       </div>

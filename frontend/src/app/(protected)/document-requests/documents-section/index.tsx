@@ -35,9 +35,7 @@ const ChooseTemplate = ({
   onChangeExistingTemplate,
   onRemove,
 }: Props) => {
-  const [mode, setMode] = useState<TemplateMode>(
-    templateId ? TemplateMode.USE_TEMPLATE : TemplateMode.ADD_DOCUMENTS,
-  );
+  const [mode, setMode] = useState<TemplateMode>(TemplateMode.ADD_DOCUMENTS);
 
   return (
     <>
@@ -63,7 +61,10 @@ const ChooseTemplate = ({
 
       {mode === TemplateMode.USE_TEMPLATE && (
         <ExistingTemplates
-          onChange={onChangeExistingTemplate}
+          onChange={(template) => {
+            onChangeExistingTemplate(template);
+            setMode(TemplateMode.ADD_DOCUMENTS);
+          }}
           templateId={templateId}
         />
       )}
@@ -76,7 +77,9 @@ const ChooseTemplate = ({
         />
       )}
 
-      <SectionFooter onNext={onNext} onPrevious={onPrevious} />
+      {!(TemplateMode.USE_TEMPLATE === mode) && (
+        <SectionFooter onNext={onNext} onPrevious={onPrevious} />
+      )}
     </>
   );
 };

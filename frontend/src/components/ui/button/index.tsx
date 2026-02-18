@@ -13,7 +13,7 @@ type ButtonIntent =
   | "neutral";
 
 type ButtonVariant = "solid" | "outline" | "ghost" | "soft";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonSize = "xs" | "sm" | "md" | "lg";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   intent?: ButtonIntent;

@@ -2,7 +2,7 @@
   padding: var(--space-8);
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius-lg);
-  background-color: var(--surface-muted);
+  background-color: var(--surface-page);
 
   display: flex;
   flex-direction: column;
@@ -28,14 +28,16 @@
 }
 
 .title {
-  font-size: var(--text-lg);
-  font-weight: var(--fw-semibold);
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
   color: var(--text-primary);
 }
 
 .description {
   font-size: var(--text-sm);
   color: var(--text-tertiary);
+  font-weight: var(--fw-medium);
+  margin-top: -6px;
 }
 
 .actions {

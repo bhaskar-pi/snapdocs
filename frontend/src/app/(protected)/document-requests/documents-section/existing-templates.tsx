@@ -2,6 +2,7 @@ import { FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SearchInput } from "@/components/ui/form/search";
 import { Icon } from "@/components/ui/icon";
@@ -66,7 +67,7 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
       {!isLoading && filteredTemplates.length > 0 && (
         <div className={styles.templatesGrid}>
           {filteredTemplates.map((template) => {
-            const MAX_DOCS_VISIBLE = 3;
+            const MAX_DOCS_VISIBLE = 2;
             const visibleDocs = template.documents.slice(0, MAX_DOCS_VISIBLE);
             const remainingCount = template.documents.length - MAX_DOCS_VISIBLE;
 
@@ -75,12 +76,15 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
                 key={template.id}
                 data-type={templateId === template.id ? "active" : ""}
                 className={`card ${styles.existingTemplateCard}`}
-                role="button"
-                onClick={() => onChange(template)}
               >
                 <div className={styles.cardTop}>
-                  <div className="d-flex gap-2 items-start">
-                    <Icon name={FileText} tone="primary" className="mt-2" />
+                  <div className="d-flex gap-3 items-start">
+                    <Icon
+                      name={FileText}
+                      size={20}
+                      tone="primary"
+                      className="mt-2"
+                    />
 
                     <div className={styles.textBlock}>
                       <h6 className="truncate">{template.title}</h6>
@@ -96,8 +100,23 @@ const ExistingTemplates = ({ templateId, onChange }: Props) => {
 
                 <p className={styles.documents}>
                   {visibleDocs.map((doc) => doc.name).join(", ")}
-                  {remainingCount > 0 && ` +${remainingCount} more`}
+                  <span>
+                    {" "}
+                    {remainingCount > 0 && ` +${remainingCount} more`}
+                  </span>
                 </p>
+
+                <div className={styles.cardFooter}>
+                  <Button
+                    type="button"
+                    className={styles.useBtn}
+                    onClick={() => onChange(template)}
+                    size="xs"
+                    intent="primary"
+                  >
+                    Use Template
+                  </Button>
+                </div>
               </div>
             );
           })}

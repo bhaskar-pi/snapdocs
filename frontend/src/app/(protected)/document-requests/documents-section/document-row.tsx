@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, FileEdit, Trash2 } from "lucide-react";
+import { Edit, FileText, Trash2 } from "lucide-react";
 
 import { Icon } from "@/components/ui/icon";
 import { IconBadge } from "@/components/ui/icon-badge";
@@ -20,7 +20,7 @@ const DocumentRow = ({ document, onDelete, onEdit }: Props) => {
   return (
     <div className={styles.documentRow}>
       <div className={styles.documentLeft}>
-        <IconBadge icon={FileEdit} variant="secondary" />
+        <IconBadge icon={FileText} variant="secondary" />
         <div className={styles.documentInfo}>
           <p className={styles.documentName}>{document.name}</p>
           <p className={`${styles.documentMeta}`}>
@@ -30,7 +30,7 @@ const DocumentRow = ({ document, onDelete, onEdit }: Props) => {
       </div>
 
       <div className={styles.documentRowActions}>
-        <Icon tone="info" name={Edit} onClick={onEdit} />
+        <Icon tone="primary" name={Edit} onClick={onEdit} />
         <Icon tone="negative" name={Trash2} onClick={onDelete} />
       </div>
     </div>

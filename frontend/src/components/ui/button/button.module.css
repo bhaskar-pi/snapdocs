@@ -259,13 +259,21 @@
 /* SIZES */
 /*  */
 
+.btn-xs {
+  height: 30px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+}
+
 .btn-sm {
   height: 37px;
   padding: 0 var(--space-3);
+  font-size: var(--text-sm);
 }
 
 .btn-md {
   height: 44px;
+  font-size: var(--text-sm);
 }
 
 .btn-lg {

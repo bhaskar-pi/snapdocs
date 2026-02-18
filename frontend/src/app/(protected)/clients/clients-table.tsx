@@ -71,6 +71,8 @@ const ClientsTable = () => {
       <Filter filters={filters} onChange={onChangeFilters} />
 
       <DataTable
+        title="Document Request"
+        onEmptyAction={() => router.push(SCREEN_PATHS.DOCUMENT_REQUESTS)}
         columnWidths="1fr 220px 200px 150px 68px"
         emptyText="No clients found"
         emptyDescription="Create document requests for clients and track their progress here."
