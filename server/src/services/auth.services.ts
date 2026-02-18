@@ -14,7 +14,7 @@ import {
   LoginRequest,
   UserRegisterRequest,
 } from "@models/payloads/auth.payload";
-import { User } from "@database/schema/users.schema";
+import { UserInsert } from "@database/schema/users.schema";
 import {
   generateAccessToken,
   generateRefreshToken,
@@ -26,7 +26,16 @@ import { TokenValidity } from "@enums/session";
 import { AppError } from "@utils/error";
 
 export async function registerUser(data: UserRegisterRequest) {
-  const { firstName, lastName, email, phoneNumber, password } = data;
+  const {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    businessName,
+    businessType,
+    otherBusinessType,
+  } = data;
 
   const existsUser = await getUserByEmail(email);
   if (existsUser) {
@@ -39,9 +48,12 @@ export async function registerUser(data: UserRegisterRequest) {
     firstName,
     lastName,
     email,
-    phoneNumber,
+    phoneNumber: phoneNumber ?? null,
     password: passwordHash,
-  } as User);
+    businessName,
+    businessType,
+    otherBusinessType: otherBusinessType ?? null,
+  } as UserInsert);
 }
 
 export async function loginUser(data: LoginRequest) {
