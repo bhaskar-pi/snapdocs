@@ -1,5 +1,8 @@
+"use client";
+
 import { Search } from "lucide-react";
 import React from "react";
+
 
 import { Icon } from "../../icon";
 import styles from "../form.module.css";
@@ -12,18 +15,9 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   fieldClassName?: string;
   message?: string;
-  messageType?: "error" | "warning" | "info" | "neutral";
+  messageType?: "error" | "warning" | "info" | "success" | "secondary";
   messagePosition?: "left" | "right" | "center";
 }
-
-const messagePositionStyles: Record<
-  NonNullable<Props["messagePosition"]>,
-  string
-> = {
-  left: styles.messageLeft,
-  center: styles.messageCenter,
-  right: styles.messageRight,
-};
 
 export const SearchInput: React.FC<Props> = ({
   id,
@@ -33,41 +27,59 @@ export const SearchInput: React.FC<Props> = ({
   inputClassName = "",
   fieldClassName = "",
   message,
-  messageType = "error",
+  messageType,
   messagePosition = "left",
   ...props
 }) => {
-  const messageClassName = [
-    styles.message,
-    styles[messageType],
-    messagePositionStyles[messagePosition],
-  ].join(" ");
+  const hasError = message && messageType === "error";
 
-  const errorBorder =
-    message && messageType === "error" ? styles.inputError : "";
+  const inputClasses = [
+    styles.input,
+    styles["search-input"],
+    hasError && styles["input-error"],
+    inputClassName,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const messageClasses = [
+    styles["form-message"],
+    message && messageType && styles[`form-message-${messageType}`],
+    styles[`form-message-${messagePosition}`],
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={`${styles.inputContainer} ${containerClassName}`}>
+    <div
+      className={[styles["form-control"], containerClassName]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {label && (
-        <label className={`${styles.label} ${labelClassName}`} htmlFor={id}>
+        <label
+          htmlFor={id}
+          className={[styles["form-label"], labelClassName]
+            .filter(Boolean)
+            .join(" ")}
+        >
           {label}
         </label>
       )}
 
-      <div className={`${styles.field} ${fieldClassName}`}>
-        <div className={styles.searchWrapper}>
-          <Icon className={styles.searchIcon} name={Search} />
+      <div
+        className={[styles["form-field"], fieldClassName]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        <div className={styles["search-wrapper"]}>
+          <Icon name={Search} size={16} className={styles["search-icon"]} />
 
-          <input
-            id={id}
-            type="search"
-            className={`${styles.input} ${styles.searchInput} ${inputClassName} ${errorBorder}`}
-            {...props}
-          />
+          <input id={id} type="search" className={inputClasses} {...props} />
         </div>
-
-        {message && <p className={messageClassName}>{message}</p>}
       </div>
+
+      {message && <p className={messageClasses}>{message}</p>}
     </div>
   );
 };

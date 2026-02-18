@@ -9,7 +9,6 @@ import { SETTINGS_TABS } from "@/types/enums/tabs";
 
 import Profile from "./profile";
 import Security from "./security";
-import styles from "./settings.module.css";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState<string>(SETTINGS_TABS.PROFILE);
@@ -27,20 +26,19 @@ const Settings = () => {
 
   return (
     <Layout
+      size="sm"
       header={{
         title: "Settings",
         description: "Manage your account and preferences",
       }}
     >
-      <div className={styles.settingsContainer}>
-        <Tabs
-          tabs={SettingsTabs}
-          activeTab={activeTab}
-          onSelectTab={(tab) => setActiveTab(tab)}
-        />
+      <Tabs
+        tabs={SettingsTabs}
+        activeTab={activeTab}
+        onSelectTab={(tab) => setActiveTab(tab)}
+      />
 
-        {renderTabContent(activeTab)}
-      </div>
+      {renderTabContent(activeTab)}
     </Layout>
   );
 };

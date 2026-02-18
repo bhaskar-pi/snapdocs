@@ -33,7 +33,7 @@ const LoginPanel = () => {
       )}
 
       <div className={styles.trustedCard}>
-        <IconBadge icon={content.trust.icon} />
+        <IconBadge variant="secondary" icon={content.trust.icon} />
         <div className={styles.trustedCardInfo}>
           <p>{content.trust.title}</p>
           <p>{content.trust.subtitle}</p>

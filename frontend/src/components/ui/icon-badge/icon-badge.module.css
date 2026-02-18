@@ -37,7 +37,7 @@
   height: 56px;
 }
 
-/* ================= Icon ================= */
+/*  Icon  */
 
 .icon {
   width: 18px;
@@ -80,8 +80,7 @@
 /* Success */
 .success {
   background-color: var(--success-light);
-  color: var(--success-text);
-  border-color: var(--success-border);
+  color: var(--success-text); 
 }
 
 /* Warning */
@@ -105,4 +104,58 @@
   border-color: var(--border-subtle);
   opacity: 0.6;
   pointer-events: none;
+}
+
+/*  SOLID (default)  */
+
+.mode-solid.primary {
+  background-color: var(--brand-primary);
+  color: var(--text-inverse);
+}
+
+.mode-solid.secondary {
+  background-color: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.mode-solid.success {
+  background-color: var(--success-base);
+  color: var(--text-inverse);
+}
+
+.mode-solid.warning {
+  background-color: var(--warning-base);
+  color: var(--text-inverse);
+}
+
+.mode-solid.negative {
+  background-color: var(--danger-base);
+  color: var(--text-inverse);
+}
+
+/*  SOFT (Light background)  */
+
+.mode-soft.primary {
+  background-color: var(--brand-primary-light);
+  color: var(--brand-primary);
+}
+
+.mode-soft.secondary {
+  background-color: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.mode-soft.success {
+  background-color: var(--success-light);
+  color: var(--success-base);
+}
+
+.mode-soft.warning {
+  background-color: var(--warning-light);
+  color: var(--warning-base);
+}
+
+.mode-soft.negative {
+  background-color: var(--danger-light);
+  color: var(--danger-base);
 }

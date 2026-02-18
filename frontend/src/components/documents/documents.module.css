@@ -2,37 +2,41 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 10px;
+  padding: var(--space-3) var(--space-3);
 
-  background-color: var(--slate-150);
-  color: var(--slate-700);
+  background-color: var(--surface-page);
+  color: var(--text-secondary);
   border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
 
-  font-size: var(--font-sm);
+  font-size: var(--text-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.documentRow:hover {
+  background-color: var(--surface-muted);
 }
 
 .documentRowLeft {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
 .documentRowLeft > :last-child {
-  color: var(--slate-900);
-  font-weight: 500;
-  font-size: var(--font-sm);
+  color: var(--text-primary);
+  font-weight: var(--fw-medium);
+  font-size: var(--text-sm);
 }
 
 .documentRowRight {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: var(--space-5);
 }
 
 .documentRowRight > :first-child {
-  color: var(--slate-500);
-  font-weight: 400;
-  font-size: var(--font-xs);
-  font-weight: 500;
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
+  font-size: var(--text-xs);
 }
-

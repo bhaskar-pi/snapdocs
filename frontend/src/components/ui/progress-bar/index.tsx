@@ -19,7 +19,7 @@ interface Props {
 export const ProgressBar = ({
   completed,
   total,
-  variant = "neutral",
+  variant = "success",
   textType = "count",
 }: Props) => {
   const percent = total === 0 ? 0 : Math.round((completed / total) * 100);

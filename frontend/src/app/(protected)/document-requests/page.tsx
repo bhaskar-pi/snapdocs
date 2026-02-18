@@ -5,6 +5,7 @@ import DocumentRequests from "./document-requests";
 const Page = () => {
   return (
     <Layout
+      size="md"
       header={{
         title: "Create Documents Request",
         description:

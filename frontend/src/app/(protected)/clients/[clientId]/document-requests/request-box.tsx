@@ -10,8 +10,8 @@ import { formatDate } from "@/utils/date";
 import { formatEnumLabel } from "@/utils/input";
 import { getStatusClassName } from "@/utils/misc";
 
-import styles from "../styles.module.css";
 import ChecklistItems from "./checklist-items";
+import styles from "./document-requests.module.css";
 
 interface Props {
   request: DocumentRequest;
@@ -25,47 +25,55 @@ const RequestBox = ({ request }: Props) => {
   ).length;
 
   return (
-    <div key={request.id} className={`card ${styles.requestCard}`}>
-      <div className={styles.header}>
-        <div className={styles.headerLeft}>
-          <div className={styles.titleRow}>
-            <h2>{request.title}</h2>
-            <span className={`status ${getStatusClassName(request.status)}`}>
+    <div
+      role="button"
+      className={`card ${styles.requestCard}`}
+      onClick={() => setIsOpen((prev) => !prev)}
+    >
+      <div className={styles.requestBoxHeader}>
+        <div className={styles.requestBoxLeft}>
+          <div className={styles.requestTitleRow}>
+            <h2 className={styles.requestBoxTitle}>{request.title}</h2>
+
+            <span
+              className={`status status-${getStatusClassName(request.status)}`}
+            >
               {formatEnumLabel(request.status)}
             </span>
           </div>
 
-          <p className={styles.meta}>
-            Created: {formatDate(request.createdAt)}
+          <p className={styles.requestMeta}>
+            Created {formatDate(request.createdAt)}
           </p>
         </div>
 
-        <div className={styles.headerRight}>
+        <div className={styles.requestBoxRight}>
           {request.dueDate && (
-            <p className={styles.dueDate}>
-              <Icon name={Clock} size={16} />
-              <span>Due: {formatDate(request.dueDate)}</span>
-            </p>
+            <div className={styles.dueDate}>
+              <Icon name={Clock} size={14} tone="muted" />
+              <span>Due {formatDate(request.dueDate)}</span>
+            </div>
           )}
-          <Icon
-            size={22}
-            name={isOpen ? ChevronUp : ChevronDown}
-            containerClassName={styles.closeToggle}
-            onClick={() => setIsOpen((prev) => !prev)}
-          />
+
+          <button type="button" className={styles.toggleButton}>
+            <Icon
+              size={18}
+              name={isOpen ? ChevronUp : ChevronDown}
+              tone="muted"
+            />
+          </button>
         </div>
       </div>
 
       {isOpen && (
-        <>
-          <p className="line"></p>
-
+        <div className={styles.requestBody}>
           <div className={styles.documentsHeader}>
-            <p>{`Documents (${receivedCount}/${request?.checklistItems?.length} received)`}</p>
+            Documents ({receivedCount}/{request?.checklistItems?.length}{" "}
+            received)
           </div>
 
           <ChecklistItems items={request.checklistItems} />
-        </>
+        </div>
       )}
     </div>
   );

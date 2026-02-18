@@ -1,10 +1,13 @@
 "use client";
 
+import { Ellipsis, Pencil, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
+import { DataTable } from "@/components/data-table";
 import Layout from "@/components/layouts/app-layout";
-import TemplateCard from "@/components/templates/template-card";
+import { ActionMenu } from "@/components/ui/action-menu";
+import { Icon } from "@/components/ui/icon";
 import {
   useCreateTemplate,
   useDeleteTemplate,
@@ -15,7 +18,6 @@ import { useAuthStore } from "@/store/auth.store";
 import { Template } from "@/types/models/templates";
 
 import TemplateModal from "./template-modal";
-import styles from "./templates.module.css";
 
 enum Mode {
   CREATE = "create",
@@ -139,16 +141,78 @@ const Templates = () => {
       }}
       isLoading={isLoading}
     >
-      <div className={styles.cards}>
-        {templates?.data?.map((template) => (
-          <TemplateCard
-            key={template.id}
-            template={template}
-            onEdit={() => onOpenModal(template)}
-            onDelete={() => onDeleteTemplate(template.id)}
-          />
-        ))}
-      </div>
+      <DataTable
+        title="Templates"
+        onEmptyAction={() => onOpenModal()}
+        columnWidths="1fr 160px 180px 160px 68px"
+        emptyText="No templates found"
+        emptyDescription="Create reusable document request templates to standardize your workflow."
+        isLoading={templatesLoading}
+        count={templates?.data?.length || 0}
+        columns={
+          <>
+            <p>Template</p>
+            <p>Documents</p>
+            <p>Category</p>
+            <p>Last Updated</p>
+            <p />
+          </>
+        }
+        rows={templates?.data?.map((template) => {
+          const requiredCount = template.documents.filter(
+            (d) => d.isRequired,
+          ).length;
+
+          return (
+            <div
+              key={template.id}
+              className="data-table-row"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 160px 180px 160px 68px",
+              }}
+            >
+              <div>
+                <p className="data-table-primary">{template.title}</p>
+                <p className="data-table-secondary truncate">
+                  {template.description}
+                </p>
+              </div>
+
+              <p className="data-table-primary-row">
+                {template.documents.length} docs • {requiredCount} required
+              </p>
+
+              <p className="data-table-primary-row">
+                {template.category ?? "NA"} requests
+              </p>
+
+              <p className="data-table-primary-row">
+                {new Date(template.updatedAt).toLocaleDateString()}
+              </p>
+
+              <ActionMenu
+                trigger={<Icon name={Ellipsis} tone="muted" size={16} />}
+                context={
+                  <>
+                    <Icon
+                      text="Edit"
+                      name={Pencil}
+                      onClick={() => onOpenModal(template)}
+                    />
+                    <Icon
+                      tone="negative"
+                      text="Delete"
+                      name={Trash2}
+                      onClick={() => onDeleteTemplate(template.id)}
+                    />
+                  </>
+                }
+              />
+            </div>
+          );
+        })}
+      />
 
       <TemplateModal
         isLoading={isLoading}

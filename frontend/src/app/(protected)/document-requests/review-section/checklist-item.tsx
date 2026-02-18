@@ -14,9 +14,11 @@ const CheckListItem = ({ document }: Props) => {
     <div className={styles.checklistItem}>
       <div>
         <Icon name={FileText} className={styles.squareDot} />
-        <p>{document.name}</p>
+        <p className="subtitle-sm">{document.name}</p>
       </div>
-      <span>{document.isRequired ? "Required" : "Optional"}</span>
+      <span className={styles.requiredLabel} data-type={document.isRequired ? "required" : "optional"}>
+        {document.isRequired ? "Required" : "Optional"}
+      </span>
     </div>
   );
 };

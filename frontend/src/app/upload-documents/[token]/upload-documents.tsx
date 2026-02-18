@@ -2,6 +2,8 @@
 
 import {
   CircleCheck,
+  Edit,
+  Edit2,
   FileText,
   Replace,
   Shield,
@@ -59,7 +61,6 @@ export default function UploadDocuments() {
 
   return (
     <div className={styles.page}>
-      {/* HEADER */}
       <div className={styles.headerContainer}>
         <div className={styles.container}>
           <div className={styles.header}>
@@ -68,18 +69,16 @@ export default function UploadDocuments() {
         </div>
       </div>
 
-      {/* BODY */}
       <div className={styles.bodyWrapper}>
         <div className={styles.container}>
           <div className={styles.body}>
-            <div className={styles.user}>
-              <Icon size={16} name={User} tone="muted" strokeWidth={2} />
-              <p>
-                Requested by <span>{requestDetails?.requestedBy}</span>
-              </p>
-            </div>
-
             <div>
+              <div className={styles.user}>
+                <Icon size={16} name={User} tone="muted" strokeWidth={2} />
+                <p>
+                  Requested by <span>{requestDetails?.requestedBy}</span>
+                </p>
+              </div>
               <h1 className={styles.title}>{requestDetails?.requestTitle}</h1>
               <p className={styles.description}>
                 Hi <span>{requestDetails?.clientName} 👋</span>, please upload
@@ -132,7 +131,7 @@ export default function UploadDocuments() {
                       <IconBadge
                         icon={isReceived ? CircleCheck : FileText}
                         size="lg"
-                        variant={isReceived ? "success" : "default"}
+                        variant={isReceived ? "success" : "secondary"}
                       />
                       <div className={styles.docText}>
                         <h3 className={styles.docTitle}>
@@ -156,9 +155,10 @@ export default function UploadDocuments() {
                     </div>
 
                     <FileUploadButton
+                      className={isReceived ? styles.replaceBtn : ""}
                       isLoading={isUploading}
                       id="file-upload"
-                      icon={<Icon name={isReceived ? Replace : Upload} />}
+                      icon={<Icon name={isReceived ? Edit : Upload} />}
                       label={isReceived ? "Replace" : "Upload"}
                       onFileSelect={(file) =>
                         handleFileSelect(
@@ -177,7 +177,6 @@ export default function UploadDocuments() {
         </div>
       </div>
 
-      {/* FOOTER */}
       <div className={styles.footer}>
         <div className={styles.container}>
           <div className={styles.footerInner}>

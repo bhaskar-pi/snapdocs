@@ -1,46 +1,66 @@
+/*  WRAPPER  */
+
 .wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
+
+/*  TRACK  */
 
 .bar {
   width: 120px;
   height: 6px;
-  background-color: var(--slate-200);
-  border-radius: var(--radius-sm);
+
+  background-color: var(--surface-muted);
+  border-radius: var(--radius-full);
   overflow: hidden;
+
+  position: relative;
 }
+
+/*  FILL  */
 
 .fill {
   height: 100%;
   border-radius: inherit;
-  transition: width 0.3s ease;
+
+  transition:
+    width 0.35s ease,
+    background-color var(--transition-fast);
 }
 
-/* Variants */
+/*  VARIANTS  */
+
+/* Neutral (default subtle progress) */
 .neutral {
-  background-color: var(--neutral);
+  background-color: var(--brand-primary);
 }
 
+/* Success */
 .success {
-  background-color: var(--success);
+  background-color: var(--success-base);
 }
 
+/* Warning */
 .warning {
-  background-color: var(--warning);
+  background-color: var(--warning-base);
 }
 
+/* Danger */
 .danger {
-  background-color: var(--negative);
+  background-color: var(--danger-base);
 }
 
+/* Info */
 .info {
-  background-color: var(--info);
+  background-color: var(--info-base);
 }
+
+/*  TEXT  */
 
 .text {
-  font-size: var(--font-xs);
+  font-size: var(--text-xs);
   font-weight: var(--fw-medium);
   color: var(--text-secondary);
   white-space: nowrap;

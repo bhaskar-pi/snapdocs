@@ -43,7 +43,7 @@ const PageHeader = ({ title, description, back, backTitle, action }: Props) => {
             className={styles.backContainer}
             onClick={handleBack}
           >
-            <IconBadge icon={ArrowLeft} />
+            <IconBadge icon={ArrowLeft} mode="soft" variant="secondary" />
           </button>
         )}
 
