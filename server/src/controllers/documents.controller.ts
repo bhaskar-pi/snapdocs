@@ -1,9 +1,12 @@
 import { CreateDocumentItemPayload } from "@models/payloads/documents.payload";
+import { AuthenticatedUser } from "@models/user";
 import {
   createDocument,
+  getDocumentById,
   updateDocumentById,
 } from "@repositories/documents.repository";
-import { uploadChecklistItemDocument } from "@services/upload-documents";
+import { generateSignedDocumentUrl } from "@services/storage-service/storage-urls";
+import { uploadChecklistItemDocument } from "@services/storage-service/upload-document";
 import { AppError } from "@utils/error";
 import { verifyDocumentsRequestToken } from "@utils/session";
 
@@ -53,5 +56,26 @@ export const uploadDocumentHandler = async ({
     message: "Document uploaded successfully.",
     data: document,
     statusCode: documentId ? 200 : 201,
+  };
+};
+
+export const getDocumentUrlHandler = async ({
+  params,
+}: {
+  params: { documentId: string };
+}) => {
+  const { documentId } = params;
+  const document = await getDocumentById(documentId);
+
+  if (!document) {
+    throw new AppError("Document not found", 404);
+  }
+
+  const signedUrl = await generateSignedDocumentUrl(document.storagePath);
+
+  return {
+    statusCode: 200,
+    url: signedUrl,
+    message: "Url retrieved successfully.",
   };
 };

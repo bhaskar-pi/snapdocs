@@ -2,6 +2,7 @@ import { db } from "@database/drizzle";
 import { checklistItemsTable } from "@database/schema/checklist-items.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import {
+  Document,
   DocumentInsert,
   documentsTable,
 } from "@database/schema/documents.schema";
@@ -112,6 +113,18 @@ export async function updateDocumentById(
 
     return updatedDocument;
   });
+}
+
+export async function getDocumentById(
+  documentId: string,
+): Promise<Document | undefined> {
+  const [document] = await db
+    .select()
+    .from(documentsTable)
+    .where(eq(documentsTable.id, documentId))
+    .limit(1);
+
+  return document;
 }
 
 export async function getDocumentsByChecklistIds(checklistItemIds: string[]) {

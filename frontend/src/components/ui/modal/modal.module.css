@@ -37,6 +37,10 @@
   max-width: 820px;
 }
 
+.xlarge {
+  max-width: 920px;
+}
+
 /* Header Base */
 .header {
   display: flex;

@@ -1,5 +1,6 @@
-import { POST } from "@/api/http";
+import { GET, POST } from "@/api/http";
 import { DocumentItem } from "@/types/models/document";
+import { ApiResponse } from "@/types/models/misc";
 
 export const documentsApi = {
   uploadDocument(
@@ -16,6 +17,10 @@ export const documentsApi = {
       formData.append("documentId", documentId);
     }
 
-    return POST<DocumentItem>(`/upload-document/${token}`, formData);
+    return POST<DocumentItem>(`/documents/upload/${token}`, formData);
+  },
+
+  getDocumentUrl(documentId: string) {
+    return GET<ApiResponse<{ url: string }>>(`/documents/${documentId}/url`);
   },
 };

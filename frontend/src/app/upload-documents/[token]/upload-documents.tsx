@@ -52,8 +52,8 @@ export default function UploadDocuments() {
     );
   };
 
-  if (isLoading) {
-    return <Loader open={isLoading} />;
+  if (isLoading && !requestDetails) {
+    return <Loader open />;
   }
 
   return (

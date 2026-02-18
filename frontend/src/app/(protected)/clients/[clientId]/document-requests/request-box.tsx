@@ -25,12 +25,12 @@ const RequestBox = ({ request }: Props) => {
   ).length;
 
   return (
-    <div
-      role="button"
-      className={`card ${styles.requestCard}`}
-      onClick={() => setIsOpen((prev) => !prev)}
-    >
-      <div className={styles.requestBoxHeader}>
+    <div className={`card ${styles.requestCard}`}>
+      <div
+        className={styles.requestBoxHeader}
+        onClick={() => setIsOpen((prev) => !prev)}
+        role="button"
+      >
         <div className={styles.requestBoxLeft}>
           <div className={styles.requestTitleRow}>
             <h2 className={styles.requestBoxTitle}>{request.title}</h2>

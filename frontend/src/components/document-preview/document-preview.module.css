@@ -1,0 +1,27 @@
+.previewWrapper {
+  width: 100%;
+  height: 65vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.previewIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.loadingText {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}

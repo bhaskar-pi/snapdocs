@@ -44,6 +44,12 @@ export const useUploadDocument = (requestToken?: string) => {
   });
 };
 
+export function useGetDocumentUrl() {
+  return useMutation({
+    mutationFn: (documentId: string) => documentsApi.getDocumentUrl(documentId),
+  });
+}
+
 export function useGetUploadChecklistItems(requestToken?: string | null) {
   return useQuery({
     queryKey: ["uploadChecklistItems", requestToken],

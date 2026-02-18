@@ -1,12 +1,13 @@
 "use client";
 
 import { Edit, Ellipsis, Trash2 } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { DataTable } from "@/components/data-table";
 import Layout from "@/components/layouts/app-layout";
 import { ActionMenu } from "@/components/ui/action-menu";
+import { SearchInput } from "@/components/ui/form/search";
 import { Icon } from "@/components/ui/icon";
 import { Modal } from "@/components/ui/modal";
 import {
@@ -38,6 +39,7 @@ const Templates = () => {
     Template | undefined
   >();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [search, setSearch] = useState("");
 
   const userId = useAuthStore((store) => store.user?.id || "");
   const { data: templates, isLoading: templatesLoading } = useTemplates(userId);
@@ -45,6 +47,14 @@ const Templates = () => {
   const updateTemplate = useUpdateTemplate(userId);
   const deleteTemplate = useDeleteTemplate(userId);
   const createTemplate = useCreateTemplate(userId);
+
+  const filteredTemplates = useMemo(() => {
+    if (!templates || !templates?.data) return [];
+
+    return templates.data.filter((template) =>
+      template.title.toLowerCase().includes(search.toLowerCase().trim()),
+    );
+  }, [templates, search]);
 
   const onCloseModal = useCallback(() => {
     setMode(undefined);
@@ -156,6 +166,14 @@ const Templates = () => {
       }}
       isLoading={isLoading}
     >
+      <div className="mb-4">
+        <SearchInput
+          id="search"
+          value={search}
+          placeholder="Search templates..."
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <DataTable
         title="Templates"
         onEmptyAction={() => onOpenEditModal()}
@@ -163,7 +181,7 @@ const Templates = () => {
         emptyText="No templates found"
         emptyDescription="Create reusable document request templates to standardize your workflow."
         isLoading={templatesLoading}
-        count={templates?.data?.length || 0}
+        count={filteredTemplates?.length || 0}
         columns={
           <>
             <p>Template</p>
@@ -173,7 +191,7 @@ const Templates = () => {
             <p />
           </>
         }
-        rows={templates?.data?.map((template) => {
+        rows={filteredTemplates?.map((template) => {
           const requiredCount = template.documents.filter(
             (d) => d.isRequired,
           ).length;

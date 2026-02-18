@@ -26,7 +26,7 @@ interface ModalProps {
   onDismiss?: ModalAction;
   onDelete?: ModalAction;
 
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "xlarge";
   children: React.ReactNode;
 }
 
