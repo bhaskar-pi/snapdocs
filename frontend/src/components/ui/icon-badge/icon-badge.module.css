@@ -80,8 +80,7 @@
 /* Success */
 .success {
   background-color: var(--success-light);
-  color: var(--success-text);
-  border-color: var(--success-border);
+  color: var(--success-text); 
 }
 
 /* Warning */
@@ -117,7 +116,6 @@
 .mode-solid.secondary {
   background-color: var(--surface-muted);
   color: var(--text-primary);
-  border-color: var(--border-subtle);
 }
 
 .mode-solid.success {

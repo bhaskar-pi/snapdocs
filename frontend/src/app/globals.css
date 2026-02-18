@@ -821,7 +821,7 @@
     background-color: var(--surface-card);
     border: 1px solid var(--border-default);
     border-radius: var(--radius-sm);
-    
+
     transition:
       box-shadow var(--transition-fast),
       background-color var(--transition-fast);
@@ -983,5 +983,25 @@
 
   .status-info > span {
     background-color: var(--info-base);
+  }
+
+  /** count pills **/
+
+  .count {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-inverse);
+    background-color: var(--text-primary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+  }
+
+  .count-light {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-secondary);
+    background-color: var(--surface-muted);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
   }
 }

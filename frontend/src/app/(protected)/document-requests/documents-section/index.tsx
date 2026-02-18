@@ -35,7 +35,9 @@ const ChooseTemplate = ({
   onChangeExistingTemplate,
   onRemove,
 }: Props) => {
-  const [mode, setMode] = useState<TemplateMode>(TemplateMode.ADD_DOCUMENTS);
+  const [mode, setMode] = useState<TemplateMode>(
+    templateId ? TemplateMode.USE_TEMPLATE : TemplateMode.ADD_DOCUMENTS,
+  );
 
   return (
     <>
@@ -55,7 +57,7 @@ const ChooseTemplate = ({
           data-active={mode === TemplateMode.USE_TEMPLATE}
           onClick={() => setMode(TemplateMode.USE_TEMPLATE)}
         >
-          Use Template
+          Quick Templates
         </div>
       </div>
 

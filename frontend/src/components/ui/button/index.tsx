@@ -27,7 +27,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({
   intent = "primary",
   variant = "solid",
-  size = "md",
+  size = "sm",
   loading = false,
   disabled,
   icon,

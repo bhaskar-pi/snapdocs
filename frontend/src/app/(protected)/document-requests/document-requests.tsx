@@ -115,7 +115,7 @@ const DocumentRequests = () => {
     }));
   }, []);
 
-  const onChangeRequest = useCallback((key: string, value: string | Date) => {
+  const onChangeRequest = useCallback((key: string, value: string) => {
     setClientRequest((prev) => ({
       ...prev,
       request: {
@@ -148,7 +148,17 @@ const DocumentRequests = () => {
   }, [clientRequest.request.documents.length, incrementProgressStep]);
 
   const onSendRequest = useCallback(() => {
-    sendRequest.mutate(clientRequest, {
+    const payload = {
+      ...clientRequest,
+      request: {
+        ...clientRequest.request,
+        dueDate: clientRequest.request.dueDate
+          ? `${new Date(clientRequest.request.dueDate)}`
+          : undefined,
+      },
+    };
+
+    sendRequest.mutate(payload, {
       onSuccess: () => {
         setProgressStep(0);
         setClientRequest(initialClientRequest);
@@ -188,6 +198,7 @@ const DocumentRequests = () => {
             onChange={onChangeRequest}
             documents={clientRequest?.request.documents}
             clientName={clientRequest?.client?.fullName}
+            clientEmail={clientRequest?.client?.email}
             isLoading={sendRequest.isPending}
             title={clientRequest.request.title || ""}
             description={clientRequest.request.description || ""}

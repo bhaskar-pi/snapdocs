@@ -13,6 +13,7 @@ interface Props {
   disabled?: boolean;
   containerClassName?: string;
   iconClassName?: string;
+  onClick?: () => void;
 }
 
 export const IconBadge = ({
@@ -23,9 +24,12 @@ export const IconBadge = ({
   disabled = false,
   containerClassName,
   iconClassName,
+  onClick,
 }: Props) => {
   return (
     <span
+      role="button"
+      onClick={onClick}
       className={[
         styles.badge,
         styles[size],

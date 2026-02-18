@@ -40,57 +40,71 @@ export async function createDocumentRequest(
   userId: string,
   client: ClientInsert,
   docRequest: CreateRequestPayload,
-): Promise<{ clientRecord: Client; createdRequest: DocRequest }> {
+) {
   const { title, dueDate, description } = docRequest;
 
-  return await db.transaction(async (tx) => {
-    const [insertedClient] = await tx
-      .insert(clientsTable)
-      .values({ ...client, userId })
-      .onConflictDoNothing({
-        target: [clientsTable.email, clientsTable.userId],
-      })
-      .returning();
+  try {
+    return await db.transaction(async (tx) => {
+      console.log("1");
+      const [insertedClient] = await tx
+        .insert(clientsTable)
+        .values({ ...client, userId })
+        .onConflictDoNothing({
+          target: [clientsTable.email, clientsTable.userId],
+        })
+        .returning();
 
-    let clientRecord = insertedClient;
+      let clientRecord = insertedClient;
 
-    if (!clientRecord) {
-      [clientRecord] = await tx
-        .select()
-        .from(clientsTable)
-        .where(
-          and(
-            eq(clientsTable.email, client.email),
-            eq(clientsTable.userId, userId),
-          ),
-        )
-        .limit(1);
-    }
+      if (!clientRecord) {
+        [clientRecord] = await tx
+          .select()
+          .from(clientsTable)
+          .where(
+            and(
+              eq(clientsTable.email, client.email),
+              eq(clientsTable.userId, userId),
+            ),
+          )
+          .limit(1);
+      }
 
-    // Create request
-    const [createdRequest] = await tx
-      .insert(requestsTable)
-      .values({
-        title: title ?? "",
-        description,
-        userId,
-        clientId: clientRecord.id,
-        sentAt: new Date(),
-        ...(dueDate && { dueDate: new Date(dueDate) }),
-      })
-      .returning();
+      console.log("1");
 
-    // Prepare checklist rows
-    const checklistRows = docRequest.documents.map((doc) => ({
-      ...doc,
-      requestId: createdRequest.id,
-    }));
+      // Create request
+      const [createdRequest] = await tx
+        .insert(requestsTable)
+        .values({
+          title: title ?? "",
+          description,
+          userId,
+          clientId: clientRecord.id,
+          sentAt: new Date(),
+          ...(dueDate && { dueDate: new Date(dueDate) }),
+        })
+        .returning();
 
-    await tx.insert(checklistItemsTable).values(checklistRows);
+      console.log("2");
 
+      // Prepare checklist rows
+      const checklistRows = docRequest.documents.map((doc) => ({
+        ...doc,
+        requestId: createdRequest.id,
+      }));
+
+      await tx.insert(checklistItemsTable).values(checklistRows);
+
+      console.log("3");
+      return {
+        clientRecord,
+        createdRequest,
+      };
+    });
+  } catch (error) {
+    console.log({ error });
     return {
-      clientRecord,
-      createdRequest,
+      clientRecord: {} as Client,
+      createdRequest: {} as DocRequest,
     };
-  });
+  }
 }
