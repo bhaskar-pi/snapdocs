@@ -3,9 +3,7 @@
 import {
   CircleCheck,
   Edit,
-  Edit2,
   FileText,
-  Replace,
   Shield,
   Upload,
   User,
@@ -38,15 +36,14 @@ export default function UploadDocuments() {
   const [uploadingItemId, setUploadingItemId] = useState<string | null>(null);
 
   const handleFileSelect = async (
-    checklistItemId: string,
-    requestId: string,
     file: File,
+    checklistItemId: string,
     documentId?: string,
   ) => {
     setUploadingItemId(checklistItemId);
 
     uploadDocument.mutate(
-      { file, requestId, checklistItemId, documentId },
+      { file, checklistItemId, documentId },
       {
         onSettled: () => {
           setUploadingItemId(null);
@@ -56,7 +53,7 @@ export default function UploadDocuments() {
   };
 
   if (isLoading) {
-    return <Loader open />;
+    return <Loader open={isLoading} />;
   }
 
   return (
@@ -76,7 +73,7 @@ export default function UploadDocuments() {
               <div className={styles.user}>
                 <Icon size={16} name={User} tone="muted" strokeWidth={2} />
                 <p>
-                  Requested by <span>{requestDetails?.requestedBy}</span>
+                  Requested by <span>{requestDetails?.userName}</span>
                 </p>
               </div>
               <h1 className={styles.title}>{requestDetails?.requestTitle}</h1>
@@ -161,12 +158,7 @@ export default function UploadDocuments() {
                       icon={<Icon name={isReceived ? Edit : Upload} />}
                       label={isReceived ? "Replace" : "Upload"}
                       onFileSelect={(file) =>
-                        handleFileSelect(
-                          item.id,
-                          item.requestId,
-                          file,
-                          item.documents[0]?.id,
-                        )
+                        handleFileSelect(file, item.id, item.documents[0]?.id)
                       }
                     />
                   </div>

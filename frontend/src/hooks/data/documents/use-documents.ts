@@ -14,15 +14,20 @@ export const useUploadDocument = (requestToken?: string) => {
     mutationFn: ({
       file,
       checklistItemId,
-      requestId,
+
       documentId,
     }: {
       file: File;
       checklistItemId: string;
-      requestId: string;
+
       documentId?: string;
     }) =>
-      documentsApi.uploadDocument(file, checklistItemId, requestId, documentId),
+      documentsApi.uploadDocument(
+        file,
+        checklistItemId,
+        documentId,
+        requestToken,
+      ),
 
     onSuccess() {
       queryClient.invalidateQueries({

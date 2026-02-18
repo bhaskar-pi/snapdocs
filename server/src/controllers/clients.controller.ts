@@ -1,10 +1,14 @@
 import { getClientDetailsDto } from "@mappers/clients";
+import { UpdateClientPayload } from "@models/payloads/documents-request.payload";
 import { AuthenticatedUser } from "@models/user";
 import {
+  deleteClientById,
   getClientDetailsById,
   getClientsByUserId,
   getClientsStatsByUserId,
+  updateClient,
 } from "@repositories/client.repository";
+import { AppError } from "@utils/error";
 
 export const getUserClientsStatsHandler = async ({
   authUser,
@@ -52,5 +56,59 @@ export const getClientsHandler = async ({
   return {
     data: clients,
     statusCode: 200,
+  };
+};
+
+export const deleteClientHandler = async ({
+  authUser,
+  params,
+}: {
+  authUser: AuthenticatedUser;
+  params: { clientId: string };
+}) => {
+  if (!params.clientId) {
+    throw new AppError("ClientId not found", 400);
+  }
+
+  const isDeleted = await deleteClientById(authUser.id, params.clientId);
+
+  if (!isDeleted) {
+    throw new AppError("Client not found or access denied", 404);
+  }
+
+  return {
+    message: "Client deleted successfully.",
+    statusCode: 200,
+    success: isDeleted,
+  };
+};
+
+export const updateClientDetailsHandler = async ({
+  authUser,
+  params,
+  request,
+}: {
+  authUser: AuthenticatedUser;
+  params: { clientId: string };
+  request: UpdateClientPayload;
+}) => {
+  if (!params.clientId) {
+    throw new AppError("ClientId not found", 400);
+  }
+
+  const updatedClient = await updateClient(
+    authUser.id,
+    params.clientId,
+    request,
+  );
+
+  if (!updatedClient) {
+    throw new AppError("Client not found or access denied", 404);
+  }
+
+  return {
+    message: "Client updated successfully.",
+    statusCode: 200,
+    data: updatedClient,
   };
 };

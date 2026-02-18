@@ -5,18 +5,17 @@ export const documentsApi = {
   uploadDocument(
     file: File,
     checklistItemId: string,
-    requestId: string,
     documentId?: string,
+    token?: string,
   ) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("checklistItemId", checklistItemId);
-    formData.append("requestId", requestId);
 
     if (documentId) {
       formData.append("documentId", documentId);
     }
 
-    return POST<DocumentItem>("/upload-document", formData);
+    return POST<DocumentItem>(`/upload-document/${token}`, formData);
   },
 };

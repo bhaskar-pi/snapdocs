@@ -4,23 +4,39 @@ import {
   updateDocumentById,
 } from "@repositories/documents.repository";
 import { uploadChecklistItemDocument } from "@services/upload-documents";
+import { AppError } from "@utils/error";
+import { verifyDocumentsRequestToken } from "@utils/session";
 
 export const uploadDocumentHandler = async ({
   request,
+  file,
+  params,
 }: {
   request: CreateDocumentItemPayload;
+  params: { token: string };
+  file?: Express.Multer.File;
 }) => {
-  const file = request.file;
+  if (!params.token) {
+    throw new AppError("Token not found", 400);
+  }
+
+  const { clientId, userId, requestId } = verifyDocumentsRequestToken(
+    params.token,
+  );
 
   const checklistItemId = request.checklistItemId;
   const documentId = request.documentId;
-  const requestId = request.requestId;
 
-  if (!file || !checklistItemId || !requestId) {
-    throw new Error("File or checklistItemId or requestId missing");
+  if (!file || !checklistItemId || !requestId || !userId) {
+    throw new Error("File or userId or checklistItemId or requestId missing");
   }
 
-  const storagePath = await uploadChecklistItemDocument(checklistItemId, file);
+  const storagePath = await uploadChecklistItemDocument(file, {
+    clientId,
+    userId,
+    requestId,
+    checklistItemId,
+  });
 
   const interimDocument = {
     fileName: file.originalname,

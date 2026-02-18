@@ -20,4 +20,5 @@
   flex-direction: column;
 
   gap: 8px;
+  margin-top: var(--space-3);
 }

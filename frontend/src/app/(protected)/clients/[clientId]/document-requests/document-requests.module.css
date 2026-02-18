@@ -114,6 +114,7 @@
 .requestMeta {
   font-size: var(--text-xs);
   color: var(--text-secondary);
+  font-weight: var(--fw-medium);
 }
 
 /*  RIGHT SIDE  */
@@ -130,6 +131,7 @@
   gap: var(--space-1);
   font-size: var(--text-xs);
   color: var(--text-secondary);
+  font-weight: var(--fw-medium);
 }
 
 /* Toggle */

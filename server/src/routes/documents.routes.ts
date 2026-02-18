@@ -6,7 +6,7 @@ import { Router } from "express";
 const router = Router();
 
 router.post(
-  "/upload-document",
+  "/upload-document/:token",
   upload.single("file"),
   unProtectedHandler(uploadDocumentHandler),
 );

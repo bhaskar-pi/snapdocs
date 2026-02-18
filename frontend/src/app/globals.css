@@ -88,6 +88,7 @@
   :root {
     /* Brand */
     --brand-primary: var(--blue-800);
+    --brand-primary-base: var(--blue-700);
     --brand-primary-dark: var(--blue-950);
     --brand-primary-hover: var(--blue-800);
     --brand-primary-active: var(--blue-900);
@@ -241,7 +242,7 @@
     --font-sans: "DM Sans", "Geist", system-ui, sans-serif;
     --font-mono: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 
-    --text-xs: 11px;
+    --text-xs: 12px;
     --text-sm: 13.35px;
     --text-base: 16px;
     --text-lg: 18px;
@@ -580,10 +581,14 @@
     color: var(--warning-text);
   }
   .text-danger {
-    color: var(--danger-text);
+    color: var(--danger-base);
   }
   .text-info {
     color: var(--info-text);
+  }
+  .text-primary-bold {
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
   }
 }
 

@@ -77,9 +77,11 @@ export const getUploadRequestDetailsHandler = async ({
     message: "Retrieved request details successfully.",
     statusCode: 201,
     data: {
-      requestedBy: `${user.firstName} ${user.lastName}`,
+      userId: user.id,
+      userName: `${user.firstName} ${user.lastName}`,
       requestedOn: documentRequest.sentAt,
       clientName: client?.fullName,
+      clientId: client?.id,
       dueDate: documentRequest.dueDate,
       requestTitle: documentRequest.title,
       requestId,

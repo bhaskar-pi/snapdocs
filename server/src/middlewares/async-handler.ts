@@ -18,6 +18,7 @@ export const asyncHandler =
         }
       }
     } catch (err) {
+      console.error("Failed", err);
       next(err);
     }
   };
@@ -33,6 +34,8 @@ export const protectedHandler = <
     params: TParams;
     query: TQuery;
     res: Response;
+    file?: Express.Multer.File;
+    files?: Express.Multer.File[];
   }) => Promise<any>,
 ) =>
   asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
@@ -48,6 +51,8 @@ export const protectedHandler = <
       params: req.params as TParams,
       query: req.query as TQuery,
       res,
+      file: req.file,
+      files: req.files as Express.Multer.File[],
     });
   });
 
@@ -61,6 +66,8 @@ export const unProtectedHandler = <
     params: TParams;
     query: TQuery;
     res: Response;
+    file?: Express.Multer.File;
+    files?: Express.Multer.File[];
   }) => Promise<any>,
 ) =>
   asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
@@ -69,5 +76,7 @@ export const unProtectedHandler = <
       params: req.params as TParams,
       query: req.query as TQuery,
       res,
+      file: req.file,
+      files: req.files as Express.Multer.File[],
     });
   });
