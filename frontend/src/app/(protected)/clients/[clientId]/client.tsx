@@ -20,6 +20,7 @@ const Client = () => {
   return (
     <Layout
       header={{
+        backTitle: `clients / ${client?.fullName}`,
         back: SCREEN_PATHS.CLIENTS,
       }}
       isLoading={isLoading}

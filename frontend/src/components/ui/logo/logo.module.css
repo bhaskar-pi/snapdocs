@@ -131,3 +131,23 @@
 .dark .text-description {
   color: var(--blue-200);
 }
+
+.xxl .textBrand {
+  font-size: var(--font-2xl);
+}
+
+.xxl .iconWrapper {
+  width: 45px;
+  height: 46px;
+  border-radius: var(--radius-md);
+}
+
+.xxxl .textBrand {
+  font-size: var(--font-3xl);
+}
+
+.xxxl .iconWrapper {
+  width: 49px;
+  height: 50px;
+  border-radius: var(--radius-md);
+}

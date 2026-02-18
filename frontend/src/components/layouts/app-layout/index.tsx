@@ -9,8 +9,6 @@ import { useAuthStore } from "@/store/auth.store";
 import styles from "./app-layout.module.css";
 import Sidebar from "./sidebar";
 
-type LayoutSize = "default" | "sm" | "md" | "lg" | "xl";
-
 interface Props {
   header?: {
     title?: string;
@@ -24,10 +22,9 @@ interface Props {
 
   isLoading?: boolean;
   children: React.ReactNode;
-  size?: LayoutSize;
 }
 
-const Layout = ({ children, isLoading, header, size = "default" }: Props) => {
+const Layout = ({ children, isLoading, header }: Props) => {
   const authLoading = useAuthStore((s) => s.isLoading);
 
   return (
@@ -39,13 +36,7 @@ const Layout = ({ children, isLoading, header, size = "default" }: Props) => {
         <PageHeader {...header} />
 
         <div className={styles.body}>
-          <div
-            className={`${styles.container} ${
-              size !== "default" ? styles[`container-${size}`] : ""
-            }`}
-          >
-            {isLoading && !authLoading ? <ContentLoader open /> : children}
-          </div>
+          {isLoading && !authLoading ? <ContentLoader open /> : children}
         </div>
       </main>
     </div>

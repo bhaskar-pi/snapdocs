@@ -26,7 +26,7 @@ interface Props {
 
 export const Icon = ({
   name: IconComponent,
-  text,
+  text = "",
   size = 18,
   tone = "inherit",
   strokeWidth = 2,
@@ -34,25 +34,28 @@ export const Icon = ({
   className = "",
   containerClassName = "",
 }: Props) => {
-  const toneClass = tone !== "inherit" ? styles[tone] : "";
-
   return (
     <span
       onClick={onClick}
-      className={[styles.container, containerClassName]
-        .filter(Boolean)
-        .join(" ")}
+      className={[styles.container, containerClassName].join(" ")}
     >
       <IconComponent
         size={size}
         strokeWidth={strokeWidth}
-        className={[styles.icon, toneClass, className]
+        className={[styles.icon, tone !== "inherit" && styles[tone], className]
           .filter(Boolean)
           .join(" ")}
       />
-
       {text && (
-        <span className={[styles.text, toneClass].filter(Boolean).join(" ")}>
+        <span
+          className={[
+            styles.text,
+            tone !== "inherit" && styles[tone],
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
           {text}
         </span>
       )}

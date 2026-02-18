@@ -12,11 +12,11 @@ const LoginPanel = () => {
 
   return (
     <section className={styles.container}>
-      <Logo size="xl" />
+      <Logo size="xxl" />
 
-      <header>
-        <h2>{content.title}</h2>
-        <p className="subtitle-sm text-secondary">{content.subtitle}</p>
+      <header className={styles.header}>
+        <h1 className={styles.title}>{content.title}</h1>
+        <p className={styles.subtitle}>{content.subtitle}</p>
       </header>
 
       {content.features?.length > 0 && (

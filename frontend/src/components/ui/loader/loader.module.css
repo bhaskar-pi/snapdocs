@@ -53,8 +53,8 @@
 .loadingSpinner {
   width: 38px;
   height: 38px;
-  border: 4px solid var(--brand-primary-light);
-  border-top-color: var(--brand-primary);
+  border: 4px solid var(--slate-400);
+  border-top-color: var(--slate-950);
   border-radius: 50%;
   animation: spin 0.9s linear infinite;
 }
@@ -63,40 +63,6 @@
   font-size: 14px;
   font-weight: 500;
   color: #374151;
-}
-
-.sm .loadingSpinner {
-  width: 24px;
-  height: 24px;
-}
-
-.sm .loadingModal {
-  width: 200px;
-  height: 120px;
-  padding: var(--space-4);
-}
-
-.sm .loadingText {
-  font-size: var(--text-xs);
-}
-
-.md .loadingSpinner {
-  width: 36px;
-  height: 36px;
-}
-
-.lg .loadingSpinner {
-  width: 48px;
-  height: 48px;
-}
-
-.lg .loadingModal {
-  width: 320px;
-  height: 180px;
-}
-
-.lg .loadingText {
-  font-size: var(--text-base);
 }
 
 @media (max-width: 640px) {

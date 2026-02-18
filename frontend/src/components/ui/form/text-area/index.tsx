@@ -1,12 +1,10 @@
 "use client";
 
-import React from "react";
-
 import styles from "../form.module.css";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
-  label?: string;
+  label: string;
 
   containerClassName?: string;
   labelClassName?: string;
@@ -14,9 +12,15 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   textareaClassName?: string;
 
   message?: string;
-  messageType?: "error" | "warning" | "info" | "success" | "secondary";
+  messageType?: "error" | "warning" | "info" | "neutral";
   messagePosition?: "left" | "right" | "center";
 }
+
+const messagePositionStyles = {
+  left: styles.messageLeft,
+  center: styles.messageCenter,
+  right: styles.messageRight,
+};
 
 export const TextArea = ({
   id,
@@ -25,55 +29,37 @@ export const TextArea = ({
   labelClassName = "",
   fieldClassName = "",
   textareaClassName = "",
+
   message,
-  messageType,
+  messageType = "error",
   messagePosition = "left",
+
   ...props
 }: TextAreaProps) => {
-  const hasError = message && messageType === "error";
+  const messageClassName = [
+    styles.message,
+    styles[messageType],
+    messagePositionStyles[messagePosition],
+  ].join(" ");
 
-  const textareaClasses = [
-    styles.textarea,
-    hasError && styles["input-error"],
-    textareaClassName,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const messageClasses = [
-    styles["form-message"],
-    message && messageType && styles[`form-message-${messageType}`],
-    styles[`form-message-${messagePosition}`],
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const errorBorder =
+    message && messageType === "error" ? styles.inputError : "";
 
   return (
-    <div
-      className={[styles["form-control"], containerClassName]
-        .filter(Boolean)
-        .join(" ")}
-    >
-      {label && (
-        <label
-          htmlFor={id}
-          className={[styles["form-label"], labelClassName]
-            .filter(Boolean)
-            .join(" ")}
-        >
-          {label}
-        </label>
-      )}
+    <div className={`${styles.inputContainer} ${containerClassName}`}>
+      <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>
+        {label}
+      </label>
 
-      <div
-        className={[styles["form-field"], fieldClassName]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <textarea id={id} className={textareaClasses} {...props} />
+      <div className={`${styles.field} ${fieldClassName}`}>
+        <textarea
+          id={id}
+          className={`${styles.textarea} ${textareaClassName} ${errorBorder}`}
+          {...props}
+        />
       </div>
 
-      {message && <p className={messageClasses}>{message}</p>}
+      {message && <p className={messageClassName}>{message}</p>}
     </div>
   );
 };

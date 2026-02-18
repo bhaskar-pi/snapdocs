@@ -86,8 +86,6 @@ export const Modal = ({
                   intent="secondary"
                   onClick={onDismiss.onClick}
                   disabled={onDismiss.disabled}
-                  variant="soft"
-                  size="sm"
                 >
                   {onDismiss.label}
                 </Button>
@@ -101,8 +99,6 @@ export const Modal = ({
                   intent="negative"
                   onClick={onDelete.onClick}
                   disabled={onDelete.disabled}
-                  variant="soft"
-                  size="sm"
                 >
                   {onDelete.label}
                 </Button>
@@ -114,7 +110,6 @@ export const Modal = ({
                   intent="primary"
                   onClick={onSave.onClick}
                   disabled={onSave.disabled}
-                  size="sm"
                 >
                   {onSave.label}
                 </Button>
@@ -124,6 +119,6 @@ export const Modal = ({
         )}
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };

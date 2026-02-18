@@ -66,8 +66,8 @@ const TemplateModal = ({
         disabled: isLoading,
       }}
     >
-      <form className="form">
-        <div className="d-flex gap-2">
+      <form className="base-form">
+        <div className="base-two-in-row">
           <Input
             label="Title"
             id="template-title"
@@ -105,8 +105,6 @@ const TemplateModal = ({
             className={styles.addButton}
             onClick={() => onAddDocument(documentName)}
             disabled={!documentName.trim()}
-            intent="primary"
-            variant="soft"
           >
             Add
           </Button>

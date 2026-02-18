@@ -1,55 +1,49 @@
 .container {
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  gap: 20px;
 }
 
 .stepper {
   display: flex;
   align-items: center;
   flex: 1;
-  gap: var(--space-5);
+  gap: 20px;
 }
 
 .step {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 14px;
 }
 
 .step > p {
-  color: var(--text-primary);
-  font-weight: var(--fw-medium);
-  font-size: var(--text-sm);
+  color: var(--slate-900);
+  font-weight: 500;
+  font-size: var(--font-sm);
 }
 
-/* Step icon wrapper */
-
 .icon {
-  border-radius: var(--radius-full) !important;
+  border-radius: var(--radius-100) !important;
   width: 40px !important;
   height: 40px !important;
 }
 
-/* Divider */
-
 .divider {
   flex: 1;
   height: 2px;
-  background-color: var(--border-strong);
+  background-color: var(--slate-200);
   border: none;
 }
 
 .dividerActive {
-  background-color: var(--success-base);
+  background-color: var(--primary);
 }
 
-/* States */
-
 .disabledText {
-  color: var(--text-disabled);
+  color: var(--disabled-color);
 }
 
 .active {
-  font-weight: var(--fw-semibold);
+  font-weight: 600;
 }

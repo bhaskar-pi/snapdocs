@@ -27,10 +27,9 @@ const ProgressStepper = ({ currentStep }: Props) => {
               <IconBadge
                 icon={isCompleted ? Check : step.icon}
                 size="md"
-                variant={isCompleted ? "success" : "primary"}
+                variant={"primary"}
                 disabled={isDisabled}
                 containerClassName={styles.icon}
-                mode={isCompleted ? "solid" : "soft"}
               />
               <p
                 className={[

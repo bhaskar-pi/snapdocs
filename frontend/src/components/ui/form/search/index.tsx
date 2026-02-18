@@ -1,8 +1,5 @@
-"use client";
-
 import { Search } from "lucide-react";
 import React from "react";
-
 
 import { Icon } from "../../icon";
 import styles from "../form.module.css";
@@ -15,9 +12,18 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   fieldClassName?: string;
   message?: string;
-  messageType?: "error" | "warning" | "info" | "success" | "secondary";
+  messageType?: "error" | "warning" | "info" | "neutral";
   messagePosition?: "left" | "right" | "center";
 }
+
+const messagePositionStyles: Record<
+  NonNullable<Props["messagePosition"]>,
+  string
+> = {
+  left: styles.messageLeft,
+  center: styles.messageCenter,
+  right: styles.messageRight,
+};
 
 export const SearchInput: React.FC<Props> = ({
   id,
@@ -27,59 +33,41 @@ export const SearchInput: React.FC<Props> = ({
   inputClassName = "",
   fieldClassName = "",
   message,
-  messageType,
+  messageType = "error",
   messagePosition = "left",
   ...props
 }) => {
-  const hasError = message && messageType === "error";
+  const messageClassName = [
+    styles.message,
+    styles[messageType],
+    messagePositionStyles[messagePosition],
+  ].join(" ");
 
-  const inputClasses = [
-    styles.input,
-    styles["search-input"],
-    hasError && styles["input-error"],
-    inputClassName,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const messageClasses = [
-    styles["form-message"],
-    message && messageType && styles[`form-message-${messageType}`],
-    styles[`form-message-${messagePosition}`],
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const errorBorder =
+    message && messageType === "error" ? styles.inputError : "";
 
   return (
-    <div
-      className={[styles["form-control"], containerClassName]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <div className={`${styles.inputContainer} ${containerClassName}`}>
       {label && (
-        <label
-          htmlFor={id}
-          className={[styles["form-label"], labelClassName]
-            .filter(Boolean)
-            .join(" ")}
-        >
+        <label className={`${styles.label} ${labelClassName}`} htmlFor={id}>
           {label}
         </label>
       )}
 
-      <div
-        className={[styles["form-field"], fieldClassName]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <div className={styles["search-wrapper"]}>
-          <Icon name={Search} size={16} className={styles["search-icon"]} />
+      <div className={`${styles.field} ${fieldClassName}`}>
+        <div className={styles.searchWrapper}>
+          <Icon className={styles.searchIcon} name={Search} />
 
-          <input id={id} type="search" className={inputClasses} {...props} />
+          <input
+            id={id}
+            type="search"
+            className={`${styles.input} ${styles.searchInput} ${inputClassName} ${errorBorder}`}
+            {...props}
+          />
         </div>
-      </div>
 
-      {message && <p className={messageClasses}>{message}</p>}
+        {message && <p className={messageClassName}>{message}</p>}
+      </div>
     </div>
   );
 };

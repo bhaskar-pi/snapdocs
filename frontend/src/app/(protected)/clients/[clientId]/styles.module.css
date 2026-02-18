@@ -1,65 +1,137 @@
 .clientInfo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+  margin-top: -20px;
 }
 
-.clientHeader {
+.clientInfo > :last-child {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.clientInfoRow {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 220px;
+}
+
+.requestCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.clientName {
-  font-size: var(--text-lg);
-  font-weight: var(--fw-bold);
-  color: var(--text-primary);
-  line-height: 1.2;
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.clientMeta {
-  margin-top: 2px;
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  font-weight: var(--fw-medium);
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.editBadge {
+.titleRow h2 {
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.meta {
+  font-size: var(--font-sm);
+  color: var(--slate-600);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: var(--font-sm);
+  color: var(--slate-700);
+}
+
+.dueDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.closeToggle {
+  width: 32px;
+  height: 32px;
   cursor: pointer;
 }
 
-.contactGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-5);
+.documentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -2px;
 }
 
-.contactCard {
+.documentsHeader p {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklistRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border-radius: 10px;
+}
+
+.checklistInfo {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
-
-  background: var(--surface-muted);
-  border: 1px solid var(--border-subtle);
-
-  transition: background-color var(--transition-fast);
+  gap: 12px;
 }
 
-.contactCard:hover {
-  border: 1px solid var(--border-default);
+.docName {
+  font-weight: 500;
+  font-size: var(--font-sm);
+  color: var(--secondary);
 }
 
-.label {
-  font-size: var(--text-sm);
-  font-weight: var(--fw-medium);
-  color: var(--text-tertiary);
+.uploadedAt {
+  font-size: var(--font-xs);
+  color: var(--slate-500);
 }
 
-.value {
-  font-size: var(--text-sm);
-  font-weight: var(--fw-semibold);
-  color: var(--text-primary);
+.checklistActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--slate-700);
 }

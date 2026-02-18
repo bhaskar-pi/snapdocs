@@ -4,26 +4,21 @@ import { useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 
-type ButtonIntent =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "negative"
-  | "neutral";
-
-type ButtonVariant = "solid" | "outline" | "ghost" | "soft";
-
 interface Props {
   id: string;
   label: string;
-  intent?: ButtonIntent;
+  intent?:
+    | "primary"
+    | "secondary"
+    | "neutral"
+    | "success"
+    | "info"
+    | "warning"
+    | "negative";
   accept?: string;
   disabled?: boolean;
   isLoading?: boolean;
   icon?: React.ReactNode;
-  variant?: ButtonVariant;
-  className?: string;
   onFileSelect: (file: File) => void;
 }
 
@@ -35,8 +30,6 @@ export function FileUploadButton({
   disabled = false,
   isLoading = false,
   icon,
-  variant,
-  className,
   onFileSelect,
 }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -56,11 +49,9 @@ export function FileUploadButton({
       <Button
         icon={icon}
         intent={intent}
-        variant={variant}
         disabled={disabled}
         onClick={() => inputRef.current?.click()}
         loading={isLoading}
-        className={className}
       >
         {label}
       </Button>

@@ -192,6 +192,9 @@ export const Select = ({
 
             {filteredOptions.map((option) => (
               <div
+                data-type={
+                  selectedOption?.label === option.label ? "active" : ""
+                }
                 key={option.value}
                 className={[
                   styles["select-option"],

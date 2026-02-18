@@ -4,12 +4,10 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useMemo, useState } from "react";
 
 import styles from "./data-table.module.css";
-import { EmptyState } from "../ui/empty-state";
 import { Icon } from "../ui/icon";
 import { ContentLoader } from "../ui/loader/content-loader";
 
-interface Props {
-  title: string;
+interface DataTableProps {
   columns: React.ReactNode;
   rows?: React.ReactNode[];
   columnWidths: string;
@@ -18,11 +16,9 @@ interface Props {
   pageSize?: number;
   emptyText?: string;
   emptyDescription?: string;
-  onEmptyAction: () => void;
 }
 
 export function DataTable({
-  title,
   columns,
   rows,
   isLoading = false,
@@ -31,8 +27,7 @@ export function DataTable({
   emptyText = "No data found",
   emptyDescription = "",
   columnWidths,
-  onEmptyAction,
-}: Props) {
+}: DataTableProps) {
   const [page, setPage] = useState(1);
 
   const onPrev = () => {
@@ -53,14 +48,13 @@ export function DataTable({
 
   return (
     <>
-      {!isLoading && count < 1 && (
-        <EmptyState
-          title={emptyText}
-          description={emptyDescription}
-          primaryActionLabel={`Create ${title}`}
-          onPrimaryAction={onEmptyAction}
-          size="md"
-        />
+      {!isLoading && rows?.length === 0 && (
+        <div className={styles.emptyState}>
+          {emptyText && <p className={styles.emptyTitle}>{emptyText}</p>}
+          {emptyDescription && (
+            <p className={styles.emptyDescription}>{emptyDescription}</p>
+          )}
+        </div>
       )}
 
       {(isLoading || (rows && rows?.length > 0)) && (

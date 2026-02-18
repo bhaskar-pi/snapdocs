@@ -55,16 +55,13 @@ const ChooseTemplate = ({
           data-active={mode === TemplateMode.USE_TEMPLATE}
           onClick={() => setMode(TemplateMode.USE_TEMPLATE)}
         >
-          Quick Templates
+          Use Template
         </div>
       </div>
 
       {mode === TemplateMode.USE_TEMPLATE && (
         <ExistingTemplates
-          onChange={(template) => {
-            onChangeExistingTemplate(template);
-            setMode(TemplateMode.ADD_DOCUMENTS);
-          }}
+          onChange={onChangeExistingTemplate}
           templateId={templateId}
         />
       )}
@@ -77,9 +74,7 @@ const ChooseTemplate = ({
         />
       )}
 
-      {!(TemplateMode.USE_TEMPLATE === mode) && (
-        <SectionFooter onNext={onNext} onPrevious={onPrevious} />
-      )}
+      <SectionFooter onNext={onNext} onPrevious={onPrevious} />
     </>
   );
 };

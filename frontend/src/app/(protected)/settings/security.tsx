@@ -38,7 +38,7 @@ const Security = () => {
   return (
     <section className={`${styles.section} card card-sm`}>
       <div className={styles.sectionHeader}>
-        <IconBadge icon={LockKeyhole} size="md" />
+        <IconBadge icon={LockKeyhole} size="lg" />
 
         <div>
           <h1 className={styles.sectionTitle}>Change Password</h1>

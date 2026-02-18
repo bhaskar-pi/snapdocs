@@ -23,10 +23,10 @@ const DocumentRow = ({ name, isRequired, onToggle, onDelete }: Props) => {
         <p>{isRequired ? "Required" : "Optional"}</p>
         <ToggleSwitch checked={isRequired} onChange={onToggle} />
         <Icon
-          containerClassName="cursor"
           name={Trash2}
           size={16}
-          tone="negative"
+          tone="muted"
+          className="deleteIcon"
           onClick={onDelete}
         />
       </div>

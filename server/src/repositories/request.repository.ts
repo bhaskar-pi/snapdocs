@@ -40,7 +40,7 @@ export async function createDocumentRequest(
   userId: string,
   client: ClientInsert,
   docRequest: CreateRequestPayload,
-) {
+): Promise<{ clientRecord: Client; createdRequest: DocRequest }> {
   const { title, dueDate, description } = docRequest;
 
   return await db.transaction(async (tx) => {

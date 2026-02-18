@@ -10,10 +10,9 @@ import SectionHeader from "../section-header";
 interface Props {
   onSendRequest: () => void;
   onPrevious: () => void;
-  onChange: (prop: string, value: string) => void;
+  onChange: (prop: string, value: string | Date) => void;
   documents: DocumentModal[];
   clientName: string;
-  clientEmail: string;
   isLoading?: boolean;
   title: string;
   description: string;
@@ -26,7 +25,6 @@ const ReviewAndSend = ({
   onChange,
   documents = [],
   clientName,
-  clientEmail,
   isLoading,
   title,
   description,
@@ -40,25 +38,23 @@ const ReviewAndSend = ({
       />
 
       <div className={styles.reviewForm}>
-        <div className="d-flex gap-2">
-          <Input
-            id="title"
-            label="Request Title"
-            placeholder="e.g., ITR Filing 2026"
-            fieldClassName={styles.stepFormInput}
-            value={title}
-            onChange={(e) => onChange("title", e.target.value)}
-          />
-          <Input
-            id="due-date"
-            label="Due Date"
-            placeholder=""
-            type="date"
-            fieldClassName={styles.stepFormInput}
-            value={dueDate}
-            onChange={(e) => onChange("dueDate", e.target.value)}
-          />
-        </div>
+        <Input
+          id="title"
+          label="Request Title"
+          placeholder="e.g., ITR Filing 2026"
+          fieldClassName={styles.stepFormInput}
+          value={title}
+          onChange={(e) => onChange("title", e.target.value)}
+        />
+        <Input
+          id="due-date"
+          label="Due Date"
+          placeholder=""
+          type="date"
+          fieldClassName={styles.stepFormInput}
+          value={dueDate}
+          onChange={(e) => onChange("dueDate", new Date(e.target.value))}
+        />
         <TextArea
           id="description"
           label="Message"
@@ -70,14 +66,14 @@ const ReviewAndSend = ({
       </div>
 
       <div className={styles.checklistReview}>
-        <h1>{`Documents (${documents.length})`}</h1>
+        <h1>{`Document CheckList (${documents.length} items)`}</h1>
         {documents.map((doc) => (
           <CheckListItem key={doc.name} document={doc} />
         ))}
       </div>
 
       <div className={styles.sendingNote}>
-        Sending to: <span>{`${clientName} (${clientEmail ?? ""})`}</span>
+        Sending to: <span>{`${clientName}`}</span>
       </div>
 
       <SectionFooter

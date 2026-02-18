@@ -1,19 +1,14 @@
-"use client";
-
 import React from "react";
-
-import styles from "./button.module.css";
 
 type ButtonIntent =
   | "primary"
   | "secondary"
   | "success"
   | "warning"
-  | "negative"
-  | "neutral";
+  | "negative";
 
 type ButtonVariant = "solid" | "outline" | "ghost" | "soft";
-type ButtonSize = "xs" | "sm" | "md" | "lg";
+type ButtonSize = "sm" | "md" | "lg";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   intent?: ButtonIntent;
@@ -28,7 +23,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({
   intent = "primary",
   variant = "solid",
-  size = "sm",
+  size = "md",
   loading = false,
   disabled,
   icon,
@@ -44,8 +39,8 @@ export const Button = ({
   const classes = [
     styles.btn,
     styles[`btn-${intent}`],
-    styles[`btn-${variant}`],
-    styles[`btn-${size}`],
+    variant !== "solid" && styles[`btn-${variant}`],
+    size !== "md" && styles[`btn-${size}`],
     isIconOnly && styles["btn-icon"],
     loading && styles["btn-loading"],
     block && styles["btn-block"],
@@ -55,7 +50,7 @@ export const Button = ({
     .join(" ");
 
   return (
-    <button type="button" {...props} disabled={isDisabled} className={classes}>
+    <button type="button" disabled={isDisabled} className={classes} {...props}>
       {!loading && icon && iconPosition === "left" && (
         <span className={styles["btn-icon-slot"]}>{icon}</span>
       )}

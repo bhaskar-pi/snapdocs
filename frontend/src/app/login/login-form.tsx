@@ -60,7 +60,7 @@ const LoginForm = () => {
             />
           </div>
 
-          <Button size="md" loading={login.isPending} type="submit" className="mt-2">
+          <Button loading={login.isPending} type="submit" className="mt-2">
             {login.isPending ? "Logging in..." : "Log In"}
           </Button>
 

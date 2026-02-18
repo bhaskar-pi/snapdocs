@@ -1,11 +1,10 @@
 "use client";
 
-import { FileText, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/form/input";
 import { Icon } from "@/components/ui/icon";
 import { Modal } from "@/components/ui/modal";
@@ -81,41 +80,38 @@ const ChooseDocuments = ({ documents, onRemove, onChange }: Props) => {
 
   return (
     <>
-      <div className={styles.addDocBtnContainer}>
-        <div className={styles.documentRowHeader}>
-          <p>{`${documents.length} document(s) added`}</p>
-          <p>{`${requiredDocumentsCount} required`}</p>
-        </div>
+      <div>
+        {documents.length > 0 && (
+          <div className={styles.documentRowHeader}>
+            <p>{`${documents.length} document(s) added`}</p>
+            <p>{`${requiredDocumentsCount} required`}</p>
+          </div>
+        )}
+      </div>
+      <div className={styles.documentRows}>
+        {documents.map((doc, index) => (
+          <DocumentRow
+            key={doc.name}
+            document={doc}
+            onEdit={() => handleEditDocument(doc, index)}
+            onDelete={() => handleDeleteDocument(doc.name)}
+          />
+        ))}
+      </div>
 
+      <div className={styles.addDocBtnContainer}>
         <Button
-          intent="secondary"
+          intent="neutral"
           icon={<Icon name={Plus} />}
           onClick={() => setOpenModal(true)}
-          size="sm"
         >
           Add Document
         </Button>
-      </div>
-      {documents.length > 0 && (
-        <div className={styles.documentRows}>
-          {documents.map((doc, index) => (
-            <DocumentRow
-              key={doc.name}
-              document={doc}
-              onEdit={() => handleEditDocument(doc, index)}
-              onDelete={() => handleDeleteDocument(doc.name)}
-            />
-          ))}
-        </div>
-      )}
 
-      {documents.length === 0 && (
-        <EmptyState
-          icon={<Icon name={FileText} size={32} tone="muted" />}
-          title="No documents added yet"
-          description="Use a template or add documents manually."
-        />
-      )}
+        {documents.length === 0 && (
+          <p>Click the button above to start adding documents</p>
+        )}
+      </div>
 
       {/** Modals */}
       <Modal

@@ -1,12 +1,13 @@
 import { Download, Eye, FileText } from "lucide-react";
 
 import { Icon } from "@/components/ui/icon";
+import { ChecklistItemStatus } from "@/types/enums/request";
 import { ChecklistItem } from "@/types/models/document";
 import { formatDate } from "@/utils/date";
 import { formatEnumLabel } from "@/utils/input";
 import { getStatusClassName } from "@/utils/misc";
 
-import styles from "./document-requests.module.css";
+import styles from "../styles.module.css";
 
 interface Props {
   items: ChecklistItem[];
@@ -16,7 +17,7 @@ const ChecklistItems = ({ items }: Props) => {
   return (
     <div className={styles.checklist}>
       {items.map((item) => {
-        const document = item.documents[0];
+        const document = item.documents[0]; // assuming single doc per item
 
         return (
           <div key={item.id} className={styles.checklistRow}>
@@ -27,7 +28,7 @@ const ChecklistItems = ({ items }: Props) => {
 
                 {document && (
                   <p className={styles.uploadedAt}>
-                    Uploaded {formatDate(document.updatedAt)}
+                    Uploaded {formatDate(document?.updatedAt)}
                   </p>
                 )}
               </div>
@@ -35,7 +36,7 @@ const ChecklistItems = ({ items }: Props) => {
 
             <div className={styles.checklistActions}>
               <span
-                className={`status status-${getStatusClassName(item.status)}`}
+                className={`status ${item.status === ChecklistItemStatus.RECEIVED && getStatusClassName(ChecklistItemStatus.RECEIVED)}`}
               >
                 {formatEnumLabel(item.status)}
               </span>
@@ -43,7 +44,7 @@ const ChecklistItems = ({ items }: Props) => {
               {document && (
                 <>
                   <button
-                    className={styles.iconButton}
+                    className={styles.iconBtn}
                     aria-label="View document"
                     onClick={() => window.open(document.storagePath)}
                   >
@@ -51,7 +52,7 @@ const ChecklistItems = ({ items }: Props) => {
                   </button>
 
                   <button
-                    className={styles.iconButton}
+                    className={styles.iconBtn}
                     aria-label="Download document"
                     onClick={() =>
                       window.open(`${document.storagePath}?download=1`)
