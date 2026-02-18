@@ -15,7 +15,7 @@ const Profile = () => {
   const authUser = useAuthStore((store) => store.user);
   const updateUser = useUpdateUser();
 
-  const [user, setUser] = useState<User>(authUser || {} as User);
+  const [user, setUser] = useState<User>(authUser || ({} as User));
   const [isUserDetailsChanged, setIsUserDetailsChanged] = useState(false);
 
   const onChangeUser = useCallback((prop: string, value: string) => {
@@ -44,10 +44,10 @@ const Profile = () => {
   const isLoading = updateUser.isPending;
 
   return (
-    <section className={`${styles.section} card card-sm`}>
+    <section className={`${styles.section} card`}>
       <div className={styles.sectionHeader}>
         <div>
-          <IconBadge icon={User2} size="lg" />
+          <IconBadge icon={User2} size="md" />
         </div>
         <div>
           <h1 className={styles.sectionTitle}>Profile Information</h1>
@@ -57,7 +57,7 @@ const Profile = () => {
         </div>
       </div>
       <form className={styles.form} onSubmit={onSaveUserDetails}>
-        <div className="base-two-in-row" style={{ gap: "30px" }}>
+        <div className="d-flex gap-2">
           <Input
             required
             label="First Name"
@@ -77,7 +77,7 @@ const Profile = () => {
             disabled={isLoading}
           />
         </div>
-        <div className="base-two-in-row" style={{ gap: "30px" }}>
+        <div className="d-flex gap-2">
           <Input
             required
             label="Email"
@@ -85,7 +85,7 @@ const Profile = () => {
             value={user?.email ?? ""}
             placeholder="Enter your email"
             message="Email cannot be changed. Please contact support"
-            messageType="info"
+            messageType="secondary"
             disabled
           />
           <Input
