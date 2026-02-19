@@ -24,9 +24,9 @@ export const getDashboardStatusClassName = (status: DashboardStatus) => {
   switch (status) {
     case DashboardStatus.ON_TRACK:
       return "status-success";
-    case "At Risk":
+    case DashboardStatus.AT_RISK:
       return "status-warning";
-    case "Overdue":
+    case DashboardStatus.OVERDUE:
       return "status-danger";
     default:
       return "status-neutral";

@@ -87,7 +87,7 @@ export function useUpdateClient() {
 
     onError(error) {
       const msg = getErrorMessage(error as AxiosError<ApiError>);
-      toast.error(msg ?? "Failed to updated details. Please try again");
+      toast.error(msg ?? "Failed to update details. Please try again");
     },
   });
 }

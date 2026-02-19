@@ -67,6 +67,7 @@ const Templates = () => {
     setMode(template ? Mode.EDIT : Mode.CREATE);
     setTemplate(template);
     setOpenModal(true);
+    // when open edit modal - have a delete btn - so when clicked on delete we need data for onConfirmDeleteTemplate()
     setTemplateToDelete(template);
   }, []);
 

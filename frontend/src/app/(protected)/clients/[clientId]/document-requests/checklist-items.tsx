@@ -36,12 +36,12 @@ const ChecklistItems = ({ items }: Props) => {
 
       const response = await getDocumentUrl.mutateAsync(documentId);
 
-      if (!response?.url) {
+      if (!response?.data.url) {
         toast.error("Failed to get document preview URL.");
         return;
       }
 
-      setPreviewUrl(response.url);
+      setPreviewUrl(response?.data?.url);
       setSelectedDocToPreview(name);
       setIsPreviewOpen(true);
     } catch (err) {
@@ -57,12 +57,12 @@ const ChecklistItems = ({ items }: Props) => {
       setLoadingAction({ id: documentId, action: "download" });
 
       const response = await getDocumentUrl.mutateAsync(documentId);
-      if (!response?.url) {
+      if (!response?.data?.url) {
         toast.error("Failed to get document download URL.");
         return;
       }
 
-      const blob = await fetch(response.url).then((r) => r.blob());
+      const blob = await fetch(response?.data.url).then((r) => r.blob());
       const blobUrl = URL.createObjectURL(blob);
 
       const anchor = document.createElement("a");
@@ -70,7 +70,9 @@ const ChecklistItems = ({ items }: Props) => {
       anchor.download = fileName;
       anchor.click();
 
-      URL.revokeObjectURL(blobUrl);
+      setTimeout(() => {
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
     } catch (err) {
       console.error(err);
       toast.error("An error occurred while trying to download the document.");

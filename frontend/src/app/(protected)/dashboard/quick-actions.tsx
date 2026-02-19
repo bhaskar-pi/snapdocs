@@ -28,7 +28,6 @@ export function QuickActionsCard() {
         </Button>
 
         <Button
-      
           variant="soft"
           size="md"
           onClick={() => router.push(SCREEN_PATHS.TEMPLATES)}

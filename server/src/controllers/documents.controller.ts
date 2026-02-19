@@ -30,7 +30,10 @@ export const uploadDocumentHandler = async ({
   const documentId = request.documentId;
 
   if (!file || !checklistItemId || !requestId || !userId) {
-    throw new Error("File or userId or checklistItemId or requestId missing");
+    throw new AppError(
+      "File or userId or checklistItemId or requestId missing",
+      400,
+    );
   }
 
   const storagePath = await uploadChecklistItemDocument(file, {
@@ -74,7 +77,9 @@ export const getDocumentUrlHandler = async ({
 
   return {
     statusCode: 200,
-    url: signedUrl,
+    data: {
+      url: signedUrl,
+    },
     message: "Url retrieved successfully.",
   };
 };

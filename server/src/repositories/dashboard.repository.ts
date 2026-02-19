@@ -17,11 +17,16 @@ const activeRequestCondition = sql`
 export async function getDashboardMetricsByUserId(userId: string) {
   const [result] = await db
     .select({
+      // Count unique requests
       activeRequestsCount: sql<number>`
-        COUNT(*) FILTER (WHERE ${activeRequestCondition})
+        COUNT(DISTINCT ${requestsTable.id}) FILTER (
+          WHERE ${activeRequestCondition}
+        )
       `,
+
+      // Count unique completed requests
       completedRequestCount: sql<number>`
-        COUNT(*) FILTER (
+        COUNT(DISTINCT ${requestsTable.id}) FILTER (
           WHERE ${requestsTable.status} = ${RequestStatus.COMPLETED}
           AND COALESCE(
             ${requestsTable.completedAt},
@@ -30,11 +35,15 @@ export async function getDashboardMetricsByUserId(userId: string) {
           ) >= NOW() - INTERVAL '7 days'
         )
       `,
+
       pendingDocumentsCount: sql<number>`
-        COUNT(*) FILTER (WHERE ${requiredPendingChecklist})
+        COUNT(${checklistItemsTable.id}) FILTER (
+          WHERE ${requiredPendingChecklist}
+        )
       `,
+
       overdueItemsCount: sql<number>`
-        COUNT(*) FILTER (
+        COUNT(${checklistItemsTable.id}) FILTER (
           WHERE ${requiredPendingChecklist}
           AND ${requestsTable.dueDate} IS NOT NULL
           AND ${requestsTable.dueDate} < NOW()

@@ -25,6 +25,6 @@ export const clientsApi = {
   },
 
   updateClient(clientId: string, data: ClientFormInput) {
-    return PUT<ApiResponse<Client[]>>(`/clients/${clientId}`, data);
+    return PUT<ApiResponse<Client>>(`/clients/${clientId}`, data);
   },
 };

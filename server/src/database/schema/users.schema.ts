@@ -8,7 +8,7 @@ import {
   pgEnum,
 } from "drizzle-orm/pg-core";
 
-const IndustryTypeEnum = pgEnum("industry_type", [
+const industryTypePgEnum = pgEnum("industry_type", [
   "CA_FIRM",
   "ACCOUNTING_TAX",
   "LAW_FIRM",
@@ -26,7 +26,7 @@ export const usersTable = pgTable(
     email: text("email").notNull(),
     phoneNumber: text("phone_number"),
     businessName: text("business_name").notNull(),
-    businessType: IndustryTypeEnum("business_type").notNull(),
+    businessType: industryTypePgEnum("business_type").notNull(),
     otherBusinessType: text("other_business_type"),
     password: text("password").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -41,4 +41,4 @@ export const usersTable = pgTable(
 export type User = InferSelectModel<typeof usersTable>;
 export type UserInsert = InferInsertModel<typeof usersTable>;
 
-export { IndustryTypeEnum };
+export { industryTypePgEnum };

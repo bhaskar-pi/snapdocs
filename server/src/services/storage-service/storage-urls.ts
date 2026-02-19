@@ -1,4 +1,5 @@
 import { supabase } from "@config/supabase";
+import { AppError } from "@utils/error";
 
 export async function generateSignedDocumentUrl(storagePath: string) {
   const { data, error } = await supabase.storage
@@ -6,7 +7,7 @@ export async function generateSignedDocumentUrl(storagePath: string) {
     .createSignedUrl(storagePath, 60 * 60 * 24);
 
   if (error) {
-    throw new Error("Failed to generate signed URL");
+    throw new AppError(`Failed to generate signed URL: ${error.message}`, 500);
   }
 
   return data.signedUrl;

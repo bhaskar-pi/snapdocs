@@ -17,7 +17,7 @@ export const getMetricCards = (metrics?: DashboardMetrics): MetricCard[] => {
     {
       title: "Completed Requests",
       value: String(metrics?.completedRequestCount ?? 0),
-      helper: "All time completed",
+      helper: "Completed in last 7 days",
       trend: (metrics?.completedRequestCount ?? 0) > 0 ? "up" : "flat",
     },
     {
