@@ -10,4 +10,6 @@ export enum SCREEN_PATHS {
   TEMPLATES = "/templates",
 
   SETTINGS = "/settings",
+
+  INVALID_LINK = "/invalid-link",
 }

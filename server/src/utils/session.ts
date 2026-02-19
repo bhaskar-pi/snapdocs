@@ -103,7 +103,7 @@ export function verifyDocumentsRequestToken(token: string) {
   } catch (error) {
     throw new AppError(
       "Your link has expired. Please contact your authorities.",
-      401,
+      410,
       TokenErrors.TOKEN_EXPIRED,
     );
   }

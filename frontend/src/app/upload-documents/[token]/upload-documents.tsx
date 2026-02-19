@@ -8,8 +8,8 @@ import {
   Upload,
   User,
 } from "lucide-react";
-import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { FileUploadButton } from "@/components/ui/file-upload";
 import { Icon } from "@/components/ui/icon";
@@ -21,17 +21,26 @@ import {
   useGetUploadChecklistItems,
   useUploadDocument,
 } from "@/hooks/data/documents/use-documents";
+import { SCREEN_PATHS } from "@/types/enums/paths";
 import { ChecklistItemStatus } from "@/types/enums/request";
+import { isUploadTokenExpired } from "@/utils/api";
 import { formatDate } from "@/utils/date";
 
 import styles from "../upload-documents.module.css";
 
 export default function UploadDocuments() {
   const params = useParams();
+  const router = useRouter();
   const token = params.token as string;
 
-  const { data: request, isLoading } = useGetUploadChecklistItems(token);
+  const { data: request, isLoading, error } = useGetUploadChecklistItems(token);
   const requestDetails = request?.data;
+
+  useEffect(() => {
+    if (isUploadTokenExpired(error)) {
+      router.replace(SCREEN_PATHS.INVALID_LINK);
+    }
+  }, [error, router]);
 
   const uploadDocument = useUploadDocument(token);
   const [uploadingItemId, setUploadingItemId] = useState<string | null>(null);
