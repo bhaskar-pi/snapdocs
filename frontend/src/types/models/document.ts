@@ -44,7 +44,8 @@ export interface DocumentsUploadChecklist {
   userName: string;
   requestedOn: Date;
   clientName: string;
-  dueDate: Date;
+  dueDate?: Date;
+  senderNotes?: string;
   requestTitle: string;
   checklistItems: ChecklistItem[];
 }

@@ -83,6 +83,7 @@ export const getUploadRequestDetailsHandler = async ({
       clientName: client?.fullName,
       clientId: client?.id,
       dueDate: documentRequest.dueDate,
+      senderNotes: documentRequest.description,
       requestTitle: documentRequest.title,
       requestId,
       checklistItems: checklistItems.map((item) => ({

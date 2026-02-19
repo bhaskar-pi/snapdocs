@@ -22,6 +22,7 @@ import {
   useUploadDocument,
 } from "@/hooks/data/documents/use-documents";
 import { ChecklistItemStatus } from "@/types/enums/request";
+import { formatDate } from "@/utils/date";
 
 import styles from "../upload-documents.module.css";
 
@@ -71,12 +72,43 @@ export default function UploadDocuments() {
           <div className={styles.body}>
             <div>
               <div className={styles.user}>
-                <Icon size={16} name={User} tone="muted" strokeWidth={2} />
-                <p>
-                  Requested by <span>{requestDetails?.userName}</span>
-                </p>
+                <Icon
+                  size={16}
+                  name={User}
+                  tone="muted"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+
+                <div className={styles.meta}>
+                  <span className={styles.requestedBy}>
+                    Requested by{" "}
+                    <strong className={styles.userName}>
+                      {requestDetails?.userName ?? "Unknown"}
+                    </strong>
+                  </span>
+
+                  {requestDetails?.dueDate && (
+                    <>
+                      <span className={styles.separator} aria-hidden="true">
+                        •
+                      </span>
+
+                      <time
+                        className={styles.dueDate}
+                        dateTime={`${requestDetails.dueDate}`}
+                      >
+                        Due on {formatDate(requestDetails.dueDate)}
+                      </time>
+                    </>
+                  )}
+                </div>
               </div>
-              <h1 className={styles.title}>{requestDetails?.requestTitle}</h1>
+
+              <div>
+                <h1 className={styles.title}>{requestDetails?.requestTitle}</h1>
+              </div>
+
               <p className={styles.description}>
                 Hi <span>{requestDetails?.clientName} 👋</span>, please upload
                 the following documents at your earliest convenience.
