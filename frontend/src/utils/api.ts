@@ -11,6 +11,7 @@ export function isUploadTokenExpired(error: unknown): boolean {
 
   return (
     err?.response?.status === 410 ||
+    err?.response?.status === 404 ||
     (typeof err?.response?.data === "object" &&
       err?.response?.data !== null &&
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

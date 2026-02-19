@@ -108,7 +108,7 @@ const ClientsTable = () => {
         title="Document Request"
         onEmptyAction={() => router.push(SCREEN_PATHS.DOCUMENT_REQUESTS)}
         columnWidths="1fr 220px 200px 150px 68px"
-        emptyText="No clients found"
+        emptyTitle="No clients found"
         emptyDescription="Create document requests for clients and track their progress here."
         isLoading={isLoading}
         count={filteredClientSummaries?.length || 0}

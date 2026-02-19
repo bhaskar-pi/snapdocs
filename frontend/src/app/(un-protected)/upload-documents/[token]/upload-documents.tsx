@@ -31,9 +31,16 @@ import styles from "../upload-documents.module.css";
 export default function UploadDocuments() {
   const params = useParams();
   const router = useRouter();
-  const token = params.token as string;
+  const token = params?.token as string | undefined;
 
-  const { data: request, isLoading, error } = useGetUploadChecklistItems(token);
+  const {
+    data: request,
+    isLoading,
+    error,
+  } = useGetUploadChecklistItems(token, {
+    enabled: !!token,
+  });
+
   const requestDetails = request?.data;
 
   useEffect(() => {

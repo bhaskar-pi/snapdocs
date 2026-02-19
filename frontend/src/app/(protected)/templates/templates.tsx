@@ -179,7 +179,7 @@ const Templates = () => {
         title="Templates"
         onEmptyAction={() => onOpenEditModal()}
         columnWidths="1fr 160px 180px 160px 68px"
-        emptyText="No templates found"
+        emptyTitle="No templates found"
         emptyDescription="Create reusable document request templates to standardize your workflow."
         isLoading={templatesLoading}
         count={filteredTemplates?.length || 0}

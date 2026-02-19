@@ -50,12 +50,14 @@ export function useGetDocumentUrl() {
   });
 }
 
-export function useGetUploadChecklistItems(requestToken?: string | null) {
+export function useGetUploadChecklistItems(
+  token?: string,
+  options?: { enabled?: boolean },
+) {
   return useQuery({
-    queryKey: ["uploadChecklistItems", requestToken],
-    queryFn: () => documentRequestsApi.getUploadChecklistItems(requestToken!),
-    enabled: !!requestToken,
-    staleTime: 5 * 60 * 1000,
+    queryKey: ["upload-checklist", token],
+    queryFn: () => documentRequestsApi.getUploadChecklistItems(token!),
+    enabled: options?.enabled ?? true,
     retry: false,
   });
 }

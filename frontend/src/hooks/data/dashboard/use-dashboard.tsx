@@ -6,7 +6,9 @@ export function useDashboardStats() {
   return useQuery({
     queryKey: ["dashboard", "stats"],
     queryFn: dashboardApi.getDashboardStats,
-    staleTime: 1000 * 60 * 2,
+    staleTime: 0,
     retry: false,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 }

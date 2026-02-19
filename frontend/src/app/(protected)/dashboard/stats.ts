@@ -7,30 +7,45 @@ import {
 import { getRequestHealthStatus } from "@/utils/dashboard";
 
 export const getMetricCards = (metrics?: DashboardMetrics): MetricCard[] => {
+  const active = metrics?.activeRequestsCount ?? 0;
+  const completed = metrics?.completedRequestCount ?? 0;
+  const overdue = metrics?.overdueItemsCount ?? 0;
+  const pending = metrics?.pendingDocumentsCount ?? 0;
+
+  const hasAnyRequests = active > 0 || completed > 0;
+
   return [
     {
       title: "Active Requests",
-      value: String(metrics?.activeRequestsCount ?? 0),
+      value: String(active),
       helper: "Currently active",
-      trend: (metrics?.activeRequestsCount ?? 0) > 0 ? "up" : "flat",
+      trend: active > 0 ? "up" : "flat",
     },
     {
       title: "Completed Requests",
-      value: String(metrics?.completedRequestCount ?? 0),
+      value: String(completed),
       helper: "Completed in last 7 days",
-      trend: (metrics?.completedRequestCount ?? 0) > 0 ? "up" : "flat",
+      trend: completed > 0 ? "up" : "flat",
     },
     {
       title: "Overdue Requests",
-      value: String(metrics?.overdueItemsCount ?? 0),
+      value: String(overdue),
       helper: "Past due date",
-      trend: (metrics?.overdueItemsCount ?? 0) > 0 ? "down" : "up",
+      trend: !hasAnyRequests
+        ? "flat" // NEW USER
+        : overdue > 0
+          ? "down"
+          : "up",
     },
     {
       title: "Pending Documents",
-      value: String(metrics?.pendingDocumentsCount ?? 0),
+      value: String(pending),
       helper: "Still waiting from clients",
-      trend: (metrics?.pendingDocumentsCount ?? 0) > 0 ? "flat" : "up",
+      trend: !hasAnyRequests
+        ? "flat" // NEW USER
+        : pending > 0
+          ? "flat"
+          : "up",
     },
   ];
 };

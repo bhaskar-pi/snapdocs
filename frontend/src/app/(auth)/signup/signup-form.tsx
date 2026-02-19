@@ -8,10 +8,13 @@ import { Input } from "@/components/ui/form/input";
 import { Select } from "@/components/ui/form/select";
 import { Logo } from "@/components/ui/logo";
 import { useSignup } from "@/hooks/data/auth/use-signup";
-import { IndustryType } from "@/types/enums/industry";
+import {
+  INDUSTRY_TYPE_LABELS,
+  IndustryType,
+  IndustryTypeKey,
+} from "@/types/enums/industry";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 import { SignUpForm as SignUpFormType } from "@/types/models/auth";
-import { mapEnumToOptions } from "@/utils/input";
 
 import styles from "./signup.module.css";
 
@@ -21,8 +24,15 @@ const initialForm: SignUpFormType = {
   email: "",
   password: "",
   businessName: "",
-  businessType: "" as IndustryType,
+  businessType: "" as IndustryTypeKey,
 };
+
+export const INDUSTRY_TYPE_OPTIONS = Object.values(IndustryType).map(
+  (value) => ({
+    value,
+    label: INDUSTRY_TYPE_LABELS[value],
+  }),
+);
 
 const SignUpForm = () => {
   const signup = useSignup();
@@ -125,13 +135,15 @@ const SignUpForm = () => {
               label="Industry"
               placeholder="Select your business industry"
               value={form.businessType}
-              onChange={(value) => onChangeForm("businessType", value)}
-              options={mapEnumToOptions(IndustryType)}
+              onChange={(value) =>
+                onChangeForm("businessType", value as IndustryType)
+              }
+              options={INDUSTRY_TYPE_OPTIONS}
               disabled={signup.isPending}
             />
           </div>
 
-          <Button disabled={signup.isPending} type="submit">
+          <Button disabled={signup.isPending} type="submit" size="md">
             {signup.isPending ? "Creating..." : "Create Account"}
           </Button>
 

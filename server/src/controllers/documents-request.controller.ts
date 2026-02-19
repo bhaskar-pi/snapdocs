@@ -45,6 +45,10 @@ export const getUploadRequestDetailsHandler = async ({
     getCheckListItemsByRequestId(requestId),
   ]);
 
+  if (!client) {
+    throw new AppError("Request owner not found", 404);
+  }
+
   if (!user) {
     throw new AppError("Request owner not found", 404);
   }

@@ -18,10 +18,11 @@ export function RecentRequestsTable({ requests }: Props) {
   return (
     <DataTable
       title="Request"
+      emptyTitle="No document requests yet"
+      emptyDescription="Create your first document request to start collecting files from clients."
       count={requests.length}
       pageSize={5}
       columnWidths="1fr 1fr 140px 120px"
-      onEmptyAction={() => {}}
       columns={
         <>
           <p>Client</p>
