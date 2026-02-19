@@ -4,8 +4,8 @@
   gap: var(--space-6);
 }
 
-.clientInfo:hover {
-  background-color: var(--surface-card) !important;
+.clientInfo.card:hover {
+  background-color: var(--surface-card);
 }
 
 .clientHeader {

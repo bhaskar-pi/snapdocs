@@ -166,14 +166,14 @@ const Templates = () => {
       }}
       isLoading={isLoading}
     >
-      <div className="mb-4">
+      <form style={{ width: "400px" }} className="d-flex justify-end mb-6">
         <SearchInput
           id="search"
           value={search}
           placeholder="Search templates..."
           onChange={(e) => setSearch(e.target.value)}
         />
-      </div>
+      </form>
       <DataTable
         title="Templates"
         onEmptyAction={() => onOpenEditModal()}

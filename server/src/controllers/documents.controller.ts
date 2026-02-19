@@ -1,5 +1,4 @@
 import { CreateDocumentItemPayload } from "@models/payloads/documents.payload";
-import { AuthenticatedUser } from "@models/user";
 import {
   createDocument,
   getDocumentById,

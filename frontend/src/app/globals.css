@@ -775,6 +775,9 @@
   .mb-4 {
     margin-bottom: var(--space-4);
   }
+  .mb-6 {
+    margin-bottom: var(--space-6);
+  }
 
   /* — Skeleton loader — */
   @keyframes skeleton-pulse {

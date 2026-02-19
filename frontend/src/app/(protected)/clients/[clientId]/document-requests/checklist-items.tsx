@@ -2,6 +2,7 @@
 
 import { Download, Eye, FileText, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import DocumentPreviewModal from "@/components/document-preview";
 import { Icon } from "@/components/ui/icon";
@@ -35,11 +36,17 @@ const ChecklistItems = ({ items }: Props) => {
 
       const response = await getDocumentUrl.mutateAsync(documentId);
 
-      setPreviewUrl(response?.url || "");
+      if (!response?.url) {
+        toast.error("Failed to get document preview URL.");
+        return;
+      }
+
+      setPreviewUrl(response.url);
       setSelectedDocToPreview(name);
       setIsPreviewOpen(true);
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while trying to view the document.");
     } finally {
       setLoadingAction(null);
     }
@@ -50,8 +57,12 @@ const ChecklistItems = ({ items }: Props) => {
       setLoadingAction({ id: documentId, action: "download" });
 
       const response = await getDocumentUrl.mutateAsync(documentId);
+      if (!response?.url) {
+        toast.error("Failed to get document download URL.");
+        return;
+      }
 
-      const blob = await fetch(response.url || "").then((r) => r.blob());
+      const blob = await fetch(response.url).then((r) => r.blob());
       const blobUrl = URL.createObjectURL(blob);
 
       const anchor = document.createElement("a");
@@ -62,6 +73,7 @@ const ChecklistItems = ({ items }: Props) => {
       URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while trying to download the document.");
     } finally {
       setLoadingAction(null);
     }
@@ -78,10 +90,11 @@ const ChecklistItems = ({ items }: Props) => {
       {items.map((item) => {
         const document = item.documents[0];
         const isViewLoading =
-          loadingAction?.id === document.id && loadingAction.action === "view";
+          loadingAction?.id === document?.id &&
+          loadingAction?.action === "view";
         const isDownloadLoading =
-          loadingAction?.id === document.id &&
-          loadingAction.action === "download";
+          loadingAction?.id === document?.id &&
+          loadingAction?.action === "download";
 
         return (
           <div key={item.id} className={styles.checklistRow}>

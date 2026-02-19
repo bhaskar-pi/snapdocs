@@ -33,7 +33,7 @@ const ClientsTable = () => {
   const router = useRouter();
   const { data: clientsSummaries, isLoading, error } = useClientsSummary();
   const deleteClient = useDeleteClient();
-  const isDeleteLoading = deleteClient?.isPaused;
+  const isDeleteLoading = deleteClient?.isPending;
 
   const [filters, setFilters] = useState<Filters>({
     searchText: "",
@@ -98,8 +98,6 @@ const ClientsTable = () => {
         },
       });
     }
-
-    onCloseModal();
   };
 
   return (

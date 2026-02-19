@@ -151,15 +151,15 @@ export async function updateClient(
   userId: string,
   clientId: string,
   data: UpdateClientPayload,
-) {
-  const result = await db
+): Promise<Client | undefined> {
+  const [result] = await db
     .update(clientsTable)
     .set({
       ...data,
       updatedAt: new Date(),
     })
     .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
-    .returning({ id: clientsTable.id });
+    .returning();
 
-  return result.length > 0;
+  return result;
 }
