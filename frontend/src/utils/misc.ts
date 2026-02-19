@@ -1,3 +1,4 @@
+import { DashboardStatus } from "@/types/enums/dashboard";
 import { ChecklistItemStatus, RequestStatus } from "@/types/enums/request";
 
 export function getStatusClassName(
@@ -18,3 +19,16 @@ export function getStatusClassName(
       return "neutral";
   }
 }
+
+export const getDashboardStatusClassName = (status: DashboardStatus) => {
+  switch (status) {
+    case DashboardStatus.ON_TRACK:
+      return "status-success";
+    case "At Risk":
+      return "status-warning";
+    case "Overdue":
+      return "status-danger";
+    default:
+      return "status-neutral";
+  }
+};
