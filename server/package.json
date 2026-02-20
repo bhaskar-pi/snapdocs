@@ -31,6 +31,7 @@
     "jsonwebtoken": "9.0.3",
     "multer": "2.0.2",
     "pg": "8.16.3",
+    "tsc-alias": "^1.8.16",
     "uuid": "8.3.2",
     "zod": "4.3.4"
   },
@@ -38,7 +39,6 @@
     "drizzle-kit": "^0.31.8",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
-    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3"
   },
