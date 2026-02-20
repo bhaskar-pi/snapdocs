@@ -1,6 +1,12 @@
-import { Download, Eye, FileText } from "lucide-react";
+"use client";
 
+import { Download, Eye, FileText, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import DocumentPreviewModal from "@/components/document-preview";
 import { Icon } from "@/components/ui/icon";
+import { useGetDocumentUrl } from "@/hooks/data/documents/use-documents";
 import { ChecklistItem } from "@/types/models/document";
 import { formatDate } from "@/utils/date";
 import { formatEnumLabel } from "@/utils/input";
@@ -13,10 +19,84 @@ interface Props {
 }
 
 const ChecklistItems = ({ items }: Props) => {
+  const getDocumentUrl = useGetDocumentUrl();
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [selectedDocToPreview, setSelectedDocToPreview] = useState("");
+
+  const [loadingAction, setLoadingAction] = useState<{
+    id: string;
+    action: "view" | "download";
+  } | null>(null);
+
+  const handleView = async (documentId: string, name: string) => {
+    try {
+      setLoadingAction({ id: documentId, action: "view" });
+
+      const response = await getDocumentUrl.mutateAsync(documentId);
+
+      if (!response?.data.url) {
+        toast.error("Failed to get document preview URL.");
+        return;
+      }
+
+      setPreviewUrl(response?.data?.url);
+      setSelectedDocToPreview(name);
+      setIsPreviewOpen(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while trying to view the document.");
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const handleDownload = async (documentId: string, fileName: string) => {
+    try {
+      setLoadingAction({ id: documentId, action: "download" });
+
+      const response = await getDocumentUrl.mutateAsync(documentId);
+      if (!response?.data?.url) {
+        toast.error("Failed to get document download URL.");
+        return;
+      }
+
+      const blob = await fetch(response?.data.url).then((r) => r.blob());
+      const blobUrl = URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.href = blobUrl;
+      anchor.download = fileName;
+      anchor.click();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while trying to download the document.");
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const handleClosePreview = () => {
+    setPreviewUrl(null);
+    setIsPreviewOpen(false);
+    setSelectedDocToPreview("");
+  };
+
   return (
     <div className={styles.checklist}>
       {items.map((item) => {
         const document = item.documents[0];
+        const isViewLoading =
+          loadingAction?.id === document?.id &&
+          loadingAction?.action === "view";
+        const isDownloadLoading =
+          loadingAction?.id === document?.id &&
+          loadingAction?.action === "download";
 
         return (
           <div key={item.id} className={styles.checklistRow}>
@@ -45,19 +125,25 @@ const ChecklistItems = ({ items }: Props) => {
                   <button
                     className={styles.iconButton}
                     aria-label="View document"
-                    onClick={() => window.open(document.storagePath)}
+                    onClick={() => handleView(document.id, item.name)}
                   >
-                    <Eye size={16} />
+                    {isViewLoading ? (
+                      <Loader2 size={16} className="spinner" />
+                    ) : (
+                      <Eye size={16} />
+                    )}
                   </button>
 
                   <button
                     className={styles.iconButton}
                     aria-label="Download document"
-                    onClick={() =>
-                      window.open(`${document.storagePath}?download=1`)
-                    }
+                    onClick={() => handleDownload(document.id, item.name)}
                   >
-                    <Download size={16} />
+                    {isDownloadLoading ? (
+                      <Loader2 size={16} className="spinner" />
+                    ) : (
+                      <Download size={16} />
+                    )}
                   </button>
                 </>
               )}
@@ -65,6 +151,13 @@ const ChecklistItems = ({ items }: Props) => {
           </div>
         );
       })}
+
+      <DocumentPreviewModal
+        title={`${selectedDocToPreview}`}
+        open={isPreviewOpen}
+        url={previewUrl}
+        onClose={handleClosePreview}
+      />
     </div>
   );
 };

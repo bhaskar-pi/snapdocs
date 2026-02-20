@@ -1,6 +1,7 @@
-import { GET } from "@/api/http";
+import { DELETE, GET, PUT } from "@/api/http";
 import {
   Client,
+  ClientFormInput,
   ClientRequestDetails,
   ClientSummary,
 } from "@/types/models/client";
@@ -17,5 +18,13 @@ export const clientsApi = {
 
   getClients() {
     return GET<ApiResponse<Client[]>>(`/clients`);
+  },
+
+  deleteClient(clientId: string) {
+    return DELETE<ApiResponse<void>>(`/clients/${clientId}`);
+  },
+
+  updateClient(clientId: string, data: ClientFormInput) {
+    return PUT<ApiResponse<Client>>(`/clients/${clientId}`, data);
   },
 };

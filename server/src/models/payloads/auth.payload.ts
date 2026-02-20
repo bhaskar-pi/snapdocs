@@ -1,3 +1,4 @@
+import { IndustryType } from "@enums/industry";
 import { DateString } from "@models/date";
 
 export interface LoginRequest {
@@ -12,6 +13,9 @@ export interface UserRegisterRequest {
   phoneNumber: string;
   password: string;
   confirmPassword: string;
+  businessName: string;
+  businessType: IndustryType;
+  otherBusinessType?: string;
 }
 
 export interface RefreshSessionRequest {

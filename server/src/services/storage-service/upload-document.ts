@@ -1,16 +1,12 @@
 import { supabase } from "@config/supabase";
-import { sanitizeFileName } from "@utils/doc-requests";
-import { v4 as uuidV4 } from "uuid";
+import { StoragePathKeys } from "@models/document";
+import { getDocumentStoragePath } from "@utils/doc-requests";
 
 export async function uploadChecklistItemDocument(
-  checklistItemId: string,
   file: Express.Multer.File,
+  ids: StoragePathKeys,
 ) {
-  const ext = file.originalname.split(".").pop()?.toLowerCase() || "";
-  const baseName = file.originalname.replace(/\.[^/.]+$/, "");
-  const safeName = sanitizeFileName(baseName);
-
-  const storagePath = `checklists/${checklistItemId}/${uuidV4()}/${safeName}.${ext}`;
+  const storagePath = getDocumentStoragePath(file, ids);
 
   const { error } = await supabase.storage
     .from("documents")

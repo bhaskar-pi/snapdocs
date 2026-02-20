@@ -16,9 +16,9 @@ interface Props {
   isLoading?: boolean;
   count: number;
   pageSize?: number;
-  emptyText?: string;
+  emptyTitle?: string;
   emptyDescription?: string;
-  onEmptyAction: () => void;
+  onEmptyAction?: () => void;
 }
 
 export function DataTable({
@@ -28,7 +28,7 @@ export function DataTable({
   isLoading = false,
   count,
   pageSize = 10,
-  emptyText = "No data found",
+  emptyTitle = "No data found",
   emptyDescription = "",
   columnWidths,
   onEmptyAction,
@@ -55,10 +55,10 @@ export function DataTable({
     <>
       {!isLoading && count < 1 && (
         <EmptyState
-          title={emptyText}
+          title={emptyTitle}
           description={emptyDescription}
-          primaryActionLabel={`Create ${title}`}
-          onPrimaryAction={onEmptyAction}
+          primaryActionLabel={onEmptyAction ? `Create ${title}` : undefined}
+          onPrimaryAction={onEmptyAction ? onEmptyAction : undefined}
           size="md"
         />
       )}

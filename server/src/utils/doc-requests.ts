@@ -1,5 +1,6 @@
 import env from "@config/env";
 import { generateDocumentsRequestToken } from "./session";
+import { StoragePathKeys } from "@models/document";
 
 export const generateClientUploadLink = (
   userId: string,
@@ -20,4 +21,19 @@ export function sanitizeFileName(name: string) {
     .replace(/[^\w.\-]/g, "_") // remove unsafe chars
     .replace(/_+/g, "_") // collapse multiple _
     .toLowerCase();
+}
+
+export function getDocumentStoragePath(
+  file: Express.Multer.File,
+  ids: StoragePathKeys,
+) {
+  const ext = file.originalname.split(".").pop()?.toLowerCase() || "";
+  const baseName = file.originalname.replace(/\.[^/.]+$/, "");
+  const safeName = sanitizeFileName(baseName);
+
+  const { userId, clientId, requestId, checklistItemId } = ids;
+
+  const storagePath = `${userId}/${clientId}/${requestId}/checklists/${checklistItemId}/${new Date().getTime()}-${safeName}.${ext}`;
+
+  return storagePath;
 }

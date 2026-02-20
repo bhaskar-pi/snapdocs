@@ -40,10 +40,12 @@ export interface DocumentRequest {
 }
 
 export interface DocumentsUploadChecklist {
-  requestedBy: string;
-  requestedOn: Date;
+  userId: string;
+  userName: string;
+  requestedOn: Date | string;
   clientName: string;
-  dueDate: Date;
+  dueDate?: Date | string;
+  senderNotes?: string;
   requestTitle: string;
   checklistItems: ChecklistItem[];
 }

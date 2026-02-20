@@ -97,6 +97,14 @@ export function generateDocumentsRequestToken(
 }
 
 export function verifyDocumentsRequestToken(token: string) {
-  const payload = jwt.verify(token, env.JWT_DOCUMENTS_SEND_SECRET);
-  return payload as { clientId: string; userId: string; requestId: string };
+  try {
+    const payload = jwt.verify(token, env.JWT_DOCUMENTS_SEND_SECRET);
+    return payload as { clientId: string; userId: string; requestId: string };
+  } catch (error) {
+    throw new AppError(
+      "Your link has expired. Please contact your authorities.",
+      410,
+      TokenErrors.TOKEN_EXPIRED,
+    );
+  }
 }

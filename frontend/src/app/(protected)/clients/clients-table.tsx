@@ -10,8 +10,12 @@ import { toast } from "sonner";
 import { DataTable } from "@/components/data-table";
 import { ActionMenu } from "@/components/ui/action-menu";
 import { Icon } from "@/components/ui/icon";
+import { Modal } from "@/components/ui/modal";
 import { ProgressBar } from "@/components/ui/progress-bar";
-import { useClientsSummary } from "@/hooks/data/clients/use-clients";
+import {
+  useClientsSummary,
+  useDeleteClient,
+} from "@/hooks/data/clients/use-clients";
 import { SCREEN_PATHS } from "@/types/enums/paths";
 import { getErrorMessage } from "@/utils/api";
 import { formatEnumLabel } from "@/utils/input";
@@ -28,11 +32,21 @@ interface Filters {
 const ClientsTable = () => {
   const router = useRouter();
   const { data: clientsSummaries, isLoading, error } = useClientsSummary();
+  const deleteClient = useDeleteClient();
+  const isDeleteLoading = deleteClient?.isPending;
 
   const [filters, setFilters] = useState<Filters>({
     searchText: "",
     status: "All Status",
   });
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [clientToDelete, setClientToDelete] = useState<
+    | {
+        name: string;
+        id: string;
+      }
+    | undefined
+  >();
 
   useEffect(() => {
     if (error) {
@@ -66,6 +80,26 @@ const ClientsTable = () => {
     }));
   }, []);
 
+  const onOpenDeleteModal = useCallback((name: string, id: string) => {
+    setClientToDelete({ name, id });
+    setShowDeleteModal(true);
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setClientToDelete(undefined);
+    setShowDeleteModal(false);
+  }, []);
+
+  const onDeleteClient = () => {
+    if (clientToDelete?.id) {
+      deleteClient.mutate(clientToDelete?.id, {
+        onSuccess() {
+          onCloseModal();
+        },
+      });
+    }
+  };
+
   return (
     <section className="d-flex flex-col gap-6">
       <Filter filters={filters} onChange={onChangeFilters} />
@@ -74,7 +108,7 @@ const ClientsTable = () => {
         title="Document Request"
         onEmptyAction={() => router.push(SCREEN_PATHS.DOCUMENT_REQUESTS)}
         columnWidths="1fr 220px 200px 150px 68px"
-        emptyText="No clients found"
+        emptyTitle="No clients found"
         emptyDescription="Create document requests for clients and track their progress here."
         isLoading={isLoading}
         count={filteredClientSummaries?.length || 0}
@@ -138,7 +172,7 @@ const ClientsTable = () => {
                     text="Delete"
                     name={Trash2}
                     onClick={() =>
-                      router.push(`${SCREEN_PATHS.CLIENTS}/${summary.id}`)
+                      onOpenDeleteModal(summary.fullName, summary.id)
                     }
                   />
                 </>
@@ -147,6 +181,38 @@ const ClientsTable = () => {
           </div>
         ))}
       />
+
+      <Modal
+        size="small"
+        type="negative"
+        open={showDeleteModal}
+        onClose={onCloseModal}
+        title={`Delete Client`}
+        onDelete={{
+          label: "Delete",
+          onClick: onDeleteClient,
+          isLoading: isDeleteLoading,
+          disabled: isDeleteLoading || !clientToDelete?.id,
+        }}
+        onDismiss={{
+          label: "Cancel",
+          onClick: onCloseModal,
+        }}
+      >
+        <p>
+          You are about to permanently delete{" "}
+          <strong className="text-primary">{clientToDelete?.name}</strong>.
+        </p>
+
+        <p className="mt-2">
+          All associated requests and uploaded documents will also be
+          permanently removed. This action cannot be undone.
+        </p>
+
+        <p className="mt-2">
+          <strong>Are you sure you want to continue?</strong>
+        </p>
+      </Modal>
     </section>
   );
 };

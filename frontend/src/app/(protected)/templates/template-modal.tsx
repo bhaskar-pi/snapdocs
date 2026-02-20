@@ -43,6 +43,7 @@ const TemplateModal = ({
   return (
     <Modal
       title={title}
+      type="neutral"
       size="medium"
       open={open}
       onClose={onClose}

@@ -88,6 +88,7 @@
   :root {
     /* Brand */
     --brand-primary: var(--blue-800);
+    --brand-primary-base: var(--blue-700);
     --brand-primary-dark: var(--blue-950);
     --brand-primary-hover: var(--blue-800);
     --brand-primary-active: var(--blue-900);
@@ -241,7 +242,7 @@
     --font-sans: "DM Sans", "Geist", system-ui, sans-serif;
     --font-mono: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 
-    --text-xs: 11px;
+    --text-xs: 12px;
     --text-sm: 13.35px;
     --text-base: 16px;
     --text-lg: 18px;
@@ -580,10 +581,14 @@
     color: var(--warning-text);
   }
   .text-danger {
-    color: var(--danger-text);
+    color: var(--danger-base);
   }
   .text-info {
     color: var(--info-text);
+  }
+  .text-primary-bold {
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
   }
 }
 
@@ -770,6 +775,9 @@
   .mb-4 {
     margin-bottom: var(--space-4);
   }
+  .mb-6 {
+    margin-bottom: var(--space-6);
+  }
 
   /* — Skeleton loader — */
   @keyframes skeleton-pulse {
@@ -836,6 +844,15 @@
     cursor: pointer;
   }
 
+  .spinner {
+    animation: spin 0.6s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
   /** subtitle */
 
   .subtitle-sm {
@@ -942,7 +959,7 @@
   .status-neutral {
     background-color: var(--surface-skeleton);
     color: var(--text-secondary);
-    border-color: var(--border-subtle);
+    border-color: var(--border-strong);
   }
 
   .status-neutral > span {
@@ -1016,4 +1033,42 @@
     padding: var(--space-1) var(--space-2);
     border-radius: var(--radius-md);
   }
+
+  /** not found page **/
+
+  .not-found-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    text-align: center;
+    padding: var(--space-6);
+  }
+
+  .not-found-code {
+    font-size: 6rem;
+    font-weight: var(--fw-bold);
+    color: var(--danger-base);
+    line-height: 1;
+  }
+
+  .not-found-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+  }
+
+  .not-found-description {
+    font-size: var(--text-base);
+    color: var(--text-tertiary);
+    max-width: 400px;
+  }
+
+  .not-found-button {
+    margin-top: var(--space-2);
+  }
+
+  /** end **/
 }

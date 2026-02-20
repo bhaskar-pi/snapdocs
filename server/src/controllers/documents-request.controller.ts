@@ -45,6 +45,10 @@ export const getUploadRequestDetailsHandler = async ({
     getCheckListItemsByRequestId(requestId),
   ]);
 
+  if (!client) {
+    throw new AppError("Client not found", 404);
+  }
+
   if (!user) {
     throw new AppError("Request owner not found", 404);
   }
@@ -75,12 +79,15 @@ export const getUploadRequestDetailsHandler = async ({
 
   return {
     message: "Retrieved request details successfully.",
-    statusCode: 201,
+    statusCode: 200,
     data: {
-      requestedBy: `${user.firstName} ${user.lastName}`,
+      userId: user.id,
+      userName: `${user.firstName} ${user.lastName}`,
       requestedOn: documentRequest.sentAt,
       clientName: client?.fullName,
+      clientId: client?.id,
       dueDate: documentRequest.dueDate,
+      senderNotes: documentRequest.description,
       requestTitle: documentRequest.title,
       requestId,
       checklistItems: checklistItems.map((item) => ({

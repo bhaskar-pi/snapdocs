@@ -15,6 +15,7 @@ interface ModalAction {
 }
 
 interface ModalProps {
+  type?: "negative" | "primary" | "neutral";
   open: boolean;
   onClose: () => void;
 
@@ -25,13 +26,14 @@ interface ModalProps {
   onDismiss?: ModalAction;
   onDelete?: ModalAction;
 
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "xlarge";
   children: React.ReactNode;
 }
 
 export const Modal = ({
   open,
   onClose,
+  type,
   title,
   description,
   onSave,
@@ -60,7 +62,12 @@ export const Modal = ({
         aria-modal="true"
       >
         {(title || description) && (
-          <div className={styles.header}>
+          <div
+            className={[
+              styles.header,
+              type ? styles[`header-${type}`] : "",
+            ].join(" ")}
+          >
             <div>
               {title && <h2>{title}</h2>}
               {description && <p>{description}</p>}

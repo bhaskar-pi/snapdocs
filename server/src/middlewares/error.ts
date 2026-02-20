@@ -12,6 +12,7 @@ export function errorHandler(
       message: err.message,
       code: err.code,
       status: err.statusCode,
+      success: false,
     });
   }
 

@@ -5,7 +5,10 @@ import { Client, clientsTable } from "@database/schema/clients.schema";
 import { requestsTable } from "@database/schema/document-requests.schema";
 import { documentsTable } from "@database/schema/documents.schema";
 import { ChecklistStatus, RequestStatus } from "@enums/document-requests";
-import { CreateClientPayload } from "@models/payloads/documents-request.payload";
+import {
+  CreateClientPayload,
+  UpdateClientPayload,
+} from "@models/payloads/documents-request.payload";
 
 export async function getClientByEmail(
   userId: string,
@@ -131,6 +134,34 @@ export async function getClientDetailsById(userId: string, clientId: string) {
     )
     .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
     .orderBy(desc(requestsTable.createdAt));
+
+  return result;
+}
+
+export async function deleteClientById(userId: string, clientId: string) {
+  const result = await db
+    .delete(clientsTable)
+    .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
+    .returning({ id: clientsTable.id });
+
+  return result.length > 0;
+}
+
+export async function updateClient(
+  userId: string,
+  clientId: string,
+  data: UpdateClientPayload,
+): Promise<Client | undefined> {
+  const [result] = await db
+    .update(clientsTable)
+    .set({
+      fullName: data.fullName,
+      email: data.email,
+      whatsappNumber: data.whatsappNumber,
+      updatedAt: new Date(),
+    })
+    .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
+    .returning();
 
   return result;
 }

@@ -4,6 +4,10 @@
   gap: var(--space-6);
 }
 
+.clientInfo.card:hover {
+  background-color: var(--surface-card);
+}
+
 .clientHeader {
   display: flex;
   justify-content: space-between;

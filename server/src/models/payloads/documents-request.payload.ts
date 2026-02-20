@@ -1,5 +1,4 @@
 import { ClientInsert } from "@database/schema/clients.schema";
-import { DocRequestInsert } from "@database/schema/document-requests.schema";
 import { RequestStatus } from "@enums/document-requests";
 
 export interface RequestDocumentItem {
@@ -13,6 +12,8 @@ export interface CreateClientPayload {
   whatsappNumber: string | null;
   fullName: string;
 }
+
+export interface UpdateClientPayload extends CreateClientPayload {}
 
 export interface TemplateRequestPayload {
   templateId: string;

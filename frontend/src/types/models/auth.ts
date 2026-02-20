@@ -1,5 +1,5 @@
 import { User } from "./user";
-import { IndustryType } from "../enums/industry";
+import { IndustryTypeKey } from "../enums/industry";
 
 export interface SignUpForm {
   firstName: string;
@@ -7,7 +7,7 @@ export interface SignUpForm {
   email: string;
   password: string;
   businessName: string;
-  businessType: IndustryType;
+  businessType: IndustryTypeKey;
   otherBusinessType?: string;
 }
 

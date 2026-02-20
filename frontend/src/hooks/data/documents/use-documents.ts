@@ -14,15 +14,20 @@ export const useUploadDocument = (requestToken?: string) => {
     mutationFn: ({
       file,
       checklistItemId,
-      requestId,
+
       documentId,
     }: {
       file: File;
       checklistItemId: string;
-      requestId: string;
+
       documentId?: string;
     }) =>
-      documentsApi.uploadDocument(file, checklistItemId, requestId, documentId),
+      documentsApi.uploadDocument(
+        file,
+        checklistItemId,
+        documentId,
+        requestToken,
+      ),
 
     onSuccess() {
       queryClient.invalidateQueries({
@@ -39,12 +44,20 @@ export const useUploadDocument = (requestToken?: string) => {
   });
 };
 
-export function useGetUploadChecklistItems(requestToken?: string | null) {
+export function useGetDocumentUrl() {
+  return useMutation({
+    mutationFn: (documentId: string) => documentsApi.getDocumentUrl(documentId),
+  });
+}
+
+export function useGetUploadChecklistItems(
+  token?: string,
+  options?: { enabled?: boolean },
+) {
   return useQuery({
-    queryKey: ["uploadChecklistItems", requestToken],
-    queryFn: () => documentRequestsApi.getUploadChecklistItems(requestToken!),
-    enabled: !!requestToken,
-    staleTime: 5 * 60 * 1000,
+    queryKey: ["upload-checklist", token],
+    queryFn: () => documentRequestsApi.getUploadChecklistItems(token!),
+    enabled: options?.enabled ?? true,
     retry: false,
   });
 }
