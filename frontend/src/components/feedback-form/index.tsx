@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Input } from "@/components/ui/form/input";
 import { Select } from "@/components/ui/form/select";
@@ -102,7 +102,7 @@ export const FeedbackForm = ({ open, onClose, type }: FeedbackModalProps) => {
           <Input
             id="feedback-name"
             label="Your Name"
-            placeholder="John Doe"
+            placeholder="Enter name..."
             value={form.name}
             onChange={(e) => handleChange("name", e.target.value)}
             message={errors.name}
@@ -115,7 +115,7 @@ export const FeedbackForm = ({ open, onClose, type }: FeedbackModalProps) => {
             id="feedback-email"
             label="Email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="Enter email..."
             value={form.email}
             onChange={(e) => handleChange("email", e.target.value)}
             message={errors.email}
