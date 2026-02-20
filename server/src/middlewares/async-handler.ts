@@ -52,7 +52,7 @@ export const protectedHandler = <
       query: req.query as TQuery,
       res,
       file: req.file,
-      files: req.files as Express.Multer.File[],
+      files: req.files as Express.Multer.File[] | undefined,
     });
   });
 

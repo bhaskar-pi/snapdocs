@@ -42,7 +42,7 @@ export function useDeleteClient() {
     mutationFn: (clientId: string) => clientsApi.deleteClient(clientId),
 
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      queryClient.invalidateQueries({ queryKey: ["clients", "summaries"] });
       toast.success(response?.message ?? "Deleted Successfully.");
     },
 

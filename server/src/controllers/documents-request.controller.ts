@@ -46,7 +46,7 @@ export const getUploadRequestDetailsHandler = async ({
   ]);
 
   if (!client) {
-    throw new AppError("Request owner not found", 404);
+    throw new AppError("Client not found", 404);
   }
 
   if (!user) {
@@ -79,7 +79,7 @@ export const getUploadRequestDetailsHandler = async ({
 
   return {
     message: "Retrieved request details successfully.",
-    statusCode: 201,
+    statusCode: 200,
     data: {
       userId: user.id,
       userName: `${user.firstName} ${user.lastName}`,

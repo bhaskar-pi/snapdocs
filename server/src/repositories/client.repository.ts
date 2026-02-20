@@ -155,7 +155,9 @@ export async function updateClient(
   const [result] = await db
     .update(clientsTable)
     .set({
-      ...data,
+      fullName: data.fullName,
+      email: data.email,
+      whatsappNumber: data.whatsappNumber,
       updatedAt: new Date(),
     })
     .where(and(eq(clientsTable.id, clientId), eq(clientsTable.userId, userId)))
