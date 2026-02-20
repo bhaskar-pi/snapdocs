@@ -11,7 +11,7 @@ export const getDashboardStatsHandler = async ({
 }) => {
   const [metrics, recentRequests] = await Promise.all([
     getDashboardMetricsByUserId(authUser.id),
-    getRecentRequestsByUserId(authUser.id, 8),
+    getRecentRequestsByUserId(authUser.id, 5),
   ]);
 
   return {

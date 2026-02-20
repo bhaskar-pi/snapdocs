@@ -10,6 +10,7 @@ import documentsRouter from "@routes/documents.routes";
 import templatesRouter from "@routes/templates.routes";
 import userRouter from "@routes/user.routes";
 import dashboardRouter from "@routes/dashboard.routes";
+import feedbackRouter from "@routes/feedback.routes";
 import { errorHandler } from "@middlewares/error";
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(env.API_PATH, documentsRouter);
 app.use(env.API_PATH, templatesRouter);
 app.use(env.API_PATH, userRouter);
 app.use(env.API_PATH, dashboardRouter);
+app.use(env.API_PATH, feedbackRouter);
 
 /** use Error handler middleware at last */
 app.use(errorHandler);

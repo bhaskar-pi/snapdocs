@@ -68,6 +68,10 @@ apiClient.interceptors.response.use(
     const errorCode = error.response?.data?.code;
     const requestUrl = originalRequest?.url ?? "";
 
+    if (error.code === "ERR_NETWORK") {
+      return Promise.reject(new Error("Server is currently unavailable"));
+    }
+
     /**
      * If we don't even have config → just reject
      */

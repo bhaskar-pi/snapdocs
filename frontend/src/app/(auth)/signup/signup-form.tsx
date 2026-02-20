@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
+import { FeedbackForm } from "@/components/feedback-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/form/input";
 import { Select } from "@/components/ui/form/select";
@@ -37,6 +38,7 @@ export const INDUSTRY_TYPE_OPTIONS = Object.values(IndustryType).map(
 const SignUpForm = () => {
   const signup = useSignup();
   const [form, setForm] = useState<SignUpFormType>(initialForm);
+  const [showSupportModal, setShowSupportModal] = useState(false);
 
   const onChangeForm = useCallback(
     (prop: keyof SignUpFormType, value: string | IndustryType) => {
@@ -60,10 +62,14 @@ const SignUpForm = () => {
     <div className={styles.container}>
       <div className={styles.topBar}>
         <Logo />
-        <div className={styles.support}>
-          For support:{" "}
-          <a href="mailto:b.pasupurathi@gmail.com">b.pasupurathi@gmail.com</a>
-        </div>
+        <Button
+          size="sm"
+          variant="soft"
+          onClick={() => setShowSupportModal(true)}
+          aria-label="Open support form"
+        >
+          Need Help? Contact Support
+        </Button>
       </div>
       <div className={styles.content}>
         <form className={styles.form} onSubmit={handleCreateAccount}>
@@ -143,6 +149,22 @@ const SignUpForm = () => {
             />
           </div>
 
+          {form.businessType === "OTHER" && (
+            <div className="d-flex gap-3 mb-4">
+              <Input
+                required
+                id="otherBusinessType"
+                label="Other Business Type"
+                placeholder="Enter business type"
+                value={form.otherBusinessType}
+                onChange={(e) =>
+                  onChangeForm("otherBusinessType", e.target.value)
+                }
+                disabled={signup.isPending}
+              />
+            </div>
+          )}
+
           <Button disabled={signup.isPending} type="submit" size="md">
             {signup.isPending ? "Creating..." : "Create Account"}
           </Button>
@@ -154,6 +176,13 @@ const SignUpForm = () => {
         </form>
       </div>
       <div className={styles.footer}>© SnapDocs 2026</div>
+
+      {/** Modal */}
+      <FeedbackForm
+        open={showSupportModal}
+        onClose={() => setShowSupportModal(false)}
+        type="support"
+      />
     </div>
   );
 };
