@@ -15,12 +15,26 @@ import { errorHandler } from "@middlewares/error";
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000", // local dev
+  env.APP_URL, // production
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true, //  allow cookies
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow Postman / curl
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
