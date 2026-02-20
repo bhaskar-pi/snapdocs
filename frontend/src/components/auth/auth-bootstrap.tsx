@@ -12,7 +12,6 @@ export function AuthBootstrap() {
   const hasBootstrapped = useRef(false);
 
   useEffect(() => {
-    if (!persistedUser) return;
     if (hasBootstrapped.current) return;
 
     hasBootstrapped.current = true;

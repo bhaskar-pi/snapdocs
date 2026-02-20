@@ -1,11 +1,13 @@
 "use client";
 
-import { ChevronRight, LogOut } from "lucide-react";
+import { ChevronRight, LogOut, MessageCircleQuestionMark } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
+import { FeedbackForm } from "@/components/feedback-form";
 import { Icon } from "@/components/ui/icon";
+import { IconBadge } from "@/components/ui/icon-badge";
 import { Logo } from "@/components/ui/logo";
 import { SIDEBAR_TABS } from "@/config/tabs";
 import { useLogout } from "@/hooks/data/auth/use-logout";
@@ -16,12 +18,13 @@ import styles from "./app-layout.module.css";
 const Sidebar = () => {
   const user = useAuthStore((store) => store.user);
   const logout = useLogout();
+  const pathName = usePathname();
+
+  const [showSupportModal, setShowSupportModal] = useState(false);
 
   const handleLogout = useCallback(() => {
     logout.mutate();
   }, [logout]);
-
-  const pathName = usePathname();
 
   return (
     <aside className={styles.sidebar}>
@@ -67,16 +70,22 @@ const Sidebar = () => {
           <p className={styles.userEmail}>{`${user?.email}`}</p>
         </div>
 
-        <button className={styles.logout} onClick={handleLogout}>
-          <Icon
-            className={styles.logoutIcon}
-            name={LogOut}
-            strokeWidth={2}
-            size={18}
+        <div className={styles.footerIconsContainer}>
+          <IconBadge icon={LogOut} size={"sm"} onClick={handleLogout} />
+          <IconBadge
+            icon={MessageCircleQuestionMark}
+            size="sm"
+            onClick={() => setShowSupportModal(true)}
           />
-          <span>Sign out</span>
-        </button>
+        </div>
       </div>
+
+      {/** Modal */}
+      <FeedbackForm
+        type="support"
+        onClose={() => setShowSupportModal(false)}
+        open={showSupportModal}
+      />
     </aside>
   );
 };

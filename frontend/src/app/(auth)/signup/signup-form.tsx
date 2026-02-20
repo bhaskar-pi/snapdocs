@@ -143,6 +143,22 @@ const SignUpForm = () => {
             />
           </div>
 
+          {form.businessType === "OTHER" && (
+            <div className="d-flex gap-3 mb-4">
+              <Input
+                required
+                id="otherBusinessType"
+                label="Other Business Type"
+                placeholder="Enter business type"
+                value={form.otherBusinessType}
+                onChange={(e) =>
+                  onChangeForm("otherBusinessType", e.target.value)
+                }
+                disabled={signup.isPending}
+              />
+            </div>
+          )}
+
           <Button disabled={signup.isPending} type="submit" size="md">
             {signup.isPending ? "Creating..." : "Create Account"}
           </Button>
