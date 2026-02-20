@@ -4,6 +4,7 @@ import { AlertTriangle } from "lucide-react";
 import { useState } from "react";
 
 import styles from "./error.module.css";
+import { TextArea } from "../ui/form/text-area";
 
 interface Props {
   error: Error;
@@ -45,12 +46,9 @@ export default function ErrorForm({ error, reset }: Props) {
         {!submitted ? (
           <>
             <div className={styles.formSection}>
-              <label className={styles.textareaLabel}>
-                What were you doing when this happened?
-              </label>
-
-              <textarea
-                className={styles.textarea}
+              <TextArea
+                id="error-form"
+                label="What were you doing when this happened?"
                 placeholder="Optional: describe what happened..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}

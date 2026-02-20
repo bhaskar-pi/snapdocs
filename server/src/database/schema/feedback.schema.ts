@@ -3,8 +3,8 @@ import { usersTable } from "./users.schema";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export const feedbackTable = pgTable("feedback", {
-  id: uuid("id").notNull().primaryKey(),
-  userId: text("user_id").references(() => usersTable.id),
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
+  userId: uuid("user_id").references(() => usersTable.id),
   userName: text("user_name"),
   userEmail: text("user_email").notNull(),
   type: text("type"),

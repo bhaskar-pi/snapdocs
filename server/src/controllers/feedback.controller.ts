@@ -32,7 +32,7 @@ export const submitPublicFeedbackHandler = async ({
 }: {
   request: FeedbackPayload;
 }) => {
-  if (!request.email || request.message) {
+  if (!request.email || !request.message) {
     throw new AppError("Missing email or message", 400);
   }
 

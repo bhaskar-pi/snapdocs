@@ -1,10 +1,13 @@
-import { submitFeedbackHandler, submitPublicFeedbackHandler } from "@controllers/feedback.controller";
+import {
+  submitFeedbackHandler,
+  submitPublicFeedbackHandler,
+} from "@controllers/feedback.controller";
 import {
   protectedHandler,
   unProtectedHandler,
 } from "@middlewares/async-handler";
 import { authenticate } from "@middlewares/validate-request";
-import Router from "express";
+import { Router } from "express";
 
 const router = Router();
 
