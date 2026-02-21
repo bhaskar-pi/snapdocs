@@ -28,14 +28,15 @@ export const loginHandler = async (
   response.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: env.NODE_ENV === Environment.PRODUCTION,
-    sameSite: "strict",
+    sameSite: "none",
     path: "/",
     maxAge: TokenValidity.ONE_DAY,
   });
   response.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: env.NODE_ENV === Environment.PRODUCTION,
-    sameSite: "lax",
+    sameSite: "none",
+    path: "/",
     maxAge: 15 * 60 * 1000,
   });
 
@@ -100,7 +101,7 @@ export const refreshHandler = async (
       response.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
         secure: env.NODE_ENV === Environment.PRODUCTION,
-        sameSite: "strict",
+        sameSite: "none",
         path: "/",
         maxAge: TokenValidity.ONE_DAY,
       });
@@ -109,7 +110,7 @@ export const refreshHandler = async (
     response.cookie("accessToken", session.accessToken, {
       httpOnly: true,
       secure: env.NODE_ENV === Environment.PRODUCTION,
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
       maxAge: 15 * 60 * 1000,
     });

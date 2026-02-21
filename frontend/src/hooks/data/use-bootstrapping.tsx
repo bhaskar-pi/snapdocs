@@ -22,12 +22,17 @@ export function useBootstrapping() {
       setUser(response.data.user);
       setSession(response.data.session);
       setLoading(false);
+      if (window.location.pathname === SCREEN_PATHS.LOGIN) {
+        router.replace(SCREEN_PATHS.DASHBOARD);
+      }
     },
 
     onError: () => {
       clearUser();
       setLoading(false);
-      router.replace(SCREEN_PATHS.LOGIN);
+      if (window.location.pathname !== SCREEN_PATHS.LOGIN) {
+        router.replace(SCREEN_PATHS.LOGIN);
+      }
     },
   });
 }

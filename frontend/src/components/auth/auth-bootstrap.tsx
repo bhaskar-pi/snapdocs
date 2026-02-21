@@ -1,22 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 import { useBootstrapping } from "@/hooks/data/use-bootstrapping";
 import { useAuthStore } from "@/store/auth.store";
 
 export function AuthBootstrap() {
-  const { persistedUser } = useAuthStore();
+  const { hasBootstrapped, setBootstrapped } = useAuthStore();
   const { mutate: bootstrap } = useBootstrapping();
 
-  const hasBootstrapped = useRef(false);
-
   useEffect(() => {
-    if (hasBootstrapped.current) return;
+    if (hasBootstrapped) return;
 
-    hasBootstrapped.current = true;
+    setBootstrapped(true);
     bootstrap();
-  }, [persistedUser, bootstrap]);
+  }, [hasBootstrapped, bootstrap, setBootstrapped]);
 
   return null;
 }
