@@ -19,10 +19,9 @@ export function useLogin() {
       authApi.login(email, password),
 
     onSuccess(response) {
+      router.push("/dashboard");
       setUser(response.data.user);
       setSession(response.data.session);
-
-      router.push("/dashboard");
       toast.success(response.message);
     },
 

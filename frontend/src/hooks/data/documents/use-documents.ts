@@ -31,7 +31,7 @@ export const useUploadDocument = (requestToken?: string) => {
 
     onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: ["uploadChecklistItems", requestToken],
+        queryKey: ["upload-checklist", requestToken],
       });
 
       toast.success("Document uploaded successfully.");
