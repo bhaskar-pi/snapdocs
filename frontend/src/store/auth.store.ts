@@ -15,11 +15,13 @@ interface AuthState {
   persistedUser: PersistedUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  hasBootstrapped: boolean;
 
   setLoading: (loading: boolean) => void;
   setUser: (user: User) => void;
   setSession: (session: Session) => void;
   clearUser: () => void;
+  setBootstrapped: (value: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -30,6 +32,7 @@ export const useAuthStore = create<AuthState>()(
       persistedUser: null,
       isAuthenticated: false,
       isLoading: false,
+      hasBootstrapped: false,
 
       setLoading: (loading) => set({ isLoading: loading }),
 
@@ -56,6 +59,8 @@ export const useAuthStore = create<AuthState>()(
           persistedUser: null,
           isAuthenticated: false,
         }),
+
+      setBootstrapped: (value) => set({ hasBootstrapped: value }),
     }),
     {
       name: "auth-user",

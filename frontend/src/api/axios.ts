@@ -25,6 +25,10 @@ let isRefreshing = false;
 const handleSessionExpired = () => {
   if (typeof window === "undefined") return;
 
+  const isLoginPage = window.location.pathname === "/login";
+
+  if (isLoginPage) return; // prevent unnecessary redirect
+
   setTimeout(() => {
     window.location.href = "/login";
   }, 800);

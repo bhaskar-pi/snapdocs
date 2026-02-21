@@ -29,10 +29,17 @@ interface Props {
 
 const Layout = ({ children, isLoading, header, size = "default" }: Props) => {
   const authLoading = useAuthStore((s) => s.isLoading);
+  const user = useAuthStore((s) => s.user);
 
+  if (authLoading || !user) {
+    return (
+      <div className={styles.layout}>
+        <Loader open />
+      </div>
+    );
+  }
   return (
     <div className={styles.layout}>
-      <Loader open={authLoading} />
       <Sidebar />
 
       <main className={styles.main}>
